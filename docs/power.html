@@ -364,7 +364,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 × 8
 ##   .y.            group1 group2    n1    n2 statistic    df     p
 ## * &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 bill_length_mm Adelie Gentoo     2     2     -1.02  1.47 0.445</code></pre>
+## 1 bill_length_mm Adelie Gentoo     2     2     -1.29  1.33 0.377</code></pre>
 <p>With a sample of just n=2 penguins of each species, we do not have enough power to detect a significant difference in bill length between species. Comparing our p-value to our significance threshold of 0.05, it is clear that we fail to reject the null hypothesis. Therefore, as sample size decreases, so does our power in identifying true trends.</p>
 </div>
 <div id="magnitude-of-effect" class="section level4 hasAnchor" number="9.0.1.2">
@@ -420,9 +420,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb186-12"><a href="power.html#cb186-12" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb186-13"><a href="power.html#cb186-13" tabindex="-1"></a>  <span class="fu">t_test</span>(bill_length_mm <span class="sc">~</span> species, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 8
-##   .y.            group1 group2    n1    n2 statistic    df      p
-## * &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-## 1 bill_length_mm Adelie Gentoo     2     2     -7.01  1.78 0.0265</code></pre>
+##   .y.            group1 group2    n1    n2 statistic    df     p
+## * &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 bill_length_mm Adelie Gentoo     2     2     -10.1  1.50 0.023</code></pre>
 </div>
 </div>
 <div id="note-about-random-selection" class="section level3 hasAnchor" number="9.0.2">
