@@ -4,26 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 9 Power | Introduction to Data Analysis in R</title>
-  <meta name="description" content="This site hosts the course content for WR 696 at Colorado State University." />
+  <title> 9 Power | Introduction to Environmental Data Science</title>
+  <meta name="description" content="This site hosts the first half of the course content for ESS 523A at Colorado State University." />
   <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" 9 Power | Introduction to Data Analysis in R" />
+  <meta property="og:title" content=" 9 Power | Introduction to Environmental Data Science" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="This site hosts the course content for WR 696 at Colorado State University." />
-  <meta name="github-repo" content="rossyndicate/WR696_R_Intro" />
+  <meta property="og:description" content="This site hosts the first half of the course content for ESS 523A at Colorado State University." />
+  <meta name="github-repo" content="rossyndicate/Intro_R_Data_Analysis" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 9 Power | Introduction to Data Analysis in R" />
+  <meta name="twitter:title" content=" 9 Power | Introduction to Environmental Data Science" />
   
-  <meta name="twitter:description" content="This site hosts the course content for WR 696 at Colorado State University." />
+  <meta name="twitter:description" content="This site hosts the first half of the course content for ESS 523A at Colorado State University." />
   
 
-<meta name="author" content="Caitlin C. Mothes, PhD and Katie Willi" />
+<meta name="author" content="Caitlin Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2024-07-18" />
+<meta name="date" content="2024-07-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -296,7 +296,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Data Analysis in R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Environmental Data Science</a>
           </h1>
         </div>
 
@@ -362,9 +362,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb180-8"><a href="power.html#cb180-8" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span>   </span>
 <span id="cb180-9"><a href="power.html#cb180-9" tabindex="-1"></a>  <span class="fu">t_test</span>(bill_length_mm <span class="sc">~</span> species, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 8
-##   .y.            group1 group2    n1    n2 statistic    df     p
-## * &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 bill_length_mm Adelie Gentoo     2     2     -1.29  1.33 0.377</code></pre>
+##   .y.            group1 group2    n1    n2 statistic    df      p
+## * &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 bill_length_mm Adelie Gentoo     2     2     -6.84  1.00 0.0916</code></pre>
 <p>With a sample of just n=2 penguins of each species, we do not have enough power to detect a significant difference in bill length between species. Comparing our p-value to our significance threshold of 0.05, it is clear that we fail to reject the null hypothesis. Therefore, as sample size decreases, so does our power in identifying true trends.</p>
 </div>
 <div id="magnitude-of-effect" class="section level4 hasAnchor" number="9.0.1.2">
@@ -420,9 +420,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb186-12"><a href="power.html#cb186-12" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb186-13"><a href="power.html#cb186-13" tabindex="-1"></a>  <span class="fu">t_test</span>(bill_length_mm <span class="sc">~</span> species, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 8
-##   .y.            group1 group2    n1    n2 statistic    df     p
-## * &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 bill_length_mm Adelie Gentoo     2     2     -10.1  1.50 0.023</code></pre>
+##   .y.            group1 group2    n1    n2 statistic    df      p
+## * &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 bill_length_mm Adelie Gentoo     2     2     -11.0  1.73 0.0134</code></pre>
 </div>
 </div>
 <div id="note-about-random-selection" class="section level3 hasAnchor" number="9.0.2">

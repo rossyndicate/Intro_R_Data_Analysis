@@ -4,26 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 6 Data Analysis: T-test and ANOVA | Introduction to Data Analysis in R</title>
-  <meta name="description" content="This site hosts the course content for WR 696 at Colorado State University." />
+  <title> 6 Data Analysis: T-test and ANOVA | Introduction to Environmental Data Science</title>
+  <meta name="description" content="This site hosts the first half of the course content for ESS 523A at Colorado State University." />
   <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" 6 Data Analysis: T-test and ANOVA | Introduction to Data Analysis in R" />
+  <meta property="og:title" content=" 6 Data Analysis: T-test and ANOVA | Introduction to Environmental Data Science" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="This site hosts the course content for WR 696 at Colorado State University." />
-  <meta name="github-repo" content="rossyndicate/WR696_R_Intro" />
+  <meta property="og:description" content="This site hosts the first half of the course content for ESS 523A at Colorado State University." />
+  <meta name="github-repo" content="rossyndicate/Intro_R_Data_Analysis" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 6 Data Analysis: T-test and ANOVA | Introduction to Data Analysis in R" />
+  <meta name="twitter:title" content=" 6 Data Analysis: T-test and ANOVA | Introduction to Environmental Data Science" />
   
-  <meta name="twitter:description" content="This site hosts the course content for WR 696 at Colorado State University." />
+  <meta name="twitter:description" content="This site hosts the first half of the course content for ESS 523A at Colorado State University." />
   
 
-<meta name="author" content="Caitlin C. Mothes, PhD and Katie Willi" />
+<meta name="author" content="Caitlin Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2024-07-18" />
+<meta name="date" content="2024-07-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -296,7 +296,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Data Analysis in R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Environmental Data Science</a>
           </h1>
         </div>
 
@@ -370,10 +370,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb126-2"><a href="data-analysis-t-test-and-anova.html#cb126-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight_log =</span> <span class="fu">log</span>(weight_g)) <span class="sc">%&gt;%</span> </span>
 <span id="cb126-3"><a href="data-analysis-t-test-and-anova.html#cb126-3" tabindex="-1"></a>  <span class="fu">t_test</span>(weight_log <span class="sc">~</span> section, <span class="at">var.equal =</span> <span class="cn">TRUE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 15
-##   estimate estimate1 estimate2 .y.        group1 group2    n1    n2 statistic          p    df
-## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;
-## 1    0.131      1.52      1.39 weight_log CC     OG      6798  5796      5.49    4.06e-8 12592
-## # ℹ 4 more variables: conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
+##   estimate estimate1 estimate2 .y.       group1 group2    n1    n2 statistic       p    df conf.low
+## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+## 1    0.131      1.52      1.39 weight_l… CC     OG      6798  5796      5.49 4.06e-8 12592   0.0839
+## # ℹ 3 more variables: conf.high &lt;dbl&gt;, method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
 <p>The output of this test gives us the test statistics, p-value, and the means for each of our forest groups (estimate1 and estimate2, corresponding to group1 and group2). Given the extremely small p-value and the means of each group, we can conclude that <em>Cutthroat trout weight was observed to be significantly higher in clear cut forests compared to old growth forests</em>. Remember though that now these mean weight values are log transformed, and not the raw weight in grams. The relationship can still be interpreted the same.</p>
 <p>How does this relate to our original hypothesis?</p>
 <p><strong>Welch Two Sample t-test</strong></p>
@@ -381,10 +381,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="data-analysis-t-test-and-anova.html#cb128-1" tabindex="-1"></a>trout_clean <span class="sc">%&gt;%</span> </span>
 <span id="cb128-2"><a href="data-analysis-t-test-and-anova.html#cb128-2" tabindex="-1"></a>  <span class="fu">t_test</span>(weight_g <span class="sc">~</span> section, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>) </span></code></pre></div>
 <pre><code>## # A tibble: 1 × 15
-##   estimate estimate1 estimate2 .y.      group1 group2    n1    n2 statistic        p     df
-## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
-## 1     1.17      9.38      8.21 weight_g CC     OG      6798  5796      6.69 2.26e-11 12588.
-## # ℹ 4 more variables: conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
+##   estimate estimate1 estimate2 .y.     group1 group2    n1    n2 statistic        p     df conf.low
+## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+## 1     1.17      9.38      8.21 weight… CC     OG      6798  5796      6.69 2.26e-11 12588.    0.825
+## # ℹ 3 more variables: conf.high &lt;dbl&gt;, method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
 <p>While we used a slightly different method, our conclusions are still the same, finding that Cutthroat trout had significantly higher weights in clear cut forests than old growth.</p>
 </div>
 </div>

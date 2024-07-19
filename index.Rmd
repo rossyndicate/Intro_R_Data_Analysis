@@ -1,6 +1,6 @@
 ---
-title: "Introduction to Data Analysis in R"
-author: "Caitlin C. Mothes, PhD and Katie Willi"
+title: "Introduction to Environmental Data Science"
+author: "Caitlin Mothes, PhD and Katie Willi"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -8,9 +8,9 @@ bibliography: [book.bib, packages.bib]
 url: https://ccmothes.github.io/quantitative-reasoning-course/
 # cover-image: path to the social sharing image like images/cover.jpg
 description: |
-  This site hosts the course content for WR 696 at Colorado State University.
+  This site hosts the first half of the course content for ESS 523A at Colorado State University.
 link-citations: yes
-github-repo: rossyndicate/WR696_R_Intro
+github-repo: rossyndicate/Intro_R_Data_Analysis
 ---
 
 ```{r include=FALSE}
@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, eval = TRUE
 
 # Welcome!
 
-This site hosts the course curriculum for Colorado State University's **WR 696** course: *Introduction to Data Analysis in R*
+This site hosts the course curriculum for Colorado State University's **ESS 523A** course: *Introduction to Environmental Data Science*
 
 ## Set up Instructions {.unnumbered}
 
