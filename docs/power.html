@@ -23,7 +23,7 @@
 <meta name="author" content="Caitlin Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2024-07-19" />
+<meta name="date" content="2024-08-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -364,7 +364,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 × 8
 ##   .y.            group1 group2    n1    n2 statistic    df     p
 ## * &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 bill_length_mm Adelie Gentoo     2     2     -2.29  1.02 0.257</code></pre>
+## 1 bill_length_mm Adelie Gentoo     2     2     -2.09  1.24 0.243</code></pre>
 <p>With a sample of just n=2 penguins of each species, we do not have enough power to detect a significant difference in bill length between species. Comparing our p-value to our significance threshold of 0.05, it is clear that we fail to reject the null hypothesis. Therefore, as sample size decreases, so does our power in identifying true trends.</p>
 </div>
 <div id="magnitude-of-effect" class="section level4 hasAnchor" number="9.0.1.2">
@@ -422,7 +422,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 × 8
 ##   .y.            group1 group2    n1    n2 statistic    df      p
 ## * &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-## 1 bill_length_mm Adelie Gentoo     2     2     -18.7  1.22 0.0189</code></pre>
+## 1 bill_length_mm Adelie Gentoo     2     2     -5.12  1.36 0.0752</code></pre>
 </div>
 </div>
 <div id="note-about-random-selection" class="section level3 hasAnchor" number="9.0.2">
