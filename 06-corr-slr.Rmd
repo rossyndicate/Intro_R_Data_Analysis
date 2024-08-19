@@ -35,7 +35,7 @@ Before diving in, let's visually explore the relationship between our two variab
 
 ```{r}
 ggplot(data = sal) + 
-  geom_point(aes(x = length_2_mm, y = weight_g)) +
+  geom_point(aes(x = length_2_mm, y = weight_g), color = "black") +
   theme_bw()
 ```
 
@@ -117,7 +117,7 @@ When plotting, it is important to have the predictor variable on the x-axis, and
 
 ```{r}
 ggplot(data = pie_crab, aes(x = latitude, y = size)) + 
-  geom_point() +
+  geom_point(color = "black") +
   geom_smooth(method = "lm", se = FALSE) +
   theme_bw() 
 ```
