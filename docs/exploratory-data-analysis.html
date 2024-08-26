@@ -23,7 +23,7 @@
 <meta name="author" content="Caitlin Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2024-08-19" />
+<meta name="date" content="2024-08-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -472,8 +472,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Find the average flipper length for each species. Which species has the largest flippers? (2 pts.)</p></li>
 <li><p>Which is the only species that was sampled across all three islands in this study? You must use {dplyr} functions to answer this question (e.g., <code>group_by()</code> …) (2 pts.)</p></li>
 <li><p>Reorder the variables in <code>penguins</code> so that <code>year</code> is the first column followed by the rest (Hint: look into the use of <code>everything()</code>). (2 pts.)</p></li>
-<li><p>Create a new column called 'size_group' where individuals with body mass greater than the <em>overall</em> average are called 'large' and those smaller are called 'small'. (Note: this answer requires the additional use of both the <code>if_else()</code> and <code>mean()</code> functions. Remember how to deal with <code>NA</code> values in <code>mean()</code>). (4 pts.)</p></li>
-<li><p>You want to filter data for years that are <em>not</em> in a vector of given years, but this code doesn't work. Tweak it so that it does. (Yes, you could just filter year to equal 2007 in this case but there is a trouble-shooting lessons here). (2 pts.)</p>
+<li><p>Create a new column called ‘size_group’ where individuals with body mass greater than the <em>overall</em> average are called ‘large’ and those smaller are called ‘small’. (Note: this answer requires the additional use of both the <code>if_else()</code> and <code>mean()</code> functions. Remember how to deal with <code>NA</code> values in <code>mean()</code>). (4 pts.)</p></li>
+<li><p>You want to filter data for years that are <em>not</em> in a vector of given years, but this code doesn’t work. Tweak it so that it does. (Yes, you could just filter year to equal 2007 in this case but there is a trouble-shooting lessons here). (2 pts.)</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="exploratory-data-analysis.html#cb75-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
 <span id="cb75-2"><a href="exploratory-data-analysis.html#cb75-2" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">!%in%</span> <span class="fu">c</span>(<span class="dv">2008</span>, <span class="dv">2009</span>))</span></code></pre></div></li>
 </ol>
@@ -528,7 +528,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="exercises-3" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Exercises<a href="exploratory-data-analysis.html#exercises-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><em>Please include the line(s) of code you used to create your figure and make sure the figure is shown in the rendered report.</em></p>
-<ol style="list-style-type: decimal">
+<ol start="7" style="list-style-type: decimal">
 <li>Using the visualization techniques you learned today, create a figure that allows you to visualize some comparison of your choice among the <code>penguins</code> data set. Below your figure write a testable hypothesis about the data and the patterns you see from this figure. (5 pts.)</li>
 </ol>
 

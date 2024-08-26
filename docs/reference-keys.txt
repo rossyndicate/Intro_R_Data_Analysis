@@ -95,4 +95,3 @@ testing-for-normal-distribution
 testing-for-equal-variance
 anova---kruskal-wallis
 anova-post-hoc-analysis
-cover-image-path-to-the-social-sharing-image-like-imagescover.jpg

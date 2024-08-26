@@ -221,14 +221,14 @@ penguins %>%
 
     ```
 
-5.  Create a new column called \'size_group\' where individuals with body mass greater than the *overall* average are called \'large\' and those smaller are called \'small\'. (Note: this answer requires the additional use of both the `if_else()` and `mean()` functions. Remember how to deal with `NA` values in `mean()`). (4 pts.)
+5.  Create a new column called 'size_group' where individuals with body mass greater than the *overall* average are called 'large' and those smaller are called 'small'. (Note: this answer requires the additional use of both the `if_else()` and `mean()` functions. Remember how to deal with `NA` values in `mean()`). (4 pts.)
 
     ```{r echo=FALSE, eval=FALSE}
     penguins %>% 
       mutate(size_group = if_else(body_mass_g > mean(body_mass_g, na.rm = TRUE), "large", "small"))
     ```
 
-6.  You want to filter data for years that are *not* in a vector of given years, but this code doesn\'t work. Tweak it so that it does. (Yes, you could just filter year to equal 2007 in this case but there is a trouble-shooting lessons here). (2 pts.)
+6.  You want to filter data for years that are *not* in a vector of given years, but this code doesn't work. Tweak it so that it does. (Yes, you could just filter year to equal 2007 in this case but there is a trouble-shooting lessons here). (2 pts.)
 
     ```{r eval = FALSE}
     penguins %>% 
@@ -320,4 +320,4 @@ ggplot(penguins) +
 
 *Please include the line(s) of code you used to create your figure and make sure the figure is shown in the rendered report.*
 
-1.  Using the visualization techniques you learned today, create a figure that allows you to visualize some comparison of your choice among the `penguins` data set. Below your figure write a testable hypothesis about the data and the patterns you see from this figure. (5 pts.)
+7.  Using the visualization techniques you learned today, create a figure that allows you to visualize some comparison of your choice among the `penguins` data set. Below your figure write a testable hypothesis about the data and the patterns you see from this figure. (5 pts.)
