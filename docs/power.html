@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 9 Power | Introduction to Environmental Data Science</title>
   <meta name="description" content="This site hosts the first half of the course content for ESS 523A at Colorado State University." />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 9 Power | Introduction to Environmental Data Science" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Caitlin Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2024-08-26" />
+<meta name="date" content="2024-09-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,7 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <script src="libs/plotly-binding-4.10.4/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
@@ -66,9 +65,9 @@
 <script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.2.1/leaflet.js"></script>
 <script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.1/leaflet-providers-plugin.js"></script>
 <link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
 <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
@@ -365,7 +364,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 × 8
 ##   .y.            group1 group2    n1    n2 statistic    df      p
 ## * &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-## 1 bill_length_mm Adelie Gentoo     2     2     -6.67  1.28 0.0603</code></pre>
+## 1 bill_length_mm Adelie Gentoo     2     2     -6.19  1.28 0.0656</code></pre>
 <p>With a sample of just n=2 penguins of each species, we do not have enough power to detect a significant difference in bill length between species. Comparing our p-value to our significance threshold of 0.05, it is clear that we fail to reject the null hypothesis. Therefore, as sample size decreases, so does our power in identifying true trends.</p>
 </div>
 <div id="magnitude-of-effect" class="section level4 hasAnchor" number="9.0.1.2">
@@ -423,7 +422,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 × 8
 ##   .y.            group1 group2    n1    n2 statistic    df      p
 ## * &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-## 1 bill_length_mm Adelie Gentoo     2     2     -12.1  1.13 0.0389</code></pre>
+## 1 bill_length_mm Adelie Gentoo     2     2     -3.63  1.98 0.0691</code></pre>
 </div>
 </div>
 <div id="note-about-random-selection" class="section level3 hasAnchor" number="9.0.2">
