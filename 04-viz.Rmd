@@ -8,9 +8,25 @@ knitr::opts_chunk$set(echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE
 
 This lesson will go a little deeper into data visualization and how to customize figures and tables and make them 'publication ready'.
 
-First start by reading in the packages for this lesson, which in this case is only the {tidyverse}:
+First, set up your session by executing your set up script we created in [Lesson 1][Introduction to R, RStudio and R Markdown].
 
-```{r message=FALSE}
+*Note:* There are some new packages we will use below. For simplicity, you can add them to your setup.R script by tacking them on to the `packages <- c()` list. The new packages are:
+
+-   `ggthemes`
+
+-   `RColorBrewer`
+
+-   `viridis`
+
+-   `ggdark`
+
+-   `plotly`
+
+```{r eval=FALSE}
+source("setup.R")
+```
+
+```{r include = FALSE}
 library(tidyverse)
 ```
 
@@ -141,7 +157,7 @@ census_data %>%
   )
 ```
 
-Another change you may want to make is the value breaks in the axis labels (i.e., what values are shown on the axis). To customize that for a continuous variable you can use `scale_x_continuous()` / `scale_y_continuous` (for discrete variables use `scale_x_discrete` ). In this example we will also add `anlge =` to our axis text to angle the labels so they are not too jumbled:
+Another change you may want to make is the value breaks in the axis labels (i.e., what values are shown on the axis). To customize that for a continuous variable you can use `scale_x_continuous()` / `scale_y_continuous` (for discrete variables use `scale_x_discrete` ). In this example we will also add `angle =` to our axis text to angle the labels so they are not too jumbled:
 
 ```{r eval = TRUE}
 census_data %>%
@@ -187,7 +203,9 @@ census_data %>%
 
 You can also import many different themes by installing certain packages. A popular one is `ggthemes`. A complete list of themes with this package can be seen [here](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/)
 
-To run this example, first install the `ggthemes` package and then load it in to your session:
+**If you did not add this to your setup.R script yet,** to run this example, first install the `ggthemes` package and then load it in to your session:
+
+*Note: you should NOT include any `install.packages()`* *lines of code in your .Rmd when you try to knit, it will likely throw an error. Remember you only need to use `install.packages()` once.*
 
 ```{r eval = FALSE}
 install.packages("ggthemes")

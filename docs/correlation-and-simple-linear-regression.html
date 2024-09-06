@@ -23,7 +23,7 @@
 <meta name="author" content="Caitlin Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2024-09-03" />
+<meta name="date" content="2024-09-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -328,12 +328,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="correlation-and-simple-linear-regression.html#cb146-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> sal) <span class="sc">+</span> </span>
 <span id="cb146-2"><a href="correlation-and-simple-linear-regression.html#cb146-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> length_2_mm, <span class="at">y =</span> weight_g), <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
 <span id="cb146-3"><a href="correlation-and-simple-linear-regression.html#cb146-3" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-120-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
 <p>From our plot, we see that there is indeed a pretty visible relationship between a salamander’s weight and length. In other words, a salamander’s weight and length seem to be <strong>positively correlated:</strong> as length increases, weight also increases, and vice versa. Moreover, this relationship does not appear linear. And, we will need to see what the distribution of our variables looks like:</p>
 <div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="correlation-and-simple-linear-regression.html#cb147-1" tabindex="-1"></a><span class="fu">hist</span>(sal<span class="sc">$</span>length_2_mm) <span class="co"># skewed... is it technically &quot;normal&quot; distribution?</span></span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
 <div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="correlation-and-simple-linear-regression.html#cb148-1" tabindex="-1"></a><span class="fu">hist</span>(sal<span class="sc">$</span>weight_g) <span class="co"># def non normal distribution</span></span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-121-2.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-122-2.png" width="672" /></p>
 <p>They both look pretty skewed, therefore likely not normally distributed. We can statistically test if a variable fits a normal distribution with the <code>shapiro.test()</code> function. However, this function only runs for 5000 observations or less. Therefore, we will need to test for normality on a random subset of our full data set:</p>
 <div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="correlation-and-simple-linear-regression.html#cb149-1" tabindex="-1"></a>sal_sub <span class="ot">&lt;-</span> sal <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">5000</span>) </span>
 <span id="cb149-2"><a href="correlation-and-simple-linear-regression.html#cb149-2" tabindex="-1"></a>  </span>
@@ -342,13 +342,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  sal_sub$length_2_mm
-## W = 0.93199, p-value &lt; 2.2e-16</code></pre>
+## W = 0.93191, p-value &lt; 2.2e-16</code></pre>
 <div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="correlation-and-simple-linear-regression.html#cb151-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(sal_sub<span class="sc">$</span>weight_g)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  sal_sub$weight_g
-## W = 0.55786, p-value &lt; 2.2e-16</code></pre>
+## W = 0.56309, p-value &lt; 2.2e-16</code></pre>
 <p>The <em>null hypothesis of the Shapiro-Wilk normality test is that the variable is normally distributed</em>, so a p-value less than 0.05, at 95% confidence (as we see for both of our variables here) tells use that our data does not fit a normal distribution.</p>
 <p>Therefore we have two options as we did with our t-test example in the previous lesson: transform the variables or use a non-parametric test. Here, we will go ahead with a non-parametric Spearman correlation test.</p>
 </div>
@@ -407,16 +407,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <p>Let’s first visualize latitude vs. size with some histograms and a scatter plot.</p>
 <div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="correlation-and-simple-linear-regression.html#cb155-1" tabindex="-1"></a><span class="fu">hist</span>(pie_crab<span class="sc">$</span>latitude)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-124-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-125-1.png" width="672" /></p>
 <div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="correlation-and-simple-linear-regression.html#cb156-1" tabindex="-1"></a><span class="fu">hist</span>(pie_crab<span class="sc">$</span>size)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-124-2.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-125-2.png" width="672" /></p>
 <p>It is clear that crab data was surveyed at only a finite number of locations, which leads to a non-normal distribution. But that’s okay - linear regression does NOT require the variables to be normally distributed. However, the error of the data must be normally distributed around the linear line (more on error later).</p>
 <p>When plotting, it is important to have the predictor variable on the x-axis, and the response variable on the y-axis. Then, we can fit a linear regression line through this data so that the distance between the line and the most observations is at its lowest:</p>
 <div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="correlation-and-simple-linear-regression.html#cb157-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pie_crab, <span class="fu">aes</span>(<span class="at">x =</span> latitude, <span class="at">y =</span> size)) <span class="sc">+</span> </span>
 <span id="cb157-2"><a href="correlation-and-simple-linear-regression.html#cb157-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
 <span id="cb157-3"><a href="correlation-and-simple-linear-regression.html#cb157-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb157-4"><a href="correlation-and-simple-linear-regression.html#cb157-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>() </span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-125-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-126-1.png" width="672" /></p>
 <p>Each observation’s vertical distance away from the line is the observation’s <strong>error</strong>. Getting the standard deviation of these distances gives us the line’s <strong>residual standard error</strong>.</p>
 <p>The intercept of this line, or the value of the line if we extended it out to meet the y-axis (i.e., where our crab size is zero), is also known as the line’s <strong>constant</strong>.</p>
 <p>Lastly, we have our <strong>slope</strong> of the line. This tells us how much a crab’s average size increases if we increase the latitude, and vice versa.</p>

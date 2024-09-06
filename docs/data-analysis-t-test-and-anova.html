@@ -23,7 +23,7 @@
 <meta name="author" content="Caitlin Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2024-09-03" />
+<meta name="date" content="2024-09-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -340,7 +340,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="data-analysis-t-test-and-anova.html#cb120-1" tabindex="-1"></a>trout_clean <span class="sc">%&gt;%</span></span>
 <span id="cb120-2"><a href="data-analysis-t-test-and-anova.html#cb120-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> section, <span class="at">y =</span> weight_g)) <span class="sc">+</span>   </span>
 <span id="cb120-3"><a href="data-analysis-t-test-and-anova.html#cb120-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-102-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
 <p>We don’t see too much of a difference based on this visual, but lets conduct the statistical test to verify if our hypothesis is supported.</p>
 <div id="assumptions" class="section level3 hasAnchor" number="6.2.1">
 <h3><span class="header-section-number">6.2.1</span> Assumptions<a href="data-analysis-t-test-and-anova.html#assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -356,7 +356,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4><span class="header-section-number">6.2.1.1</span> <strong>Variable transformation</strong><a href="data-analysis-t-test-and-anova.html#variable-transformation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>If we look at the distribution of weight (our continuous variable), it is pretty right skewed. Therefore, we’d likely want to do a log transformation on the data, which works well the data is skewed like this:</p>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="data-analysis-t-test-and-anova.html#cb123-1" tabindex="-1"></a><span class="fu">hist</span>(trout_clean<span class="sc">$</span>weight_g)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
 <p>Lets perform the variances check like we did before, but on the log transformed values, which you can do with <code>log()</code> , and we can nest the functions so we only use one line of code like this:</p>
 <div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="data-analysis-t-test-and-anova.html#cb124-1" tabindex="-1"></a>trout_clean <span class="sc">%&gt;%</span> </span>
 <span id="cb124-2"><a href="data-analysis-t-test-and-anova.html#cb124-2" tabindex="-1"></a>  <span class="fu">levene_test</span>(<span class="fu">log</span>(weight_g) <span class="sc">~</span> section)</span></code></pre></div>
@@ -370,10 +370,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb126-2"><a href="data-analysis-t-test-and-anova.html#cb126-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight_log =</span> <span class="fu">log</span>(weight_g)) <span class="sc">%&gt;%</span> </span>
 <span id="cb126-3"><a href="data-analysis-t-test-and-anova.html#cb126-3" tabindex="-1"></a>  <span class="fu">t_test</span>(weight_log <span class="sc">~</span> section, <span class="at">var.equal =</span> <span class="cn">TRUE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 15
-##   estimate estimate1 estimate2 .y.     group1 group2    n1    n2 statistic       p    df conf.low
-## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
-## 1    0.131      1.52      1.39 weight… CC     OG      6798  5796      5.49 4.06e-8 12592   0.0839
-## # ℹ 3 more variables: conf.high &lt;dbl&gt;, method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
+##   estimate estimate1 estimate2 .y.   group1 group2    n1    n2 statistic       p    df conf.low conf.high
+## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1    0.131      1.52      1.39 weig… CC     OG      6798  5796      5.49 4.06e-8 12592   0.0839     0.177
+## # ℹ 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
 <p>The output of this test gives us the test statistics, p-value, and the means for each of our forest groups (estimate1 and estimate2, corresponding to group1 and group2). Given the extremely small p-value and the means of each group, we can conclude that <em>Cutthroat trout weight was observed to be significantly higher in clear cut forests compared to old growth forests</em>. Remember though that now these mean weight values are log transformed, and not the raw weight in grams. The relationship can still be interpreted the same.</p>
 <p>How does this relate to our original hypothesis?</p>
 <p><strong>Welch Two Sample t-test</strong></p>
@@ -381,9 +381,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="data-analysis-t-test-and-anova.html#cb128-1" tabindex="-1"></a>trout_clean <span class="sc">%&gt;%</span> </span>
 <span id="cb128-2"><a href="data-analysis-t-test-and-anova.html#cb128-2" tabindex="-1"></a>  <span class="fu">t_test</span>(weight_g <span class="sc">~</span> section, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>) </span></code></pre></div>
 <pre><code>## # A tibble: 1 × 15
-##   estimate estimate1 estimate2 .y.   group1 group2    n1    n2 statistic        p     df conf.low
-## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-## 1     1.17      9.38      8.21 weig… CC     OG      6798  5796      6.69 2.26e-11 12588.    0.825
+##   estimate estimate1 estimate2 .y.      group1 group2    n1    n2 statistic        p     df conf.low
+## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+## 1     1.17      9.38      8.21 weight_g CC     OG      6798  5796      6.69 2.26e-11 12588.    0.825
 ## # ℹ 3 more variables: conf.high &lt;dbl&gt;, method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
 <p>While we used a slightly different method, our conclusions are still the same, finding that Cutthroat trout had significantly higher weights in clear cut forests than old growth.</p>
 </div>
@@ -451,14 +451,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="data-analysis-t-test-and-anova.html#cb140-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
 <span id="cb140-2"><a href="data-analysis-t-test-and-anova.html#cb140-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> unittype, <span class="at">y =</span> weight_g, <span class="at">color =</span> unittype)) <span class="sc">+</span> </span>
 <span id="cb140-3"><a href="data-analysis-t-test-and-anova.html#cb140-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
 <div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="data-analysis-t-test-and-anova.html#cb141-1" tabindex="-1"></a>trout_cc <span class="sc">%&gt;%</span> </span>
 <span id="cb141-2"><a href="data-analysis-t-test-and-anova.html#cb141-2" tabindex="-1"></a>  <span class="co"># since we are making a histogram only need an &#39;x&#39; variable</span></span>
 <span id="cb141-3"><a href="data-analysis-t-test-and-anova.html#cb141-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight_g)) <span class="sc">+</span></span>
 <span id="cb141-4"><a href="data-analysis-t-test-and-anova.html#cb141-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
 <span id="cb141-5"><a href="data-analysis-t-test-and-anova.html#cb141-5" tabindex="-1"></a>  <span class="co"># separate plot by unittype</span></span>
 <span id="cb141-6"><a href="data-analysis-t-test-and-anova.html#cb141-6" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>unittype, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
 <div id="post-hoc-analysis" class="section level4 hasAnchor" number="6.3.1.1">
 <h4><span class="header-section-number">6.3.1.1</span> Post-Hoc Analysis<a href="data-analysis-t-test-and-anova.html#post-hoc-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Now ANOVAs don’t tell us which groups are significantly different, for that we would need to use a post-hoc test. Since we used the non-parametric Kruskal-Wallace test, we can use the associated Dunn’s test for multiple comparisons to assess significant differences among each pair of groups.</p>
