@@ -6,7 +6,11 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, eval = TRUE
 
 In this lesson you will be introduced to the process of conducting statistical tests in R, specifically t-tests and ANOVA tests for working with categorical predictor variables.
 
-First, to access the dataset(s) you will be using in this lesson, we will be using a new data package called [{lterdatasampler}](https://lter.github.io/lterdatasampler/). This package contains subsets of data from various Long Term Ecological Research (LTER) sites, designed for use in R teaching and training activities.
+::: {.alert .alert-info}
+Need a refresher on stats fundamentals? We highly suggest watching this [20-minute video](https://www.youtube.com/watch?v=OmNPYpXaKFw) that goes over hypothesis testing, defining significance/p-values, and common statistical testing assumptions.
+:::
+
+To access the dataset(s) you will be using in this lesson, we will be using a new data package called [{lterdatasampler}](https://lter.github.io/lterdatasampler/). This package contains subsets of data from various Long Term Ecological Research (LTER) sites, designed for use in R teaching and training activities.
 
 We we also need the {[rstatix](https://rpkgs.datanovia.com/rstatix/)} package, which allows us to conduct various statistical tests that are 'tidyverse' friendly (aka, we can use them with the pipe `%>%`).
 
