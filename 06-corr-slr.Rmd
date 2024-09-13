@@ -4,7 +4,13 @@
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
-```{r}
+*Before* running the set up script, if you have not already, add the `"lubridate"` package to your packages list in the setup.R script.
+
+```{r eval = FALSE}
+source("setup.R")
+```
+
+```{r include = FALSE}
 # load in packages
 library(tidyverse)
 library(lterdatasampler)
@@ -191,8 +197,6 @@ Let's first define each date's water year using an `if_else()` statement and the
 
 ```{r}
 ntl_airtemp_wyear <- ntl_airtemp %>%
-  # Add a column to group the Fall and Spring season into a same year 
-  # (similar to hydrologic "water years") using the lubridate package:
   mutate(wyear = if_else(month(sampledate) < 10, year, year+1))
 ```
 
@@ -280,10 +284,10 @@ summary(slr_model)
 
 ## Citations
 
-***Data Source:*** Anderson, L. and D. Robertson. 2020. Madison Wisconsin Daily Meteorological Data 1869 - current ver 32. Environmental Data Initiative. https://doi.org/10.6073/pasta/e3ff85971d817e9898bb8a83fb4c3a8b (Accessed 2021-03-08).
+***Data Source:*** Anderson, L. and D. Robertson. 2020. Madison Wisconsin Daily Meteorological Data 1869 - current ver 32. Environmental Data Initiative. <https://doi.org/10.6073/pasta/e3ff85971d817e9898bb8a83fb4c3a8b> (Accessed 2021-03-08).
 
-***Data Source:*** Johnson, D. 2019. Fiddler crab body size in salt marshes from Florida to Massachusetts, USA at PIE and VCR LTER and NOAA NERR sites during summer 2016. ver 1. Environmental Data Initiative. https://doi.org/10.6073/pasta/4c27d2e778d3325d3830a5142e3839bb (Accessed 2021-05-27).
+***Data Source:*** Johnson, D. 2019. Fiddler crab body size in salt marshes from Florida to Massachusetts, USA at PIE and VCR LTER and NOAA NERR sites during summer 2016. ver 1. Environmental Data Initiative. <https://doi.org/10.6073/pasta/4c27d2e778d3325d3830a5142e3839bb> (Accessed 2021-05-27).
 
-***Data Source:*** Magnuson, J.J., S.R. Carpenter, and E.H. Stanley. 2021. North Temperate Lakes LTER: Ice Duration - Madison Lakes Area 1853 - current ver 35. Environmental Data Initiative. https://doi.org/10.6073/pasta/ab31f2489ee436beb73fc8f1d0213d97 (Accessed 2021-03-08).
+***Data Source:*** Magnuson, J.J., S.R. Carpenter, and E.H. Stanley. 2021. North Temperate Lakes LTER: Ice Duration - Madison Lakes Area 1853 - current ver 35. Environmental Data Initiative. <https://doi.org/10.6073/pasta/ab31f2489ee436beb73fc8f1d0213d97> (Accessed 2021-03-08).
 
-Magnuson, J.J. 2021. Seeing the invisible present and place: from years to centuries with lake ice from Wisconsin to the Northern Hemisphere. Chapter 9 (243- 277) in R. B. Waide and S. E. Kingsland [eds]. The Challenges of Long Term Ecological Research: A Historical Analysis. Springer, Archimedes Series #59. https://doi.org/10.1007/978-3-030-66933-1_9 (Accessed 2022-02-14).
+Magnuson, J.J. 2021. Seeing the invisible present and place: from years to centuries with lake ice from Wisconsin to the Northern Hemisphere. Chapter 9 (243- 277) in R. B. Waide and S. E. Kingsland [eds]. The Challenges of Long Term Ecological Research: A Historical Analysis. Springer, Archimedes Series #59. <https://doi.org/10.1007/978-3-030-66933-1_9> (Accessed 2022-02-14).
