@@ -52,7 +52,7 @@ From our plot, we see that there is indeed a pretty visible relationship between
 Whether we use a parametric or non-parametric correlation test depends on 1) whether our two variables exhibit a visually linear relationship and 2) whether they follow normal distributions. Looking at our plot above, we can see that their relationship *does not appear linear*. Let's also check what the distributions of our variables look like:
 
 ```{r}
-hist(sal$length_2_mm) # skewed... is it technically "normal" distribution?
+hist(sal$length_2_mm) # slightly skewed..
 
 hist(sal$weight_g) # def non normal distribution
 ```

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 7 Correlation and Simple Linear Regression | Introduction to Environmental Data Science</title>
   <meta name="description" content="This site hosts the first half of the course content for ESS 523A at Colorado State University." />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 7 Correlation and Simple Linear Regression | Introduction to Environmental Data Science" />
   <meta property="og:type" content="book" />
@@ -52,7 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <script src="libs/plotly-binding-4.10.4/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
@@ -66,9 +65,9 @@
 <script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.2.1/leaflet.js"></script>
 <script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.1/leaflet-providers-plugin.js"></script>
 <link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
 <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
@@ -331,7 +330,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="parametric-vs.-non-parameteric-correlation-tests" class="section level5 hasAnchor" number="7.1.0.1.1">
 <h5><span class="header-section-number">7.1.0.1.1</span> Parametric vs. non-parameteric correlation tests<a href="correlation-and-simple-linear-regression.html#parametric-vs.-non-parameteric-correlation-tests" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Whether we use a parametric or non-parametric correlation test depends on 1) whether our two variables exhibit a visually linear relationship and 2) whether they follow normal distributions. Looking at our plot above, we can see that their relationship <em>does not appear linear</em>. Let’s also check what the distributions of our variables look like:</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="correlation-and-simple-linear-regression.html#cb147-1" tabindex="-1"></a><span class="fu">hist</span>(sal<span class="sc">$</span>length_2_mm) <span class="co"># skewed... is it technically &quot;normal&quot; distribution?</span></span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="correlation-and-simple-linear-regression.html#cb147-1" tabindex="-1"></a><span class="fu">hist</span>(sal<span class="sc">$</span>length_2_mm) <span class="co"># slightly skewed..</span></span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
 <div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="correlation-and-simple-linear-regression.html#cb148-1" tabindex="-1"></a><span class="fu">hist</span>(sal<span class="sc">$</span>weight_g) <span class="co"># def non normal distribution</span></span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-123-2.png" width="672" /></p>
@@ -343,13 +342,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  sal_sub$length_2_mm
-## W = 0.93024, p-value &lt; 2.2e-16</code></pre>
+## W = 0.93518, p-value &lt; 2.2e-16</code></pre>
 <div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="correlation-and-simple-linear-regression.html#cb151-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(sal_sub<span class="sc">$</span>weight_g)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  sal_sub$weight_g
-## W = 0.5538, p-value &lt; 2.2e-16</code></pre>
+## W = 0.55859, p-value &lt; 2.2e-16</code></pre>
 <p>The <strong>null hypothesis of the Shapiro-Wilk normality test is that the variable is normally distributed</strong>, so a p-value less than 0.05, at 95% confidence (as we see for both of our variables here) tells use that <em>our data does not fit a normal distribution</em>.</p>
 <p>Therefore we have two options as we did with our t-test example in the previous lesson: transform the variables and see if that helps, or use a non-parametric test. Here, we will go ahead with the non-parametric Spearman correlation test.</p>
 <div class="alert alert-info">
