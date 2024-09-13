@@ -45,7 +45,11 @@ ggplot(data = sal) +
   theme_bw()
 ```
 
-From our plot, we see that there is indeed a pretty visible relationship between a salamander's weight and length. In other words, a salamander's weight and length seem to be **positively correlated:** as length increases, weight also increases, and vice versa. Moreover, this relationship does not appear linear. And, we will need to see what the distribution of our variables looks like:
+From our plot, we see that there is indeed a pretty visible relationship between a salamander's weight and length. In other words, a salamander's weight and length seem to be **positively correlated:** as length increases, weight also increases, and vice versa.
+
+##### Parametric vs. non-parameteric correlation tests
+
+Whether we use a parametric or non-parametric correlation test depends on 1) whether our two variables exhibit a visually linear relationship and 2) whether they follow normal distributions. Looking at our plot above, we can see that their relationship *does not appear linear*. Let's also check what the distributions of our variables look like:
 
 ```{r}
 hist(sal$length_2_mm) # skewed... is it technically "normal" distribution?
@@ -53,7 +57,7 @@ hist(sal$length_2_mm) # skewed... is it technically "normal" distribution?
 hist(sal$weight_g) # def non normal distribution
 ```
 
-They both look pretty skewed, therefore likely not normally distributed. We can statistically test if a variable fits a normal distribution with the `shapiro.test()` function. However, this function only runs for 5000 observations or less. Therefore, we will need to test for normality on a random subset of our full data set:
+They *both look pretty skewed*, therefore likely not normally distributed. We can statistically test if a variable fits a normal distribution with the `shapiro.test()` function. However, this function only runs for 5000 observations or less. Therefore, we will need to test for normality on a random subset of our full data set:
 
 ```{r}
 sal_sub <- sal %>% slice_sample(n = 5000) 
@@ -63,9 +67,13 @@ shapiro.test(sal_sub$length_2_mm)
 shapiro.test(sal_sub$weight_g)
 ```
 
-The *null hypothesis of the Shapiro-Wilk normality test is that the variable is normally distributed*, so a p-value less than 0.05, at 95% confidence (as we see for both of our variables here) tells use that our data does not fit a normal distribution.
+The **null hypothesis of the Shapiro-Wilk normality test is that the variable is normally distributed**, so a p-value less than 0.05, at 95% confidence (as we see for both of our variables here) tells use that *our data does not fit a normal distribution*.
 
-Therefore we have two options as we did with our t-test example in the previous lesson: transform the variables or use a non-parametric test. Here, we will go ahead with a non-parametric Spearman correlation test.
+Therefore we have two options as we did with our t-test example in the previous lesson: transform the variables and see if that helps, or use a non-parametric test. Here, we will go ahead with the non-parametric Spearman correlation test.
+
+::: {.alert .alert-info}
+When two continuous variables are normally distributed and appear to have a linear relationship, one should use the **Pearson correlation test**.
+:::
 
 #### Correlation test in R
 
@@ -80,13 +88,9 @@ cor_test(sal,
 
 **`cor`** is the correlation coefficient, *r*. In this example it is positive, indicating that there is a positive correlation between weight and length. Remember that *r* can only range from -1 to +1. So, a value of 0.98 indicates a very strong relationship.
 
-`statistic` is the test statistic (t) which is calculated using *r* and the number of observations in the test.
+**`statistic`** is the test statistic (t) which is calculated using *r* and the number of observations in the test.
 
-`p` is the p-value. Here, it is calculated using the confidence level and the test statistic.
-
-::: {.alert .alert-info}
-When two continuous variables are normally distributed and appear to have a linear relationship, one should use the *Pearson correlation test*.
-:::
+**`p`** is the p-value. Here, it is calculated using the confidence level and the test statistic.
 
 #### **Correlation limitations**
 

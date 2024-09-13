@@ -63,6 +63,7 @@ citations
 correlation-and-simple-linear-regression
 correlation-with-salamanders
 eda
+parametric-vs.-non-parameteric-correlation-tests
 correlation-test-in-r
 correlation-limitations
 simple-linear-regression-with-crabs
@@ -95,4 +96,3 @@ testing-for-normal-distribution
 testing-for-equal-variance
 anova---kruskal-wallis
 anova-post-hoc-analysis
-cover-image-path-to-the-social-sharing-image-like-imagescover.jpg
