@@ -114,6 +114,12 @@ But first we must define which variable leads to the other's change, something w
 | Predictor                      | Outcome                         |
 | Explanatory                    | Response                        |
 
+Load in the crab data from the `lterdatasampler` package:
+
+```{r}
+data("pie_crab")
+```
+
 Let's first visualize latitude vs. size with some histograms and a scatter plot.
 
 ```{r}
@@ -213,16 +219,16 @@ ntl_winter_airtemp <- ntl_airtemp_wyear %>%
   summarize(mean_air_temp = mean(ave_air_temp_adjusted))
 ```
 
-**1.** Join your table of (water-)yearly average winter temperatures to our `avg_icecover` object. Save this new table as `icecover_temp`. (HINT: use a `join()` function to do this.)
+**1.** Join your table of (water-)yearly average winter temperatures to our `avg_icecover` object. Save this new table as `icecover_temp`. (HINT: use a `join()` function to do this.) (3 pts.)
 
 ```{r, echo = FALSE, message = FALSE, results = 'hide'}
 icecover_temp <- avg_icecover %>%
-  left_join(., ntl_winter_airtemp, by = "wyear" )
+  left_join(ntl_winter_airtemp, by = "wyear")
 ```
 
 <br>
 
-**2.** Visualize the data by plotting our variables against one another, and using histograms. Is their relationship linear? Are our variables normally distributed?
+**2.** Visualize the data by plotting our variables against one another, and using histograms. Is their relationship linear? Are our variables normally distributed? (3 pts.)
 
 ```{r, echo = FALSE, message = FALSE, eval = FALSE, results = 'hide'}
 hist(icecover_temp$mean_air_temp)
@@ -238,7 +244,7 @@ shapiro.test(icecover_temp$mean_air_temp)
 
 <br>
 
-**3.** Perform a correlation test on `icecover_temp` to see whether there is a significant relationship between mean ice duration and mean air temperature. What is the test statistic of this relationship? Is the relationship positive or negative?
+**3.** Perform a correlation test on `icecover_temp` to see whether there is a significant relationship between mean ice duration and mean air temperature. If so, is the relationship positive or negative? What is the correlation coefficient? (4 pts.)
 
 ```{r, echo = FALSE, message = FALSE, eval = FALSE, results = 'hide'}
 cor_test(icecover_temp,
@@ -251,7 +257,7 @@ cor_test(icecover_temp,
 
 <br>
 
-**4.** Use a simple linear model to predict the mean ice duration for a year whose mean temperature is -2 degrees, 0 degrees, and 2 degrees.
+**4.** Develop a simple linear model to then predict the mean ice duration when mean winter temperatures are -2 degrees, 0 degrees, and 2 degrees. (4 pts.)
 
 ```{r, echo = FALSE, message = FALSE, eval = FALSE, results = 'hide'}
 # Simple linear regression model
@@ -266,7 +272,7 @@ predict(slr_model, newdata = new_temp)
 
 <br>
 
-**5.** Plot the average air temperature against the average ice cover duration. Include our simple linear regression (i.e., the line of best fit) in the plot.
+**5.** Plot the average air temperature against the average ice cover duration. Include our simple linear regression (i.e., the line of best fit) in the plot. (3 pts.)
 
 ```{r, echo = FALSE, eval = FALSE, message = FALSE, results = 'hide'}
 ggplot(icecover_temp, aes(x = mean_air_temp, y = mean_duration)) +
@@ -276,7 +282,7 @@ ggplot(icecover_temp, aes(x = mean_air_temp, y = mean_duration)) +
 
 <br>
 
-**6.** What are the slope, intercept, and the residual standard error of our simple linear regression line?
+**6.** What is the slope, intercept, and residual standard error of our simple linear regression? (3 pts.)
 
 ```{r, echo = FALSE, eval = FALSE, message = FALSE, results = 'hide'}
 # slope = -8.903
