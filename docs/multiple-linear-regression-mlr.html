@@ -23,7 +23,7 @@
 <meta name="author" content="Caitlin Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2024-09-16" />
+<meta name="date" content="2024-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -306,8 +306,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="multiple-linear-regression-mlr" class="section level1 hasAnchor" number="8">
 <h1><span class="header-section-number"> 8</span> Multiple Linear Regression (MLR)<a href="multiple-linear-regression-mlr.html#multiple-linear-regression-mlr" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="multiple-linear-regression-mlr.html#cb167-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb167-2"><a href="multiple-linear-regression-mlr.html#cb167-2" tabindex="-1"></a><span class="fu">library</span>(lterdatasampler)</span></code></pre></div>
+<p>Set up our session. At minimum, make sure you have <code>tidyverse</code> and <code>lterdatasampler</code> in your “setup.R” script.</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="multiple-linear-regression-mlr.html#cb167-1" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;setup.R&quot;</span>)</span></code></pre></div>
 <p>Multiple linear regression is the most common form of linear regression analysis. As a predictive analysis, multiple linear regression is used to explain the relationship between one continuous dependent variable (or, the response variable) and two or more independent variables (or, the predictor variables). The independent variables can be continuous OR categorical. Unlike a simple linear regression, where we describe the relationship between X and Y (two dimensional) and can simply plot them against each other, we are now working with multiple X’s and Y - which is three-dimensional.</p>
 <p>Here we are using the <code>pie_crab</code> data set again to develop a multiple linear regression model to predict crab size with additional variables from the data set, <code>latitude</code>, <code>air_temp</code>, and <code>water_temp</code>. Let’s first plot each of our predictor variables’ linear relationship with our response variable, crab size:</p>
 <div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="multiple-linear-regression-mlr.html#cb168-1" tabindex="-1"></a><span class="fu">data</span>(pie_crab)</span>
@@ -322,7 +322,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb168-10"><a href="multiple-linear-regression-mlr.html#cb168-10" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb168-11"><a href="multiple-linear-regression-mlr.html#cb168-11" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>name, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb168-12"><a href="multiple-linear-regression-mlr.html#cb168-12" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-143-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-144-1.png" width="672" /></p>
 <p>A multiple linear regression, at the location of each observation, incorporates each of our three variable’s simple linear relationships with crab size using the following equation:</p>
 <p><span class="math inline">\(y = β0 + (β1 * x1) + (β2 * x2) + (β3 * x3) + ε\)</span></p>
 <p>In this equation, <em>y</em> is a our response variable, crab size, while each <em>x</em> represents one of our predictor variables. <em>β0</em> represents the intercept; we can think of this as the value of <em>y</em> if all of our <em>x</em>’s were zero. Each <em>β</em> is called a <strong>partial regression coefficient</strong>; this is because we can think of each as the slope in the <em>x</em>’s dimension if all of our other <em>x</em>’s were held constant. Lastly, ε is the distance between our observation, and what our model predicts for it (i.e., observed - predicted).</p>
@@ -385,7 +385,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This “Residuals vs Fitted” (fitted meaning the predicted values) plot gives an indication if there are non-linear patterns. This is a bit subjective, but a good way of verifying that this assumption is met is by ensuring that no clear trend seems so exist. The residuals should also occupy equal space above and below the line, and along the length of the line.</p>
 <p><strong>The residual error values are normally distributed.</strong></p>
 <div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="multiple-linear-regression-mlr.html#cb174-1" tabindex="-1"></a><span class="fu">plot</span>(mlr_model, <span class="at">which =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-147-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-148-1.png" width="672" /></p>
 <p>… also a bit subjective, but so long as the points on the Q-Q plot follow the dotted line, this assumption is fulfilled.</p>
 <p><strong>The independent variables are not highly correlated with each other.</strong></p>
 <p>Multicolinearity can lead to unreliable coefficient estimates, while adding more variables to the model will always increase the R<sup>2</sup> value, reflecting a higher proportion of variance explained by the model that is unjust.</p>

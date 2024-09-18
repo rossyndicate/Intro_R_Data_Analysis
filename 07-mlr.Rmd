@@ -4,7 +4,14 @@
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
-```{r}
+Set up our session. At minimum, make sure you have `tidyverse` and `lterdatasampler` in your "setup.R" script.
+
+```{r eval = FALSE}
+source("setup.R")
+```
+
+
+```{r include=FALSE}
 library(tidyverse)
 library(lterdatasampler)
 ```
