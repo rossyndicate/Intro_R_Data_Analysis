@@ -125,13 +125,13 @@ Normally, we should exclude variables that have a correlation coefficient greate
 
 We are interested in developing a multiple linear regression model to predict mean annual stream flow across the Eastern US. For every state, we have a handful of watershed and site characteristic data associated with USGS stream gauging stations.
 
-Download the 'usgs' folder on Canvas and store it in a 'data' folder in this assignment's project directory. Here is a list of all of these files:
+Download the 'usgs_gages' folder on Canvas and store it in a 'data' folder in this assignment's project directory. Here is a list of all of these files:
 
 ```{r}
-data_files <- list.files('data/usgs', full.names = TRUE)
+data_files <- list.files('data/usgs_gages', full.names = TRUE, pattern = "*.csv")
 ```
 
-**1.** Read in each of the data sets associated with the assignment and combine them into a single data set. (HINT: What does map_dfr() do? 2.5 pts.
+**1.** Read in each of the data sets associated with the assignment and combine them into a single data set. (HINT: What does map_dfr() do)? 2.5 pts.
 
 ```{r, eval = FALSE, echo = FALSE}
 full_dataset <- data_files %>% 

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 8 Multiple Linear Regression (MLR) | Introduction to Environmental Data Science</title>
   <meta name="description" content="This site hosts the first half of the course content for ESS 523A at Colorado State University." />
-  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 8 Multiple Linear Regression (MLR) | Introduction to Environmental Data Science" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Caitlin Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2024-09-18" />
+<meta name="date" content="2024-09-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,7 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <script src="libs/plotly-binding-4.10.4/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
@@ -65,9 +66,9 @@
 <script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.2.1/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script>
 <script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.2.1/leaflet-providers-plugin.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
 <link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
 <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
@@ -402,9 +403,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="exercises-6" class="section level2 hasAnchor" number="8.2">
 <h2><span class="header-section-number">8.2</span> Exercises<a href="multiple-linear-regression-mlr.html#exercises-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We are interested in developing a multiple linear regression model to predict mean annual stream flow across the Eastern US. For every state, we have a handful of watershed and site characteristic data associated with USGS stream gauging stations.</p>
-<p>Download the ‘usgs’ folder on Canvas and store it in a ‘data’ folder in this assignment’s project directory. Here is a list of all of these files:</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="multiple-linear-regression-mlr.html#cb177-1" tabindex="-1"></a>data_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&#39;data/usgs&#39;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><strong>1.</strong> Read in each of the data sets associated with the assignment and combine them into a single data set. (HINT: What does map_dfr() do? 2.5 pts.</p>
+<p>Download the ‘usgs_gages’ folder on Canvas and store it in a ‘data’ folder in this assignment’s project directory. Here is a list of all of these files:</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="multiple-linear-regression-mlr.html#cb177-1" tabindex="-1"></a>data_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&#39;data/usgs_gages&#39;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>, <span class="at">pattern =</span> <span class="st">&quot;*.csv&quot;</span>)</span></code></pre></div>
+<p><strong>1.</strong> Read in each of the data sets associated with the assignment and combine them into a single data set. (HINT: What does map_dfr() do)? 2.5 pts.</p>
 <p><br></p>
 <p><strong>2.</strong> Using our combined data set, plot each variable against mean annual stream flow to identify variables that seem to have a linear relationship with stream flow. 5 pts.</p>
 <p><br></p>
