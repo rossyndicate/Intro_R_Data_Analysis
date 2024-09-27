@@ -103,8 +103,8 @@ penguins %>%
   filter(species %in% c("Adelie", "Gentoo")) %>%
   ggplot() +
   geom_histogram(aes(x = bill_length_mm, fill = species), alpha = 0.50) +
-  geom_vline(xintercept =  38.8) +
-  geom_vline(xintercept = 47.5)
+  geom_vline(xintercept =  38.8, col = "black") +
+  geom_vline(xintercept = 47.5, col = "black")
 ```
 
 In the grand scheme of things the difference between these two populations is relatively small in magnitude: their histograms overlap, indicating that some penguins in both species often have similar bill lengths. But, what if the bills of all of the Gentoo penguins *magically* grew an extra 15 mm?
@@ -116,8 +116,8 @@ penguins %>%
   mutate(bill_length_mm = if_else(species == "Gentoo", bill_length_mm + 15, bill_length_mm)) %>% 
   ggplot() + 
   geom_histogram(aes(x = bill_length_mm, fill = species), alpha = 0.56) +
-  geom_vline(xintercept =  38.8) +
-  geom_vline(xintercept = 62.5) # I found this from the new mutated values separately
+  geom_vline(xintercept =  38.8, col = "black") +
+  geom_vline(xintercept = 62.5, col = "black") # I found this from the new mutated values separately
 ```
 
 And now perform the t-test on this new *magical* data:

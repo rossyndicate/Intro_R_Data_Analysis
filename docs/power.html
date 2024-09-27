@@ -368,9 +368,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb181-8"><a href="power.html#cb181-8" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span>   </span>
 <span id="cb181-9"><a href="power.html#cb181-9" tabindex="-1"></a>  <span class="fu">t_test</span>(bill_length_mm <span class="sc">~</span> species, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 15
-##   estimate estimate1 estimate2 .y.           group1 group2    n1    n2 statistic       p    df conf.low
-## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
-## 1    -13.4      37.2      50.6 bill_length_… Adelie Gentoo     2     2     -15.7 0.00449  1.95    -17.2
+##   estimate estimate1 estimate2 .y.            group1 group2    n1    n2 statistic      p    df conf.low
+## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+## 1    -8.65      39.6      48.3 bill_length_mm Adelie Gentoo     2     2     -4.20 0.0884  1.45    -21.7
 ## # ℹ 3 more variables: conf.high &lt;dbl&gt;, method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
 <p>Compared to the p-value in the previous test, this p-value is much larger and, depending on which random samples were chosen in <code>slice_sample</code>, likely higher than our cut-off of 0.05 and would lead to an insignificant difference in bill length between the two species.</p>
 <p>Therefore, as sample size decreases, so does our power in identifying true trends.</p>
@@ -382,8 +382,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb183-2"><a href="power.html#cb183-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb183-3"><a href="power.html#cb183-3" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb183-4"><a href="power.html#cb183-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">fill =</span> species), <span class="at">alpha =</span> <span class="fl">0.50</span>) <span class="sc">+</span></span>
-<span id="cb183-5"><a href="power.html#cb183-5" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span>  <span class="fl">38.8</span>) <span class="sc">+</span></span>
-<span id="cb183-6"><a href="power.html#cb183-6" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">47.5</span>)</span></code></pre></div>
+<span id="cb183-5"><a href="power.html#cb183-5" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span>  <span class="fl">38.8</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb183-6"><a href="power.html#cb183-6" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">47.5</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-162-1.png" width="864" /></p>
 <p>In the grand scheme of things the difference between these two populations is relatively small in magnitude: their histograms overlap, indicating that some penguins in both species often have similar bill lengths. But, what if the bills of all of the Gentoo penguins <em>magically</em> grew an extra 15 mm?</p>
 <div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="power.html#cb184-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
@@ -392,8 +392,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb184-4"><a href="power.html#cb184-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bill_length_mm =</span> <span class="fu">if_else</span>(species <span class="sc">==</span> <span class="st">&quot;Gentoo&quot;</span>, bill_length_mm <span class="sc">+</span> <span class="dv">15</span>, bill_length_mm)) <span class="sc">%&gt;%</span> </span>
 <span id="cb184-5"><a href="power.html#cb184-5" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb184-6"><a href="power.html#cb184-6" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">fill =</span> species), <span class="at">alpha =</span> <span class="fl">0.56</span>) <span class="sc">+</span></span>
-<span id="cb184-7"><a href="power.html#cb184-7" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span>  <span class="fl">38.8</span>) <span class="sc">+</span></span>
-<span id="cb184-8"><a href="power.html#cb184-8" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">62.5</span>) <span class="co"># I found this from the new mutated values separately</span></span></code></pre></div>
+<span id="cb184-7"><a href="power.html#cb184-7" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span>  <span class="fl">38.8</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb184-8"><a href="power.html#cb184-8" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">62.5</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>) <span class="co"># I found this from the new mutated values separately</span></span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-163-1.png" width="864" /></p>
 <p>And now perform the t-test on this new <em>magical</em> data:</p>
 <div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="power.html#cb185-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
@@ -429,7 +429,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 × 15
 ##   estimate estimate1 estimate2 .y.            group1 group2    n1    n2 statistic      p    df conf.low
 ## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
-## 1    -24.8      39.1      64.0 bill_length_mm Adelie Gentoo     2     2     -6.88 0.0252  1.84    -41.7
+## 1    -19.8      40.4      60.1 bill_length_mm Adelie Gentoo     2     2     -15.2 0.0125  1.51    -27.5
 ## # ℹ 3 more variables: conf.high &lt;dbl&gt;, method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
 </div>
 </div>
