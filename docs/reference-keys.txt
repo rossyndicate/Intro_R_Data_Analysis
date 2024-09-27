@@ -78,6 +78,7 @@ mlr-assumptions
 exercises-6
 citations-2
 power
+recommended-pre-work
 power-in-action
 sample-size
 magnitude-of-effect
