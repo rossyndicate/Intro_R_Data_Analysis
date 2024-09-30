@@ -86,7 +86,7 @@ note-about-random-selection
 assignment
 citations-3
 r-skills-review
-necessary-packages
+setup
 tidying-datasets
 get-usgs-stream-flow-data
 get-cdwr-stream-flow-data

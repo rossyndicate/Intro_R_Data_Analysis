@@ -6,7 +6,17 @@ knitr::opts_chunk$set(echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE, rows.p
 
 In this lesson you will take all of the skills you have learned up to this point and use them on a completely new set of data.
 
-#### Necessary packages:
+#### Setup
+
+::: {.alert .alert-info}
+New packages for this lesson: `dataRetrieval`, `httr`, `jsonlite`
+
+Add these to your 'setup.R' script if you want to follow along with the data retrieval part of this lesson (*optional*).
+:::
+
+```{r eval = FALSE}
+source("setup.R")
+```
 
 ```{r include=FALSE}
 library(tidyverse)
@@ -18,21 +28,11 @@ library(sf) # for the map
 library(mapview) # for making the interactive plot
 ```
 
-```{r eval=FALSE}
-library(tidyverse)
-library(rstatix)
-
-# new packages! Only if you want to work through the data retrieval process
-library(httr)
-library(jsonlite)
-library(dataRetrieval)
-```
-
 ## Tidying datasets
 
-We are interested in looking at how the Cache la Poudre River's flow changes over time and space as it travels out of the mountainous Poudre Canyon and through Fort Collins.
+We are interested in looking at how the Cache la Poudre River's flow changes over *time and space* as it travels out of the mountainous Poudre Canyon and through Fort Collins.
 
-There are four stream flow monitoring sites on the Poudre that we are interested in: two managed by the US Geological Survey (USGS), and two managed by the Colorado Division of Water Resources (CDWR):
+There are four stream flow monitoring sites along the Poudre that we are interested in: two managed by the US Geological Survey (USGS), and two managed by the Colorado Division of Water Resources (CDWR):
 
 ```{r echo = FALSE}
 # Making a tibble to convert into coordinates for our sites
@@ -61,7 +61,7 @@ Using the `dataRetrieval` package we can pull all sorts of USGS water data. You 
 usgs <- dataRetrieval::readNWISdv(siteNumbers = c("06752260", "06752280"), # USGS site code for the Poudre River at the Lincoln Bridge and the ELC
                                   parameterCd = "00060", # USGS code for stream flow
                                   startDate = "2020-10-01", # YYYY-MM-DD formatting
-                                  endDate = "2023-10-01") %>% # YYYY-MM-DD formatting
+                                  endDate = "2024-09-30") %>% # YYYY-MM-DD formatting
   rename(q_cfs = X_00060_00003) %>% # USGS code for stream flow units in cubic feet per second (CFS)
   mutate(Date = lubridate::ymd(Date), # convert the Date column to "Date" formatting using the `lubridate` package
          Site = case_when(site_no == "06752260" ~ "Lincoln", 
@@ -74,22 +74,22 @@ usgs <- dataRetrieval::readNWISdv(siteNumbers = c("06752260", "06752280"), # USG
 
 ### Get CDWR stream flow data
 
-Alas, CDWR doesn't have an R packge to easily pull data from their API like USGS does, but they do have user-friendly instructions about how to develop API calls.
+Alas, CDWR doesn't have an R packge to easily pull data from their API like USGS does, but they do have user-friendly instructions about how to develop **API calls.**
 
-**Don't stress if you have no clue what an API is**! We will learn a lot more about them in 523A, but this is good practice for our function writing and mapping skills.
+**Don't stress if you have no clue what an API is**! We will learn a lot more about them in later lessons, but this is good practice for our function writing and mapping skills.
 
-Using the ["URL Generator" steps outlined]((https://dwr.state.co.us/Rest/GET/Help/SurfaceWaterTSDayGenerator)), if we wanted data from 2020-2022 for the Canyon mouth side (site abbreviation = CLAFTCCO), it generates this URL to retrieve that data:
+Using the ["URL Generator" steps outlined](https://dwr.state.co.us/Rest/GET/Help/SurfaceWaterTSDayGenerator), if we wanted data from 2020-2024 for the Canyon mouth site (site abbreviation = CLAFTCCO), it generates this URL to retrieve that data:
 
-<https://dwr.state.co.us/Rest/GET/api/v2/surfacewater/surfacewatertsday/?format=json&dateFormat=dateOnly&fields=abbrev%2CmeasDate%2Cvalue%2CmeasUnit&encoding=deflate&abbrev=CLAFTCCO&min-measDate=10%2F01%2F2020&max-measDate=09%2F30%2F2022>
+<https://dwr.state.co.us/Rest/GET/api/v2/surfacewater/surfacewatertsday/?dateFormat=dateOnly&fields=abbrev%2CmeasDate%2Cvalue%2CmeasUnit&abbrev=CLAFTCCO&min-measDate=10%2F01%2F2020&max-measDate=09%2F30%2F2024>
 
-However, we want to pull this data for two different sites, and may want to change the year range of data. Therefore, we can write a function to pull data for our various sites and time frames:
+However, we want to pull this data for two different sites, and may want to change the year range of data. Therefore, writing a custom function to pull data for our various sites and time frames would be useful:
 
 ```{r eval=FALSE}
 
-# Functin to retrieve data
-co_water_data <- function(site, start_year, end_year){
+# Function to retrieve data
+pull_cdwr <- function(site, start_year, end_year){
   
-  raw_data <- httr::GET(url = paste0("https://dwr.state.co.us/Rest/GET/api/v2/surfacewater/surfacewatertsday/?format=json&dateFormat=dateOnly&fields=abbrev%2CmeasDate%2Cvalue%2CmeasUnit&encoding=deflate&abbrev=",site,
+  raw_data <- httr::GET(url = paste0("https://dwr.state.co.us/Rest/GET/api/v2/surfacewater/surfacewatertsday/?dateFormat=dateOnly&fields=abbrev%2CmeasDate%2Cvalue%2CmeasUnit&abbrev=",site,
                                      "&min-measDate=10%2F01%2F", start_year,
                                      "&max-measDate=09%2F30%2F", end_year))
   
@@ -113,7 +113,7 @@ Now, lets use that function to pull data for our two CDWR sites of interest, whi
 sites <- c("CLAFTCCO","CLARIVCO")
 
 cdwr <- sites %>% 
-  map_dfr(~ co_water_data(site = .x, start_year = 2020, end_year = 2023))
+  map_dfr(~ pull_cdwr(site = .x, start_year = 2020, end_year = 2024))
  
 # If you want to save this file
 #write_csv(cdwr, 'data/review-cdwr.csv') 
@@ -121,7 +121,7 @@ cdwr <- sites %>%
 
 ### OR, read in the .csv's we already generated and saved for you:
 
-Read in our two data sets. You will find that they provide the same information (daily streamflow from 2020-2022) but their variable names and structures are different:
+Read in our two data sets. You will find that they provide the same information (daily streamflow from 2020-2024) but their variable names and structures are different:
 
 ```{r}
 usgs <- read_csv('data/review-usgs.csv')
@@ -130,7 +130,7 @@ cdwr <- read_csv('data/review-cdwr.csv')
 
 ```
 
-When we look at these two datasets, we see they provide the same information (daily streamflow from 2020-2023) but their variable names and structures are different:
+When we look at these two datasets, we see they provide the same information (daily streamflow from 2020-2024) but their variable names and structures are different:
 
 ```{r}
 glimpse(usgs)
@@ -148,7 +148,7 @@ cdwr_clean <- cdwr %>%
   rename(q_cfs = value) %>%
   # Add site and agency vars
   mutate(Date = lubridate::ymd(measDate),
-         Site = ifelse(abbrev == "CLAFTCCO", "Canyon",
+         Site = if_else(abbrev == "CLAFTCCO", "Canyon",
                        "Timnath"),
          agency_cd = "CDWR")
 ```
@@ -198,18 +198,19 @@ Let's look at the daily difference in discharge between the mouth of the Cache l
 dif_data <- data %>%
   # select vars of interest
   select(Site, Date, q_cfs) %>%
-  # create a column of streamflow values for each site
+  # pivot wider so each site is its own column
   pivot_wider(names_from = Site, values_from = q_cfs) %>%
   # for each downstream site, create a new column that is the difference from the Canyon mouth site
-  mutate_at(c("Boxelder", "Lincoln", "Timnath"), .funs = ~ (Canyon - .)) %>% 
-  # if you wanted to create new variables use this instead:
-  #mutate_at(c("Boxelder", "Lincoln", "Timnath"), .funs = list(dif = ~ (Canyon - .))) %>%
+  mutate_at(c("Boxelder", "Lincoln", "Timnath"), .funs = list(dif = ~ (Canyon - .))) %>%
   # then pivot these new columns (i.e., NOT the date and canyon columns) longer again
-  pivot_longer(-c(Canyon, Date))
+  pivot_longer(-c(Canyon, Date)) %>% 
+  # keep just the 'dif' values
+  filter(str_detect(name, "_dif"))
 
 
 dif_data %>% 
-  mutate(name = fct(name, levels = c("Lincoln", "Boxelder", "Timnath"))) %>% 
+  # factor the site variable in order from distance to the canyon mouth for plotting purposes
+  mutate(name = fct(name, levels = c("Lincoln_dif", "Boxelder_dif", "Timnath_dif"))) %>% 
   ggplot() +
     geom_line(aes(x = Date, y = value, color = name)) +
     theme_bw() +
@@ -241,7 +242,7 @@ data %>%
   shapiro_test(q_cfs)
 ```
 
-Since the null hypothesis of the Shapiro-Wilk test is that the data is normally distributed, these results tell us all groups do not fit a normal distribution for daily stream flow. It is also quite clear from their histograms that they are not normally distributed.
+Since the null hypothesis of the Shapiro-Wilk test is that the data **is** normally distributed, these results tell us all groups do not fit a normal distribution for daily stream flow. It is also quite clear from their histograms that they are not normally distributed.
 
 ### Testing for equal variance
 
@@ -252,7 +253,7 @@ data %>%
   levene_test(q_cfs ~ Site)
 ```
 
-Given this small p-value, we see that the variances of our groups are not equal.
+Given this small p-value, we see that the variances of our groups are *not* equal.
 
 ### ANOVA - Kruskal-Wallis
 
@@ -263,7 +264,7 @@ data %>%
   kruskal_test(q_cfs ~ Site)
 ```
 
-Our results here are highly significant (at alpha = 0.05), meaning that at least one of our group's mean stream flow is significantly different from the others.
+Our results here are highly significant (extremely small p-value), meaning that at least one of our sites has a stream flow significantly different from the others.
 
 ### ANOVA post-hoc analysis
 
@@ -271,10 +272,10 @@ Since we used the non-parametric Kruskal-Wallace test, we can use the associated
 
 ```{r}
 data %>% 
-  dunn_test(q_cfs ~ Site)
+  dunn_test(q_cfs ~ Site, detailed = TRUE)
 ```
 
-The results of our Dunn test signify that all of our sites are significantly different from eachother mean streamflow across our sites are significantly different.
+The results of our Dunn test signify that *all* of our sites are significantly different from each other in terms of mean streamflow.
 
 THOUGHT EXPERIMENT 1: Based on our results, which of our two gages have the greatest difference in mean daily stream flow?
 
