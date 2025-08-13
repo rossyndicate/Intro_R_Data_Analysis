@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Introduction to Environmental Data Science</title>
   <meta name="description" content="This site hosts the first half of the course content for ESS 523A at Colorado State University." />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Introduction to Environmental Data Science" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Caitlin Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2024-09-30" />
+<meta name="date" content="2025-08-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -69,10 +69,6 @@
 <script src="libs/leaflet-binding-2.2.2/leaflet.js"></script>
 <script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
 <script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
-<script src="libs/FlatGeoBuf-3.21.3/fgb.js"></script>
-<script src="libs/FlatGeoBuf-3.21.3/flatgeobuf-geojson.min.js"></script>
-<script src="libs/chromajs-2.1.0/chroma.min.js"></script>
-<link id="Poudre_River_Monitoring-1-attachment" rel="attachment" href="libs/Poudre_River_Monitoring-0.0.1/Poudre_River_Monitoring_layer.fgb"/>
 <link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
 <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
@@ -312,7 +308,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Introduction to Environmental Data Science</h1>
 <p class="author"><em>Caitlin Mothes, PhD and Katie Willi</em></p>
-<p class="date"><em>2024-09-30</em></p>
+<p class="date"><em>2025-08-13</em></p>
 </div>
 <div id="welcome" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number"> 1</span> Welcome!<a href="index.html#welcome" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -338,12 +334,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="approach-and-expectations" class="section level2 unnumbered hasAnchor">
 <h2>Approach and Expectations<a href="index.html#approach-and-expectations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><em>In-Person Section:</em></p>
 <p>This class is <a href="https://ieeexplore.ieee.org/document/7344151">flipped</a>, meaning all materials for the week ahead must be reviewed before class. To encourage this we will have weekly quizzes on pre-class content each Monday before we dive into the assignment.</p>
 <p>So without lectures in class what do we do together? We code! This class has almost 6 hours of contact time per week, and we design lessons so that you should be able to finish your assignments in class. The flipped class allows for deeper discussion about the common pitfalls of coding and allows for collaborative work time with your fellow classmates.</p>
 <p>Generally we will do a quick live-code review of concepts from the assignment and the pre-class materials, but more than 1 hour per class will be dedicated to you coding and working on the assignment in class.</p>
 <p>As such, coming to class is a vital part of how you can be successful and we fully expect you to be there every day.</p>
-<p>We also will actively encourage a <strong>collaborative coding environment</strong> where students help each other and discuss the best approach to solving various coding problems. We also hope that outside of class, you will use our Teams channel to discuss code issues!</p>
-<p>We will always send announcements with assignments, web links, and other updates through Canvas. The course syllabus will also be posted on Canvas.</p>
+<p>We also will actively encourage a <strong>collaborative coding environment</strong> where students help each other and discuss the best approach to solving various coding problems. We also hope that outside of class, you will use the course Teams channel to discuss code issues!</p>
+<p><em>Online Sections:</em></p>
+<p>The online course is asynchronous, and you will watch the class lectures that are posted on Canvas and work through lessons and assignments on your own time. While you will be learning in an online environment, we highly encourage you to collaborate with your fellow online classmates by communicating through the course Teams channel.</p>
+<p><em>All Students:</em></p>
+<p>We will send all course communications as Canvas announcements. The course syllabus will also be posted on Canvas. Please review the course syllabus for communication guidelines, AI policy, and other important course logistics and details.</p>
 </div>
 <div id="class-schedule" class="section level2 unnumbered hasAnchor">
 <h2>Class Schedule<a href="index.html#class-schedule" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -353,7 +353,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <colgroup>
 <col width="2%" />
 <col width="5%" />
-<col width="84%" />
+<col width="85%" />
 <col width="6%" />
 </colgroup>
 <tbody>
@@ -365,7 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 <tr class="even">
 <td>1</td>
-<td><strong>8/19</strong></td>
+<td><strong>8/25</strong></td>
 <td><p><em>Before class:</em> <a href="https://github.com/rossyndicate/primers/blob/main/README.md">Primers Basics</a> and <a href="https://rmarkdown.rstudio.com/lesson-1.html?_gl=1*10u3rje*_ga*NzUxNjg2ODAzLjE2OTE1MTIzMzk.*_ga_2C0WZ1JHG0*MTY5MTUxNjA2OC4yLjEuMTY5MTUxNjU2Ni4wLjAuMA..">R Markdown</a>; download R and RStudio</p>
 <p><strong>Introduction to R, RStudio, RMarkdown</strong></p>
 <p>Assignment - None</p></td>
@@ -373,111 +373,112 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 <tr class="odd">
 <td>2</td>
-<td><strong>8/26</strong></td>
-<td><p><em>Before class</em>: <a href="https://github.com/rossyndicate/primers/blob/main/README.md">Work with Data</a></p>
+<td><strong>9/1</strong></td>
+<td><p><strong>No Class Monday 9/1!</strong> <em>Before class Wednesday</em>: <a href="https://github.com/rossyndicate/primers/blob/main/README.md">Work with Data</a></p>
 <p><strong>Exploratory data analysis</strong></p>
 <p>Assignment - Exploratory Data Analysis (20 points)</p></td>
-<td>9/3</td>
+<td>9/8</td>
 </tr>
 <tr class="even">
 <td>3</td>
-<td><strong>9/2</strong></td>
-<td><p><strong>No Class Monday 9/2!</strong> <em>Before class Wednesday:</em> <a href="https://github.com/rossyndicate/primers/blob/main/README.md">Visualize Data</a></p>
+<td><strong>9/8</strong></td>
+<td><p><em>Before class:</em> <a href="https://github.com/rossyndicate/primers/blob/main/README.md">Visualize Data</a></p>
 <p><strong>Data visualization</strong></p>
 <p>Assignment - Bad Plots (20 points)</p></td>
-<td>9/9</td>
+<td>9/15</td>
 </tr>
 <tr class="odd">
 <td>4</td>
-<td><strong>9/9</strong></td>
+<td><strong>9/15</strong></td>
 <td><p><em>Before class:</em> <a href="https://github.com/rossyndicate/primers/blob/main/README.md">Tidy Your Data</a></p>
 <p><strong>Introduction to statistical analysis - T-tests, ANOVA</strong></p>
 <p>Assignment - T-Tests and ANOVA (20 points)</p></td>
-<td>9/16</td>
+<td>9/22</td>
 </tr>
 <tr class="even">
 <td>5</td>
-<td><strong>9/16</strong></td>
+<td><strong>9/22</strong></td>
 <td><p><em>Before class:</em> <a href="https://github.com/rossyndicate/primers/blob/main/README.md">Iterate</a></p>
 <p><strong>Simple Linear Regression</strong></p>
 <p>Assignment - Simple regression (20 points)</p></td>
-<td>9/23</td>
+<td>9/29</td>
 </tr>
 <tr class="odd">
 <td>6</td>
-<td><strong>9/23</strong></td>
+<td><strong>9/29</strong></td>
 <td><p><em>Before class:</em> <a href="https://github.com/rossyndicate/primers/blob/main/README.md">Write Functions</a></p>
 <p><strong>Multiple Linear Regression</strong></p>
 <p>Assignment - Interpreting multiple linear regression (20 points)</p></td>
-<td>9/30</td>
+<td>10/6</td>
 </tr>
 <tr class="even">
 <td>7</td>
-<td><strong>9/30</strong></td>
+<td><strong>10/6</strong></td>
 <td><p><strong>Power in Statistical Analysis and R Skills Review</strong></p>
 <p>Assignment - Power (20 points)</p></td>
-<td>10/7</td>
+<td>10/13</td>
 </tr>
 <tr class="odd">
 <td>8</td>
-<td><strong>10/7</strong></td>
+<td><strong>10/13</strong></td>
 <td><p><strong>Intro to Git and GitHub</strong></p>
 <p>Assignment - First Git Repo and Pull Request (20 points)</p></td>
-<td>10/14</td>
+<td>10/20</td>
 </tr>
 <tr class="even">
 <td>9</td>
-<td><strong>10/14</strong></td>
-<td><p><strong>Debugging</strong></p>
-<p>Assignment - Debugging LLM Output (20 points)</p></td>
-<td>10/21</td>
+<td><strong>10/20</strong></td>
+<td><p><strong>Debugging and AI</strong></p>
+<p>Assignment - Code Debugging and AI (20 points)</p></td>
+<td>10/27</td>
 </tr>
 <tr class="odd">
 <td>10</td>
-<td><strong>10/21</strong></td>
+<td><strong>10/27</strong></td>
 <td><p><strong>Iteration, Functions, API calls</strong></p>
 <p>Assignment - National Park Visitation (20 points)</p></td>
-<td>10/28</td>
+<td>11/3</td>
 </tr>
 <tr class="even">
 <td>11</td>
-<td><strong>10/28</strong></td>
-<td><strong>Introduction to Working with Geospatial Data; Final Project Overview</strong></td>
-<td>N/A</td>
+<td><strong>11/3</strong></td>
+<td><p><strong>Introduction to Working with Geospatial Data</strong></p>
+<p>Assignment - Geospatial data and analysis (20 points)</p></td>
+<td>11/17</td>
 </tr>
 <tr class="odd">
 <td>12</td>
-<td><strong>11/4</strong></td>
+<td><strong>11/10</strong></td>
 <td><p><strong>Introduction to Working with Geospatial Data (cont.)</strong></p>
-<p>Assignment - Geospatial Workflows (20 points)</p></td>
-<td>11/11</td>
+<p>Assignment - Geospatial visualization and iteration (20 points)</p></td>
+<td>11/17</td>
 </tr>
 <tr class="even">
 <td>13</td>
-<td><strong>11/11</strong></td>
+<td><strong>11/17</strong></td>
 <td><p><strong>Nested Modeling</strong></p>
 <p>Assignment - Water quality modeling (20 points)</p></td>
-<td>11/18</td>
+<td>12/1</td>
 </tr>
 <tr class="odd">
 <td>14</td>
-<td><strong>11/18</strong></td>
-<td><p><strong>Introduction to Machine Learning</strong></p>
-<p>Assignment - Remote sensing of water quality (20 points)</p></td>
-<td>12/02</td>
-</tr>
-<tr class="even">
-<td>15</td>
-<td><strong>11/25</strong></td>
+<td><strong>11/24</strong></td>
 <td><strong>No Classes - Fall Break</strong></td>
 <td></td>
 </tr>
+<tr class="even">
+<td>15</td>
+<td><strong>12/1</strong></td>
+<td><p>Final projects: R Markdown, Bookdown, Quarto, Shiny apps</p>
+<p>Assignment – Final Project - 100 points</p></td>
+<td>12/17</td>
+</tr>
 <tr class="odd">
 <td>16</td>
-<td><strong>12/02</strong></td>
-<td><p><strong>Final Projects - R Markdown, Bookdown, Quarto, Shiny</strong></p>
-<p>Assignment - Final Project (100 points)</p></td>
-<td>12/11</td>
+<td><strong>12/8</strong></td>
+<td>Final project work time; Continuing your data
+science journey 😊</td>
+<td></td>
 </tr>
 </tbody>
 </table>
