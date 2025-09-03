@@ -371,7 +371,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 × 15
 ##   estimate estimate1 estimate2 .y.      group1 group2    n1    n2 statistic     p    df conf.low conf.high
 ## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-## 1      -12      38.0      50.0 bill_le… Adelie Gentoo     2     2     -5.72 0.095  1.10    -33.7      9.73
+## 1    -8.05      38.6      46.6 bill_le… Adelie Gentoo     2     2     -2.16 0.186  1.69    -27.2      11.1
 ## # ℹ 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
 <p>Compared to the p-value in the previous test, this p-value is much larger and, depending on which random samples were chosen in <code>slice_sample</code>, likely higher than our cut-off of 0.05 and would lead to an insignificant difference in bill length between the two species.</p>
 <p>Therefore, as sample size decreases, so does our power in identifying true trends.</p>
@@ -428,9 +428,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb187-10"><a href="power.html#cb187-10" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb187-11"><a href="power.html#cb187-11" tabindex="-1"></a>  <span class="fu">t_test</span>(bill_length_mm <span class="sc">~</span> species, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 15
-##   estimate estimate1 estimate2 .y.      group1 group2    n1    n2 statistic     p    df conf.low conf.high
-## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-## 1    -23.2      38.8        62 bill_le… Adelie Gentoo     2     2     -15.4 0.041  1.00    -42.1     -4.18
+##   estimate estimate1 estimate2 .y.     group1 group2    n1    n2 statistic      p    df conf.low conf.high
+## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1    -29.0      34.2      63.2 bill_l… Adelie Gentoo     2     2     -13.3 0.0345  1.14    -49.8     -8.09
 ## # ℹ 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
 </div>
 </div>

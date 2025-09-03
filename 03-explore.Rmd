@@ -16,7 +16,7 @@ library(palmerpenguins)
 ```
 
 ::: {.alert .alert-info}
-Note: To avoid warnings and other messages showing up in your rendered R Markdown document, you can set `messae = FALSE` and `warning = FALSE` in your code chunk arguments.
+Note: To avoid warnings and other messages showing up in your rendered R Markdown document, you can set `message = FALSE` and `warning = FALSE` in your code chunk arguments.
 :::
 
 ### The `penguins` data
