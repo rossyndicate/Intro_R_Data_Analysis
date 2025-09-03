@@ -1,0 +1,164 @@
+---
+title: "Introduction to Environmental Data Science"
+author: "Caitlin Mothes, PhD and Katie Willi"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+url: https://ccmothes.github.io/quantitative-reasoning-course/
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This site hosts the first half of the course content for ESS 523A at Colorado State University.
+link-citations: yes
+github-repo: rossyndicate/Intro_R_Data_Analysis
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, eval = TRUE)
+```
+
+# Welcome!
+
+This site hosts the course curriculum for Colorado State University's **ESS 523A** course: *Introduction to Environmental Data Science*
+
+## Set up Instructions {.unnumbered}
+
+As your first step, please follow the instructions on the [R Setup][Setup Instructions] page to make sure you have all the necessary software installed on your computer before the class starts.
+
+## Navigating this site {.unnumbered}
+
+The table of contents on the left allows you to navigate to the lesson for each week of the course. Each lesson will walk you through the topic(s), analysis, etc. for that week. There are exercises at the end of the lesson that will be that week's homework assignment.
+
+Homework will be submitted through Canvas and exercise questions (including any code, figures, etc.) must be submitted as a rendered R Markdown document in Word or HTML format. The Intro to R and R Markdown lesson will walk through how to create these R Markdown documents; you will use these R Markdowns as the basis for writing your code/answers to the exercises and then render them to either a Word or HTML report which is what you will submit through Canvas.
+
+## Goals {.unnumbered}
+
+The broad goal of this course is to learn the data science tools and best practices for working with environmental datasets using the programming language R. Specific to the content in this website, students will learn how to:
+
+1.  Navigate the RStudio interface and create R Markdown documents for reproducible reporting;
+2.  Utilize R packages and functions to manipulate and analyze data effectively and apply data wrangling techniques using the {tidyverse} framework;
+3.  Differentiate between various data types and structures within R; and
+4.  Explore comparative analyses, linear regression, and trend analysis techniques to reveal patterns in data.
+
+## Approach and Expectations {.unnumbered}
+
+*In-Person Section:*
+
+This class is [flipped](https://ieeexplore.ieee.org/document/7344151), meaning all materials for the week ahead must be reviewed before class. To encourage this we will have weekly quizzes on pre-class content each Monday before we dive into the assignment.
+
+So without lectures in class what do we do together? We code! This class has almost 6 hours of contact time per week, and we design lessons so that you should be able to finish your assignments in class. The flipped class allows for deeper discussion about the common pitfalls of coding and allows for collaborative work time with your fellow classmates.
+
+Generally we will do a quick live-code review of concepts from the assignment and the pre-class materials, but more than 1 hour per class will be dedicated to you coding and working on the assignment in class.
+
+As such, coming to class is a vital part of how you can be successful and we fully expect you to be there every day.
+
+We also will actively encourage a **collaborative coding environment** where students help each other and discuss the best approach to solving various coding problems. We also hope that outside of class, you will use the course Teams channel to discuss code issues!
+
+*Online Sections:*
+
+The online course is asynchronous, and you will watch the class lectures that are posted on Canvas and work through lessons and assignments on your own time. While you will be learning in an online environment, we highly encourage you to collaborate with your fellow online classmates by communicating through the course Teams channel.
+
+*All Students:*
+
+We will send all course communications as Canvas announcements. The course syllabus will also be posted on Canvas. Please review the course syllabus for communication guidelines, AI policy, and other important course logistics and details.
+
+## Class Schedule {.unnumbered}
+
+*All links to Primers lessons (except for R Markdown) can be found here:* <https://github.com/rossyndicate/primers/blob/main/README.md>
+
+**All assignments are due by midnight of the specified date and are subject to change.**
+
++------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+
+| Week | **Date (Monday)** | Content                                                                                                                                                                                                                                                                                        | Assignment Due Date |
++------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+
+| 1    | **8/25**          | *Before class:* [Primers Basics](https://github.com/rossyndicate/primers/blob/main/README.md) and [R Markdown](https://rmarkdown.rstudio.com/lesson-1.html?_gl=1*10u3rje*_ga*NzUxNjg2ODAzLjE2OTE1MTIzMzk.*_ga_2C0WZ1JHG0*MTY5MTUxNjA2OC4yLjEuMTY5MTUxNjU2Ni4wLjAuMA..); download R and RStudio | N/A                 |
+|      |                   |                                                                                                                                                                                                                                                                                                |                     |
+|      |                   | **Introduction to R, RStudio, RMarkdown**                                                                                                                                                                                                                                                      |                     |
+|      |                   |                                                                                                                                                                                                                                                                                                |                     |
+|      |                   | Assignment - None                                                                                                                                                                                                                                                                              |                     |
++------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+
+| 2    | **9/1**           | **No Class Monday 9/1!** *Before class Wednesday*: [Work with Data](https://github.com/rossyndicate/primers/blob/main/README.md)                                                                                                                                                               | 9/8                 |
+|      |                   |                                                                                                                                                                                                                                                                                                |                     |
+|      |                   | **Exploratory data analysis**                                                                                                                                                                                                                                                                  |                     |
+|      |                   |                                                                                                                                                                                                                                                                                                |                     |
+|      |                   | Assignment - Exploratory Data Analysis (20 points)                                                                                                                                                                                                                                             |                     |
++------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+
+| 3    | **9/8**           | *Before class:* [Visualize Data](https://github.com/rossyndicate/primers/blob/main/README.md)                                                                                                                                                                                                  | 9/15                |
+|      |                   |                                                                                                                                                                                                                                                                                                |                     |
+|      |                   | **Data visualization**                                                                                                                                                                                                                                                                         |                     |
+|      |                   |                                                                                                                                                                                                                                                                                                |                     |
+|      |                   | Assignment - Bad Plots (20 points)                                                                                                                                                                                                                                                             |                     |
++------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+
+| 4    | **9/15**          | *Before class:* [Tidy Your Data](https://github.com/rossyndicate/primers/blob/main/README.md)                                                                                                                                                                                                  | 9/22                |
+|      |                   |                                                                                                                                                                                                                                                                                                |                     |
+|      |                   | **Introduction to statistical analysis - T-tests, ANOVA**                                                                                                                                                                                                                                      |                     |
+|      |                   |                                                                                                                                                                                                                                                                                                |                     |
+|      |                   | Assignment - T-Tests and ANOVA (20 points)                                                                                                                                                                                                                                                     |                     |
++------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+
+| 5    | **9/22**          | *Before class:* [Iterate](https://github.com/rossyndicate/primers/blob/main/README.md)                                                                                                                                                                                                         | 9/29                |
+|      |                   |                                                                                                                                                                                                                                                                                                |                     |
+|      |                   | **Simple Linear Regression**                                                                                                                                                                                                                                                                   |                     |
+|      |                   |                                                                                                                                                                                                                                                                                                |                     |
+|      |                   | Assignment - Simple regression (20 points)                                                                                                                                                                                                                                                     |                     |
++------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+
+| 6    | **9/29**          | *Before class:* [Write Functions](https://github.com/rossyndicate/primers/blob/main/README.md)                                                                                                                                                                                                 | 10/6                |
+|      |                   |                                                                                                                                                                                                                                                                                                |                     |
+|      |                   | **Multiple Linear Regression**                                                                                                                                                                                                                                                                 |                     |
+|      |                   |                                                                                                                                                                                                                                                                                                |                     |
+|      |                   | Assignment - Interpreting multiple linear regression (20 points)                                                                                                                                                                                                                               |                     |
++------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+
+| 7    | **10/6**          | **Power in Statistical Analysis and R Skills Review**                                                                                                                                                                                                                                          | 10/13               |
+|      |                   |                                                                                                                                                                                                                                                                                                |                     |
+|      |                   | Assignment - Power (20 points)                                                                                                                                                                                                                                                                 |                     |
++------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+
+| 8    | **10/13**         | **Intro to Git and GitHub**                                                                                                                                                                                                                                                                    | 10/20               |
+|      |                   |                                                                                                                                                                                                                                                                                                |                     |
+|      |                   | Assignment - First Git Repo and Pull Request (20 points)                                                                                                                                                                                                                                       |                     |
++------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+
+| 9    | **10/20**         | **Debugging and AI**                                                                                                                                                                                                                                                                           | 10/27               |
+|      |                   |                                                                                                                                                                                                                                                                                                |                     |
+|      |                   | Assignment - Code Debugging and AI (20 points)                                                                                                                                                                                                                                                 |                     |
++------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+
+| 10   | **10/27**         | **Iteration, Functions, API calls**                                                                                                                                                                                                                                                            | 11/3                |
+|      |                   |                                                                                                                                                                                                                                                                                                |                     |
+|      |                   | Assignment - National Park Visitation (20 points)                                                                                                                                                                                                                                              |                     |
++------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+
+| 11   | **11/3**          | **Introduction to Working with Geospatial Data**                                                                                                                                                                                                                                               | 11/17               |
+|      |                   |                                                                                                                                                                                                                                                                                                |                     |
+|      |                   | Assignment - Geospatial data and analysis (20 points)                                                                                                                                                                                                                                          |                     |
++------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+
+| 12   | **11/10**         | **Introduction to Working with Geospatial Data (cont.)**                                                                                                                                                                                                                                       | 11/17               |
+|      |                   |                                                                                                                                                                                                                                                                                                |                     |
+|      |                   | Assignment - Geospatial visualization and iteration (20 points)                                                                                                                                                                                                                                |                     |
++------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+
+| 13   | **11/17**         | **Nested Modeling**                                                                                                                                                                                                                                                                            | 12/1                |
+|      |                   |                                                                                                                                                                                                                                                                                                |                     |
+|      |                   | Assignment - Water quality modeling (20 points)                                                                                                                                                                                                                                                |                     |
++------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+
+| 14   | **11/24**         | **No Classes - Fall Break**                                                                                                                                                                                                                                                                    |                     |
++------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+
+| 15   | **12/1**          | Final projects: R Markdown, Bookdown, Quarto, Shiny apps                                                                                                                                                                                                                                       | 12/17               |
+|      |                   |                                                                                                                                                                                                                                                                                                |                     |
+|      |                   | Assignment – Final Project - 100 points                                                                                                                                                                                                                                                        |                     |
++------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+
+| 16   | **12/8**          | Final project work time; Continuing your data                                                                                                                                                                                                                                                  |                     |
+|      |                   | science journey 😊                                                                                                                                                                                                                                                                             |                     |
++------+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+
+
+## Additional introductory resources {.unnumbered}
+
+If you are looking to learn even more outside of what this class offers, below are some great introductory R resources:
+
+-   [Stat 158](https://csu-r.github.io/Module1/) - Vectors, data frames, installing R, etc...
+
+-   [RStudio Materials](https://education.rstudio.com/learn/beginner/) - A series of videos, books, and more to get you started in R.
+
+#### Tidyverse Introduction
+
+-   [R for Data Science](https://r4ds.had.co.nz/introduction.html) - Covers all of the basic intro material, from a tidyverse perspective. As discussed, this is one way to find solutions in R, it happens to be my preferred way, but there are lots of Base R ways that work just fine!
+
+-   [Stat 159](https://csu-r.github.io/Module2/) - A CSU specific course for an intro to the tidyverse
+
+-   [R Markdown](https://bookdown.org/yihui/rmarkdown/#preface) - The primary book for learning more about R Markdown and all of its quirks.
+
+-   [Cheatsheets](https://www.rstudio.com/resources/cheatsheets/) - Short, clear documents that cover so much material from dplyr to shiny apps. Great for quick references. We find the [`rmarkdown`](https://rstudio.github.io/cheatsheets/html/rmarkdown.html?_gl=1*1f2w4s3*_ga*MTc5NTY0NDA0Mi4xNjg2MzQ0MDUy*_ga_2C0WZ1JHG0*MTY5MTk1OTY1Ni42LjAuMTY5MTk1OTY1Ni4wLjAuMA..) and [`ggplot2`](https://rstudio.github.io/cheatsheets/html/data-visualization.html?_gl=1*1f2w4s3*_ga*MTc5NTY0NDA0Mi4xNjg2MzQ0MDUy*_ga_2C0WZ1JHG0*MTY5MTk1OTY1Ni42LjAuMTY5MTk1OTY1Ni4wLjAuMA..) ones particularly useful!

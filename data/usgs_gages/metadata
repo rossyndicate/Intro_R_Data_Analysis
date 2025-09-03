@@ -1,0 +1,17 @@
+site_name = USGS site name
+state = state of stream gage
+streamflow_mmd = mean annual streamflow in mm/day
+mean_baseflow = mean annual baseflow (the portion of the streamflow that is sustained between precipitation events)
+ws_area_sqkm = watershed area of stream gage in square kilometers
+site_elevation = stream gage elevation in cm
+median_ws_elevation = median elevation of the watershed in cm
+mean_annual_precip = mean annual precipitation of the watershed in mm
+mean_winter_temp = mean winter temperature of watershed in Celsius
+mean_aridity_index = mean aridity index of watershed (indicator of the degree of dryness of the climate), unitless
+soil_sand_content = mean percent sand in soil of watershed
+mean_soil_organic_matter = mean percent organic matter in soil of watershed
+mean_soil_permeability = mean percent soil permeability of watershed
+percent_urban = NLCD 2015 percent urban landcover across watershed
+percent_forested = NLCD 2015 percent forested landcover across watershed
+percent_wetland = NLCD 2015 percent wetland landcover across watershed
+percent_s_facing = percent of watershed with southern aspect

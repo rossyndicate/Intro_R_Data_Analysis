@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Introduction to Environmental Data Science</title>
+  <meta name="description" content="This site hosts the first half of the course content for ESS 523A at Colorado State University." />
+  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Introduction to Environmental Data Science" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This site hosts the first half of the course content for ESS 523A at Colorado State University." />
+  <meta name="github-repo" content="rossyndicate/Intro_R_Data_Analysis" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Introduction to Environmental Data Science" />
+  
+  <meta name="twitter:description" content="This site hosts the first half of the course content for ESS 523A at Colorado State University." />
+  
+
+<meta name="author" content="Caitlin Mothes, PhD and Katie Willi" />
+
+
+<meta name="date" content="2025-09-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="setup-instructions.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.11.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script>
+<script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<link href="libs/Poudre River Monitoring-CSS-0.0.1/Poudre River Monitoring_home-button.css" rel="stylesheet" />
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Data Analysis in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome!</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#set-up-instructions"><i class="fa fa-check"></i>Set up Instructions</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#navigating-this-site"><i class="fa fa-check"></i>Navigating this site</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#goals"><i class="fa fa-check"></i>Goals</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#approach-and-expectations"><i class="fa fa-check"></i>Approach and Expectations</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#class-schedule"><i class="fa fa-check"></i>Class Schedule</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#additional-introductory-resources"><i class="fa fa-check"></i>Additional introductory resources</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="setup-instructions.html"><a href="setup-instructions.html"><i class="fa fa-check"></i><b>2</b> Setup Instructions</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="setup-instructions.html"><a href="setup-instructions.html#install-r-and-rstudio"><i class="fa fa-check"></i><b>2.1</b> Install R and RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="setup-instructions.html"><a href="setup-instructions.html#package-installation"><i class="fa fa-check"></i><b>2.2</b> Package Installation</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html"><i class="fa fa-check"></i><b>3</b> Introduction to R, RStudio and R Markdown</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#getting-to-know-rstudio"><i class="fa fa-check"></i><b>3.1</b> Getting to know RStudio</a></li>
+<li class="chapter" data-level="3.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#r-projects"><i class="fa fa-check"></i><b>3.2</b> R Projects</a></li>
+<li class="chapter" data-level="3.3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#write-a-set-up-script"><i class="fa fa-check"></i><b>3.3</b> Write a set-up script</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#functions"><i class="fa fa-check"></i><b>3.3.1</b> Functions</a></li>
+<li class="chapter" data-level="3.3.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#packages"><i class="fa fa-check"></i><b>3.3.2</b> Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#r-markdown"><i class="fa fa-check"></i><b>3.4</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#what-about-quarto"><i class="fa fa-check"></i><b>3.4.1</b> What About Quarto?</a></li>
+<li class="chapter" data-level="3.4.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#getting-started-with-r-markdown"><i class="fa fa-check"></i><b>3.4.2</b> Getting started with R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#explore"><i class="fa fa-check"></i><b>3.5</b> Explore</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#the-penguins-data"><i class="fa fa-check"></i><b>3.5.1</b> The <code>penguins</code> data</a></li>
+<li class="chapter" data-level="3.5.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#data-types"><i class="fa fa-check"></i><b>3.5.2</b> Data Types</a></li>
+<li class="chapter" data-level="3.5.3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#indexing"><i class="fa fa-check"></i><b>3.5.3</b> Indexing</a></li>
+<li class="chapter" data-level="3.5.4" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#the-dplyr-package"><i class="fa fa-check"></i><b>3.5.4</b> The {dplyr} package</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#read-and-write-data"><i class="fa fa-check"></i><b>3.6</b> Read and Write Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>4</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="4.0.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-penguins-data-1"><i class="fa fa-check"></i><b>4.0.1</b> The <code>penguins</code> data</a></li>
+<li class="chapter" data-level="4.0.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>4.0.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="4.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-wrangling"><i class="fa fa-check"></i><b>4.1</b> Data wrangling</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-dplyr-package-1"><i class="fa fa-check"></i><b>4.1.1</b> The <code>dplyr</code> package</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-2"><i class="fa fa-check"></i><b>4.2</b> Exercises</a></li>
+<li class="chapter" data-level="4.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#visualization"><i class="fa fa-check"></i><b>4.3</b> Visualization</a></li>
+<li class="chapter" data-level="4.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-3"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html"><i class="fa fa-check"></i><b>5</b> Data Visualization in R</a>
+<ul>
+<li class="chapter" data-level="5.0.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#data-preparation"><i class="fa fa-check"></i><b>5.0.1</b> Data Preparation</a></li>
+<li class="chapter" data-level="5.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#publication-ready-figures-with-ggplot2"><i class="fa fa-check"></i><b>5.1</b> Publication Ready Figures with <code>ggplot2</code></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#general-appearance"><i class="fa fa-check"></i><b>5.1.1</b> General Appearance</a></li>
+<li class="chapter" data-level="5.1.2" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#color-size-and-legends"><i class="fa fa-check"></i><b>5.1.2</b> Color, Size and Legends</a></li>
+<li class="chapter" data-level="5.1.3" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#annotation"><i class="fa fa-check"></i><b>5.1.3</b> Annotation</a></li>
+<li class="chapter" data-level="5.1.4" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#finalize-and-save"><i class="fa fa-check"></i><b>5.1.4</b> Finalize and save</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#the-assignment"><i class="fa fa-check"></i><b>5.2</b> The Assignment</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#acknowledgements-and-resources"><i class="fa fa-check"></i><b>5.2.1</b> Acknowledgements and Resources</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html"><i class="fa fa-check"></i><b>6</b> Data Analysis: T-test and ANOVA</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#explore-the-dataset"><i class="fa fa-check"></i><b>6.1</b> Explore the dataset</a></li>
+<li class="chapter" data-level="6.2" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#t-test---compare-two-means"><i class="fa fa-check"></i><b>6.2</b> t-test - Compare two means</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#assumptions"><i class="fa fa-check"></i><b>6.2.1</b> Assumptions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#anova-test---compare-more-than-two-means"><i class="fa fa-check"></i><b>6.3</b> ANOVA test - compare more than two means</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#assumptions-1"><i class="fa fa-check"></i><b>6.3.1</b> Assumptions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#exercises-4"><i class="fa fa-check"></i><b>6.4</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#acknowledgements"><i class="fa fa-check"></i><b>6.4.1</b> Acknowledgements</a></li>
+<li class="chapter" data-level="6.4.2" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#citations"><i class="fa fa-check"></i><b>6.4.2</b> Citations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html"><i class="fa fa-check"></i><b>7</b> Correlation and Simple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#correlation-with-salamanders"><i class="fa fa-check"></i><b>7.1</b> Correlation with salamanders</a></li>
+<li class="chapter" data-level="7.2" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#simple-linear-regression-with-crabs"><i class="fa fa-check"></i><b>7.2</b> Simple linear regression with crabs</a></li>
+<li class="chapter" data-level="7.3" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#exercises-5"><i class="fa fa-check"></i><b>7.3</b> Exercises</a></li>
+<li class="chapter" data-level="7.4" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#citations-1"><i class="fa fa-check"></i><b>7.4</b> Citations</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression (MLR)</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#mlr-in-r"><i class="fa fa-check"></i><b>8.1</b> MLR in R</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#predicting-crab-size-1"><i class="fa fa-check"></i><b>8.1.1</b> Predicting crab size</a></li>
+<li class="chapter" data-level="8.1.2" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#mlr-assumptions"><i class="fa fa-check"></i><b>8.1.2</b> MLR Assumptions</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#exercises-6"><i class="fa fa-check"></i><b>8.2</b> Exercises</a></li>
+<li class="chapter" data-level="8.3" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#citations-2"><i class="fa fa-check"></i><b>8.3</b> Citations</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="power.html"><a href="power.html"><i class="fa fa-check"></i><b>9</b> Power</a>
+<ul>
+<li class="chapter" data-level="9.0.1" data-path="power.html"><a href="power.html#power-in-action"><i class="fa fa-check"></i><b>9.0.1</b> Power in action</a></li>
+<li class="chapter" data-level="9.0.2" data-path="power.html"><a href="power.html#note-about-random-selection"><i class="fa fa-check"></i><b>9.0.2</b> Note about random selection</a></li>
+<li class="chapter" data-level="9.1" data-path="power.html"><a href="power.html#assignment"><i class="fa fa-check"></i><b>9.1</b> Assignment</a></li>
+<li class="chapter" data-level="9.2" data-path="power.html"><a href="power.html#citations-3"><i class="fa fa-check"></i><b>9.2</b> Citations</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="r-skills-review.html"><a href="r-skills-review.html"><i class="fa fa-check"></i><b>10</b> R Skills Review</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="r-skills-review.html"><a href="r-skills-review.html#tidying-datasets"><i class="fa fa-check"></i><b>10.1</b> Tidying datasets</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="r-skills-review.html"><a href="r-skills-review.html#get-usgs-stream-flow-data"><i class="fa fa-check"></i><b>10.1.1</b> Get USGS stream flow data</a></li>
+<li class="chapter" data-level="10.1.2" data-path="r-skills-review.html"><a href="r-skills-review.html#get-cdwr-stream-flow-data"><i class="fa fa-check"></i><b>10.1.2</b> Get CDWR stream flow data</a></li>
+<li class="chapter" data-level="10.1.3" data-path="r-skills-review.html"><a href="r-skills-review.html#or-read-in-the-.csvs-we-already-generated-and-saved-for-you"><i class="fa fa-check"></i><b>10.1.3</b> OR, read in the .csv’s we already generated and saved for you:</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="r-skills-review.html"><a href="r-skills-review.html#exploratory-data-analysis-2"><i class="fa fa-check"></i><b>10.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="10.3" data-path="r-skills-review.html"><a href="r-skills-review.html#data-analysis"><i class="fa fa-check"></i><b>10.3</b> Data Analysis</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="r-skills-review.html"><a href="r-skills-review.html#testing-for-normal-distribution"><i class="fa fa-check"></i><b>10.3.1</b> Testing for normal distribution</a></li>
+<li class="chapter" data-level="10.3.2" data-path="r-skills-review.html"><a href="r-skills-review.html#testing-for-equal-variance"><i class="fa fa-check"></i><b>10.3.2</b> Testing for equal variance</a></li>
+<li class="chapter" data-level="10.3.3" data-path="r-skills-review.html"><a href="r-skills-review.html#anova---kruskal-wallis"><i class="fa fa-check"></i><b>10.3.3</b> ANOVA - Kruskal-Wallis</a></li>
+<li class="chapter" data-level="10.3.4" data-path="r-skills-review.html"><a href="r-skills-review.html#anova-post-hoc-analysis"><i class="fa fa-check"></i><b>10.3.4</b> ANOVA post-hoc analysis</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Environmental Data Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Introduction to Environmental Data Science</h1>
+<p class="author"><em>Caitlin Mothes, PhD and Katie Willi</em></p>
+<p class="date"><em>2025-09-03</em></p>
+</div>
+<div id="welcome" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number"> 1</span> Welcome!<a href="index.html#welcome" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This site hosts the course curriculum for Colorado State University’s <strong>ESS 523A</strong> course: <em>Introduction to Environmental Data Science</em></p>
+<div id="set-up-instructions" class="section level2 unnumbered hasAnchor">
+<h2>Set up Instructions<a href="index.html#set-up-instructions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As your first step, please follow the instructions on the <a href="setup-instructions.html#setup-instructions">R Setup</a> page to make sure you have all the necessary software installed on your computer before the class starts.</p>
+</div>
+<div id="navigating-this-site" class="section level2 unnumbered hasAnchor">
+<h2>Navigating this site<a href="index.html#navigating-this-site" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The table of contents on the left allows you to navigate to the lesson for each week of the course. Each lesson will walk you through the topic(s), analysis, etc. for that week. There are exercises at the end of the lesson that will be that week’s homework assignment.</p>
+<p>Homework will be submitted through Canvas and exercise questions (including any code, figures, etc.) must be submitted as a rendered R Markdown document in Word or HTML format. The Intro to R and R Markdown lesson will walk through how to create these R Markdown documents; you will use these R Markdowns as the basis for writing your code/answers to the exercises and then render them to either a Word or HTML report which is what you will submit through Canvas.</p>
+</div>
+<div id="goals" class="section level2 unnumbered hasAnchor">
+<h2>Goals<a href="index.html#goals" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The broad goal of this course is to learn the data science tools and best practices for working with environmental datasets using the programming language R. Specific to the content in this website, students will learn how to:</p>
+<ol style="list-style-type: decimal">
+<li>Navigate the RStudio interface and create R Markdown documents for reproducible reporting;</li>
+<li>Utilize R packages and functions to manipulate and analyze data effectively and apply data wrangling techniques using the {tidyverse} framework;</li>
+<li>Differentiate between various data types and structures within R; and</li>
+<li>Explore comparative analyses, linear regression, and trend analysis techniques to reveal patterns in data.</li>
+</ol>
+</div>
+<div id="approach-and-expectations" class="section level2 unnumbered hasAnchor">
+<h2>Approach and Expectations<a href="index.html#approach-and-expectations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><em>In-Person Section:</em></p>
+<p>This class is <a href="https://ieeexplore.ieee.org/document/7344151">flipped</a>, meaning all materials for the week ahead must be reviewed before class. To encourage this we will have weekly quizzes on pre-class content each Monday before we dive into the assignment.</p>
+<p>So without lectures in class what do we do together? We code! This class has almost 6 hours of contact time per week, and we design lessons so that you should be able to finish your assignments in class. The flipped class allows for deeper discussion about the common pitfalls of coding and allows for collaborative work time with your fellow classmates.</p>
+<p>Generally we will do a quick live-code review of concepts from the assignment and the pre-class materials, but more than 1 hour per class will be dedicated to you coding and working on the assignment in class.</p>
+<p>As such, coming to class is a vital part of how you can be successful and we fully expect you to be there every day.</p>
+<p>We also will actively encourage a <strong>collaborative coding environment</strong> where students help each other and discuss the best approach to solving various coding problems. We also hope that outside of class, you will use the course Teams channel to discuss code issues!</p>
+<p><em>Online Sections:</em></p>
+<p>The online course is asynchronous, and you will watch the class lectures that are posted on Canvas and work through lessons and assignments on your own time. While you will be learning in an online environment, we highly encourage you to collaborate with your fellow online classmates by communicating through the course Teams channel.</p>
+<p><em>All Students:</em></p>
+<p>We will send all course communications as Canvas announcements. The course syllabus will also be posted on Canvas. Please review the course syllabus for communication guidelines, AI policy, and other important course logistics and details.</p>
+</div>
+<div id="class-schedule" class="section level2 unnumbered hasAnchor">
+<h2>Class Schedule<a href="index.html#class-schedule" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><em>All links to Primers lessons (except for R Markdown) can be found here:</em> <a href="https://github.com/rossyndicate/primers/blob/main/README.md" class="uri">https://github.com/rossyndicate/primers/blob/main/README.md</a></p>
+<p><strong>All assignments are due by midnight of the specified date and are subject to change.</strong></p>
+<table style="width:99%;">
+<colgroup>
+<col width="2%" />
+<col width="5%" />
+<col width="85%" />
+<col width="6%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>Week</td>
+<td><strong>Date (Monday)</strong></td>
+<td>Content</td>
+<td>Assignment Due Date</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td><strong>8/25</strong></td>
+<td><p><em>Before class:</em> <a href="https://github.com/rossyndicate/primers/blob/main/README.md">Primers Basics</a> and <a href="https://rmarkdown.rstudio.com/lesson-1.html?_gl=1*10u3rje*_ga*NzUxNjg2ODAzLjE2OTE1MTIzMzk.*_ga_2C0WZ1JHG0*MTY5MTUxNjA2OC4yLjEuMTY5MTUxNjU2Ni4wLjAuMA..">R Markdown</a>; download R and RStudio</p>
+<p><strong>Introduction to R, RStudio, RMarkdown</strong></p>
+<p>Assignment - None</p></td>
+<td>N/A</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td><strong>9/1</strong></td>
+<td><p><strong>No Class Monday 9/1!</strong> <em>Before class Wednesday</em>: <a href="https://github.com/rossyndicate/primers/blob/main/README.md">Work with Data</a></p>
+<p><strong>Exploratory data analysis</strong></p>
+<p>Assignment - Exploratory Data Analysis (20 points)</p></td>
+<td>9/8</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td><strong>9/8</strong></td>
+<td><p><em>Before class:</em> <a href="https://github.com/rossyndicate/primers/blob/main/README.md">Visualize Data</a></p>
+<p><strong>Data visualization</strong></p>
+<p>Assignment - Bad Plots (20 points)</p></td>
+<td>9/15</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td><strong>9/15</strong></td>
+<td><p><em>Before class:</em> <a href="https://github.com/rossyndicate/primers/blob/main/README.md">Tidy Your Data</a></p>
+<p><strong>Introduction to statistical analysis - T-tests, ANOVA</strong></p>
+<p>Assignment - T-Tests and ANOVA (20 points)</p></td>
+<td>9/22</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td><strong>9/22</strong></td>
+<td><p><em>Before class:</em> <a href="https://github.com/rossyndicate/primers/blob/main/README.md">Iterate</a></p>
+<p><strong>Simple Linear Regression</strong></p>
+<p>Assignment - Simple regression (20 points)</p></td>
+<td>9/29</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td><strong>9/29</strong></td>
+<td><p><em>Before class:</em> <a href="https://github.com/rossyndicate/primers/blob/main/README.md">Write Functions</a></p>
+<p><strong>Multiple Linear Regression</strong></p>
+<p>Assignment - Interpreting multiple linear regression (20 points)</p></td>
+<td>10/6</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td><strong>10/6</strong></td>
+<td><p><strong>Power in Statistical Analysis and R Skills Review</strong></p>
+<p>Assignment - Power (20 points)</p></td>
+<td>10/13</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td><strong>10/13</strong></td>
+<td><p><strong>Intro to Git and GitHub</strong></p>
+<p>Assignment - First Git Repo and Pull Request (20 points)</p></td>
+<td>10/20</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td><strong>10/20</strong></td>
+<td><p><strong>Debugging and AI</strong></p>
+<p>Assignment - Code Debugging and AI (20 points)</p></td>
+<td>10/27</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td><strong>10/27</strong></td>
+<td><p><strong>Iteration, Functions, API calls</strong></p>
+<p>Assignment - National Park Visitation (20 points)</p></td>
+<td>11/3</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td><strong>11/3</strong></td>
+<td><p><strong>Introduction to Working with Geospatial Data</strong></p>
+<p>Assignment - Geospatial data and analysis (20 points)</p></td>
+<td>11/17</td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td><strong>11/10</strong></td>
+<td><p><strong>Introduction to Working with Geospatial Data (cont.)</strong></p>
+<p>Assignment - Geospatial visualization and iteration (20 points)</p></td>
+<td>11/17</td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td><strong>11/17</strong></td>
+<td><p><strong>Nested Modeling</strong></p>
+<p>Assignment - Water quality modeling (20 points)</p></td>
+<td>12/1</td>
+</tr>
+<tr class="odd">
+<td>14</td>
+<td><strong>11/24</strong></td>
+<td><strong>No Classes - Fall Break</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td><strong>12/1</strong></td>
+<td><p>Final projects: R Markdown, Bookdown, Quarto, Shiny apps</p>
+<p>Assignment – Final Project - 100 points</p></td>
+<td>12/17</td>
+</tr>
+<tr class="odd">
+<td>16</td>
+<td><strong>12/8</strong></td>
+<td>Final project work time; Continuing your data
+science journey 😊</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="additional-introductory-resources" class="section level2 unnumbered hasAnchor">
+<h2>Additional introductory resources<a href="index.html#additional-introductory-resources" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>If you are looking to learn even more outside of what this class offers, below are some great introductory R resources:</p>
+<ul>
+<li><p><a href="https://csu-r.github.io/Module1/">Stat 158</a> - Vectors, data frames, installing R, etc…</p></li>
+<li><p><a href="https://education.rstudio.com/learn/beginner/">RStudio Materials</a> - A series of videos, books, and more to get you started in R.</p></li>
+</ul>
+<div id="tidyverse-introduction" class="section level4 hasAnchor" number="1.0.0.1">
+<h4><span class="header-section-number">1.0.0.1</span> Tidyverse Introduction<a href="index.html#tidyverse-introduction" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><p><a href="https://r4ds.had.co.nz/introduction.html">R for Data Science</a> - Covers all of the basic intro material, from a tidyverse perspective. As discussed, this is one way to find solutions in R, it happens to be my preferred way, but there are lots of Base R ways that work just fine!</p></li>
+<li><p><a href="https://csu-r.github.io/Module2/">Stat 159</a> - A CSU specific course for an intro to the tidyverse</p></li>
+<li><p><a href="https://bookdown.org/yihui/rmarkdown/#preface">R Markdown</a> - The primary book for learning more about R Markdown and all of its quirks.</p></li>
+<li><p><a href="https://www.rstudio.com/resources/cheatsheets/">Cheatsheets</a> - Short, clear documents that cover so much material from dplyr to shiny apps. Great for quick references. We find the <a href="https://rstudio.github.io/cheatsheets/html/rmarkdown.html?_gl=1*1f2w4s3*_ga*MTc5NTY0NDA0Mi4xNjg2MzQ0MDUy*_ga_2C0WZ1JHG0*MTY5MTk1OTY1Ni42LjAuMTY5MTk1OTY1Ni4wLjAuMA.."><code>rmarkdown</code></a> and <a href="https://rstudio.github.io/cheatsheets/html/data-visualization.html?_gl=1*1f2w4s3*_ga*MTc5NTY0NDA0Mi4xNjg2MzQ0MDUy*_ga_2C0WZ1JHG0*MTY5MTk1OTY1Ni42LjAuMTY5MTk1OTY1Ni4wLjAuMA.."><code>ggplot2</code></a> ones particularly useful!</p></li>
+</ul>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="setup-instructions.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/index.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
