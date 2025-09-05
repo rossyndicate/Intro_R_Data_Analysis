@@ -4,7 +4,7 @@ library(tidyverse)
 library(tidycensus)
 
 
-census_api_key("32c2220d9742d12204a87074b475e571a00fc0df", install = TRUE)
+census_api_key("your api key here", install = TRUE)
 
 # search for variables
 v20 <- load_variables(2020, "acs5", cache = TRUE)
