@@ -343,13 +343,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  sal_sub$length_2_mm
-## W = 0.93231, p-value &lt; 2.2e-16</code></pre>
+## W = 0.93666, p-value &lt; 2.2e-16</code></pre>
 <div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="correlation-and-simple-linear-regression.html#cb151-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(sal_sub<span class="sc">$</span>weight_g)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  sal_sub$weight_g
-## W = 0.56018, p-value &lt; 2.2e-16</code></pre>
+## W = 0.57089, p-value &lt; 2.2e-16</code></pre>
 <p>The <strong>null hypothesis of the Shapiro-Wilk normality test is that the variable is normally distributed</strong>, so a p-value less than 0.05, at 95% confidence (as we see for both of our variables here) tells use that <em>our data does not fit a normal distribution</em>.</p>
 <p>Therefore we have two options as we did with our t-test example in the previous lesson: transform the variables and see if that helps, or use a non-parametric test. Here, we will go ahead with the non-parametric Spearman correlation test.</p>
 <div class="alert alert-info">
