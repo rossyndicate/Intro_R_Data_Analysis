@@ -23,7 +23,7 @@
 <meta name="author" content="Caitlin Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2025-09-05" />
+<meta name="date" content="2025-09-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,8 +56,8 @@
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <script src="libs/plotly-binding-4.11.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 <link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
@@ -71,7 +71,7 @@
 <script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
 <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
-<link href="libs/Poudre_River_Monitoring-CSS-0.0.1/Poudre_River_Monitoring_home-button.css" rel="stylesheet" />
+<link href="libs/Poudre River Monitoring-CSS-0.0.1/Poudre River Monitoring_home-button.css" rel="stylesheet" />
 <script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
@@ -343,13 +343,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  sal_sub$length_2_mm
-## W = 0.93666, p-value &lt; 2.2e-16</code></pre>
+## W = 0.93165, p-value &lt; 2.2e-16</code></pre>
 <div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="correlation-and-simple-linear-regression.html#cb151-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(sal_sub<span class="sc">$</span>weight_g)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  sal_sub$weight_g
-## W = 0.57089, p-value &lt; 2.2e-16</code></pre>
+## W = 0.5519, p-value &lt; 2.2e-16</code></pre>
 <p>The <strong>null hypothesis of the Shapiro-Wilk normality test is that the variable is normally distributed</strong>, so a p-value less than 0.05, at 95% confidence (as we see for both of our variables here) tells use that <em>our data does not fit a normal distribution</em>.</p>
 <p>Therefore we have two options as we did with our t-test example in the previous lesson: transform the variables and see if that helps, or use a non-parametric test. Here, we will go ahead with the non-parametric Spearman correlation test.</p>
 <div class="alert alert-info">
