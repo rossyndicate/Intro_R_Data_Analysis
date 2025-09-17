@@ -4,7 +4,7 @@
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
-*Before* running the set up script, if you have not already, add the `"lubridate"` package to your packages list in the setup.R script.
+*Before* running the set up script, if you have not already, **add the `"lubridate"` package to your packages list in the setup.R script.**
 
 ```{r eval = FALSE}
 source("setup.R")
@@ -31,7 +31,7 @@ data("and_vertebrates")
 
 sal <- and_vertebrates %>% 
   # find observations that contain the string "salamander" in the species column:
-  filter(grepl("salamander", species)) %>%
+  filter(str_detect(species, "salamander")) %>%
   drop_na(length_2_mm, weight_g)
 ```
 
@@ -40,7 +40,7 @@ sal <- and_vertebrates %>%
 Before diving in, let's visually explore the relationship between our two variables with a scatter plot:
 
 ```{r}
-ggplot(data = sal) + 
+ggplot(sal) + 
   geom_point(aes(x = length_2_mm, y = weight_g), color = "black") +
   theme_bw()
 ```
@@ -152,7 +152,7 @@ size = slope of the line \* latitude + constant + point's distance from line
 
 $y = (β1 * x) + β0 + ε$
 
-In this equation, *y* is a our response variable (crab's size), β0 is the constant, β1 is the slope, x is our explanatory variable (the crab's latitude), and ε is the distance between the line and each observation's true size.
+In this equation, *y* is our response variable (crab's size), β0 is the constant, β1 is the slope, x is our explanatory variable (the crab's latitude), and ε is the distance between the line and each observation's true size.
 
 #### Simple linear regression in R
 
@@ -231,6 +231,10 @@ icecover_temp <- avg_icecover %>%
 **2.** Visualize the data by plotting our variables against one another, and using histograms. Is their relationship linear? Are our variables normally distributed? (3 pts.)
 
 ```{r, echo = FALSE, message = FALSE, eval = FALSE, results = 'hide'}
+ggplot(icecover_temp) +
+  geom_point(aes(x = mean_air_temp, y = mean_duration))
+
+
 hist(icecover_temp$mean_air_temp)
 hist(icecover_temp$mean_duration)
 
@@ -272,7 +276,7 @@ predict(slr_model, newdata = new_temp)
 
 <br>
 
-**5.** Plot the average air temperature against the average ice cover duration. Include our simple linear regression (i.e., the line of best fit) in the plot. (3 pts.)
+**5.** Plot the mean air temperature against the mean ice cover duration. Include our simple linear regression (i.e., the line of best fit) in the plot. (3 pts.)
 
 ```{r, echo = FALSE, eval = FALSE, message = FALSE, results = 'hide'}
 ggplot(icecover_temp, aes(x = mean_air_temp, y = mean_duration)) +

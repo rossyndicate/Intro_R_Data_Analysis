@@ -23,7 +23,7 @@
 <meta name="author" content="Caitlin Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2025-09-12" />
+<meta name="date" content="2025-09-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,8 +56,8 @@
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <script src="libs/plotly-binding-4.11.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
 <link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
@@ -71,7 +71,7 @@
 <script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
 <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
-<link href="libs/Poudre River Monitoring-CSS-0.0.1/Poudre River Monitoring_home-button.css" rel="stylesheet" />
+<link href="libs/Poudre_River_Monitoring-CSS-0.0.1/Poudre_River_Monitoring_home-button.css" rel="stylesheet" />
 <script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
@@ -374,10 +374,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb126-2"><a href="data-analysis-t-test-and-anova.html#cb126-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight_log =</span> <span class="fu">log</span>(weight_g)) <span class="sc">%&gt;%</span> </span>
 <span id="cb126-3"><a href="data-analysis-t-test-and-anova.html#cb126-3" tabindex="-1"></a>  <span class="fu">t_test</span>(weight_log <span class="sc">~</span> section, <span class="at">var.equal =</span> <span class="cn">TRUE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 15
-##   estimate estimate1 estimate2 .y.      group1 group2    n1    n2 statistic       p    df conf.low
-## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
-## 1    0.131      1.52      1.39 weight_… CC     OG      6798  5796      5.49 4.06e-8 12592   0.0839
-## # ℹ 3 more variables: conf.high &lt;dbl&gt;, method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
+##   estimate estimate1 estimate2 .y.   group1 group2    n1    n2 statistic       p
+## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1    0.131      1.52      1.39 weig… CC     OG      6798  5796      5.49 4.06e-8
+## # ℹ 5 more variables: df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, method &lt;chr&gt;,
+## #   alternative &lt;chr&gt;</code></pre>
 <p>The output of this test gives us the test statistics, p-value, and the means for each of our forest groups (estimate1 and estimate2, corresponding to group1 and group2). Given the extremely small p-value and the means of each group, we can conclude that <em>Cutthroat trout weight was observed to be significantly higher in clear cut forests compared to old growth forests</em>. But remember - these mean weight values are log transformed and not the raw weight in grams. The relationship can still be interpreted the same.</p>
 <p>How does this relate to our original hypothesis?</p>
 <p><strong>Welch Two Sample t-test</strong></p>
@@ -385,10 +386,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="data-analysis-t-test-and-anova.html#cb128-1" tabindex="-1"></a>trout_clean <span class="sc">%&gt;%</span> </span>
 <span id="cb128-2"><a href="data-analysis-t-test-and-anova.html#cb128-2" tabindex="-1"></a>  <span class="fu">t_test</span>(weight_g <span class="sc">~</span> section, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>) </span></code></pre></div>
 <pre><code>## # A tibble: 1 × 15
-##   estimate estimate1 estimate2 .y.    group1 group2    n1    n2 statistic        p     df conf.low
-## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-## 1     1.17      9.38      8.21 weigh… CC     OG      6798  5796      6.69 2.26e-11 12588.    0.825
-## # ℹ 3 more variables: conf.high &lt;dbl&gt;, method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
+##   estimate estimate1 estimate2 .y.      group1 group2    n1    n2 statistic
+## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;
+## 1     1.17      9.38      8.21 weight_g CC     OG      6798  5796      6.69
+## # ℹ 6 more variables: p &lt;dbl&gt;, df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;,
+## #   method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
 <p>While we used a slightly different method, our conclusions are still the same, finding that Cutthroat trout have significantly higher weights in clear cut forests than old growth.</p>
 </div>
 </div>
