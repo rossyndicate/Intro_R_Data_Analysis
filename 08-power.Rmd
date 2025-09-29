@@ -4,7 +4,7 @@
 knitr::opts_chunk$set(echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE, rows.print=5, fig.width=9)
 ```
 
-Set up our session. At minimum, make sure you have `tidyverse`, `lterdatasampler`, `palmerpenguins` and `rstatix` in your "setup.R" script.
+Time to set up our session. There are no new packages this week, but double check you have `tidyverse`, `lterdatasampler`, `palmerpenguins` and `rstatix` in your "setup.R" script.
 
 ```{r eval = FALSE}
 source("setup.R")
@@ -176,7 +176,9 @@ trout <-
   drop_na(weight_g) 
 ```
 
-Next, we will select a random set of trout observations at both forest types across **four different sample sizes: 5, 10, 1000, 5000**. Here, I have created the first object of **5** observations per forest type for you:
+Next, we will select a random set of trout observations at both forest types across **four different sample sizes: 5, 10, 1000, 5000**.
+
+Below is some template code for you to use to build your function in Question #1, showing how to subset the data to **5** observations per forest type:
 
 ```{r}
 trout_5 <- trout %>% 
@@ -190,7 +192,7 @@ trout_5 <- trout %>%
 
 **1.** **Write a function** called `trout_subber` that takes a user-selected number of random observations (the thing that changes) from our `trout` data frame across both forest types (i.e., section) (5 pts.)
 
-HINTS: the number of observations you want to subset to will be an argument of the function. The code I've written above can be used as the basis of the function. You can refer back to the [Write Functions](https://github.com/rossyndicate/primers?tab=readme-ov-file) primer lessons for guidance, specifically [How to write a function](https://geocentroid.shinyapps.io/how-to-write-a-function/).
+HINTS: the number of observations you want to subset to will be an argument of the function. The code above can be used as the basis of the function. You can refer back to the [Write Functions](https://github.com/rossyndicate/primers?tab=readme-ov-file) primer lessons for guidance, specifically [How to write a function](https://geocentroid.shinyapps.io/how-to-write-a-function/).
 
 ```{r, echo = FALSE, eval = FALSE}
 
@@ -231,7 +233,7 @@ trout_10 <- trout_subber(and_vertebrates, n_obs = 10)
 
 <br>
 
-**3.** **Map** over the function above, using our sample sizes of interest (i.e., 5, 10, 1000, 5000 per forest type). Repeat the process 100 times for each sample size to account for variability. The final outcome of this exercise should be a **single data frame** with 400 rows that includes all of our t-test summaries stacked on top of each other. (5 pts.)
+**3.** **Map** over the function above, using our sample sizes of interest (i.e., 5, 10, 1000, 5000 per forest type). Repeat the process 100 times for each sample size to account for variability. The final output of this exercise should be a **single data frame** **with 400 rows** (one row for each t-test summary). (5 pts.)
 
 HINTS: Make use of the `rep()` function to create your vector of numbers to map over...
 
@@ -247,7 +249,7 @@ final_data <- rep(c(5, 10, 1000, 5000), 100)  %>%
 
 <br>
 
-**4.** Using the data frame created in exercise 3, make a histogram of p-values for each sample size group (HINT: see what column name in your final data frame you should facet by). Make note of how the p-values and their variance change with sample size. (5 pts.)
+**4.** Using the data frame created in exercise 3, make a histogram of p-values for each sample size group (HINT: see what column name in your final data frame you should use to facet by). Make note of how the p-values and their variance change with sample size. (5 pts.)
 
 ```{r, eval = FALSE, echo = FALSE}
 ggplot(final_data) +
