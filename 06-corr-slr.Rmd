@@ -4,8 +4,6 @@
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
-*Before* running the set up script, if you have not already, **add the `"lubridate"` package to your packages list in the setup.R script.**
-
 ```{r eval = FALSE}
 source("setup.R")
 ```
@@ -62,9 +60,9 @@ They *both look pretty skewed*, therefore likely not normally distributed. We ca
 ```{r}
 sal_sub <- sal %>% slice_sample(n = 5000) 
   
-shapiro.test(sal_sub$length_2_mm)
+shapiro_test(sal_sub$length_2_mm)
 
-shapiro.test(sal_sub$weight_g)
+shapiro_test(sal_sub$weight_g)
 ```
 
 The **null hypothesis of the Shapiro-Wilk normality test is that the variable is normally distributed**, so a p-value less than 0.05, at 95% confidence (as we see for both of our variables here) tells use that *our data does not fit a normal distribution*.
@@ -276,7 +274,7 @@ predict(slr_model, newdata = new_temp)
 
 <br>
 
-**5.** Plot the mean air temperature against the mean ice cover duration. Include our simple linear regression (i.e., the line of best fit) in the plot. (3 pts.)
+**5.** Plot the mean ice cover duration against the mean air temperature. Include our simple linear regression (i.e., the line of best fit) in the plot. (3 pts.)
 
 ```{r, echo = FALSE, eval = FALSE, message = FALSE, results = 'hide'}
 ggplot(icecover_temp, aes(x = mean_air_temp, y = mean_duration)) +

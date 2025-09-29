@@ -14,19 +14,16 @@ To access the dataset(s) you will be using in this lesson, we will be using a ne
 
 We we also need the {[rstatix](https://rpkgs.datanovia.com/rstatix/)} package, which allows us to conduct various statistical tests that are 'tidyverse' friendly (aka, we can use them with the pipe `%>%`).
 
-So since these are new packages, we need to install them first:
-
-```{r eval=FALSE}
-install.packages("lterdatasampler")
-install.packages("rstatix")
-```
-
-Now load in the three libraries/packages needed for this lesson (OR, add `lterdatasampler` and `rstatix`` to your 'setup.R' script if you have been setting up your environment that way).
-
-```{r}
+*Note:* These are new packages that we will need to add to our setup script by tacking them on to the `packages <- c()` list.
+ 
+```{r include = FALSE}
 library(tidyverse)
 library(lterdatasampler)
 library(rstatix)
+```
+
+```{r eval = FALSE}
+source("setup.R")
 ```
 
 ## Explore the dataset

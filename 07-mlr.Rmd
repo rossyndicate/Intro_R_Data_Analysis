@@ -156,7 +156,7 @@ full_dataset <- data_files %>%
 
 <br>
 
-**2.** Using our combined data set, plot each variable against mean annual stream flow to identify variables that seem to have a linear relationship with stream flow. 5 pts.
+**2.** Using our combined data set, plot mean annual stream flow against each variable to identify variables that seem to have a linear relationship with stream flow. 5 pts.
 
 ```{r, eval = FALSE, echo = FALSE}
 
