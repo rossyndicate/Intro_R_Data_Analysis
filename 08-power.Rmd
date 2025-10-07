@@ -178,7 +178,7 @@ trout <-
 
 Next, we will select a random set of trout observations at both forest types across **four different sample sizes: 5, 10, 1000, 5000**.
 
-Below is some template code for you to use to build your function in Question #1, showing how to subset the data to **5** observations per forest type:
+Below is some template code for you to use to build your function, showing how to subset the data to **5** observations per forest type:
 
 ```{r}
 trout_5 <- trout %>% 
@@ -190,7 +190,7 @@ trout_5 <- trout %>%
   t_test(weight_g ~ section, var.equal = FALSE, detailed = TRUE)
 ```
 
-**1.** **Write a function** called `trout_subber` that takes a user-selected number of random observations (the thing that changes) from our `trout` data frame across both forest types (i.e., section) (5 pts.)
+**1.** **Write a function** called `trout_subber` that returns a user-selected number of random observations (the thing that changes) from our `trout` data frame across both forest types (i.e., section) (5 pts.)
 
 HINTS: the number of observations you want to subset to will be an argument of the function. The code above can be used as the basis of the function. You can refer back to the [Write Functions](https://github.com/rossyndicate/primers?tab=readme-ov-file) primer lessons for guidance, specifically [How to write a function](https://geocentroid.shinyapps.io/how-to-write-a-function/).
 
@@ -213,7 +213,7 @@ trout_150 <- trout_subber(df = and_vertebrates, n_obs = 150)
 
 <br>
 
-**2.** Build upon the previous function by adding an additional step to perform a t-test on the data set at the end, and to return the results of that t-test. (NOTE: for simplicity, use the non-parametric t-test across all sub sets). (5 pts.)
+**2.** Build upon the previous function by adding an additional step to perform a t-test on the data set at the end, so the function returns the results of the t-test. (NOTE: for simplicity, use the non-parametric t-test across all sub sets). (5 pts.)
 
 ```{r, eval = FALSE, echo = FALSE}
 
