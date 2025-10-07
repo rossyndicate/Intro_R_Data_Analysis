@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 9 Power | Introduction to Environmental Data Science</title>
   <meta name="description" content="This site hosts the first half of the course content for ESS 523A at Colorado State University." />
-  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 9 Power | Introduction to Environmental Data Science" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Caitlin Mothes, PhD and Katie Willi" />
 
 
-<meta name="date" content="2025-09-29" />
+<meta name="date" content="2025-10-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,7 +54,7 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/plotly-binding-4.11.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
@@ -69,9 +69,9 @@
 <script src="libs/leaflet-binding-2.2.2/leaflet.js"></script>
 <script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
 <script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
-<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
 <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<link href="libs/Poudre River Monitoring-CSS-0.0.1/Poudre River Monitoring_home-button.css" rel="stylesheet" />
 <script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
 <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
 <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
@@ -372,7 +372,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 × 15
 ##   estimate estimate1 estimate2 .y.     group1 group2    n1    n2 statistic     p
 ## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
-## 1    -5.05      41.2      46.3 bill_l… Adelie Gentoo     2     2     -1.39 0.374
+## 1    -10.5      39.6      50.1 bill_l… Adelie Gentoo     2     2     -4.24 0.126
 ## # ℹ 5 more variables: df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, method &lt;chr&gt;,
 ## #   alternative &lt;chr&gt;</code></pre>
 <p>Compared to the p-value in the previous test, this p-value is much larger and, depending on which random samples were chosen in <code>slice_sample</code>, likely higher than our cut-off of 0.05 and would lead to an insignificant difference in bill length between the two species.</p>
@@ -431,9 +431,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb186-10"><a href="power.html#cb186-10" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb186-11"><a href="power.html#cb186-11" tabindex="-1"></a>  <span class="fu">t_test</span>(bill_length_mm <span class="sc">~</span> species, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 15
-##   estimate estimate1 estimate2 .y.    group1 group2    n1    n2 statistic      p
-## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt;
-## 1    -23.5      37.6        61 bill_… Adelie Gentoo     2     2     -16.3 0.0198
+##   estimate estimate1 estimate2 .y.   group1 group2    n1    n2 statistic       p
+## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1    -20.8      40.0      60.8 bill… Adelie Gentoo     2     2     -15.5 0.00877
 ## # ℹ 5 more variables: df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, method &lt;chr&gt;,
 ## #   alternative &lt;chr&gt;</code></pre>
 </div>
@@ -455,7 +455,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb188-7"><a href="power.html#cb188-7" tabindex="-1"></a>  <span class="co"># remove NA values for weight, the variable we will be measuring</span></span>
 <span id="cb188-8"><a href="power.html#cb188-8" tabindex="-1"></a>  <span class="fu">drop_na</span>(weight_g) </span></code></pre></div>
 <p>Next, we will select a random set of trout observations at both forest types across <strong>four different sample sizes: 5, 10, 1000, 5000</strong>.</p>
-<p>Below is some template code for you to use to build your function in Question #1, showing how to subset the data to <strong>5</strong> observations per forest type:</p>
+<p>Below is some template code for you to use to build your function, showing how to subset the data to <strong>5</strong> observations per forest type:</p>
 <div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="power.html#cb189-1" tabindex="-1"></a>trout_5 <span class="ot">&lt;-</span> trout <span class="sc">%&gt;%</span> </span>
 <span id="cb189-2"><a href="power.html#cb189-2" tabindex="-1"></a>  <span class="co">#group by section to pull observations from each group</span></span>
 <span id="cb189-3"><a href="power.html#cb189-3" tabindex="-1"></a>  <span class="fu">group_by</span>(section) <span class="sc">%&gt;%</span></span>
@@ -463,10 +463,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb189-5"><a href="power.html#cb189-5" tabindex="-1"></a>  <span class="co"># ungroup the data frame to perform the statistical test</span></span>
 <span id="cb189-6"><a href="power.html#cb189-6" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb189-7"><a href="power.html#cb189-7" tabindex="-1"></a>  <span class="fu">t_test</span>(weight_g <span class="sc">~</span> section, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><strong>1.</strong> <strong>Write a function</strong> called <code>trout_subber</code> that takes a user-selected number of random observations (the thing that changes) from our <code>trout</code> data frame across both forest types (i.e., section) (5 pts.)</p>
+<p><strong>1.</strong> <strong>Write a function</strong> called <code>trout_subber</code> that returns a user-selected number of random observations (the thing that changes) from our <code>trout</code> data frame across both forest types (i.e., section) (5 pts.)</p>
 <p>HINTS: the number of observations you want to subset to will be an argument of the function. The code above can be used as the basis of the function. You can refer back to the <a href="https://github.com/rossyndicate/primers?tab=readme-ov-file">Write Functions</a> primer lessons for guidance, specifically <a href="https://geocentroid.shinyapps.io/how-to-write-a-function/">How to write a function</a>.</p>
 <p><br></p>
-<p><strong>2.</strong> Build upon the previous function by adding an additional step to perform a t-test on the data set at the end, and to return the results of that t-test. (NOTE: for simplicity, use the non-parametric t-test across all sub sets). (5 pts.)</p>
+<p><strong>2.</strong> Build upon the previous function by adding an additional step to perform a t-test on the data set at the end, so the function returns the results of the t-test. (NOTE: for simplicity, use the non-parametric t-test across all sub sets). (5 pts.)</p>
 <p><br></p>
 <p><strong>3.</strong> <strong>Map</strong> over the function above, using our sample sizes of interest (i.e., 5, 10, 1000, 5000 per forest type). Repeat the process 100 times for each sample size to account for variability. The final output of this exercise should be a <strong>single data frame</strong> <strong>with 400 rows</strong> (one row for each t-test summary). (5 pts.)</p>
 <p>HINTS: Make use of the <code>rep()</code> function to create your vector of numbers to map over…</p>
@@ -501,42 +501,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/08-power.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["_main.pdf", "_main.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/08-power.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
 });
 });
 </script>
