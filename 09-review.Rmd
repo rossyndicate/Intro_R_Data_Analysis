@@ -9,7 +9,7 @@ In this lesson you will take all of the skills you have learned up to this point
 #### Setup
 
 ::: {.alert .alert-info}
-New packages for this lesson: `dataRetrieval`, `httr`, `jsonlite`
+New packages for this lesson: `dataRetrieval`, `httr`, `jsonlite`, `sf`, and `mapview`
 
 Add these to your 'setup.R' script if you want to follow along with the data retrieval part of this lesson (*optional*).
 :::
@@ -34,7 +34,7 @@ We are interested in looking at how the Cache la Poudre River's flow changes ove
 
 There are four stream flow monitoring sites along the Poudre that we are interested in: two managed by the US Geological Survey (USGS), and two managed by the Colorado Division of Water Resources (CDWR):
 
-```{r echo = FALSE}
+```{r echo = TRUE}
 # Making a tibble to convert into coordinates for our sites
 poudre_sites <- tibble(site = c("Canyon Mouth", "Lincoln Bridge", "Boxelder", "Timnath"),
                        site_no = c("CLAFTCCO", "06752260", "06752280", "CLARIVCO"),
