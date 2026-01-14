@@ -1,95 +1,35 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
-<head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 10 R Skills Review | Introduction to Environmental Data Science</title>
-  <meta name="description" content="This site hosts the first half of the course content for ESS 523A at Colorado State University." />
-  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
-
-  <meta property="og:title" content=" 10 R Skills Review | Introduction to Environmental Data Science" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:description" content="This site hosts the first half of the course content for ESS 523A at Colorado State University." />
-  <meta name="github-repo" content="rossyndicate/Intro_R_Data_Analysis" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 10 R Skills Review | Introduction to Environmental Data Science" />
-  
-  <meta name="twitter:description" content="This site hosts the first half of the course content for ESS 523A at Colorado State University." />
-  
-
-<meta name="author" content="Caitlin Mothes, PhD and Katie Willi" />
-
-
-<meta name="date" content="2025-11-14" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="power.html"/>
-
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.11.0/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/proj4-2.6.2/proj4.min.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script>
-<script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
-<script src="libs/HomeButton-0.0.1/home-button.js"></script>
-<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
-<link href="libs/Poudre_River_Monitoring-CSS-0.0.1/Poudre_River_Monitoring_home-button.css" rel="stylesheet" />
-<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
-<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
-<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-
-
-<style type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Introduction to Environmental Data Science - 10&nbsp; R Skills Review</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -142,476 +82,589 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./power.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="site_libs/leaflet-1.3.1/leaflet.js"></script><link href="site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="site_libs/proj4-2.6.2/proj4.min.js"></script><script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="site_libs/leaflet-binding-2.2.3/leaflet.js"></script><script src="site_libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script><script src="site_libs/leaflet-providers-plugin-2.2.3/leaflet-providers-plugin.js"></script><script src="site_libs/HomeButton-0.0.1/home-button.js"></script><script src="site_libs/HomeButton-0.0.1/easy-button-src.min.js"></script><link href="site_libs/Poudre_River_Monitoring-CSS-0.0.1/Poudre_River_Monitoring_home-button.css" rel="stylesheet">
+<script src="site_libs/clipboard-0.0.1/setClipboardText.js"></script><link href="site_libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet">
+<link href="site_libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
+<body class="nav-sidebar docked">
 
-<body>
-
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">Introduction to Data Analysis in R</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome!</a>
-<ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#set-up-instructions"><i class="fa fa-check"></i>Set up Instructions</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#navigating-this-site"><i class="fa fa-check"></i>Navigating this site</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#goals"><i class="fa fa-check"></i>Goals</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#approach-and-expectations"><i class="fa fa-check"></i>Approach and Expectations</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#class-schedule"><i class="fa fa-check"></i>Class Schedule</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#additional-introductory-resources"><i class="fa fa-check"></i>Additional introductory resources</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="setup-instructions.html"><a href="setup-instructions.html"><i class="fa fa-check"></i><b>2</b> Setup Instructions</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="setup-instructions.html"><a href="setup-instructions.html#install-r-and-rstudio"><i class="fa fa-check"></i><b>2.1</b> Install R and RStudio</a></li>
-<li class="chapter" data-level="2.2" data-path="setup-instructions.html"><a href="setup-instructions.html#package-installation"><i class="fa fa-check"></i><b>2.2</b> Package Installation</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html"><i class="fa fa-check"></i><b>3</b> Introduction to R, RStudio and R Markdown</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#getting-to-know-rstudio"><i class="fa fa-check"></i><b>3.1</b> Getting to know RStudio</a></li>
-<li class="chapter" data-level="3.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#r-projects"><i class="fa fa-check"></i><b>3.2</b> R Projects</a></li>
-<li class="chapter" data-level="3.3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#write-a-set-up-script"><i class="fa fa-check"></i><b>3.3</b> Write a set-up script</a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#functions"><i class="fa fa-check"></i><b>3.3.1</b> Functions</a></li>
-<li class="chapter" data-level="3.3.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#packages"><i class="fa fa-check"></i><b>3.3.2</b> Packages</a></li>
-</ul></li>
-<li class="chapter" data-level="3.4" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#r-markdown"><i class="fa fa-check"></i><b>3.4</b> R Markdown</a>
-<ul>
-<li class="chapter" data-level="3.4.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#what-about-quarto"><i class="fa fa-check"></i><b>3.4.1</b> What About Quarto?</a></li>
-<li class="chapter" data-level="3.4.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#getting-started-with-r-markdown"><i class="fa fa-check"></i><b>3.4.2</b> Getting started with R Markdown</a></li>
-</ul></li>
-<li class="chapter" data-level="3.5" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#explore"><i class="fa fa-check"></i><b>3.5</b> Explore</a>
-<ul>
-<li class="chapter" data-level="3.5.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#the-penguins-data"><i class="fa fa-check"></i><b>3.5.1</b> The <code>penguins</code> data</a></li>
-<li class="chapter" data-level="3.5.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#data-types"><i class="fa fa-check"></i><b>3.5.2</b> Data Types</a></li>
-<li class="chapter" data-level="3.5.3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#indexing"><i class="fa fa-check"></i><b>3.5.3</b> Indexing</a></li>
-<li class="chapter" data-level="3.5.4" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#the-dplyr-package"><i class="fa fa-check"></i><b>3.5.4</b> The {dplyr} package</a></li>
-</ul></li>
-<li class="chapter" data-level="3.6" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#read-and-write-data"><i class="fa fa-check"></i><b>3.6</b> Read and Write Data</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>4</b> Exploratory Data Analysis</a>
-<ul>
-<li class="chapter" data-level="4.0.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-penguins-data-1"><i class="fa fa-check"></i><b>4.0.1</b> The <code>penguins</code> data</a></li>
-<li class="chapter" data-level="4.0.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>4.0.2</b> Exploratory Data Analysis</a></li>
-<li class="chapter" data-level="4.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-wrangling"><i class="fa fa-check"></i><b>4.1</b> Data wrangling</a>
-<ul>
-<li class="chapter" data-level="4.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-dplyr-package-1"><i class="fa fa-check"></i><b>4.1.1</b> The <code>dplyr</code> package</a></li>
-</ul></li>
-<li class="chapter" data-level="4.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-2"><i class="fa fa-check"></i><b>4.2</b> Exercises</a></li>
-<li class="chapter" data-level="4.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#visualization"><i class="fa fa-check"></i><b>4.3</b> Visualization</a></li>
-<li class="chapter" data-level="4.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-3"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html"><i class="fa fa-check"></i><b>5</b> Data Visualization in R</a>
-<ul>
-<li class="chapter" data-level="5.0.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#data-preparation"><i class="fa fa-check"></i><b>5.0.1</b> Data Preparation</a></li>
-<li class="chapter" data-level="5.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#publication-ready-figures-with-ggplot2"><i class="fa fa-check"></i><b>5.1</b> Publication Ready Figures with <code>ggplot2</code></a>
-<ul>
-<li class="chapter" data-level="5.1.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#general-appearance"><i class="fa fa-check"></i><b>5.1.1</b> General Appearance</a></li>
-<li class="chapter" data-level="5.1.2" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#color-size-and-legends"><i class="fa fa-check"></i><b>5.1.2</b> Color, Size and Legends</a></li>
-<li class="chapter" data-level="5.1.3" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#annotation"><i class="fa fa-check"></i><b>5.1.3</b> Annotation</a></li>
-<li class="chapter" data-level="5.1.4" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#finalize-and-save"><i class="fa fa-check"></i><b>5.1.4</b> Finalize and save</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#the-assignment"><i class="fa fa-check"></i><b>5.2</b> The Assignment</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#acknowledgements-and-resources"><i class="fa fa-check"></i><b>5.2.1</b> Acknowledgements and Resources</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html"><i class="fa fa-check"></i><b>6</b> Data Analysis: T-test and ANOVA</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#explore-the-dataset"><i class="fa fa-check"></i><b>6.1</b> Explore the dataset</a></li>
-<li class="chapter" data-level="6.2" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#t-test---compare-two-means"><i class="fa fa-check"></i><b>6.2</b> t-test - Compare two means</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#assumptions"><i class="fa fa-check"></i><b>6.2.1</b> Assumptions</a></li>
-</ul></li>
-<li class="chapter" data-level="6.3" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#anova-test---compare-more-than-two-means"><i class="fa fa-check"></i><b>6.3</b> ANOVA test - compare more than two means</a>
-<ul>
-<li class="chapter" data-level="6.3.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#assumptions-1"><i class="fa fa-check"></i><b>6.3.1</b> Assumptions</a></li>
-</ul></li>
-<li class="chapter" data-level="6.4" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#exercises-4"><i class="fa fa-check"></i><b>6.4</b> Exercises</a>
-<ul>
-<li class="chapter" data-level="6.4.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#acknowledgements"><i class="fa fa-check"></i><b>6.4.1</b> Acknowledgements</a></li>
-<li class="chapter" data-level="6.4.2" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#citations"><i class="fa fa-check"></i><b>6.4.2</b> Citations</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html"><i class="fa fa-check"></i><b>7</b> Correlation and Simple Linear Regression</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#correlation-with-salamanders"><i class="fa fa-check"></i><b>7.1</b> Correlation with salamanders</a></li>
-<li class="chapter" data-level="7.2" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#simple-linear-regression-with-crabs"><i class="fa fa-check"></i><b>7.2</b> Simple linear regression with crabs</a></li>
-<li class="chapter" data-level="7.3" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#exercises-5"><i class="fa fa-check"></i><b>7.3</b> Exercises</a></li>
-<li class="chapter" data-level="7.4" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#citations-1"><i class="fa fa-check"></i><b>7.4</b> Citations</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression (MLR)</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#mlr-in-r"><i class="fa fa-check"></i><b>8.1</b> MLR in R</a>
-<ul>
-<li class="chapter" data-level="8.1.1" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#predicting-crab-size-1"><i class="fa fa-check"></i><b>8.1.1</b> Predicting crab size</a></li>
-<li class="chapter" data-level="8.1.2" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#mlr-assumptions"><i class="fa fa-check"></i><b>8.1.2</b> MLR Assumptions</a></li>
-</ul></li>
-<li class="chapter" data-level="8.2" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#exercises-6"><i class="fa fa-check"></i><b>8.2</b> Exercises</a></li>
-<li class="chapter" data-level="8.3" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#citations-2"><i class="fa fa-check"></i><b>8.3</b> Citations</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="power.html"><a href="power.html"><i class="fa fa-check"></i><b>9</b> Power</a>
-<ul>
-<li class="chapter" data-level="9.0.1" data-path="power.html"><a href="power.html#power-in-action"><i class="fa fa-check"></i><b>9.0.1</b> Power in action</a></li>
-<li class="chapter" data-level="9.0.2" data-path="power.html"><a href="power.html#note-about-random-selection"><i class="fa fa-check"></i><b>9.0.2</b> Note about random selection</a></li>
-<li class="chapter" data-level="9.1" data-path="power.html"><a href="power.html#assignment"><i class="fa fa-check"></i><b>9.1</b> Assignment</a></li>
-<li class="chapter" data-level="9.2" data-path="power.html"><a href="power.html#citations-3"><i class="fa fa-check"></i><b>9.2</b> Citations</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="r-skills-review.html"><a href="r-skills-review.html"><i class="fa fa-check"></i><b>10</b> R Skills Review</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="r-skills-review.html"><a href="r-skills-review.html#tidying-datasets"><i class="fa fa-check"></i><b>10.1</b> Tidying datasets</a>
-<ul>
-<li class="chapter" data-level="10.1.1" data-path="r-skills-review.html"><a href="r-skills-review.html#get-usgs-stream-flow-data"><i class="fa fa-check"></i><b>10.1.1</b> Get USGS stream flow data</a></li>
-<li class="chapter" data-level="10.1.2" data-path="r-skills-review.html"><a href="r-skills-review.html#get-cdwr-stream-flow-data"><i class="fa fa-check"></i><b>10.1.2</b> Get CDWR stream flow data</a></li>
-<li class="chapter" data-level="10.1.3" data-path="r-skills-review.html"><a href="r-skills-review.html#or-read-in-the-.csvs-we-already-generated-and-saved-for-you"><i class="fa fa-check"></i><b>10.1.3</b> OR, read in the .csv’s we already generated and saved for you:</a></li>
-</ul></li>
-<li class="chapter" data-level="10.2" data-path="r-skills-review.html"><a href="r-skills-review.html#exploratory-data-analysis-2"><i class="fa fa-check"></i><b>10.2</b> Exploratory Data Analysis</a></li>
-<li class="chapter" data-level="10.3" data-path="r-skills-review.html"><a href="r-skills-review.html#data-analysis"><i class="fa fa-check"></i><b>10.3</b> Data Analysis</a>
-<ul>
-<li class="chapter" data-level="10.3.1" data-path="r-skills-review.html"><a href="r-skills-review.html#testing-for-normal-distribution"><i class="fa fa-check"></i><b>10.3.1</b> Testing for normal distribution</a></li>
-<li class="chapter" data-level="10.3.2" data-path="r-skills-review.html"><a href="r-skills-review.html#testing-for-equal-variance"><i class="fa fa-check"></i><b>10.3.2</b> Testing for equal variance</a></li>
-<li class="chapter" data-level="10.3.3" data-path="r-skills-review.html"><a href="r-skills-review.html#anova---kruskal-wallis"><i class="fa fa-check"></i><b>10.3.3</b> ANOVA - Kruskal-Wallis</a></li>
-<li class="chapter" data-level="10.3.4" data-path="r-skills-review.html"><a href="r-skills-review.html#anova-post-hoc-analysis"><i class="fa fa-check"></i><b>10.3.4</b> ANOVA post-hoc analysis</a></li>
-</ul></li>
-</ul></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">R Skills Review</span>
+</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
     </div>
-
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Environmental Data Science</a>
-          </h1>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to Environmental Data Science</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/rossyndicate/ESS523a_Intro_R_Data_Analysis" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
         </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Environmental Data Science</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./setup-instructions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Setup Instructions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduction-to-r-rstudio-and-r-markdown.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to R, RStudio and R Markdown</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exploratory-data-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-visualization-in-r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Visualization in R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-analysis-t-test-and-anova.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Analysis: T-test and ANOVA</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlation-and-simple-linear-regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Correlation and Simple Linear Regression</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multiple-linear-regression-mlr.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multiple Linear Regression (MLR)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./power.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Power</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./r-skills-review.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">R Skills Review</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#tidying-datasets" id="toc-tidying-datasets" class="nav-link active" data-scroll-target="#tidying-datasets"><span class="toc-section-number">10.1</span>  Tidying datasets</a>
+  <ul class="collapse">
+<li><a href="#get-usgs-stream-flow-data" id="toc-get-usgs-stream-flow-data" class="nav-link" data-scroll-target="#get-usgs-stream-flow-data"><span class="toc-section-number">10.1.1</span>  Get USGS stream flow data</a></li>
+  <li><a href="#get-cdwr-stream-flow-data" id="toc-get-cdwr-stream-flow-data" class="nav-link" data-scroll-target="#get-cdwr-stream-flow-data"><span class="toc-section-number">10.1.2</span>  Get CDWR stream flow data</a></li>
+  <li><a href="#or-read-in-the-.csvs-we-already-generated-and-saved-for-you" id="toc-or-read-in-the-.csvs-we-already-generated-and-saved-for-you" class="nav-link" data-scroll-target="#or-read-in-the-.csvs-we-already-generated-and-saved-for-you"><span class="toc-section-number">10.1.3</span>  OR, read in the .csv’s we already generated and saved for you:</a></li>
+  </ul>
+</li>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis"><span class="toc-section-number">10.2</span>  Exploratory Data Analysis</a></li>
+  <li>
+<a href="#data-analysis" id="toc-data-analysis" class="nav-link" data-scroll-target="#data-analysis"><span class="toc-section-number">10.3</span>  Data Analysis</a>
+  <ul class="collapse">
+<li><a href="#testing-for-normal-distribution" id="toc-testing-for-normal-distribution" class="nav-link" data-scroll-target="#testing-for-normal-distribution"><span class="toc-section-number">10.3.1</span>  Testing for normal distribution</a></li>
+  <li><a href="#testing-for-equal-variance" id="toc-testing-for-equal-variance" class="nav-link" data-scroll-target="#testing-for-equal-variance"><span class="toc-section-number">10.3.2</span>  Testing for equal variance</a></li>
+  <li><a href="#anova---kruskal-wallis" id="toc-anova---kruskal-wallis" class="nav-link" data-scroll-target="#anova---kruskal-wallis"><span class="toc-section-number">10.3.3</span>  ANOVA - Kruskal-Wallis</a></li>
+  <li><a href="#anova-post-hoc-analysis" id="toc-anova-post-hoc-analysis" class="nav-link" data-scroll-target="#anova-post-hoc-analysis"><span class="toc-section-number">10.3.4</span>  ANOVA post-hoc analysis</a></li>
+  </ul>
+</li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rossyndicate/ESS523a_Intro_R_Data_Analysis/edit/main/r-skills-review.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/rossyndicate/ESS523a_Intro_R_Data_Analysis/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">
+<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">R Skills Review</span>
+</h1>
+</div>
 
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
 
-            <section class="normal" id="section-">
-<div id="r-skills-review" class="section level1 hasAnchor" number="10">
-<h1><span class="header-section-number"> 10</span> R Skills Review<a href="r-skills-review.html#r-skills-review" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>In this lesson you will take all of the skills you have learned up to this point and use them on a completely new set of data.</p>
-<div id="setup" class="section level4 hasAnchor" number="10.0.0.1">
-<h4><span class="header-section-number">10.0.0.1</span> Setup<a href="r-skills-review.html#setup" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>In this lesson you will take all of the skills you have learned up to this point and use them on a completely new set of data.</p>
+<section id="setup" class="level4" data-number="10.0.0.1"><h4 data-number="10.0.0.1" class="anchored" data-anchor-id="setup">
+<span class="header-section-number">10.0.0.1</span> Setup</h4>
 <div class="alert alert-info">
 <p>New packages for this lesson: <code>dataRetrieval</code>, <code>httr</code>, <code>jsonlite</code>, <code>sf</code>, and <code>mapview</code></p>
 <p>Add these to your ‘setup.R’ script if you want to follow along with the data retrieval part of this lesson (<em>optional</em>).</p>
 </div>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="r-skills-review.html#cb190-1" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;setup.R&quot;</span>)</span></code></pre></div>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"setup.R"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="tidying-datasets" class="section level2 hasAnchor" number="10.1">
-<h2><span class="header-section-number">10.1</span> Tidying datasets<a href="r-skills-review.html#tidying-datasets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</section><section id="tidying-datasets" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="tidying-datasets">
+<span class="header-section-number">10.1</span> Tidying datasets</h2>
 <p>We are interested in looking at how the Cache la Poudre River’s flow changes over <em>time and space</em> as it travels out of the mountainous Poudre Canyon and through Fort Collins.</p>
 <p>There are four stream flow monitoring sites along the Poudre that we are interested in: two managed by the US Geological Survey (USGS), and two managed by the Colorado Division of Water Resources (CDWR):</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="r-skills-review.html#cb191-1" tabindex="-1"></a><span class="co"># Making a tibble to convert into coordinates for our sites</span></span>
-<span id="cb191-2"><a href="r-skills-review.html#cb191-2" tabindex="-1"></a>poudre_sites <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">site =</span> <span class="fu">c</span>(<span class="st">&quot;Canyon Mouth&quot;</span>, <span class="st">&quot;Lincoln Bridge&quot;</span>, <span class="st">&quot;Boxelder&quot;</span>, <span class="st">&quot;Timnath&quot;</span>),</span>
-<span id="cb191-3"><a href="r-skills-review.html#cb191-3" tabindex="-1"></a>                       <span class="at">site_no =</span> <span class="fu">c</span>(<span class="st">&quot;CLAFTCCO&quot;</span>, <span class="st">&quot;06752260&quot;</span>, <span class="st">&quot;06752280&quot;</span>, <span class="st">&quot;CLARIVCO&quot;</span>),</span>
-<span id="cb191-4"><a href="r-skills-review.html#cb191-4" tabindex="-1"></a>                       <span class="at">lat =</span> <span class="fu">c</span>(<span class="fl">40.6645</span>, <span class="fl">40.5880833</span>, <span class="fl">40.5519269</span>, <span class="fl">40.5013</span>),</span>
-<span id="cb191-5"><a href="r-skills-review.html#cb191-5" tabindex="-1"></a>                       <span class="at">long =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">105.2242</span>, <span class="sc">-</span><span class="fl">105.0692222</span>, <span class="sc">-</span><span class="fl">105.011365</span>, <span class="sc">-</span><span class="fl">104.967</span>),</span>
-<span id="cb191-6"><a href="r-skills-review.html#cb191-6" tabindex="-1"></a>                       <span class="at">source =</span> <span class="fu">c</span>(<span class="st">&quot;CDWR&quot;</span>, <span class="st">&quot;USGS&quot;</span>, <span class="st">&quot;USGS&quot;</span>, <span class="st">&quot;CDWR&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb191-7"><a href="r-skills-review.html#cb191-7" tabindex="-1"></a>  sf<span class="sc">::</span><span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;long&quot;</span>, <span class="st">&quot;lat&quot;</span>), <span class="at">crs =</span> <span class="dv">4269</span>)</span>
-<span id="cb191-8"><a href="r-skills-review.html#cb191-8" tabindex="-1"></a></span>
-<span id="cb191-9"><a href="r-skills-review.html#cb191-9" tabindex="-1"></a><span class="co"># Mapview is another package that creates interactive plots, not necessary for you to know yet! More in 523a :-)</span></span>
-<span id="cb191-10"><a href="r-skills-review.html#cb191-10" tabindex="-1"></a>mapview<span class="sc">::</span><span class="fu">mapview</span>(poudre_sites, <span class="at">zcol =</span> <span class="st">&quot;site&quot;</span>, <span class="at">layer.name =</span> <span class="st">&quot;Poudre River Monitoring&quot;</span>)</span></code></pre></div>
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-399315e4d4f3368d0148" style="width:864px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-399315e4d4f3368d0148">{"x":{"options":{"minZoom":1,"maxZoom":52,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"preferCanvas":false,"bounceAtZoomLimits":false,"maxBounds":[[[-90,-370]],[[90,370]]]},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron","CartoDB.Positron","CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["CartoDB.DarkMatter","CartoDB.DarkMatter","CartoDB.DarkMatter",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenStreetMap","OpenStreetMap","OpenStreetMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["Esri.WorldImagery","Esri.WorldImagery","Esri.WorldImagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenTopoMap","OpenTopoMap","OpenTopoMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"createMapPane","args":["point",440]},{"method":"addCircleMarkers","args":[[40.6645,40.5880833,40.5519269,40.5013],[-105.2242,-105.0692222,-105.011365,-104.967],6,null,"Poudre River Monitoring",{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"pane":"point","stroke":true,"color":"#333333","weight":1,"opacity":[0.9,0.9,0.9,0.9],"fill":true,"fillColor":["#007094","#00BE7D","#4B0055","#FDE333"],"fillOpacity":[0.6,0.6,0.6,0.6]},null,null,["<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>1&emsp;<\/td><\/tr><tr><td>1<\/td><th>site&emsp;<\/th><td>Canyon Mouth&emsp;<\/td><\/tr><tr><td>2<\/td><th>site_no&emsp;<\/th><td>CLAFTCCO&emsp;<\/td><\/tr><tr><td>3<\/td><th>source&emsp;<\/th><td>CDWR&emsp;<\/td><\/tr><tr><td>4<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>2&emsp;<\/td><\/tr><tr><td>1<\/td><th>site&emsp;<\/th><td>Lincoln Bridge&emsp;<\/td><\/tr><tr><td>2<\/td><th>site_no&emsp;<\/th><td>06752260&emsp;<\/td><\/tr><tr><td>3<\/td><th>source&emsp;<\/th><td>USGS&emsp;<\/td><\/tr><tr><td>4<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>3&emsp;<\/td><\/tr><tr><td>1<\/td><th>site&emsp;<\/th><td>Boxelder&emsp;<\/td><\/tr><tr><td>2<\/td><th>site_no&emsp;<\/th><td>06752280&emsp;<\/td><\/tr><tr><td>3<\/td><th>source&emsp;<\/th><td>USGS&emsp;<\/td><\/tr><tr><td>4<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>4&emsp;<\/td><\/tr><tr><td>1<\/td><th>site&emsp;<\/th><td>Timnath&emsp;<\/td><\/tr><tr><td>2<\/td><th>site_no&emsp;<\/th><td>CLARIVCO&emsp;<\/td><\/tr><tr><td>3<\/td><th>source&emsp;<\/th><td>CDWR&emsp;<\/td><\/tr><tr><td>4<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>"],{"maxWidth":800,"minWidth":50,"autoPan":true,"keepInView":false,"closeButton":true,"closeOnClick":true,"className":""},["Canyon Mouth","Lincoln Bridge","Boxelder","Timnath"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addHomeButton","args":[-105.2242,40.5013,-104.967,40.6645,true,"Poudre_River_Monitoring","Zoom to Poudre_River_Monitoring","<strong> Poudre_River_Monitoring <\/strong>","bottomright"]},{"method":"addLayersControl","args":[["CartoDB.Positron","CartoDB.DarkMatter","OpenStreetMap","Esri.WorldImagery","OpenTopoMap"],"Poudre River Monitoring",{"collapsed":true,"autoZIndex":true,"position":"topleft"}]},{"method":"addLegend","args":[{"colors":["#4B0055","#007094","#00BE7D","#FDE333"],"labels":["Boxelder","Canyon Mouth","Lincoln Bridge","Timnath"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"factor","title":"Poudre River Monitoring","extra":null,"layerId":null,"className":"info legend","group":"Poudre River Monitoring"}]}],"limits":{"lat":[40.5013,40.6645],"lng":[-105.2242,-104.967]},"fitBounds":[40.5013,-105.2242,40.6645,-104.967,[]]},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\n      function(el, x, data) {\n      // get the leaflet map\n      var map = this; //HTMLWidgets.find('#' + el.id);\n      // we need a new div element because we have to handle\n      // the mouseover output separately\n      // debugger;\n      function addElement () {\n      // generate new div Element\n      var newDiv = $(document.createElement('div'));\n      // append at end of leaflet htmlwidget container\n      $(el).append(newDiv);\n      //provide ID and style\n      newDiv.addClass('lnlt');\n      newDiv.css({\"position\":\"relative\",\"bottomleft\":\"0px\",\"background-color\":\"rgba(255, 255, 255, 0.7)\",\"box-shadow\":\"0 0 2px #bbb\",\"background-clip\":\"padding-box\",\"margin\":\"0\",\"padding-left\":\"5px\",\"padding-right\":\"5px\",\"color\":\"#333\",\"font-size\":\"9px\",\"font-family\":\"\\\"Helvetica Neue\\\", Arial, Helvetica, sans-serif\",\"text-align\":\"left\",\"z-index\":\"700\"});\n      return newDiv;\n      }\n\n\n      // check for already existing lnlt class to not duplicate\n      var lnlt = $(el).find('.lnlt');\n\n      if(!lnlt.length) {\n      lnlt = addElement();\n\n      // grab the special div we generated in the beginning\n      // and put the mousmove output there\n\n      map.on('mousemove', function (e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                           ' lon: ' + (e.latlng.lng).toFixed(5) +\n                           ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                           ' | zoom: ' + map.getZoom() +\n                           ' | x: ' + L.CRS.EPSG3857.project(e.latlng).x.toFixed(0) +\n                           ' | y: ' + L.CRS.EPSG3857.project(e.latlng).y.toFixed(0) +\n                           ' | epsg: 3857 ' +\n                           ' | proj4: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs ');\n      } else {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      }\n      });\n\n      // remove the lnlt div when mouse leaves map\n      map.on('mouseout', function (e) {\n      var strip = document.querySelector('.lnlt');\n      if( strip !==null) strip.remove();\n      });\n\n      };\n\n      //$(el).keypress(67, function(e) {\n      map.on('preclick', function(e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      var txt = document.querySelector('.lnlt').textContent;\n      console.log(txt);\n      //txt.innerText.focus();\n      //txt.select();\n      setClipboardText('\"' + txt + '\"');\n      }\n      });\n\n      }\n      ).call(this.getMap(), el, x, data);\n}","data":null},{"code":"function(el, x, data) {\n  return (function(el,x,data){\n           var map = this;\n\n           map.on('keypress', function(e) {\n               console.log(e.originalEvent.code);\n               var key = e.originalEvent.code;\n               if (key === 'KeyE') {\n                   var bb = this.getBounds();\n                   var txt = JSON.stringify(bb);\n                   console.log(txt);\n\n                   setClipboardText('\\'' + txt + '\\'');\n               }\n           })\n        }).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Making a tibble to convert into coordinates for our sites</span></span>
+<span><span class="va">poudre_sites</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>site <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Canyon Mouth"</span>, <span class="st">"Lincoln Bridge"</span>, <span class="st">"Boxelder"</span>, <span class="st">"Timnath"</span><span class="op">)</span>,</span>
+<span>                       site_no <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CLAFTCCO"</span>, <span class="st">"06752260"</span>, <span class="st">"06752280"</span>, <span class="st">"CLARIVCO"</span><span class="op">)</span>,</span>
+<span>                       lat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40.6645</span>, <span class="fl">40.5880833</span>, <span class="fl">40.5519269</span>, <span class="fl">40.5013</span><span class="op">)</span>,</span>
+<span>                       long <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">105.2242</span>, <span class="op">-</span><span class="fl">105.0692222</span>, <span class="op">-</span><span class="fl">105.011365</span>, <span class="op">-</span><span class="fl">104.967</span><span class="op">)</span>,</span>
+<span>                       source <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CDWR"</span>, <span class="st">"USGS"</span>, <span class="st">"USGS"</span>, <span class="st">"CDWR"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span>coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"long"</span>, <span class="st">"lat"</span><span class="op">)</span>, crs <span class="op">=</span> <span class="fl">4269</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Mapview is another package that creates interactive plots, not necessary for you to know yet!</span></span>
+<span><span class="fu">mapview</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/mapview/reference/mapView.html">mapview</a></span><span class="op">(</span><span class="va">poudre_sites</span>, zcol <span class="op">=</span> <span class="st">"site"</span>, layer.name <span class="op">=</span> <span class="st">"Poudre River Monitoring"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-fa6dc5b1751470393418" style="width:100%;height:361px;"></div>
+<script type="application/json" data-for="htmlwidget-fa6dc5b1751470393418">{"x":{"options":{"minZoom":1,"maxZoom":52,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"preferCanvas":false,"bounceAtZoomLimits":false,"maxBounds":[[[-90,-370]],[[90,370]]]},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron","CartoDB.Positron","CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["CartoDB.DarkMatter","CartoDB.DarkMatter","CartoDB.DarkMatter",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenStreetMap","OpenStreetMap","OpenStreetMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["Esri.WorldImagery","Esri.WorldImagery","Esri.WorldImagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenTopoMap","OpenTopoMap","OpenTopoMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"createMapPane","args":["point",440]},{"method":"addCircleMarkers","args":[[40.6645,40.5880833,40.5519269,40.5013],[-105.2242,-105.0692222,-105.011365,-104.967],6,null,"Poudre River Monitoring",{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"pane":"point","stroke":true,"color":"#333333","weight":1,"opacity":[0.9,0.9,0.9,0.9],"fill":true,"fillColor":["#007094","#00BE7D","#4B0055","#FDE333"],"fillOpacity":[0.6,0.6,0.6,0.6]},null,null,["<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>1&emsp;<\/td><\/tr><tr><td>1<\/td><th>site&emsp;<\/th><td>Canyon Mouth&emsp;<\/td><\/tr><tr><td>2<\/td><th>site_no&emsp;<\/th><td>CLAFTCCO&emsp;<\/td><\/tr><tr><td>3<\/td><th>source&emsp;<\/th><td>CDWR&emsp;<\/td><\/tr><tr><td>4<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>2&emsp;<\/td><\/tr><tr><td>1<\/td><th>site&emsp;<\/th><td>Lincoln Bridge&emsp;<\/td><\/tr><tr><td>2<\/td><th>site_no&emsp;<\/th><td>06752260&emsp;<\/td><\/tr><tr><td>3<\/td><th>source&emsp;<\/th><td>USGS&emsp;<\/td><\/tr><tr><td>4<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>3&emsp;<\/td><\/tr><tr><td>1<\/td><th>site&emsp;<\/th><td>Boxelder&emsp;<\/td><\/tr><tr><td>2<\/td><th>site_no&emsp;<\/th><td>06752280&emsp;<\/td><\/tr><tr><td>3<\/td><th>source&emsp;<\/th><td>USGS&emsp;<\/td><\/tr><tr><td>4<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>4&emsp;<\/td><\/tr><tr><td>1<\/td><th>site&emsp;<\/th><td>Timnath&emsp;<\/td><\/tr><tr><td>2<\/td><th>site_no&emsp;<\/th><td>CLARIVCO&emsp;<\/td><\/tr><tr><td>3<\/td><th>source&emsp;<\/th><td>CDWR&emsp;<\/td><\/tr><tr><td>4<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>"],{"maxWidth":800,"minWidth":50,"autoPan":true,"keepInView":false,"closeButton":true,"closeOnClick":true,"className":""},["Canyon Mouth","Lincoln Bridge","Boxelder","Timnath"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addHomeButton","args":[-105.2242,40.5013,-104.967,40.6645,true,"Poudre_River_Monitoring","Zoom to Poudre_River_Monitoring","<strong> Poudre_River_Monitoring <\/strong>","bottomright"]},{"method":"addLayersControl","args":[["CartoDB.Positron","CartoDB.DarkMatter","OpenStreetMap","Esri.WorldImagery","OpenTopoMap"],"Poudre River Monitoring",{"collapsed":true,"autoZIndex":true,"position":"topleft"}]},{"method":"addLegend","args":[{"colors":["#4B0055","#007094","#00BE7D","#FDE333"],"labels":["Boxelder","Canyon Mouth","Lincoln Bridge","Timnath"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"factor","title":"Poudre River Monitoring","extra":null,"layerId":null,"className":"info legend","group":"Poudre River Monitoring"}]}],"limits":{"lat":[40.5013,40.6645],"lng":[-105.2242,-104.967]},"fitBounds":[40.5013,-105.2242,40.6645,-104.967,[]]},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\n      function(el, x, data) {\n      // get the leaflet map\n      var map = this; //HTMLWidgets.find('#' + el.id);\n      // we need a new div element because we have to handle\n      // the mouseover output separately\n      // debugger;\n      function addElement () {\n      // generate new div Element\n      var newDiv = $(document.createElement('div'));\n      // append at end of leaflet htmlwidget container\n      $(el).append(newDiv);\n      //provide ID and style\n      newDiv.addClass('lnlt');\n      newDiv.css({\"position\":\"relative\",\"bottomleft\":\"0px\",\"background-color\":\"rgba(255, 255, 255, 0.7)\",\"box-shadow\":\"0 0 2px #bbb\",\"background-clip\":\"padding-box\",\"margin\":\"0\",\"padding-left\":\"5px\",\"padding-right\":\"5px\",\"color\":\"#333\",\"font-size\":\"9px\",\"font-family\":\"\\\"Helvetica Neue\\\", Arial, Helvetica, sans-serif\",\"text-align\":\"left\",\"z-index\":\"700\"});\n      return newDiv;\n      }\n\n\n      // check for already existing lnlt class to not duplicate\n      var lnlt = $(el).find('.lnlt');\n\n      if(!lnlt.length) {\n      lnlt = addElement();\n\n      // grab the special div we generated in the beginning\n      // and put the mousmove output there\n\n      map.on('mousemove', function (e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                           ' lon: ' + (e.latlng.lng).toFixed(5) +\n                           ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                           ' | zoom: ' + map.getZoom() +\n                           ' | x: ' + L.CRS.EPSG3857.project(e.latlng).x.toFixed(0) +\n                           ' | y: ' + L.CRS.EPSG3857.project(e.latlng).y.toFixed(0) +\n                           ' | epsg: 3857 ' +\n                           ' | proj4: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs ');\n      } else {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      }\n      });\n\n      // remove the lnlt div when mouse leaves map\n      map.on('mouseout', function (e) {\n      var strip = document.querySelector('.lnlt');\n      if( strip !==null) strip.remove();\n      });\n\n      };\n\n      //$(el).keypress(67, function(e) {\n      map.on('preclick', function(e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      var txt = document.querySelector('.lnlt').textContent;\n      console.log(txt);\n      //txt.innerText.focus();\n      //txt.select();\n      setClipboardText('\"' + txt + '\"');\n      }\n      });\n\n      }\n      ).call(this.getMap(), el, x, data);\n}","data":null},{"code":"function(el, x, data) {\n  return (function(el,x,data){\n           var map = this;\n\n           map.on('keypress', function(e) {\n               console.log(e.originalEvent.code);\n               var key = e.originalEvent.code;\n               if (key === 'KeyE') {\n                   var bb = this.getBounds();\n                   var txt = JSON.stringify(bb);\n                   console.log(txt);\n\n                   setClipboardText('\\'' + txt + '\\'');\n               }\n           })\n        }).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+</div>
+</div>
 <p><br></p>
 <p>We are going to work through retrieving the raw data from both the USGS and CDWR databases.</p>
-<div id="get-usgs-stream-flow-data" class="section level3 hasAnchor" number="10.1.1">
-<h3><span class="header-section-number">10.1.1</span> Get USGS stream flow data<a href="r-skills-review.html#get-usgs-stream-flow-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<section id="get-usgs-stream-flow-data" class="level3" data-number="10.1.1"><h3 data-number="10.1.1" class="anchored" data-anchor-id="get-usgs-stream-flow-data">
+<span class="header-section-number">10.1.1</span> Get USGS stream flow data</h3>
 <p>Using the <code>dataRetrieval</code> package we can pull all sorts of USGS water data. You can read more about the package, functions available, metadata etc. here: <a href="https://doi-usgs.github.io/dataRetrieval/index.html" class="uri">https://doi-usgs.github.io/dataRetrieval/index.html</a></p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="r-skills-review.html#cb192-1" tabindex="-1"></a><span class="co"># pulls USGS daily (&#39;dv&#39;) stream flow data for those two sites:</span></span>
-<span id="cb192-2"><a href="r-skills-review.html#cb192-2" tabindex="-1"></a>usgs <span class="ot">&lt;-</span> dataRetrieval<span class="sc">::</span><span class="fu">readNWISdv</span>(<span class="at">siteNumbers =</span> <span class="fu">c</span>(<span class="st">&quot;06752260&quot;</span>, <span class="st">&quot;06752280&quot;</span>), <span class="co"># USGS site code for the Poudre River at the Lincoln Bridge and the ELC</span></span>
-<span id="cb192-3"><a href="r-skills-review.html#cb192-3" tabindex="-1"></a>                                  <span class="at">parameterCd =</span> <span class="st">&quot;00060&quot;</span>, <span class="co"># USGS code for stream flow</span></span>
-<span id="cb192-4"><a href="r-skills-review.html#cb192-4" tabindex="-1"></a>                                  <span class="at">startDate =</span> <span class="st">&quot;2020-10-01&quot;</span>, <span class="co"># YYYY-MM-DD formatting</span></span>
-<span id="cb192-5"><a href="r-skills-review.html#cb192-5" tabindex="-1"></a>                                  <span class="at">endDate =</span> <span class="st">&quot;2024-09-30&quot;</span>) <span class="sc">%&gt;%</span> <span class="co"># YYYY-MM-DD formatting</span></span>
-<span id="cb192-6"><a href="r-skills-review.html#cb192-6" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">q_cfs =</span> X_00060_00003) <span class="sc">%&gt;%</span> <span class="co"># USGS code for stream flow units in cubic feet per second (CFS)</span></span>
-<span id="cb192-7"><a href="r-skills-review.html#cb192-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> lubridate<span class="sc">::</span><span class="fu">ymd</span>(Date), <span class="co"># convert the Date column to &quot;Date&quot; formatting using the `lubridate` package</span></span>
-<span id="cb192-8"><a href="r-skills-review.html#cb192-8" tabindex="-1"></a>         <span class="at">Site =</span> <span class="fu">case_when</span>(site_no <span class="sc">==</span> <span class="st">&quot;06752260&quot;</span> <span class="sc">~</span> <span class="st">&quot;Lincoln&quot;</span>, </span>
-<span id="cb192-9"><a href="r-skills-review.html#cb192-9" tabindex="-1"></a>                          site_no <span class="sc">==</span> <span class="st">&quot;06752280&quot;</span> <span class="sc">~</span> <span class="st">&quot;Boxelder&quot;</span>)) </span>
-<span id="cb192-10"><a href="r-skills-review.html#cb192-10" tabindex="-1"></a></span>
-<span id="cb192-11"><a href="r-skills-review.html#cb192-11" tabindex="-1"></a><span class="co"># if you want to save the data:</span></span>
-<span id="cb192-12"><a href="r-skills-review.html#cb192-12" tabindex="-1"></a><span class="co">#write_csv(usgs, &#39;data/review-usgs.csv&#39;)</span></span></code></pre></div>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># pulls USGS daily ('dv') stream flow data for those two sites:</span></span>
+<span><span class="va">usgs</span> <span class="op">&lt;-</span> <span class="fu">dataRetrieval</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dataRetrieval/man/readNWISdv.html">readNWISdv</a></span><span class="op">(</span>siteNumbers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"06752260"</span>, <span class="st">"06752280"</span><span class="op">)</span>, <span class="co"># USGS site code for the Poudre River at the Lincoln Bridge and the ELC</span></span>
+<span>                                  parameterCd <span class="op">=</span> <span class="st">"00060"</span>, <span class="co"># USGS code for stream flow</span></span>
+<span>                                  startDate <span class="op">=</span> <span class="st">"2020-10-01"</span>, <span class="co"># YYYY-MM-DD formatting</span></span>
+<span>                                  endDate <span class="op">=</span> <span class="st">"2024-09-30"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># YYYY-MM-DD formatting</span></span>
+<span>  <span class="fu">rename</span><span class="op">(</span>q_cfs <span class="op">=</span> <span class="va">X_00060_00003</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># USGS code for stream flow units in cubic feet per second (CFS)</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Date <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">ymd</a></span><span class="op">(</span><span class="va">Date</span><span class="op">)</span>, <span class="co"># convert the Date column to "Date" formatting using the `lubridate` package</span></span>
+<span>         Site <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span><span class="va">site_no</span> <span class="op">==</span> <span class="st">"06752260"</span> <span class="op">~</span> <span class="st">"Lincoln"</span>, </span>
+<span>                          <span class="va">site_no</span> <span class="op">==</span> <span class="st">"06752280"</span> <span class="op">~</span> <span class="st">"Boxelder"</span><span class="op">)</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co"># if you want to save the data:</span></span>
+<span><span class="co">#write_csv(usgs, 'data/review-usgs.csv')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="get-cdwr-stream-flow-data" class="section level3 hasAnchor" number="10.1.2">
-<h3><span class="header-section-number">10.1.2</span> Get CDWR stream flow data<a href="r-skills-review.html#get-cdwr-stream-flow-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</section><section id="get-cdwr-stream-flow-data" class="level3" data-number="10.1.2"><h3 data-number="10.1.2" class="anchored" data-anchor-id="get-cdwr-stream-flow-data">
+<span class="header-section-number">10.1.2</span> Get CDWR stream flow data</h3>
 <p>Alas, CDWR doesn’t have an R packge to easily pull data from their API like USGS does, but they do have user-friendly instructions about how to develop <strong>API calls.</strong></p>
 <p><strong>Don’t stress if you have no clue what an API is</strong>! We will learn a lot more about them in later lessons, but this is good practice for our function writing and mapping skills.</p>
 <p>Using the <a href="https://dwr.state.co.us/Rest/GET/Help/SurfaceWaterTSDayGenerator">“URL Generator” steps outlined</a>, if we wanted data from 2020-2024 for the Canyon mouth site (site abbreviation = CLAFTCCO), it generates this URL to retrieve that data:</p>
 <p><a href="https://dwr.state.co.us/Rest/GET/api/v2/surfacewater/surfacewatertsday/?dateFormat=dateOnly&amp;fields=abbrev%2CmeasDate%2Cvalue%2CmeasUnit&amp;abbrev=CLAFTCCO&amp;min-measDate=10%2F01%2F2020&amp;max-measDate=09%2F30%2F2024" class="uri">https://dwr.state.co.us/Rest/GET/api/v2/surfacewater/surfacewatertsday/?dateFormat=dateOnly&amp;fields=abbrev%2CmeasDate%2Cvalue%2CmeasUnit&amp;abbrev=CLAFTCCO&amp;min-measDate=10%2F01%2F2020&amp;max-measDate=09%2F30%2F2024</a></p>
 <p>However, we want to pull this data for two different sites, and may want to change the year range of data. Therefore, writing a custom function to pull data for our various sites and time frames would be useful:</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="r-skills-review.html#cb193-1" tabindex="-1"></a><span class="co"># Function to retrieve data</span></span>
-<span id="cb193-2"><a href="r-skills-review.html#cb193-2" tabindex="-1"></a>pull_cdwr <span class="ot">&lt;-</span> <span class="cf">function</span>(site, start_year, end_year){</span>
-<span id="cb193-3"><a href="r-skills-review.html#cb193-3" tabindex="-1"></a>  </span>
-<span id="cb193-4"><a href="r-skills-review.html#cb193-4" tabindex="-1"></a>  raw_data <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">GET</span>(<span class="at">url =</span> <span class="fu">paste0</span>(<span class="st">&quot;https://dwr.state.co.us/Rest/GET/api/v2/surfacewater/surfacewatertsday/?dateFormat=dateOnly&amp;fields=abbrev%2CmeasDate%2Cvalue%2CmeasUnit&amp;abbrev=&quot;</span>,site,</span>
-<span id="cb193-5"><a href="r-skills-review.html#cb193-5" tabindex="-1"></a>                                     <span class="st">&quot;&amp;min-measDate=10%2F01%2F&quot;</span>, start_year,</span>
-<span id="cb193-6"><a href="r-skills-review.html#cb193-6" tabindex="-1"></a>                                     <span class="st">&quot;&amp;max-measDate=09%2F30%2F&quot;</span>, end_year))</span>
-<span id="cb193-7"><a href="r-skills-review.html#cb193-7" tabindex="-1"></a>  </span>
-<span id="cb193-8"><a href="r-skills-review.html#cb193-8" tabindex="-1"></a>  <span class="co"># extract the text data, returns a JSON object</span></span>
-<span id="cb193-9"><a href="r-skills-review.html#cb193-9" tabindex="-1"></a>  extracted_data <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">content</span>(raw_data, <span class="at">as =</span> <span class="st">&quot;text&quot;</span>, <span class="at">encoding =</span> <span class="st">&quot;UTF-8&quot;</span>) </span>
-<span id="cb193-10"><a href="r-skills-review.html#cb193-10" tabindex="-1"></a>  </span>
-<span id="cb193-11"><a href="r-skills-review.html#cb193-11" tabindex="-1"></a>  <span class="co"># parse text from JSON to data frame</span></span>
-<span id="cb193-12"><a href="r-skills-review.html#cb193-12" tabindex="-1"></a>  final_data <span class="ot">&lt;-</span> jsonlite<span class="sc">::</span><span class="fu">fromJSON</span>(extracted_data)[[<span class="st">&quot;ResultList&quot;</span>]]</span>
-<span id="cb193-13"><a href="r-skills-review.html#cb193-13" tabindex="-1"></a>  </span>
-<span id="cb193-14"><a href="r-skills-review.html#cb193-14" tabindex="-1"></a>  <span class="fu">return</span>(final_data)</span>
-<span id="cb193-15"><a href="r-skills-review.html#cb193-15" tabindex="-1"></a>  </span>
-<span id="cb193-16"><a href="r-skills-review.html#cb193-16" tabindex="-1"></a>}</span></code></pre></div>
-<p>Now, lets use that function to pull data for our two CDWR sites of interest, which we can iterate over with <code>map()</code>. Since this function returns data frames with the same structure an variable names, we can use <code>map_dfr()</code> to bind the two data frames into a single one:</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="r-skills-review.html#cb194-1" tabindex="-1"></a><span class="co"># run function for our two sites</span></span>
-<span id="cb194-2"><a href="r-skills-review.html#cb194-2" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;CLAFTCCO&quot;</span>,<span class="st">&quot;CLARIVCO&quot;</span>)</span>
-<span id="cb194-3"><a href="r-skills-review.html#cb194-3" tabindex="-1"></a></span>
-<span id="cb194-4"><a href="r-skills-review.html#cb194-4" tabindex="-1"></a>cdwr <span class="ot">&lt;-</span> sites <span class="sc">%&gt;%</span> </span>
-<span id="cb194-5"><a href="r-skills-review.html#cb194-5" tabindex="-1"></a>  <span class="fu">map_dfr</span>(<span class="sc">~</span> <span class="fu">pull_cdwr</span>(<span class="at">site =</span> .x, <span class="at">start_year =</span> <span class="dv">2020</span>, <span class="at">end_year =</span> <span class="dv">2024</span>))</span>
-<span id="cb194-6"><a href="r-skills-review.html#cb194-6" tabindex="-1"></a> </span>
-<span id="cb194-7"><a href="r-skills-review.html#cb194-7" tabindex="-1"></a><span class="co"># If you want to save this file</span></span>
-<span id="cb194-8"><a href="r-skills-review.html#cb194-8" tabindex="-1"></a><span class="co">#write_csv(cdwr, &#39;data/review-cdwr.csv&#39;) </span></span></code></pre></div>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Function to retrieve data</span></span>
+<span><span class="va">pull_cdwr</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">site</span>, <span class="va">start_year</span>, <span class="va">end_year</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">raw_data</span> <span class="op">&lt;-</span> <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span>url <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"https://dwr.state.co.us/Rest/GET/api/v2/surfacewater/surfacewatertsday/?dateFormat=dateOnly&amp;fields=abbrev%2CmeasDate%2Cvalue%2CmeasUnit&amp;abbrev="</span>,<span class="va">site</span>,</span>
+<span>                                     <span class="st">"&amp;min-measDate=10%2F01%2F"</span>, <span class="va">start_year</span>,</span>
+<span>                                     <span class="st">"&amp;max-measDate=09%2F30%2F"</span>, <span class="va">end_year</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># extract the text data, returns a JSON object</span></span>
+<span>  <span class="va">extracted_data</span> <span class="op">&lt;-</span> <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/content.html">content</a></span><span class="op">(</span><span class="va">raw_data</span>, as <span class="op">=</span> <span class="st">"text"</span>, encoding <span class="op">=</span> <span class="st">"UTF-8"</span><span class="op">)</span> </span>
+<span>  </span>
+<span>  <span class="co"># parse text from JSON to data frame</span></span>
+<span>  <span class="va">final_data</span> <span class="op">&lt;-</span> <span class="fu">jsonlite</span><span class="fu">::</span><span class="fu"><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON</a></span><span class="op">(</span><span class="va">extracted_data</span><span class="op">)</span><span class="op">[[</span><span class="st">"ResultList"</span><span class="op">]</span><span class="op">]</span></span>
+<span>  </span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">final_data</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="or-read-in-the-.csvs-we-already-generated-and-saved-for-you" class="section level3 hasAnchor" number="10.1.3">
-<h3><span class="header-section-number">10.1.3</span> OR, read in the .csv’s we already generated and saved for you:<a href="r-skills-review.html#or-read-in-the-.csvs-we-already-generated-and-saved-for-you" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now, lets use that function to pull data for our two CDWR sites of interest, which we can iterate over with <code>map()</code>. Since this function returns data frames with the same structure an variable names, we can use <code>map_dfr()</code> to bind the two data frames into a single one:</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># run function for our two sites</span></span>
+<span><span class="va">sites</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CLAFTCCO"</span>,<span class="st">"CLARIVCO"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cdwr</span> <span class="op">&lt;-</span> <span class="va">sites</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">map_dfr</span><span class="op">(</span><span class="op">~</span> <span class="fu">pull_cdwr</span><span class="op">(</span>site <span class="op">=</span> <span class="va">.x</span>, start_year <span class="op">=</span> <span class="fl">2020</span>, end_year <span class="op">=</span> <span class="fl">2024</span><span class="op">)</span><span class="op">)</span></span>
+<span> </span>
+<span><span class="co"># If you want to save this file</span></span>
+<span><span class="co">#write_csv(cdwr, 'data/review-cdwr.csv') </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="or-read-in-the-.csvs-we-already-generated-and-saved-for-you" class="level3" data-number="10.1.3"><h3 data-number="10.1.3" class="anchored" data-anchor-id="or-read-in-the-.csvs-we-already-generated-and-saved-for-you">
+<span class="header-section-number">10.1.3</span> OR, read in the .csv’s we already generated and saved for you:</h3>
 <p>Read in our two data sets. You will find that they provide the same information (daily streamflow from 2020-2024) but their variable names and structures are different:</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="r-skills-review.html#cb195-1" tabindex="-1"></a>usgs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;data/review-usgs.csv&#39;</span>)</span>
-<span id="cb195-2"><a href="r-skills-review.html#cb195-2" tabindex="-1"></a></span>
-<span id="cb195-3"><a href="r-skills-review.html#cb195-3" tabindex="-1"></a>cdwr <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;data/review-cdwr.csv&#39;</span>) </span></code></pre></div>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">usgs</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">'data/review-usgs.csv'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cdwr</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">'data/review-cdwr.csv'</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>When we look at these two datasets, we see they provide the same information (daily streamflow from 2020-2024) but their variable names and structures are different:</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="r-skills-review.html#cb196-1" tabindex="-1"></a><span class="fu">glimpse</span>(usgs)</span></code></pre></div>
-<pre><code>## Rows: 2,920
-## Columns: 6
-## $ agency_cd        &lt;chr&gt; &quot;USGS&quot;, &quot;USGS&quot;, &quot;USGS&quot;, &quot;USGS&quot;, &quot;USGS&quot;, &quot;USGS&quot;, &quot;USGS…
-## $ site_no          &lt;chr&gt; &quot;06752260&quot;, &quot;06752260&quot;, &quot;06752260&quot;, &quot;06752260&quot;, &quot;0675…
-## $ Date             &lt;date&gt; 2020-10-01, 2020-10-02, 2020-10-03, 2020-10-04, 2020…
-## $ q_cfs            &lt;dbl&gt; 6.64, 7.41, 7.04, 6.84, 6.79, 7.81, 6.49, 11.30, 20.2…
-## $ X_00060_00003_cd &lt;chr&gt; &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;…
-## $ Site             &lt;chr&gt; &quot;Lincoln&quot;, &quot;Lincoln&quot;, &quot;Lincoln&quot;, &quot;Lincoln&quot;, &quot;Lincoln&quot;…</code></pre>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="r-skills-review.html#cb198-1" tabindex="-1"></a><span class="fu">glimpse</span>(cdwr)</span></code></pre></div>
-<pre><code>## Rows: 2,877
-## Columns: 4
-## $ abbrev   &lt;chr&gt; &quot;CLAFTCCO&quot;, &quot;CLAFTCCO&quot;, &quot;CLAFTCCO&quot;, &quot;CLAFTCCO&quot;, &quot;CLAFTCCO&quot;, &quot;…
-## $ measDate &lt;date&gt; 2020-10-01, 2020-10-02, 2020-10-03, 2020-10-04, 2020-10-05, …
-## $ value    &lt;dbl&gt; 42, 36, 34, 32, 35, 30, 30, 34, 34, 27, 21, 29, 26, 43, 39, 4…
-## $ measUnit &lt;chr&gt; &quot;cfs&quot;, &quot;cfs&quot;, &quot;cfs&quot;, &quot;cfs&quot;, &quot;cfs&quot;, &quot;cfs&quot;, &quot;cfs&quot;, &quot;cfs&quot;, &quot;cfs&quot;…</code></pre>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">glimpse</span><span class="op">(</span><span class="va">usgs</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 2,920
+Columns: 6
+$ agency_cd        &lt;chr&gt; "USGS", "USGS", "USGS", "USGS", "USGS", "USGS", "USGS…
+$ site_no          &lt;chr&gt; "06752260", "06752260", "06752260", "06752260", "0675…
+$ Date             &lt;date&gt; 2020-10-01, 2020-10-02, 2020-10-03, 2020-10-04, 2020…
+$ q_cfs            &lt;dbl&gt; 6.64, 7.41, 7.04, 6.84, 6.79, 7.81, 6.49, 11.30, 20.2…
+$ X_00060_00003_cd &lt;chr&gt; "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A"…
+$ Site             &lt;chr&gt; "Lincoln", "Lincoln", "Lincoln", "Lincoln", "Lincoln"…</code></pre>
+</div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">glimpse</span><span class="op">(</span><span class="va">cdwr</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 2,877
+Columns: 4
+$ abbrev   &lt;chr&gt; "CLAFTCCO", "CLAFTCCO", "CLAFTCCO", "CLAFTCCO", "CLAFTCCO", "…
+$ measDate &lt;date&gt; 2020-10-01, 2020-10-02, 2020-10-03, 2020-10-04, 2020-10-05, …
+$ value    &lt;dbl&gt; 42, 36, 34, 32, 35, 30, 30, 34, 34, 27, 21, 29, 26, 43, 39, 4…
+$ measUnit &lt;chr&gt; "cfs", "cfs", "cfs", "cfs", "cfs", "cfs", "cfs", "cfs", "cfs"…</code></pre>
+</div>
+</div>
 <p>Therefore, in order to combine these two datasets from different sources we need to do some data cleaning.</p>
 <p>Lets first focus on cleaning the cdwr dataset to match the structure of the usgs one:</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="r-skills-review.html#cb200-1" tabindex="-1"></a>cdwr_clean <span class="ot">&lt;-</span> cdwr <span class="sc">%&gt;%</span></span>
-<span id="cb200-2"><a href="r-skills-review.html#cb200-2" tabindex="-1"></a>  <span class="co"># rename data and streamflow vars to match name of usgs vars</span></span>
-<span id="cb200-3"><a href="r-skills-review.html#cb200-3" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">q_cfs =</span> value) <span class="sc">%&gt;%</span></span>
-<span id="cb200-4"><a href="r-skills-review.html#cb200-4" tabindex="-1"></a>  <span class="co"># Add site and agency vars</span></span>
-<span id="cb200-5"><a href="r-skills-review.html#cb200-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> lubridate<span class="sc">::</span><span class="fu">ymd</span>(measDate),</span>
-<span id="cb200-6"><a href="r-skills-review.html#cb200-6" tabindex="-1"></a>         <span class="at">Site =</span> <span class="fu">if_else</span>(abbrev <span class="sc">==</span> <span class="st">&quot;CLAFTCCO&quot;</span>, <span class="st">&quot;Canyon&quot;</span>,</span>
-<span id="cb200-7"><a href="r-skills-review.html#cb200-7" tabindex="-1"></a>                       <span class="st">&quot;Timnath&quot;</span>),</span>
-<span id="cb200-8"><a href="r-skills-review.html#cb200-8" tabindex="-1"></a>         <span class="at">agency_cd =</span> <span class="st">&quot;CDWR&quot;</span>)</span></code></pre></div>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cdwr_clean</span> <span class="op">&lt;-</span> <span class="va">cdwr</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># rename data and streamflow vars to match name of usgs vars</span></span>
+<span>  <span class="fu">rename</span><span class="op">(</span>q_cfs <span class="op">=</span> <span class="va">value</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># Add site and agency vars</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>Date <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">ymd</a></span><span class="op">(</span><span class="va">measDate</span><span class="op">)</span>,</span>
+<span>         Site <span class="op">=</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">abbrev</span> <span class="op">==</span> <span class="st">"CLAFTCCO"</span>, <span class="st">"Canyon"</span>,</span>
+<span>                       <span class="st">"Timnath"</span><span class="op">)</span>,</span>
+<span>         agency_cd <span class="op">=</span> <span class="st">"CDWR"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Now, we can join our USGS and CDWR data frames together with <code>bind_rows()</code>.</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="r-skills-review.html#cb201-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(usgs,cdwr_clean)</span></code></pre></div>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span><span class="va">usgs</span>,<span class="va">cdwr_clean</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="exploratory-data-analysis-2" class="section level2 hasAnchor" number="10.2">
-<h2><span class="header-section-number">10.2</span> Exploratory Data Analysis<a href="r-skills-review.html#exploratory-data-analysis-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</section></section><section id="exploratory-data-analysis" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="exploratory-data-analysis">
+<span class="header-section-number">10.2</span> Exploratory Data Analysis</h2>
 <p>Let’s explore the data to see if there are any trends we can find visually. We can first visualize the data as time series:</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="r-skills-review.html#cb202-1" tabindex="-1"></a><span class="co"># Discharge (in CFS) through time displaying all four of our monitoring sites.</span></span>
-<span id="cb202-2"><a href="r-skills-review.html#cb202-2" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb202-3"><a href="r-skills-review.html#cb202-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> q_cfs, <span class="at">color =</span> Site)) <span class="sc">+</span></span>
-<span id="cb202-4"><a href="r-skills-review.html#cb202-4" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb202-5"><a href="r-skills-review.html#cb202-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb202-6"><a href="r-skills-review.html#cb202-6" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Date&quot;</span>) <span class="sc">+</span></span>
-<span id="cb202-7"><a href="r-skills-review.html#cb202-7" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Discharge (cfs)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb202-8"><a href="r-skills-review.html#cb202-8" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> Site, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-183-1.png" width="864" /></p>
-<p>Say we wanted to examine differences in annual stream flow. We can do this with a little data wrangling, using the <code>separate()</code> function to split our “Date” column into Year, Month, and Day columns.</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="r-skills-review.html#cb203-1" tabindex="-1"></a>data_annual <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
-<span id="cb203-2"><a href="r-skills-review.html#cb203-2" tabindex="-1"></a>  <span class="fu">separate</span>(Date, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;Year&quot;</span>, <span class="st">&quot;Month&quot;</span>, <span class="st">&quot;Day&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;-&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb203-3"><a href="r-skills-review.html#cb203-3" tabindex="-1"></a>  <span class="co"># create monthly avg for plots</span></span>
-<span id="cb203-4"><a href="r-skills-review.html#cb203-4" tabindex="-1"></a>  <span class="fu">group_by</span>(Site, Year, Month) <span class="sc">%&gt;%</span></span>
-<span id="cb203-5"><a href="r-skills-review.html#cb203-5" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">monthly_q =</span> <span class="fu">mean</span>(q_cfs))</span>
-<span id="cb203-6"><a href="r-skills-review.html#cb203-6" tabindex="-1"></a></span>
-<span id="cb203-7"><a href="r-skills-review.html#cb203-7" tabindex="-1"></a><span class="co"># visualize annual differences across the course of each year</span></span>
-<span id="cb203-8"><a href="r-skills-review.html#cb203-8" tabindex="-1"></a>data_annual <span class="sc">%&gt;%</span> </span>
-<span id="cb203-9"><a href="r-skills-review.html#cb203-9" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Month, <span class="at">y =</span> monthly_q, <span class="at">group =</span> Year)) <span class="sc">+</span></span>
-<span id="cb203-10"><a href="r-skills-review.html#cb203-10" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">colour =</span> Year))<span class="sc">+</span></span>
-<span id="cb203-11"><a href="r-skills-review.html#cb203-11" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Site) <span class="sc">+</span></span>
-<span id="cb203-12"><a href="r-skills-review.html#cb203-12" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-184-1.png" width="864" /></p>
-<p>Let’s look at the daily difference in discharge between the mouth of the Cache la Poudre River (Canyon Mouth site) and each of the sites downstream. This will require some more wrangling of our data.</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="r-skills-review.html#cb204-1" tabindex="-1"></a>dif_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb204-2"><a href="r-skills-review.html#cb204-2" tabindex="-1"></a>  <span class="co"># select vars of interest</span></span>
-<span id="cb204-3"><a href="r-skills-review.html#cb204-3" tabindex="-1"></a>  <span class="fu">select</span>(Site, Date, q_cfs) <span class="sc">%&gt;%</span></span>
-<span id="cb204-4"><a href="r-skills-review.html#cb204-4" tabindex="-1"></a>  <span class="co"># pivot wider so each site is its own column</span></span>
-<span id="cb204-5"><a href="r-skills-review.html#cb204-5" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Site, <span class="at">values_from =</span> q_cfs) <span class="sc">%&gt;%</span></span>
-<span id="cb204-6"><a href="r-skills-review.html#cb204-6" tabindex="-1"></a>  <span class="co"># for each downstream site, create a new column that is the difference from the Canyon mouth site</span></span>
-<span id="cb204-7"><a href="r-skills-review.html#cb204-7" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">c</span>(<span class="st">&quot;Boxelder&quot;</span>, <span class="st">&quot;Lincoln&quot;</span>, <span class="st">&quot;Timnath&quot;</span>), <span class="at">.funs =</span> <span class="fu">list</span>(<span class="at">dif =</span> <span class="sc">~</span> (Canyon <span class="sc">-</span> .))) <span class="sc">%&gt;%</span></span>
-<span id="cb204-8"><a href="r-skills-review.html#cb204-8" tabindex="-1"></a>  <span class="co"># then pivot these new columns (i.e., NOT the date and canyon columns) longer again</span></span>
-<span id="cb204-9"><a href="r-skills-review.html#cb204-9" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span><span class="fu">c</span>(Canyon, Date)) <span class="sc">%&gt;%</span> </span>
-<span id="cb204-10"><a href="r-skills-review.html#cb204-10" tabindex="-1"></a>  <span class="co"># keep just the &#39;dif&#39; values</span></span>
-<span id="cb204-11"><a href="r-skills-review.html#cb204-11" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(name, <span class="st">&quot;_dif&quot;</span>))</span>
-<span id="cb204-12"><a href="r-skills-review.html#cb204-12" tabindex="-1"></a></span>
-<span id="cb204-13"><a href="r-skills-review.html#cb204-13" tabindex="-1"></a></span>
-<span id="cb204-14"><a href="r-skills-review.html#cb204-14" tabindex="-1"></a>dif_data <span class="sc">%&gt;%</span> </span>
-<span id="cb204-15"><a href="r-skills-review.html#cb204-15" tabindex="-1"></a>  <span class="co"># factor the site variable in order from distance to the canyon mouth for plotting purposes</span></span>
-<span id="cb204-16"><a href="r-skills-review.html#cb204-16" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">fct</span>(name, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Lincoln_dif&quot;</span>, <span class="st">&quot;Boxelder_dif&quot;</span>, <span class="st">&quot;Timnath_dif&quot;</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb204-17"><a href="r-skills-review.html#cb204-17" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb204-18"><a href="r-skills-review.html#cb204-18" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> value, <span class="at">color =</span> name)) <span class="sc">+</span></span>
-<span id="cb204-19"><a href="r-skills-review.html#cb204-19" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb204-20"><a href="r-skills-review.html#cb204-20" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="st">&quot;name&quot;</span>)<span class="sc">+</span></span>
-<span id="cb204-21"><a href="r-skills-review.html#cb204-21" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;Streamflow Difference from Poudre Mouth&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-185-1.png" width="864" /></p>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Discharge (in CFS) through time displaying all four of our monitoring sites.</span></span>
+<span><span class="va">data</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Date</span>, y <span class="op">=</span> <span class="va">q_cfs</span>, color <span class="op">=</span> <span class="va">Site</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Date"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Discharge (cfs)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">facet_wrap</span><span class="op">(</span> <span class="op">~</span> <span class="va">Site</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="r-skills-review_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="864"></p>
 </div>
-<div id="data-analysis" class="section level2 hasAnchor" number="10.3">
-<h2><span class="header-section-number">10.3</span> Data Analysis<a href="r-skills-review.html#data-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<p>Say we wanted to examine differences in annual stream flow. We can do this with a little data wrangling, using the <code>separate()</code> function to split our “Date” column into Year, Month, and Day columns.</p>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data_annual</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">separate</span><span class="op">(</span><span class="va">Date</span>, into <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Year"</span>, <span class="st">"Month"</span>, <span class="st">"Day"</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">"-"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="co"># create monthly avg for plots</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Site</span>, <span class="va">Year</span>, <span class="va">Month</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>monthly_q <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">q_cfs</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># visualize annual differences across the course of each year</span></span>
+<span><span class="va">data_annual</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Month</span>, y <span class="op">=</span> <span class="va">monthly_q</span>, group <span class="op">=</span> <span class="va">Year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>colour <span class="op">=</span> <span class="va">Year</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">facet_wrap</span><span class="op">(</span><span class="op">~</span><span class="va">Site</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="r-skills-review_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="864"></p>
+</div>
+</div>
+<p>Let’s look at the daily difference in discharge between the mouth of the Cache la Poudre River (Canyon Mouth site) and each of the sites downstream. This will require some more wrangling of our data.</p>
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dif_data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># select vars of interest</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">Site</span>, <span class="va">Date</span>, <span class="va">q_cfs</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># pivot wider so each site is its own column</span></span>
+<span>  <span class="fu">pivot_wider</span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">Site</span>, values_from <span class="op">=</span> <span class="va">q_cfs</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># for each downstream site, create a new column that is the difference from the Canyon mouth site</span></span>
+<span>  <span class="fu">mutate_at</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Boxelder"</span>, <span class="st">"Lincoln"</span>, <span class="st">"Timnath"</span><span class="op">)</span>, .funs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>dif <span class="op">=</span> <span class="op">~</span> <span class="op">(</span><span class="va">Canyon</span> <span class="op">-</span> <span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># then pivot these new columns (i.e., NOT the date and canyon columns) longer again</span></span>
+<span>  <span class="fu">pivot_longer</span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">Canyon</span>, <span class="va">Date</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="co"># keep just the 'dif' values</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu">str_detect</span><span class="op">(</span><span class="va">name</span>, <span class="st">"_dif"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="va">dif_data</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="co"># factor the site variable in order from distance to the canyon mouth for plotting purposes</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>name <span class="op">=</span> <span class="fu">fct</span><span class="op">(</span><span class="va">name</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Lincoln_dif"</span>, <span class="st">"Boxelder_dif"</span>, <span class="st">"Timnath_dif"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_line</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Date</span>, y <span class="op">=</span> <span class="va">value</span>, color <span class="op">=</span> <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">facet_wrap</span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu">ylab</span><span class="op">(</span><span class="st">"Streamflow Difference from Poudre Mouth"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="r-skills-review_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="864"></p>
+</div>
+</div>
+</section><section id="data-analysis" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="data-analysis">
+<span class="header-section-number">10.3</span> Data Analysis</h2>
 <p>Through our exploratory data analysis, it <em>appears</em> that stream flow decreases as we move through town. But, how can we test if these flows are significantly different, and identify the magnitude/direction of these differences?</p>
 <p>Because we will be comparing daily stream flow across multiple sites, we can use an ANOVA test to assess this research question. We will set our alpha at 0.05.</p>
-<div id="testing-for-normal-distribution" class="section level3 hasAnchor" number="10.3.1">
-<h3><span class="header-section-number">10.3.1</span> Testing for normal distribution<a href="r-skills-review.html#testing-for-normal-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<section id="testing-for-normal-distribution" class="level3" data-number="10.3.1"><h3 data-number="10.3.1" class="anchored" data-anchor-id="testing-for-normal-distribution">
+<span class="header-section-number">10.3.1</span> Testing for normal distribution</h3>
 <p>ANOVA assumes normal distribution within each group - we can visualize each site’s data with a histogram:</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="r-skills-review.html#cb205-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data, <span class="fu">aes</span>(<span class="at">x =</span> q_cfs)) <span class="sc">+</span></span>
-<span id="cb205-2"><a href="r-skills-review.html#cb205-2" tabindex="-1"></a>         <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
-<span id="cb205-3"><a href="r-skills-review.html#cb205-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span> (<span class="sc">~</span>Site)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-186-1.png" width="864" /></p>
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">q_cfs</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>         <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">facet_wrap</span> <span class="op">(</span><span class="op">~</span><span class="va">Site</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="r-skills-review_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="864"></p>
+</div>
+</div>
 <p>… and use the <code>shapiro_test()</code> function along with <code>group_by()</code> to statistically test for normality within each site’s daily stream flow data:</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="r-skills-review.html#cb206-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb206-2"><a href="r-skills-review.html#cb206-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Site) <span class="sc">%&gt;%</span></span>
-<span id="cb206-3"><a href="r-skills-review.html#cb206-3" tabindex="-1"></a>  <span class="fu">shapiro_test</span>(q_cfs)</span></code></pre></div>
-<pre><code>## # A tibble: 4 × 4
-##   Site     variable statistic        p
-##   &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;
-## 1 Boxelder q_cfs        0.474 3.29e-54
-## 2 Canyon   q_cfs        0.638 4.78e-48
-## 3 Lincoln  q_cfs        0.466 1.83e-54
-## 4 Timnath  q_cfs        0.403 8.79e-56</code></pre>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Site</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">shapiro_test</span><span class="op">(</span><span class="va">q_cfs</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 4
+  Site     variable statistic        p
+  &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+1 Boxelder q_cfs        0.474 3.29e-54
+2 Canyon   q_cfs        0.638 4.78e-48
+3 Lincoln  q_cfs        0.466 1.83e-54
+4 Timnath  q_cfs        0.403 8.79e-56</code></pre>
+</div>
+</div>
 <p>Since the null hypothesis of the Shapiro-Wilk test is that the data <strong>is</strong> normally distributed, these results tell us all groups do not fit a normal distribution for daily stream flow. It is also quite clear from their histograms that they are not normally distributed.</p>
-</div>
-<div id="testing-for-equal-variance" class="section level3 hasAnchor" number="10.3.2">
-<h3><span class="header-section-number">10.3.2</span> Testing for equal variance<a href="r-skills-review.html#testing-for-equal-variance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</section><section id="testing-for-equal-variance" class="level3" data-number="10.3.2"><h3 data-number="10.3.2" class="anchored" data-anchor-id="testing-for-equal-variance">
+<span class="header-section-number">10.3.2</span> Testing for equal variance</h3>
 <p>To test for equal variances among more than two groups, it is easiest to use a Levene’s Test like we have done in the past:</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="r-skills-review.html#cb208-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb208-2"><a href="r-skills-review.html#cb208-2" tabindex="-1"></a>  <span class="fu">levene_test</span>(q_cfs <span class="sc">~</span> Site)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 4
-##     df1   df2 statistic        p
-##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1     3  5793      67.1 1.26e-42</code></pre>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">levene_test</span><span class="op">(</span><span class="va">q_cfs</span> <span class="op">~</span> <span class="va">Site</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+    df1   df2 statistic        p
+  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1     3  5793      67.1 1.26e-42</code></pre>
+</div>
+</div>
 <p>Given this small p-value, we see that the variances of our groups are <em>not</em> equal.</p>
-</div>
-<div id="anova---kruskal-wallis" class="section level3 hasAnchor" number="10.3.3">
-<h3><span class="header-section-number">10.3.3</span> ANOVA - Kruskal-Wallis<a href="r-skills-review.html#anova---kruskal-wallis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</section><section id="anova---kruskal-wallis" class="level3" data-number="10.3.3"><h3 data-number="10.3.3" class="anchored" data-anchor-id="anova---kruskal-wallis">
+<span class="header-section-number">10.3.3</span> ANOVA - Kruskal-Wallis</h3>
 <p>After checking our assumptions we need to perform a non-parametric ANOVA test, the Kruskal-Wallis test.</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="r-skills-review.html#cb210-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb210-2"><a href="r-skills-review.html#cb210-2" tabindex="-1"></a>  <span class="fu">kruskal_test</span>(q_cfs <span class="sc">~</span> Site)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 6
-##   .y.       n statistic    df         p method        
-## * &lt;chr&gt; &lt;int&gt;     &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;         
-## 1 q_cfs  5797     1081.     3 4.20e-234 Kruskal-Wallis</code></pre>
-<p>Our results here are highly significant (extremely small p-value), meaning that at least one of our sites has a stream flow significantly different from the others.</p>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kruskal_test</span><span class="op">(</span><span class="va">q_cfs</span> <span class="op">~</span> <span class="va">Site</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 6
+  .y.       n statistic    df         p method        
+* &lt;chr&gt; &lt;int&gt;     &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;         
+1 q_cfs  5797     1081.     3 4.20e-234 Kruskal-Wallis</code></pre>
 </div>
-<div id="anova-post-hoc-analysis" class="section level3 hasAnchor" number="10.3.4">
-<h3><span class="header-section-number">10.3.4</span> ANOVA post-hoc analysis<a href="r-skills-review.html#anova-post-hoc-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<p>Our results here are highly significant (extremely small p-value), meaning that at least one of our sites has a stream flow significantly different from the others.</p>
+</section><section id="anova-post-hoc-analysis" class="level3" data-number="10.3.4"><h3 data-number="10.3.4" class="anchored" data-anchor-id="anova-post-hoc-analysis">
+<span class="header-section-number">10.3.4</span> ANOVA post-hoc analysis</h3>
 <p>Since we used the non-parametric Kruskal-Wallace test, we can use the associated Dunn’s test to test across our sites for significant differences in mean stream flow:</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="r-skills-review.html#cb212-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb212-2"><a href="r-skills-review.html#cb212-2" tabindex="-1"></a>  <span class="fu">dunn_test</span>(q_cfs <span class="sc">~</span> Site, <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 13
-##   .y.   group1   group2     n1    n2 estimate estimate1 estimate2 statistic
-## * &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt; &lt;int&gt;    &lt;dbl&gt; &lt;dbl[1d]&gt; &lt;dbl[1d]&gt;     &lt;dbl&gt;
-## 1 q_cfs Boxelder Canyon   1460  1460    1986.     2007.     3993.     32.1 
-## 2 q_cfs Boxelder Lincoln  1460  1460     615.     2007.     2622.      9.93
-## 3 q_cfs Boxelder Timnath  1460  1417     970.     2007.     2977.     15.5 
-## 4 q_cfs Canyon   Lincoln  1460  1460   -1371.     3993.     2622.    -22.1 
-## 5 q_cfs Canyon   Timnath  1460  1417   -1016.     3993.     2977.    -16.3 
-## 6 q_cfs Lincoln  Timnath  1460  1417     355.     2622.     2977.      5.69
-## # ℹ 4 more variables: p &lt;dbl&gt;, method &lt;chr&gt;, p.adj &lt;dbl&gt;, p.adj.signif &lt;chr&gt;</code></pre>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">dunn_test</span><span class="op">(</span><span class="va">q_cfs</span> <span class="op">~</span> <span class="va">Site</span>, detailed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 13
+  .y.   group1   group2     n1    n2 estimate estimate1 estimate2 statistic
+* &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt; &lt;int&gt;    &lt;dbl&gt; &lt;dbl[1d]&gt; &lt;dbl[1d]&gt;     &lt;dbl&gt;
+1 q_cfs Boxelder Canyon   1460  1460    1986.     2007.     3993.     32.1 
+2 q_cfs Boxelder Lincoln  1460  1460     615.     2007.     2622.      9.93
+3 q_cfs Boxelder Timnath  1460  1417     970.     2007.     2977.     15.5 
+4 q_cfs Canyon   Lincoln  1460  1460   -1371.     3993.     2622.    -22.1 
+5 q_cfs Canyon   Timnath  1460  1417   -1016.     3993.     2977.    -16.3 
+6 q_cfs Lincoln  Timnath  1460  1417     355.     2622.     2977.      5.69
+# ℹ 4 more variables: p &lt;dbl&gt;, method &lt;chr&gt;, p.adj &lt;dbl&gt;, p.adj.signif &lt;chr&gt;</code></pre>
+</div>
+</div>
 <p>The results of our Dunn test signify that <em>all</em> of our sites are significantly different from each other in terms of mean streamflow.</p>
 <p>THOUGHT EXPERIMENT 1: Based on our results, which of our two gages have the greatest difference in mean daily stream flow?</p>
 <p>THOUGHT EXPERIMENT 2: Is this an appropriate test to perform on stream flow data? Why or why not?</p>
 
-</div>
-</div>
-</div>
-            </section>
 
-          </div>
-        </div>
-      </div>
-<a href="power.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
-    </div>
-  </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-  "sharing": {
-    "github": false,
-    "facebook": true,
-    "twitter": true,
-    "linkedin": false,
-    "weibo": false,
-    "instapaper": false,
-    "vk": false,
-    "whatsapp": false,
-    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-  },
-  "fontsettings": {
-    "theme": "white",
-    "family": "sans",
-    "size": 2
-  },
-  "edit": {
-    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/09-review.Rmd",
-    "text": "Edit"
-  },
-  "history": {
-    "link": null,
-    "text": null
-  },
-  "view": {
-    "link": null,
-    "text": null
-  },
-  "download": null,
-  "search": {
-    "engine": "fuse",
-    "options": null
-  },
-  "toc": {
-    "collapse": "section"
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
   }
 });
-});
-</script>
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./power.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Power</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
-</body>
 
-</html>
+
+</body></html>

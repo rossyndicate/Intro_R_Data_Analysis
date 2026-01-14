@@ -1,0 +1,37 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Introduction to Environmental Data Science"
+  author: "Caitlin Mothes, PhD and Katie Willi"
+  date: "1/13/2026"
+  chapters:
+    - index.qmd
+    - setup-instructions.qmd
+    - introduction-to-r-rstudio-and-r-markdown.qmd
+    - exploratory-data-analysis.qmd
+    - data-visualization-in-r.qmd
+    - data-analysis-t-test-and-anova.qmd
+    - correlation-and-simple-linear-regression.qmd
+    - multiple-linear-regression-mlr.qmd
+    - power.qmd
+    - r-skills-review.qmd
+
+  sidebar:
+    style: docked
+    background: light
+
+  repo-url: https://github.com/rossyndicate/ESS523a_Intro_R_Data_Analysis
+  repo-actions: [edit, issue]
+
+bibliography: book.bib
+
+format:
+  html:
+    theme: default
+    css: style.css
+    code-link: true
+    code-fold: false
+    toc: true
+    number-sections: true

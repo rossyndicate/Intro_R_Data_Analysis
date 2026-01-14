@@ -1,95 +1,35 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
-<head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 9 Power | Introduction to Environmental Data Science</title>
-  <meta name="description" content="This site hosts the first half of the course content for ESS 523A at Colorado State University." />
-  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
-
-  <meta property="og:title" content=" 9 Power | Introduction to Environmental Data Science" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:description" content="This site hosts the first half of the course content for ESS 523A at Colorado State University." />
-  <meta name="github-repo" content="rossyndicate/Intro_R_Data_Analysis" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 9 Power | Introduction to Environmental Data Science" />
-  
-  <meta name="twitter:description" content="This site hosts the first half of the course content for ESS 523A at Colorado State University." />
-  
-
-<meta name="author" content="Caitlin Mothes, PhD and Katie Willi" />
-
-
-<meta name="date" content="2025-11-14" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="multiple-linear-regression-mlr.html"/>
-<link rel="next" href="r-skills-review.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.11.0/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/proj4-2.6.2/proj4.min.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script>
-<script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
-<script src="libs/HomeButton-0.0.1/home-button.js"></script>
-<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
-<link href="libs/Poudre_River_Monitoring-CSS-0.0.1/Poudre_River_Monitoring_home-button.css" rel="stylesheet" />
-<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
-<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
-<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-
-
-<style type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Introduction to Environmental Data Science - 9&nbsp; Power</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -142,176 +82,158 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./r-skills-review.html" rel="next">
+<link href="./multiple-linear-regression-mlr.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><link rel="stylesheet" href="style.css">
 </head>
+<body class="nav-sidebar docked">
 
-<body>
-
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">Introduction to Data Analysis in R</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome!</a>
-<ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#set-up-instructions"><i class="fa fa-check"></i>Set up Instructions</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#navigating-this-site"><i class="fa fa-check"></i>Navigating this site</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#goals"><i class="fa fa-check"></i>Goals</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#approach-and-expectations"><i class="fa fa-check"></i>Approach and Expectations</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#class-schedule"><i class="fa fa-check"></i>Class Schedule</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#additional-introductory-resources"><i class="fa fa-check"></i>Additional introductory resources</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="setup-instructions.html"><a href="setup-instructions.html"><i class="fa fa-check"></i><b>2</b> Setup Instructions</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="setup-instructions.html"><a href="setup-instructions.html#install-r-and-rstudio"><i class="fa fa-check"></i><b>2.1</b> Install R and RStudio</a></li>
-<li class="chapter" data-level="2.2" data-path="setup-instructions.html"><a href="setup-instructions.html#package-installation"><i class="fa fa-check"></i><b>2.2</b> Package Installation</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html"><i class="fa fa-check"></i><b>3</b> Introduction to R, RStudio and R Markdown</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#getting-to-know-rstudio"><i class="fa fa-check"></i><b>3.1</b> Getting to know RStudio</a></li>
-<li class="chapter" data-level="3.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#r-projects"><i class="fa fa-check"></i><b>3.2</b> R Projects</a></li>
-<li class="chapter" data-level="3.3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#write-a-set-up-script"><i class="fa fa-check"></i><b>3.3</b> Write a set-up script</a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#functions"><i class="fa fa-check"></i><b>3.3.1</b> Functions</a></li>
-<li class="chapter" data-level="3.3.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#packages"><i class="fa fa-check"></i><b>3.3.2</b> Packages</a></li>
-</ul></li>
-<li class="chapter" data-level="3.4" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#r-markdown"><i class="fa fa-check"></i><b>3.4</b> R Markdown</a>
-<ul>
-<li class="chapter" data-level="3.4.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#what-about-quarto"><i class="fa fa-check"></i><b>3.4.1</b> What About Quarto?</a></li>
-<li class="chapter" data-level="3.4.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#getting-started-with-r-markdown"><i class="fa fa-check"></i><b>3.4.2</b> Getting started with R Markdown</a></li>
-</ul></li>
-<li class="chapter" data-level="3.5" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#explore"><i class="fa fa-check"></i><b>3.5</b> Explore</a>
-<ul>
-<li class="chapter" data-level="3.5.1" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#the-penguins-data"><i class="fa fa-check"></i><b>3.5.1</b> The <code>penguins</code> data</a></li>
-<li class="chapter" data-level="3.5.2" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#data-types"><i class="fa fa-check"></i><b>3.5.2</b> Data Types</a></li>
-<li class="chapter" data-level="3.5.3" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#indexing"><i class="fa fa-check"></i><b>3.5.3</b> Indexing</a></li>
-<li class="chapter" data-level="3.5.4" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#the-dplyr-package"><i class="fa fa-check"></i><b>3.5.4</b> The {dplyr} package</a></li>
-</ul></li>
-<li class="chapter" data-level="3.6" data-path="introduction-to-r-rstudio-and-r-markdown.html"><a href="introduction-to-r-rstudio-and-r-markdown.html#read-and-write-data"><i class="fa fa-check"></i><b>3.6</b> Read and Write Data</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>4</b> Exploratory Data Analysis</a>
-<ul>
-<li class="chapter" data-level="4.0.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-penguins-data-1"><i class="fa fa-check"></i><b>4.0.1</b> The <code>penguins</code> data</a></li>
-<li class="chapter" data-level="4.0.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>4.0.2</b> Exploratory Data Analysis</a></li>
-<li class="chapter" data-level="4.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-wrangling"><i class="fa fa-check"></i><b>4.1</b> Data wrangling</a>
-<ul>
-<li class="chapter" data-level="4.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-dplyr-package-1"><i class="fa fa-check"></i><b>4.1.1</b> The <code>dplyr</code> package</a></li>
-</ul></li>
-<li class="chapter" data-level="4.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-2"><i class="fa fa-check"></i><b>4.2</b> Exercises</a></li>
-<li class="chapter" data-level="4.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#visualization"><i class="fa fa-check"></i><b>4.3</b> Visualization</a></li>
-<li class="chapter" data-level="4.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-3"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html"><i class="fa fa-check"></i><b>5</b> Data Visualization in R</a>
-<ul>
-<li class="chapter" data-level="5.0.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#data-preparation"><i class="fa fa-check"></i><b>5.0.1</b> Data Preparation</a></li>
-<li class="chapter" data-level="5.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#publication-ready-figures-with-ggplot2"><i class="fa fa-check"></i><b>5.1</b> Publication Ready Figures with <code>ggplot2</code></a>
-<ul>
-<li class="chapter" data-level="5.1.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#general-appearance"><i class="fa fa-check"></i><b>5.1.1</b> General Appearance</a></li>
-<li class="chapter" data-level="5.1.2" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#color-size-and-legends"><i class="fa fa-check"></i><b>5.1.2</b> Color, Size and Legends</a></li>
-<li class="chapter" data-level="5.1.3" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#annotation"><i class="fa fa-check"></i><b>5.1.3</b> Annotation</a></li>
-<li class="chapter" data-level="5.1.4" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#finalize-and-save"><i class="fa fa-check"></i><b>5.1.4</b> Finalize and save</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#the-assignment"><i class="fa fa-check"></i><b>5.2</b> The Assignment</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="data-visualization-in-r.html"><a href="data-visualization-in-r.html#acknowledgements-and-resources"><i class="fa fa-check"></i><b>5.2.1</b> Acknowledgements and Resources</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html"><i class="fa fa-check"></i><b>6</b> Data Analysis: T-test and ANOVA</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#explore-the-dataset"><i class="fa fa-check"></i><b>6.1</b> Explore the dataset</a></li>
-<li class="chapter" data-level="6.2" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#t-test---compare-two-means"><i class="fa fa-check"></i><b>6.2</b> t-test - Compare two means</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#assumptions"><i class="fa fa-check"></i><b>6.2.1</b> Assumptions</a></li>
-</ul></li>
-<li class="chapter" data-level="6.3" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#anova-test---compare-more-than-two-means"><i class="fa fa-check"></i><b>6.3</b> ANOVA test - compare more than two means</a>
-<ul>
-<li class="chapter" data-level="6.3.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#assumptions-1"><i class="fa fa-check"></i><b>6.3.1</b> Assumptions</a></li>
-</ul></li>
-<li class="chapter" data-level="6.4" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#exercises-4"><i class="fa fa-check"></i><b>6.4</b> Exercises</a>
-<ul>
-<li class="chapter" data-level="6.4.1" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#acknowledgements"><i class="fa fa-check"></i><b>6.4.1</b> Acknowledgements</a></li>
-<li class="chapter" data-level="6.4.2" data-path="data-analysis-t-test-and-anova.html"><a href="data-analysis-t-test-and-anova.html#citations"><i class="fa fa-check"></i><b>6.4.2</b> Citations</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html"><i class="fa fa-check"></i><b>7</b> Correlation and Simple Linear Regression</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#correlation-with-salamanders"><i class="fa fa-check"></i><b>7.1</b> Correlation with salamanders</a></li>
-<li class="chapter" data-level="7.2" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#simple-linear-regression-with-crabs"><i class="fa fa-check"></i><b>7.2</b> Simple linear regression with crabs</a></li>
-<li class="chapter" data-level="7.3" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#exercises-5"><i class="fa fa-check"></i><b>7.3</b> Exercises</a></li>
-<li class="chapter" data-level="7.4" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html#citations-1"><i class="fa fa-check"></i><b>7.4</b> Citations</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html"><i class="fa fa-check"></i><b>8</b> Multiple Linear Regression (MLR)</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#mlr-in-r"><i class="fa fa-check"></i><b>8.1</b> MLR in R</a>
-<ul>
-<li class="chapter" data-level="8.1.1" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#predicting-crab-size-1"><i class="fa fa-check"></i><b>8.1.1</b> Predicting crab size</a></li>
-<li class="chapter" data-level="8.1.2" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#mlr-assumptions"><i class="fa fa-check"></i><b>8.1.2</b> MLR Assumptions</a></li>
-</ul></li>
-<li class="chapter" data-level="8.2" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#exercises-6"><i class="fa fa-check"></i><b>8.2</b> Exercises</a></li>
-<li class="chapter" data-level="8.3" data-path="multiple-linear-regression-mlr.html"><a href="multiple-linear-regression-mlr.html#citations-2"><i class="fa fa-check"></i><b>8.3</b> Citations</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="power.html"><a href="power.html"><i class="fa fa-check"></i><b>9</b> Power</a>
-<ul>
-<li class="chapter" data-level="9.0.1" data-path="power.html"><a href="power.html#power-in-action"><i class="fa fa-check"></i><b>9.0.1</b> Power in action</a></li>
-<li class="chapter" data-level="9.0.2" data-path="power.html"><a href="power.html#note-about-random-selection"><i class="fa fa-check"></i><b>9.0.2</b> Note about random selection</a></li>
-<li class="chapter" data-level="9.1" data-path="power.html"><a href="power.html#assignment"><i class="fa fa-check"></i><b>9.1</b> Assignment</a></li>
-<li class="chapter" data-level="9.2" data-path="power.html"><a href="power.html#citations-3"><i class="fa fa-check"></i><b>9.2</b> Citations</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="r-skills-review.html"><a href="r-skills-review.html"><i class="fa fa-check"></i><b>10</b> R Skills Review</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="r-skills-review.html"><a href="r-skills-review.html#tidying-datasets"><i class="fa fa-check"></i><b>10.1</b> Tidying datasets</a>
-<ul>
-<li class="chapter" data-level="10.1.1" data-path="r-skills-review.html"><a href="r-skills-review.html#get-usgs-stream-flow-data"><i class="fa fa-check"></i><b>10.1.1</b> Get USGS stream flow data</a></li>
-<li class="chapter" data-level="10.1.2" data-path="r-skills-review.html"><a href="r-skills-review.html#get-cdwr-stream-flow-data"><i class="fa fa-check"></i><b>10.1.2</b> Get CDWR stream flow data</a></li>
-<li class="chapter" data-level="10.1.3" data-path="r-skills-review.html"><a href="r-skills-review.html#or-read-in-the-.csvs-we-already-generated-and-saved-for-you"><i class="fa fa-check"></i><b>10.1.3</b> OR, read in the .csv’s we already generated and saved for you:</a></li>
-</ul></li>
-<li class="chapter" data-level="10.2" data-path="r-skills-review.html"><a href="r-skills-review.html#exploratory-data-analysis-2"><i class="fa fa-check"></i><b>10.2</b> Exploratory Data Analysis</a></li>
-<li class="chapter" data-level="10.3" data-path="r-skills-review.html"><a href="r-skills-review.html#data-analysis"><i class="fa fa-check"></i><b>10.3</b> Data Analysis</a>
-<ul>
-<li class="chapter" data-level="10.3.1" data-path="r-skills-review.html"><a href="r-skills-review.html#testing-for-normal-distribution"><i class="fa fa-check"></i><b>10.3.1</b> Testing for normal distribution</a></li>
-<li class="chapter" data-level="10.3.2" data-path="r-skills-review.html"><a href="r-skills-review.html#testing-for-equal-variance"><i class="fa fa-check"></i><b>10.3.2</b> Testing for equal variance</a></li>
-<li class="chapter" data-level="10.3.3" data-path="r-skills-review.html"><a href="r-skills-review.html#anova---kruskal-wallis"><i class="fa fa-check"></i><b>10.3.3</b> ANOVA - Kruskal-Wallis</a></li>
-<li class="chapter" data-level="10.3.4" data-path="r-skills-review.html"><a href="r-skills-review.html#anova-post-hoc-analysis"><i class="fa fa-check"></i><b>10.3.4</b> ANOVA post-hoc analysis</a></li>
-</ul></li>
-</ul></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Power</span>
+</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
     </div>
-
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Environmental Data Science</a>
-          </h1>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to Environmental Data Science</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/rossyndicate/ESS523a_Intro_R_Data_Analysis" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
         </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Environmental Data Science</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./setup-instructions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Setup Instructions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduction-to-r-rstudio-and-r-markdown.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to R, RStudio and R Markdown</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exploratory-data-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-visualization-in-r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Visualization in R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-analysis-t-test-and-anova.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Analysis: T-test and ANOVA</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlation-and-simple-linear-regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Correlation and Simple Linear Regression</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multiple-linear-regression-mlr.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multiple Linear Regression (MLR)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./power.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Power</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./r-skills-review.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">R Skills Review</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#power-in-action" id="toc-power-in-action" class="nav-link active" data-scroll-target="#power-in-action"><span class="toc-section-number">9.0.1</span>  Power in action</a></li>
+  <li><a href="#note-about-random-selection" id="toc-note-about-random-selection" class="nav-link" data-scroll-target="#note-about-random-selection"><span class="toc-section-number">9.0.2</span>  Note about random selection</a></li>
+  <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment"><span class="toc-section-number">9.1</span>  Assignment</a></li>
+  <li><a href="#citations" id="toc-citations" class="nav-link" data-scroll-target="#citations"><span class="toc-section-number">9.2</span>  Citations</a></li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rossyndicate/ESS523a_Intro_R_Data_Analysis/edit/main/power.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/rossyndicate/ESS523a_Intro_R_Data_Analysis/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">
+<span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Power</span>
+</h1>
+</div>
 
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
 
-            <section class="normal" id="section-">
-<div id="power" class="section level1 hasAnchor" number="9">
-<h1><span class="header-section-number"> 9</span> Power<a href="power.html#power" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Time to set up our session. There are no new packages this week, but double check you have <code>tidyverse</code>, <code>lterdatasampler</code>, <code>palmerpenguins</code> and <code>rstatix</code> in your “setup.R” script.</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="power.html#cb177-1" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;setup.R&quot;</span>)</span></code></pre></div>
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>Time to set up our session. There are no new packages this week, but double check you have <code>tidyverse</code>, <code>lterdatasampler</code>, <code>palmerpenguins</code> and <code>rstatix</code> in your “setup.R” script.</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"setup.R"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>This week’s lesson is related to <strong>power</strong> in statistical analysis.</p>
-<div id="recommended-pre-work" class="section level4 hasAnchor" number="9.0.0.1">
-<h4><span class="header-section-number">9.0.0.1</span> <strong>Recommended pre-work:</strong><a href="power.html#recommended-pre-work" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<section id="recommended-pre-work" class="level4" data-number="9.0.0.1"><h4 data-number="9.0.0.1" class="anchored" data-anchor-id="recommended-pre-work">
+<span class="header-section-number">9.0.0.1</span> <strong>Recommended pre-work:</strong>
+</h4>
 <ul>
 <li><p>Watch this video on statistical power: <a href="https://www.youtube.com/watch?v=Rsc5znwR5FA" class="uri">https://www.youtube.com/watch?v=Rsc5znwR5FA</a></p></li>
 <li><p>Review the following null hypotheses for all of the tests we have used to far:</p></li>
@@ -331,7 +253,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 <p>Power in statistics is a measure of how effective a statistical test is at finding genuine trends/effects in your data. It tells you the likelihood that the test will correctly identify a real relationship or effect when one actually exists. In other words, power is the test’s ability to avoid missing important discoveries, an essential aspect of the reliability and accuracy of statistical analyses. Power can be influenced by the following factors:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><p><strong>Sample size</strong> - Larger samples provide more power.</p></li>
 <li><p><strong>Effect size</strong> - Larger or more dramatic effects are easier to detect.</p></li>
 </ol>
@@ -339,222 +261,326 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="alert alert-info">
 <p>Significance in statistics means how important or reliable a finding is. p-values help quantify this by telling us how likely it is that our results occurred by chance; smaller p-values indicate greater significance, suggesting that our findings are less likely due to chance.</p>
 </div>
-</div>
-<div id="power-in-action" class="section level3 hasAnchor" number="9.0.1">
-<h3><span class="header-section-number">9.0.1</span> Power in action<a href="power.html#power-in-action" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</section><section id="power-in-action" class="level3" data-number="9.0.1"><h3 data-number="9.0.1" class="anchored" data-anchor-id="power-in-action">
+<span class="header-section-number">9.0.1</span> Power in action</h3>
 <p>Let’s perform a t-test analysis on our Palmer penguins data set, where we compare bill length across two penguins species, Gentoo and Adelie.</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="power.html#cb178-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;penguins&quot;</span>)</span>
-<span id="cb178-2"><a href="power.html#cb178-2" tabindex="-1"></a></span>
-<span id="cb178-3"><a href="power.html#cb178-3" tabindex="-1"></a><span class="co"># perform the t-test</span></span>
-<span id="cb178-4"><a href="power.html#cb178-4" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb178-5"><a href="power.html#cb178-5" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb178-6"><a href="power.html#cb178-6" tabindex="-1"></a>  <span class="co"># species must be re-formatted from a factor to a character (t-test doesn&#39;t like factors)</span></span>
-<span id="cb178-7"><a href="power.html#cb178-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">as.character</span>(species)) <span class="sc">%&gt;%</span> </span>
-<span id="cb178-8"><a href="power.html#cb178-8" tabindex="-1"></a>  <span class="fu">t_test</span>(bill_length_mm <span class="sc">~</span> species, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 15
-##   estimate estimate1 estimate2 .y.           group1 group2    n1    n2 statistic
-## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;
-## 1    -8.71      38.8      47.5 bill_length_… Adelie Gentoo   151   123     -24.7
-## # ℹ 6 more variables: p &lt;dbl&gt;, df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;,
-## #   method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
-<div id="sample-size" class="section level4 hasAnchor" number="9.0.1.1">
-<h4><span class="header-section-number">9.0.1.1</span> Sample size<a href="power.html#sample-size" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"penguins"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># perform the t-test</span></span>
+<span><span class="va">penguins</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Adelie"</span>, <span class="st">"Gentoo"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># species must be re-formatted from a factor to a character (t-test doesn't like factors)</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">t_test</span><span class="op">(</span><span class="va">bill_length_mm</span> <span class="op">~</span> <span class="va">species</span>, var.equal <span class="op">=</span> <span class="cn">FALSE</span>, detailed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 15
+  estimate estimate1 estimate2 .y.           group1 group2    n1    n2 statistic
+*    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;
+1    -8.71      38.8      47.5 bill_length_… Adelie Gentoo   151   123     -24.7
+# ℹ 6 more variables: p &lt;dbl&gt;, df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;,
+#   method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
+</div>
+</div>
+<section id="sample-size" class="level4" data-number="9.0.1.1"><h4 data-number="9.0.1.1" class="anchored" data-anchor-id="sample-size">
+<span class="header-section-number">9.0.1.1</span> Sample size</h4>
 <p>In our analysis above, we find that bill length is observed to be significantly higher (p-value &lt; 0.05) in Gentoo penguins when compared to Adelie penguins. But, what if we didn’t have as many observations to perform our test on? Let’s cut our data set down to just two observations per species:</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="power.html#cb180-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span>   </span>
-<span id="cb180-2"><a href="power.html#cb180-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>)) <span class="sc">%&gt;%</span>   </span>
-<span id="cb180-3"><a href="power.html#cb180-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">as.character</span>(species)) <span class="sc">%&gt;%</span>    </span>
-<span id="cb180-4"><a href="power.html#cb180-4" tabindex="-1"></a>  <span class="fu">drop_na</span>(bill_length_mm) <span class="sc">%&gt;%</span>   </span>
-<span id="cb180-5"><a href="power.html#cb180-5" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span>   </span>
-<span id="cb180-6"><a href="power.html#cb180-6" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb180-7"><a href="power.html#cb180-7" tabindex="-1"></a>  <span class="co"># we need to upgroup our data frame for statistical tests</span></span>
-<span id="cb180-8"><a href="power.html#cb180-8" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span>   </span>
-<span id="cb180-9"><a href="power.html#cb180-9" tabindex="-1"></a>  <span class="fu">t_test</span>(bill_length_mm <span class="sc">~</span> species, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 15
-##   estimate estimate1 estimate2 .y.    group1 group2    n1    n2 statistic      p
-## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt;
-## 1    -7.95      36.4      44.4 bill_… Adelie Gentoo     2     2     -8.46 0.0346
-## # ℹ 5 more variables: df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, method &lt;chr&gt;,
-## #   alternative &lt;chr&gt;</code></pre>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">penguins</span> <span class="op">%&gt;%</span>   </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Adelie"</span>, <span class="st">"Gentoo"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>   </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>    </span>
+<span>  <span class="fu">drop_na</span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">)</span> <span class="op">%&gt;%</span>   </span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op">%&gt;%</span>   </span>
+<span>  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="co"># we need to upgroup our data frame for statistical tests</span></span>
+<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>   </span>
+<span>  <span class="fu">t_test</span><span class="op">(</span><span class="va">bill_length_mm</span> <span class="op">~</span> <span class="va">species</span>, var.equal <span class="op">=</span> <span class="cn">FALSE</span>, detailed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 15
+  estimate estimate1 estimate2 .y.     group1 group2    n1    n2 statistic     p
+*    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
+1     -5.5      41.2      46.6 bill_l… Adelie Gentoo     2     2    -0.960 0.447
+# ℹ 5 more variables: df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, method &lt;chr&gt;,
+#   alternative &lt;chr&gt;</code></pre>
+</div>
+</div>
 <p>Compared to the p-value in the previous test, this p-value is much larger and, depending on which random samples were chosen in <code>slice_sample</code>, likely higher than our cut-off of 0.05 and would lead to an insignificant difference in bill length between the two species.</p>
 <p>Therefore, as sample size decreases, so does our power in identifying true trends.</p>
-</div>
-<div id="magnitude-of-effect" class="section level4 hasAnchor" number="9.0.1.2">
-<h4><span class="header-section-number">9.0.1.2</span> Magnitude of effect<a href="power.html#magnitude-of-effect" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+</section><section id="magnitude-of-effect" class="level4" data-number="9.0.1.2"><h4 data-number="9.0.1.2" class="anchored" data-anchor-id="magnitude-of-effect">
+<span class="header-section-number">9.0.1.2</span> Magnitude of effect</h4>
 <p>Let’s look at a histogram of our bill lengths across our two penguin species. Note the last two lines of code I am adding a vertical line at the mean of each group, which we got from the output of the t-test.</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="power.html#cb182-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb182-2"><a href="power.html#cb182-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb182-3"><a href="power.html#cb182-3" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb182-4"><a href="power.html#cb182-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">fill =</span> species), <span class="at">alpha =</span> <span class="fl">0.50</span>) <span class="sc">+</span></span>
-<span id="cb182-5"><a href="power.html#cb182-5" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span>  <span class="fl">38.8</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb182-6"><a href="power.html#cb182-6" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">47.5</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-162-1.png" width="864" /></p>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">penguins</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Adelie"</span>, <span class="st">"Gentoo"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_histogram</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">bill_length_mm</span>, fill <span class="op">=</span> <span class="va">species</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.50</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span>  <span class="fl">38.8</span>, col <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">47.5</span>, col <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="power_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="864"></p>
+</div>
+</div>
 <p>In the grand scheme of things the difference between these two populations is relatively small in magnitude: their histograms overlap, indicating that some penguins in both species often have similar bill lengths. But, what if the bills of all of the Gentoo penguins <em>magically</em> grew an extra 15 mm?</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="power.html#cb183-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb183-2"><a href="power.html#cb183-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb183-3"><a href="power.html#cb183-3" tabindex="-1"></a>  <span class="co">#for all Gentoo species increase bill length by 15 mm</span></span>
-<span id="cb183-4"><a href="power.html#cb183-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bill_length_mm =</span> <span class="fu">if_else</span>(species <span class="sc">==</span> <span class="st">&quot;Gentoo&quot;</span>, bill_length_mm <span class="sc">+</span> <span class="dv">15</span>, bill_length_mm)) <span class="sc">%&gt;%</span> </span>
-<span id="cb183-5"><a href="power.html#cb183-5" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb183-6"><a href="power.html#cb183-6" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">fill =</span> species), <span class="at">alpha =</span> <span class="fl">0.56</span>) <span class="sc">+</span></span>
-<span id="cb183-7"><a href="power.html#cb183-7" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span>  <span class="fl">38.8</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb183-8"><a href="power.html#cb183-8" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">62.5</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>) <span class="co"># I found this from the new mutated values separately</span></span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-163-1.png" width="864" /></p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">penguins</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Adelie"</span>, <span class="st">"Gentoo"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co">#for all Gentoo species increase bill length by 15 mm</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>bill_length_mm <span class="op">=</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Gentoo"</span>, <span class="va">bill_length_mm</span> <span class="op">+</span> <span class="fl">15</span>, <span class="va">bill_length_mm</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">geom_histogram</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">bill_length_mm</span>, fill <span class="op">=</span> <span class="va">species</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.56</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span>  <span class="fl">38.8</span>, col <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">62.5</span>, col <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="co"># I found this from the new mutated values separately</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="power_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="864"></p>
+</div>
+</div>
 <p>And now perform the t-test on this new <em>magical</em> data:</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="power.html#cb184-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb184-2"><a href="power.html#cb184-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb184-3"><a href="power.html#cb184-3" tabindex="-1"></a>  <span class="co"># still need to convert species to a character for the t_test function</span></span>
-<span id="cb184-4"><a href="power.html#cb184-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">as.character</span>(species)) <span class="sc">%&gt;%</span></span>
-<span id="cb184-5"><a href="power.html#cb184-5" tabindex="-1"></a>  <span class="fu">drop_na</span>(bill_length_mm) <span class="sc">%&gt;%</span></span>
-<span id="cb184-6"><a href="power.html#cb184-6" tabindex="-1"></a>  <span class="co">#if species == Gentoo, add 15 to bill length..</span></span>
-<span id="cb184-7"><a href="power.html#cb184-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bill_length_mm =</span> <span class="fu">if_else</span>(species <span class="sc">==</span> <span class="st">&quot;Gentoo&quot;</span>, bill_length_mm <span class="sc">+</span> <span class="dv">15</span>,</span>
-<span id="cb184-8"><a href="power.html#cb184-8" tabindex="-1"></a>                                 <span class="co"># otherwise, keep it as is.</span></span>
-<span id="cb184-9"><a href="power.html#cb184-9" tabindex="-1"></a>                                 bill_length_mm)) <span class="sc">%&gt;%</span></span>
-<span id="cb184-10"><a href="power.html#cb184-10" tabindex="-1"></a>  <span class="fu">t_test</span>(bill_length_mm <span class="sc">~</span> species,</span>
-<span id="cb184-11"><a href="power.html#cb184-11" tabindex="-1"></a>         <span class="at">var.equal =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb184-12"><a href="power.html#cb184-12" tabindex="-1"></a>         <span class="at">detailed =</span>   <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 15
-##   estimate estimate1 estimate2 .y.           group1 group2    n1    n2 statistic
-## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;
-## 1    -23.7      38.8      62.5 bill_length_… Adelie Gentoo   151   123     -67.3
-## # ℹ 6 more variables: p &lt;dbl&gt;, df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;,
-## #   method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">penguins</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Adelie"</span>, <span class="st">"Gentoo"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># still need to convert species to a character for the t_test function</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">drop_na</span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co">#if species == Gentoo, add 15 to bill length..</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>bill_length_mm <span class="op">=</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Gentoo"</span>, <span class="va">bill_length_mm</span> <span class="op">+</span> <span class="fl">15</span>,</span>
+<span>                                 <span class="co"># otherwise, keep it as is.</span></span>
+<span>                                 <span class="va">bill_length_mm</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">t_test</span><span class="op">(</span><span class="va">bill_length_mm</span> <span class="op">~</span> <span class="va">species</span>,</span>
+<span>         var.equal <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>         detailed <span class="op">=</span>   <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 15
+  estimate estimate1 estimate2 .y.           group1 group2    n1    n2 statistic
+*    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;
+1    -23.7      38.8      62.5 bill_length_… Adelie Gentoo   151   123     -67.3
+# ℹ 6 more variables: p &lt;dbl&gt;, df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;,
+#   method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
+</div>
+</div>
 <p>… when the magnitude of the difference between our observations in our groups increases, our p-value decreases. And, when you have a greater difference between populations, the number of observations required to identify significant differences generally does not have to be so high.</p>
 <p>Lets run the above code again but keep just two observations from each group and note the p-value:</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="power.html#cb186-1" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
-<span id="cb186-2"><a href="power.html#cb186-2" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Adelie&quot;</span>, <span class="st">&quot;Gentoo&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb186-3"><a href="power.html#cb186-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">as.character</span>(species)) <span class="sc">%&gt;%</span> </span>
-<span id="cb186-4"><a href="power.html#cb186-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bill_length_mm =</span> <span class="fu">ifelse</span>(species <span class="sc">==</span> <span class="st">&quot;Gentoo&quot;</span>, bill_length_mm <span class="sc">+</span> <span class="dv">15</span>, bill_length_mm)) <span class="sc">%&gt;%</span></span>
-<span id="cb186-5"><a href="power.html#cb186-5" tabindex="-1"></a>  <span class="co"># remove NA values for weight</span></span>
-<span id="cb186-6"><a href="power.html#cb186-6" tabindex="-1"></a>  <span class="fu">drop_na</span>(bill_length_mm) <span class="sc">%&gt;%</span></span>
-<span id="cb186-7"><a href="power.html#cb186-7" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span></span>
-<span id="cb186-8"><a href="power.html#cb186-8" tabindex="-1"></a>  <span class="co"># select 2 random observations from each species:</span></span>
-<span id="cb186-9"><a href="power.html#cb186-9" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb186-10"><a href="power.html#cb186-10" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb186-11"><a href="power.html#cb186-11" tabindex="-1"></a>  <span class="fu">t_test</span>(bill_length_mm <span class="sc">~</span> species, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 15
-##   estimate estimate1 estimate2 .y.    group1 group2    n1    n2 statistic      p
-## *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt;
-## 1    -23.9      40.1        64 bill_… Adelie Gentoo     2     2     -11.6 0.0415
-## # ℹ 5 more variables: df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, method &lt;chr&gt;,
-## #   alternative &lt;chr&gt;</code></pre>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">penguins</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Adelie"</span>, <span class="st">"Gentoo"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>bill_length_mm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Gentoo"</span>, <span class="va">bill_length_mm</span> <span class="op">+</span> <span class="fl">15</span>, <span class="va">bill_length_mm</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># remove NA values for weight</span></span>
+<span>  <span class="fu">drop_na</span><span class="op">(</span><span class="va">bill_length_mm</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># select 2 random observations from each species:</span></span>
+<span>  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">t_test</span><span class="op">(</span><span class="va">bill_length_mm</span> <span class="op">~</span> <span class="va">species</span>, var.equal <span class="op">=</span> <span class="cn">FALSE</span>, detailed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 15
+  estimate estimate1 estimate2 .y.    group1 group2    n1    n2 statistic      p
+*    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+1    -23.2      39.8      63.0 bill_… Adelie Gentoo     2     2     -8.75 0.0393
+# ℹ 5 more variables: df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, method &lt;chr&gt;,
+#   alternative &lt;chr&gt;</code></pre>
 </div>
 </div>
-<div id="note-about-random-selection" class="section level3 hasAnchor" number="9.0.2">
-<h3><span class="header-section-number">9.0.2</span> Note about random selection<a href="power.html#note-about-random-selection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</section></section><section id="note-about-random-selection" class="level3" data-number="9.0.2"><h3 data-number="9.0.2" class="anchored" data-anchor-id="note-about-random-selection">
+<span class="header-section-number">9.0.2</span> Note about random selection</h3>
 <p>If you are playing around with this code on your own, you may notice that the results of each test look different than what’s written in the lesson plan: this is because we are randomly selecting a subset from our penguins populations with the <code>slice_sample()</code> function. In fact, you may have encountered p-values that lead to different conclusions for you (especially those with low sample sizes). The way we select samples from a population significantly impacts our statistical results and the statistical power of our tests. If our samples are representative of the population and sufficiently large, our findings are more likely to accurately reflect reality. However, if our samples are small or not truly representative, our results may be less reliable, and our tests may lack the ability to detect real effects.</p>
-</div>
-<div id="assignment" class="section level2 hasAnchor" number="9.1">
-<h2><span class="header-section-number">9.1</span> Assignment<a href="power.html#assignment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Let’s re-explore the difference in weight of cutthroat trout in clear cut (CC) and old growth (OG) forest types from our <a href="data-analysis-t-test-and-anova.html#data-analysis-t-test-and-anova">T-test and ANOVA lesson</a>. We want to see how sample size affects our ability to detect this difference. Therefore, our research question is: “Is there a significant difference in weight between old growth and clear cut forest types?” <strong>We will set our significance level at 0.05 (i.e., our test’s p-value must be below 0.05 for us to reject the null hypothesis).</strong></p>
+</section><section id="assignment" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="assignment">
+<span class="header-section-number">9.1</span> Assignment</h2>
+<p>Let’s re-explore the difference in weight of cutthroat trout in clear cut (CC) and old growth (OG) forest types from our [T-test and ANOVA lesson][Data Analysis: T-test and ANOVA]. We want to see how sample size affects our ability to detect this difference. Therefore, our research question is: “Is there a significant difference in weight between old growth and clear cut forest types?” <strong>We will set our significance level at 0.05 (i.e., our test’s p-value must be below 0.05 for us to reject the null hypothesis).</strong></p>
 <p>First load in your data (from the <code>lterdatasampler</code> package) and create a new variable <code>trout</code> for just the trout species:</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="power.html#cb188-1" tabindex="-1"></a><span class="fu">data</span>(and_vertebrates)</span>
-<span id="cb188-2"><a href="power.html#cb188-2" tabindex="-1"></a></span>
-<span id="cb188-3"><a href="power.html#cb188-3" tabindex="-1"></a>trout <span class="ot">&lt;-</span> </span>
-<span id="cb188-4"><a href="power.html#cb188-4" tabindex="-1"></a>  and_vertebrates <span class="sc">%&gt;%</span></span>
-<span id="cb188-5"><a href="power.html#cb188-5" tabindex="-1"></a>  <span class="co">#filter species (remember spelling and capitalization are IMPORTANT)</span></span>
-<span id="cb188-6"><a href="power.html#cb188-6" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Cutthroat trout&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb188-7"><a href="power.html#cb188-7" tabindex="-1"></a>  <span class="co"># remove NA values for weight, the variable we will be measuring</span></span>
-<span id="cb188-8"><a href="power.html#cb188-8" tabindex="-1"></a>  <span class="fu">drop_na</span>(weight_g) </span></code></pre></div>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">and_vertebrates</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">trout</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="va">and_vertebrates</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co">#filter species (remember spelling and capitalization are IMPORTANT)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Cutthroat trout"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># remove NA values for weight, the variable we will be measuring</span></span>
+<span>  <span class="fu">drop_na</span><span class="op">(</span><span class="va">weight_g</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Next, we will select a random set of trout observations at both forest types across <strong>four different sample sizes: 5, 10, 1000, 5000</strong>.</p>
-<p>Below is some template code for you to use to build your function, showing how to subset the data to <strong>5</strong> observations per forest type:</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="power.html#cb189-1" tabindex="-1"></a>trout_5 <span class="ot">&lt;-</span> trout <span class="sc">%&gt;%</span> </span>
-<span id="cb189-2"><a href="power.html#cb189-2" tabindex="-1"></a>  <span class="co">#group by section to pull observations from each group</span></span>
-<span id="cb189-3"><a href="power.html#cb189-3" tabindex="-1"></a>  <span class="fu">group_by</span>(section) <span class="sc">%&gt;%</span></span>
-<span id="cb189-4"><a href="power.html#cb189-4" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb189-5"><a href="power.html#cb189-5" tabindex="-1"></a>  <span class="co"># ungroup the data frame to perform the statistical test</span></span>
-<span id="cb189-6"><a href="power.html#cb189-6" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb189-7"><a href="power.html#cb189-7" tabindex="-1"></a>  <span class="fu">t_test</span>(weight_g <span class="sc">~</span> section, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Below is some template code for you to use to build your functions in Q1 and Q2, showing how to subset the data to <strong>5</strong> observations per forest type:</p>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">trout_5</span> <span class="op">&lt;-</span> <span class="va">trout</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="co">#group by section to pull observations from each group</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">section</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># ungroup the data frame to perform the statistical test</span></span>
+<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">t_test</span><span class="op">(</span><span class="va">weight_g</span> <span class="op">~</span> <span class="va">section</span>, var.equal <span class="op">=</span> <span class="cn">FALSE</span>, detailed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p><strong>1.</strong> <strong>Write a function</strong> called <code>trout_subber</code> that returns a user-selected number of random observations (the thing that changes) from our <code>trout</code> data frame across both forest types (i.e., section) (5 pts.)</p>
 <p>HINTS: the number of observations you want to subset to will be an argument of the function. The code above can be used as the basis of the function. You can refer back to the <a href="https://github.com/rossyndicate/primers?tab=readme-ov-file">Write Functions</a> primer lessons for guidance, specifically <a href="https://geocentroid.shinyapps.io/how-to-write-a-function/">How to write a function</a>.</p>
+<div class="cell">
+
+</div>
 <p><br></p>
 <p><strong>2.</strong> Build upon the previous function by adding an additional step to perform a t-test on the data set at the end, so the function returns the results of the t-test. (NOTE: for simplicity, use the non-parametric t-test across all sub sets). (5 pts.)</p>
+<div class="cell">
+
+</div>
 <p><br></p>
 <p><strong>3.</strong> <strong>Map</strong> over the function above, using our sample sizes of interest (i.e., 5, 10, 1000, 5000 per forest type). Repeat the process 100 times for each sample size to account for variability. The final output of this exercise should be a <strong>single data frame</strong> <strong>with 400 rows</strong> (one row for each t-test summary). (5 pts.)</p>
-<p>HINTS: Make use of the <code>rep()</code> function to create your vector of numbers to map over…</p>
+<p>HINTS: Make use of the <code><a href="https://rdrr.io/r/base/rep.html">rep()</a></code> function to create your vector of numbers to map over…</p>
+<div class="cell">
+
+</div>
 <p><br></p>
 <p><strong>4.</strong> Using the data frame created in exercise 3, make a histogram of p-values for each sample size group (HINT: see what column name in your final data frame you should use to facet by). Make note of how the p-values and their variance change with sample size. (5 pts.)</p>
-<p><br></p>
+<div class="cell">
+
 </div>
-<div id="citations-3" class="section level2 hasAnchor" number="9.2">
-<h2><span class="header-section-number">9.2</span> Citations<a href="power.html#citations-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br></p>
+</section><section id="citations" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="citations">
+<span class="header-section-number">9.2</span> Citations</h2>
 <p><strong><em>Data Source:</em></strong> Gregory, S.V. and I. Arismendi. 2020. Aquatic Vertebrate Population Study in Mack Creek, Andrews Experimental Forest, 1987 to present ver 14. Environmental Data Initiative. <a href="https://doi.org/10.6073/pasta/7c78d662e847cdbe33584add8f809165" class="uri">https://doi.org/10.6073/pasta/7c78d662e847cdbe33584add8f809165</a></p>
 <p>Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago (Antarctica) penguin data. R package version 0.1.0. <a href="https://allisonhorst.github.io/palmerpenguins/" class="uri">https://allisonhorst.github.io/palmerpenguins/</a>. doi: 10.5281/zenodo.3960218.</p>
 
-</div>
-</div>
-            </section>
 
-          </div>
-        </div>
-      </div>
-<a href="multiple-linear-regression-mlr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="r-skills-review.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
-  </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-  "sharing": {
-    "github": false,
-    "facebook": true,
-    "twitter": true,
-    "linkedin": false,
-    "weibo": false,
-    "instapaper": false,
-    "vk": false,
-    "whatsapp": false,
-    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-  },
-  "fontsettings": {
-    "theme": "white",
-    "family": "sans",
-    "size": 2
-  },
-  "edit": {
-    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/08-power.Rmd",
-    "text": "Edit"
-  },
-  "history": {
-    "link": null,
-    "text": null
-  },
-  "view": {
-    "link": null,
-    "text": null
-  },
-  "download": null,
-  "search": {
-    "engine": "fuse",
-    "options": null
-  },
-  "toc": {
-    "collapse": "section"
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
   }
 });
-});
-</script>
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./multiple-linear-regression-mlr.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multiple Linear Regression (MLR)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./r-skills-review.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">R Skills Review</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
-</body>
 
-</html>
+
+</body></html>
