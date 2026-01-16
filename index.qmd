@@ -5,11 +5,10 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
-url: https://ccmothes.github.io/quantitative-reasoning-course/
+url: https://rossyndicate.github.io/Intro_R_Data_Analysis/
 # cover-image: path to the social sharing image like images/cover.jpg
 description: |
   This site hosts the first half of the course content for ESS 523A at Colorado State University.
-link-citations: yes
 github-repo: rossyndicate/Intro_R_Data_Analysis
 ---
 
@@ -23,7 +22,7 @@ This site hosts the course curriculum for Colorado State University's **ESS 523A
 
 ## Setting up R {.unnumbered}
 
-As your first step, please follow the instructions on the **Setup Instructions** page to make sure you have all the necessary software installed on your computer before the class starts.
+As your first step, please follow the instructions on the [**Setup Instructions**](https://rossyndicate.github.io/Intro_R_Data_Analysis/setup-instructions.html) page to make sure you have all the necessary software installed on your computer before the class starts.
 
 ## Navigating this site {.unnumbered}
 
