@@ -18,8 +18,6 @@ First, set up your session by executing your set up script we created in [Lesson
 
 -   `viridis`
 
--   `ggdark`
-
 -   `plotly`
 
 ```{r eval=FALSE}
@@ -454,60 +452,6 @@ census_data %>%
   )
 ```
 
-**Want to make it dark theme?**
-
-`ggdark` is a fun package to easily convert your figures to various dark themes. If you want to test it out, install the package and try `dark_theme_classic()` instead of `theme_classic()` in the previous figure:
-
-```{r eval = FALSE}
-install.packages("ggdark")
-```
-
-```{r eval = TRUE, warning=FALSE}
-library(ggdark)
-```
-
-```{r eval = TRUE, message=FALSE}
-census_data %>%
-  ggplot(aes(x = median_age, y = percent_bipoc)) +
-  geom_point(aes(size = median_income, color = median_income), alpha = 0.9) +
-  labs(
-    title = "Socioeconomic data for Larimer County",
-    subtitle = "Median age, median income, and percentage of people of color for each census tract",
-    x = "Median Age",
-    y = "People of Color (%)",
-    caption = "Data obtained from the U.S. Census 5-year American Community Survey Samples for 2017-2021"
-  )+
-  scale_radius(range = c(2, 6)) +
-  dark_theme_classic() +
-  scale_color_viridis() + #use the Viridis palette
-  guides(color = guide_legend(title = "Median Income"),
-         size = guide_legend(title = "Median Income")) +
-  theme(
-    axis.title = element_text(face = "bold", size = 10),
-    plot.title = element_text(face = "bold",size = 15, margin = unit(c(1,1,1,1), "cm")),
-    plot.subtitle = element_text(size = 10, margin = unit(c(-0.5,0.5,0.5,0.5), "cm")),
-    plot.caption = element_text(face = "italic", hjust = -0.2),
-    plot.title.position = "plot", #sets the title to the left
-    legend.position = "bottom",
-    legend.text = element_text(size = 8)
-  ) +
-  annotate(geom = "text",
-           x = 74,
-           y = 62,
-           label = "Rocky Mountain National Park region \n Total Populaion: 53",
-           size = 3) +
-  geom_curve(
-    aes(
-      x = 82,
-      xend = 88,
-      y = 60,
-      yend = 57.5
-    ),
-    arrow = arrow(length = unit(0.2, "cm")),
-    size = 0.5,
-    curvature = -0.3
-  )
-```
 
 **Saving with `ggsave`**
 
@@ -544,7 +488,6 @@ ggplotly(census_data %>%
     caption = "Data obtained from the U.S. Census 5-year American Community Survey Samples for 2017-2021"
   )+
   scale_radius(range = c(2, 6)) +
-  dark_theme_classic() +
   scale_color_viridis() + #use the Viridis palette
   guides(color = guide_legend(title = "Median Income"),
          size = guide_legend(title = "Median Income")) +
