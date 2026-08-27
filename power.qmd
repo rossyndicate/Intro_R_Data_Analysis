@@ -161,7 +161,7 @@ If you are playing around with this code on your own, you may notice that the re
 
 ## Assignment
 
-Let's re-explore the difference in weight of cutthroat trout in clear cut (CC) and old growth (OG) forest types from our [T-test and ANOVA lesson][Data Analysis: T-test and ANOVA]. We want to see how sample size affects our ability to detect this difference. Therefore, our research question is: "Is there a significant difference in weight between old growth and clear cut forest types?" **We will set our significance level at 0.05 (i.e., our test's p-value must be below 0.05 for us to reject the null hypothesis).**
+Let's re-explore the difference in weight of cutthroat trout in clear cut (CC) and old growth (OG) forest types from our [T-test and ANOVA lesson](data-analysis-t-test-and-anova.qmd). We want to see how sample size affects our ability to detect this difference. Therefore, our research question is: "Is there a significant difference in weight between old growth and clear cut forest types?" **We will set our significance level at 0.05 (i.e., our test's p-value must be below 0.05 for us to reject the null hypothesis).**
 
 First load in your data (from the `lterdatasampler` package) and create a new variable `trout` for just the trout species:
 

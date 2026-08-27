@@ -299,7 +299,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 1 × 15
   estimate estimate1 estimate2 .y.     group1 group2    n1    n2 statistic     p
 *    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
-1    -7.70      39.0      46.6 bill_l… Adelie Gentoo     2     2     -1.88 0.215
+1    -10.2      38.4      48.6 bill_l… Adelie Gentoo     2     2     -5.51  0.11
 # ℹ 5 more variables: df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, method &lt;chr&gt;,
 #   alternative &lt;chr&gt;</code></pre>
 </div>
@@ -373,9 +373,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>  <span class="fu">t_test</span><span class="op">(</span><span class="va">bill_length_mm</span> <span class="op">~</span> <span class="va">species</span>, var.equal <span class="op">=</span> <span class="cn">FALSE</span>, detailed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 15
-  estimate estimate1 estimate2 .y.    group1 group2    n1    n2 statistic      p
-*    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt;
-1    -25.5      40.4      65.9 bill_… Adelie Gentoo     2     2     -21.0 0.0259
+  estimate estimate1 estimate2 .y.   group1 group2    n1    n2 statistic       p
+*    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+1    -24.2      37.8      62.0 bill… Adelie Gentoo     2     2     -40.1 0.00416
 # ℹ 5 more variables: df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, method &lt;chr&gt;,
 #   alternative &lt;chr&gt;</code></pre>
 </div>
@@ -385,7 +385,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>If you are playing around with this code on your own, you may notice that the results of each test look different than what’s written in the lesson plan: this is because we are randomly selecting a subset from our penguins populations with the <code>slice_sample()</code> function. In fact, you may have encountered p-values that lead to different conclusions for you (especially those with low sample sizes). The way we select samples from a population significantly impacts our statistical results and the statistical power of our tests. If our samples are representative of the population and sufficiently large, our findings are more likely to accurately reflect reality. However, if our samples are small or not truly representative, our results may be less reliable, and our tests may lack the ability to detect real effects.</p>
 </section><section id="assignment" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="assignment">
 <span class="header-section-number">9.1</span> Assignment</h2>
-<p>Let’s re-explore the difference in weight of cutthroat trout in clear cut (CC) and old growth (OG) forest types from our [T-test and ANOVA lesson][Data Analysis: T-test and ANOVA]. We want to see how sample size affects our ability to detect this difference. Therefore, our research question is: “Is there a significant difference in weight between old growth and clear cut forest types?” <strong>We will set our significance level at 0.05 (i.e., our test’s p-value must be below 0.05 for us to reject the null hypothesis).</strong></p>
+<p>Let’s re-explore the difference in weight of cutthroat trout in clear cut (CC) and old growth (OG) forest types from our <a href="./data-analysis-t-test-and-anova.html">T-test and ANOVA lesson</a>. We want to see how sample size affects our ability to detect this difference. Therefore, our research question is: “Is there a significant difference in weight between old growth and clear cut forest types?” <strong>We will set our significance level at 0.05 (i.e., our test’s p-value must be below 0.05 for us to reject the null hypothesis).</strong></p>
 <p>First load in your data (from the <code>lterdatasampler</code> package) and create a new variable <code>trout</code> for just the trout species:</p>
 <div class="cell">
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">and_vertebrates</span><span class="op">)</span></span>

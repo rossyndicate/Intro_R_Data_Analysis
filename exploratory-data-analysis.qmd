@@ -2,7 +2,7 @@
 
 For this lesson you will be working with the same `penguins` data from last week. You will be submitting this as your first assignment, so start a new R Markdown document to record your code and answers to the assignment questions, which you will submit as a rendered HTML or Word document on Canvas.
 
-You can set up your session by executing your set up script we created in [Lesson 1][Introduction to R, RStudio and R Markdown]
+You can set up your session by executing your set up script we created in [Lesson 1](introduction-to-r-rstudio-and-r-markdown.qmd#write-a-set-up-script)
 
 ```{r eval = FALSE}
 source("setup.R")
@@ -54,7 +54,7 @@ For some more in depth EDA, the `tidyverse` packages provide many useful functio
 
 ### The `dplyr` package
 
-`dplyr` is a Tidyverse package to handle most of your data exploration and manipulation tasks. Now that you have learned indexing in the [Intro to R lesson][Introduction to R and RStudio], you may notice the first two `dplyr` functions we are going to learn, `filter()` and `select()` act as indexing functions, subsetting rows and columns based on specified names and/or conditions.
+`dplyr` is a Tidyverse package to handle most of your data exploration and manipulation tasks. Now that you have learned indexing in the [Intro to R lesson](introduction-to-r-rstudio-and-r-markdown.qmd#indexing), you may notice the first two `dplyr` functions we are going to learn, `filter()` and `select()` act as indexing functions, subsetting rows and columns based on specified names and/or conditions.
 
 **Subset rows with `filter()`**
 
@@ -142,6 +142,30 @@ penguins %>%
 ```
 
 You can read it as a series of imperative statements: filter, then mutate, then select. A good way to pronounce `%>%` when reading code is "then". It takes the output of the operation to the left of `%>%` and feeds it into the next function as the input.
+
+#### The native pipe `|>`
+
+You may also come across a second pipe, `|>`, called the **native** or **base R
+pipe**. It was added to R itself in version 4.1 (2021), so it works without
+loading any packages. For everything we do in this course, `x |> f()` and
+`x %>% f()` mean exactly the same thing: take the object on the left and pass
+it as the first argument to the function on the right. Read both as "then."
+
+```{r eval = FALSE}
+# these two are equivalent
+penguins %>% filter(species == "Adelie") %>% select(bill_length_mm)
+
+penguins |> filter(species == "Adelie") |> select(bill_length_mm)
+```
+
+Use whichever you prefer, but stay consistent within a script. We use `%>%` in
+these materials because it is what you will see in most existing tidyverse code
+and documentation, but you are welcome to use `|>` in your own work. The main
+difference to be aware of is that `%>%` lets you use a `.` as a placeholder to
+send the piped object somewhere other than the first argument (e.g.
+`df %>% lm(y ~ x, data = .)`), which the native pipe handles differently. If
+you are not using that placeholder, the two are interchangeable.
+
 
 [**`group_by()`**](https://dplyr.tidyverse.org/reference/group_by.html) **and [`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html)**
 

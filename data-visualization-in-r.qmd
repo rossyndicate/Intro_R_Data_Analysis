@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE
 
 This lesson will go a little deeper into data visualization and how to customize figures and tables and make them 'publication ready'.
 
-First, set up your session by executing your set up script we created in [Lesson 1][Introduction to R, RStudio and R Markdown].
+First, set up your session by executing your set up script we created in [Lesson 1](introduction-to-r-rstudio-and-r-markdown.qmd#write-a-set-up-script).
 
 *Note:* There are some new packages we will use below. For simplicity, you can add them to your setup.R script by tacking them on to the `packages <- c()` list. The new packages are:
 
