@@ -274,10 +274,6 @@ p_aqi_preview <- fc_summer %>%
              color = "grey50") +
   geom_line(color = "#1b9e77",
             linewidth = 0.7) +
-  annotate("text",
-           x = as.Date("2026-05-01"), y = 55,
-           label = "Good/Moderate boundary",
-           size = 3, hjust = 0, color = "grey45") +
   geom_point(color = "#1b9e77", 
              size = 1) +
   geom_text(data = smoke_2026,
@@ -744,10 +740,6 @@ p_aqi_final <- fc_summer %>%
             inherit.aes = FALSE, alpha = 0.15, fill = "firebrick") +
   geom_hline(yintercept = 50,
              linetype = "dashed", color = "grey50") +
-  annotate("text",
-           x = as.Date("2026-05-01"), y = 55,
-           label = "Good/Moderate boundary",
-           size = 3, hjust = 0, color = "grey45") +
   geom_line(color = "#1b9e77", linewidth = 0.7) +
   geom_point(color = "#1b9e77", size = 1) +
   geom_text(data = smoke_2026,
