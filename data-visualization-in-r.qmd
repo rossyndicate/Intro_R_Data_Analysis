@@ -274,12 +274,16 @@ p_aqi_preview <- fc_summer %>%
              color = "grey50") +
   geom_line(color = "#1b9e77",
             linewidth = 0.7) +
+  annotate("text",
+           x = as.Date("2026-05-01"), y = 55,
+           label = "Good/Moderate boundary",
+           size = 3, hjust = 0, color = "grey45") +
   geom_point(color = "#1b9e77", 
              size = 1) +
   geom_text(data = smoke_2026,
-            x = as.Date("2026-07-05"), 
+            x = as.Date("2026-07-04"), 
             y = 99,
-            label = "Aug 3–8 smoke episode:\nworst AQI of the summer",
+            label = "Aug 3-8 smoke:\nworst AQI this summer",
             inherit.aes = FALSE, 
             size = 2.8, 
             hjust = 0, 
@@ -378,7 +382,7 @@ fc_air %>%
   geom_smooth(se = FALSE, span = 0.3, color = "black", linewidth = 1)
 ```
 
-Now the shape of the summer is obvious in a way it was not before: air quality drifts steadily worse from May into August, with a sharp spike at the start of August.
+Now the shape this summer is obvious in a way it was not before: air quality drifts steadily worse from May into August, with a sharp spike at the start of August.
 
 ::: {.alert .alert-info}
 Note: `linewidth` is the modern argument for line thickness in `ggplot2`. You may see older code and tutorials use `size` for lines instead. That still works but will give you a deprecation warning.
@@ -677,7 +681,7 @@ Because 2025 comes before 2026, the 2025 panel appears on the left and 2026 on t
 
 ## Annotation
 
-Annotation is the process of adding text, lines, shading, or other notes to your charts. In our final figure we want to communicate two things about the air-quality series: where the Good/Moderate AQI boundary falls, and when the worst smoke episode of the summer occurred.
+Annotation is the process of adding text, lines, shading, or other notes to your charts. In our final figure we want to communicate two things about the air-quality series: where the Good/Moderate AQI boundary falls, and when the worst smoke episode this summer occurred.
 
 ### A horizontal reference line
 
@@ -706,7 +710,7 @@ p_aqi +
            ymin = -Inf, ymax = Inf,
            alpha = 0.15, fill = "firebrick") +
   annotate("text",
-           x = as.Date("2026-07-05"), y = 99,
+           x = as.Date("2026-07-04"), y = 99,
            label = "Aug 3-8 smoke:\nworst AQI this summer",
            size = 3, hjust = 0, vjust = 1, color = "grey20")
 ```
@@ -740,11 +744,15 @@ p_aqi_final <- fc_summer %>%
             inherit.aes = FALSE, alpha = 0.15, fill = "firebrick") +
   geom_hline(yintercept = 50,
              linetype = "dashed", color = "grey50") +
+  annotate("text",
+           x = as.Date("2026-05-01"), y = 55,
+           label = "Good/Moderate boundary",
+           size = 3, hjust = 0, color = "grey45") +
   geom_line(color = "#1b9e77", linewidth = 0.7) +
   geom_point(color = "#1b9e77", size = 1) +
   geom_text(data = smoke_2026,
-            x = as.Date("2026-07-05"), y = 99,
-            label = "Aug 3–8 smoke episode:\nworst AQI of the summer",
+            x = as.Date("2026-07-04"), y = 99,
+            label = "Aug 3-8 smoke:\nworst AQI this summer",
             inherit.aes = FALSE, size = 2.8, hjust = 0, vjust = 1, color = "grey20") +
   scale_x_date(date_breaks = "1 month", date_labels = "%B") +
   facet_wrap(~year, nrow = 1, scales = "free_x") +
