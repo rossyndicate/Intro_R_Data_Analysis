@@ -1,6 +1,6 @@
 # Data Visualization in R
 
-```{r include=FALSE}
+```{r include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE)
 
 library(tidyverse)
@@ -8,11 +8,12 @@ library(ggthemes)
 library(RColorBrewer)
 library(viridis)
 library(plotly)
+library(patchwork)
 ```
 
 This lesson covers data visualization with `ggplot2`: how to build a chart, how to customize it, and how to make it 'publication ready'.
 
-Our focus is on a question that comes up constantly in environmental data: how do things change **over time**, and how do you show several variables changing together in one figure? Along the way we will hit a problem that has no single right answer, and work through three different solutions to it.
+Our focus is on a question that comes up constantly in environmental data: how do things change **over time**, and how do you show several variables changing together in one figure? We will build up from a basic line chart to a polished small-multiple figure that lets us compare air quality, temperature, and precipitation across two summers.
 
 First, set up your session by executing your set up script we created in [Lesson 1](introduction-to-r-rstudio-and-r-markdown.qmd#write-a-set-up-script).
 
@@ -26,7 +27,9 @@ First, set up your session by executing your set up script we created in [Lesson
 
 -   `plotly`
 
-```{r eval=FALSE}
+-   `patchwork`
+
+```{r eval = FALSE}
 source("setup.R")
 ```
 
@@ -36,16 +39,19 @@ library(ggthemes)
 library(RColorBrewer)
 library(viridis)
 library(plotly)
+library(patchwork)
 ```
 
 ### Data Preparation
 
-For today's lesson we are going to be working with a summer of daily air quality, weather, and drought data for Fort Collins, CO, covering May through August of 2026. This data can be found on Canvas in the Data Module in .csv format titled `fort_collins_aq.csv`. **Download that file and put it in a `data/` folder in your R Project.**
+For today's lesson we are going to be working with daily air quality and weather data for Fort Collins, CO. Most of the lesson will stay focused on May through August of 2026, and our final figure will compare that summer with May through August of 2025. This data can be found on Canvas in the Data Module in .csv format titled `fort_collins_aq.csv`. **Download that file and put it in a `data/` folder in your R Project.**
 
 After that, read the .csv into your R session using `read_csv()`:
 
 ```{r eval = TRUE, message = FALSE}
-fc_air <- read_csv("data/fort_collins_aq.csv")
+fc_air <- read_csv("data/fort_collins_aq.csv") %>%
+  filter(date >= as_date("2026-05-01"),
+         date <= as_date("2026-08-31"))
 ```
 
 Inspect `fc_air` and the structure of the data frame:
@@ -62,12 +68,12 @@ We are going to follow three variables across the summer:
 
 -   `temp_max_f` — daily maximum temperature, in degrees Fahrenheit.
 
--   `drought_dsci` — the Drought Severity and Coverage Index for Larimer County, which ranges from 0 (no drought anywhere in the county) to 500 (the entire county in exceptional drought). Larimer was between 213 and 430 all summer, so every point on our charts is a drought day.
+-   `precip_in` — total daily precipitation, in inches. Most summer days are dry, so this variable behaves very differently from temperature or air quality: a few storm days stand out from many zero-precipitation days.
 
 Five days in the record have no air quality reading, because the monitor reported too few hours for a trustworthy daily average. We will see exactly what `ggplot2` does about that in a moment.
 
 ::: {.alert .alert-info}
-Note: This data for Fort Collins was retrieved entirely in R, pulling from three sources: [OpenAQ](https://openaq.org/) for air quality, CSU's own [CoAgMET](https://coagmet.colostate.edu/) weather network, and the [U.S. Drought Monitor](https://droughtmonitor.unl.edu/). The air quality readings come from a real regulatory monitor here in town, and the code below prints which one it used along with its coordinates. If you are interested in how I did this, expand the code. You will need your own OpenAQ API key to run it (free and instant [here](https://explore.openaq.org/register)); CoAgMET and the Drought Monitor need no key at all.
+Note: This data for Fort Collins was retrieved entirely in R from two sources: [OpenAQ](https://openaq.org/) for air quality and CSU's own [CoAgMET](https://coagmet.colostate.edu/) weather network for temperature, precipitation, solar radiation, and wind. The air quality readings come from a regulatory monitor here in town. If you are interested in how I did this, expand the code below. You will need your own OpenAQ API key to run it (free and instant [here](https://explore.openaq.org/register)); CoAgMET needs no key.
 :::
 
 ```{r}
@@ -75,20 +81,18 @@ Note: This data for Fort Collins was retrieved entirely in R, pulling from three
 #| code-fold: true
 #| code-summary: "Show the code used to retrieve this data"
 
-library(tidyverse)
-library(httr2)
+library(httr2) # if trying to run, probably need to install first!
 
-openaq_key <- "PASTE_YOUR_OPENAQ_KEY_HERE"
+openaq_key <- "9d63f209b2b7fd5ee091e0c28d4ca42cad49c32bcb04999b29274dfe2156cb4b"
 
-start_date <- as.Date("2026-05-01")
-end_date   <- as.Date("2026-08-31")
+start_date <- as.Date("2025-01-01")
+end_date <- as.Date("2026-08-31")
 
 # Fort Collins, near the CDPHE monitor at 708 S. Mason St.
 fc_lat <- 40.5853
 fc_lon <- -105.0844
 
 coagmet_station <- "fcl01"   # CoAgMET "Fort Collins"
-larimer_fips    <- "08069"
 
 all_dates <- seq(start_date, end_date, by = "day")
 
@@ -108,59 +112,23 @@ fetch_to_temp <- function(url) {
 coagmet_fields <- c("tAvg", "tMax", "tMin", "precip",
                     "solarRad", "windRun", "gustSpeed")
 
-coagmet_url <- paste0(
-  "https://coagmet.colostate.edu/data/daily/", coagmet_station, ".csv",
-  "?from=", start_date, "&to=", end_date,
-  "&header=no&fields=", paste(coagmet_fields, collapse = ",")
-)
+coagmet_url <- paste0("https://coagmet.colostate.edu/data/daily/", coagmet_station, ".csv",
+                      "?from=", start_date, "&to=", end_date,
+                      "&header=no&fields=", paste(coagmet_fields, collapse = ","))
 
 weather <- read_csv(fetch_to_temp(coagmet_url),
                     col_names = c("station", "date", coagmet_fields)) %>%
   mutate(across(where(is.numeric), ~ na_if(.x, -999))) %>%   # -999 = missing
-  transmute(
-    date       = mdy(date),
-    temp_max_f = tMax,
-    temp_min_f = tMin,
-    temp_avg_f = tAvg,
-    precip_in  = precip,
-    solar_rad  = solarRad,
-    wind_mph   = windRun / 24,   # daily wind run (mi) -> mean speed
-    gust_mph   = gustSpeed
-  )
+  transmute(date = mdy(date),
+            temp_max_f = tMax,
+            temp_min_f = tMin,
+            temp_avg_f = tAvg,
+            precip_in = precip,
+            solar_rad = solarRad,
+            wind_mph = windRun / 24,   # daily wind run (mi) -> mean speed
+            gust_mph = gustSpeed)
 
-# --- 2. U.S. Drought Monitor --------------------------------------
-# Percentages are cumulative (D0 means "D0 or worse"), so the Drought
-# Severity and Coverage Index is just their sum, from 0 to 500.
-usdm_url <- paste0(
-  "https://usdmdataservices.unl.edu/api/CountyStatistics/",
-  "GetDroughtSeverityStatisticsByAreaPercent?aoi=", larimer_fips,
-  "&startdate=", format(start_date - 7, "%m/%d/%Y"),
-  "&enddate=",   format(end_date, "%m/%d/%Y"),
-  "&statisticsType=1"
-)
-
-drought_weekly <- read_csv(fetch_to_temp(usdm_url)) %>%
-  transmute(
-    map_date     = ymd(MapDate),
-    drought_dsci = D0 + D1 + D2 + D3 + D4,
-    drought_category = case_when(
-      D4 >= 50 ~ "D4 Exceptional",
-      D3 >= 50 ~ "D3 Extreme",
-      D2 >= 50 ~ "D2 Severe",
-      D1 >= 50 ~ "D1 Moderate",
-      D0 >= 50 ~ "D0 Abnormally Dry",
-      TRUE     ~ "None"
-    ),
-    pct_in_drought = D1
-  ) %>%
-  arrange(map_date)
-
-# Drought maps come out weekly, so carry each one forward until the next
-drought_daily <- tibble(date = all_dates) %>%
-  left_join(drought_weekly, by = join_by(closest(date >= map_date))) %>%
-  select(date, drought_dsci, drought_category, pct_in_drought)
-
-# --- 3. OpenAQ daily PM2.5 ----------------------------------------
+# --- 2. OpenAQ daily PM2.5 ----------------------------------------
 # First find the PM2.5 monitors near Fort Collins (parameters_id 2 = PM2.5,
 # radius in metres), then pull daily averages.
 openaq_get <- function(path, query = list()) {
@@ -187,15 +155,11 @@ monitors <- map_dfr(locs, function(l) {
 })
 
 # The list mixes reference-grade regulatory monitors (provider "AirNow",
-# run by CDPHE) with low-cost community sensors, and a backyard sensor can
-# be closer to downtown than the regulatory one. Location 1331 is
-# "Ft. Collins - CSU Facilities" at 251 Edison Dr, the CDPHE PM2.5 monitor.
+# run by CDPHE) with low-cost community sensors. Location 1331 is
+# "Ft. Collins - CSU Facilities", the CDPHE PM2.5 monitor.
 chosen <- filter(monitors, location_id == 1331)
 
-# /days gives daily means built from hourly data. Note that OpenAQ silently
-# IGNORES query parameters it does not recognise, so the date filter has to
-# be spelled date_from / date_to, and we page through and filter locally
-# as a belt-and-braces check.
+# /days gives daily means built from hourly data.
 fetch_days <- function(sensor_id, from, to) {
   out <- list(); page <- 1
   repeat {
@@ -220,10 +184,10 @@ pm25_to_aqi <- function(conc) {
   conc <- floor(conc * 10) / 10          # EPA truncates to 1 decimal
   bp <- tribble(
     ~c_lo,  ~c_hi,  ~i_lo, ~i_hi,
-      0.0,    9.0,      0,    50,
-      9.1,   35.4,     51,   100,
-     35.5,   55.4,    101,   150,
-     55.5,  125.4,    151,   200,
+    0.0,    9.0,      0,    50,
+    9.1,   35.4,     51,   100,
+    35.5,   55.4,    101,   150,
+    55.5,  125.4,    151,   200,
     125.5,  225.4,    201,   300,
     225.5,  500.4,    301,   500
   )
@@ -231,34 +195,33 @@ pm25_to_aqi <- function(conc) {
     if (is.na(x) || x < 0) return(NA_real_)
     row <- bp %>% filter(x >= c_lo, x <= c_hi) %>% slice(1)
     if (nrow(row) == 0) return(500)
-    round((row$i_hi - row$i_lo) / (row$c_hi - row$c_lo) * (x - row$c_lo) + row$i_lo)
+    round((row$i_hi - row$i_lo) / (row$c_hi - row$c_lo) *
+            (x - row$c_lo) + row$i_lo)
   })
 }
 
 air <- map_dfr(days, function(d) tibble(
   date      = as.Date(substr(d$period$datetimeFrom$local, 1, 10)),
   pm25_conc = as.numeric(d$value),
-  # percent of the 24 expected hourly values actually observed
   coverage  = as.numeric(d$coverage$percentComplete)
 )) %>%
   filter(date >= start_date, date <= end_date, coverage >= 75) %>%
   mutate(
     pm25_conc = round(pm25_conc, 1),
     pm25_aqi  = pm25_to_aqi(pm25_conc),
-    pm25_category = cut(pm25_aqi,
+    pm25_category = cut(
+      pm25_aqi,
       breaks = c(-Inf, 50, 100, 150, 200, 300, Inf),
       labels = c("Good", "Moderate", "Unhealthy for Sensitive Groups",
-                 "Unhealthy", "Very Unhealthy", "Hazardous")) %>% as.character()
+                 "Unhealthy", "Very Unhealthy", "Hazardous")
+    ) %>% as.character()
   ) %>%
   select(date, pm25_conc, pm25_aqi, pm25_category)
 
-# --- 4. Join it all together --------------------------------------
+# --- 3. Join it all together --------------------------------------
 fort_collins_aq <- tibble(date = all_dates) %>%
-  left_join(air,           by = "date") %>%
-  left_join(weather,       by = "date") %>%
-  left_join(drought_daily, by = "date") %>%
-  mutate(month = month(date, label = TRUE, abbr = FALSE)) %>%
-  relocate(month, .after = date)
+  left_join(air, by = "date") %>%
+  left_join(weather, by = "date")
 
 write_csv(fort_collins_aq, "data/fort_collins_aq.csv")
 ```
@@ -267,91 +230,102 @@ write_csv(fort_collins_aq, "data/fort_collins_aq.csv")
 
 ## Where We Are Headed
 
-In today's lesson you are going to learn how to go:
+In today's lesson, you are going to learn how to go **from this...**
 
 ```{r}
 #| echo: false
-#| layout-ncol: 2
-#| fig-height: 6.5
-#| fig-subcap:
-#|   - "From this"
-#|   - "To this!"
+#| fig-height: 3.5
 
-# ---- the starting point ----
 fc_air %>%
   ggplot(aes(x = date, y = pm25_aqi)) +
   geom_line()
-
-# ---- the finished figure ----
-.preview_long <- fc_air %>%
-  select(date, pm25_aqi, temp_max_f, drought_dsci) %>%
-  pivot_longer(cols = -date, names_to = "variable", values_to = "value") %>%
-  mutate(variable = factor(
-    variable,
-    levels = c("pm25_aqi", "temp_max_f", "drought_dsci"),
-    labels = c("PM2.5 Air Quality Index",
-               "Maximum Temperature (F)",
-               "Drought Severity (DSCI)")
-  ))
-
-.preview_threshold <- tibble(
-  variable = factor("PM2.5 Air Quality Index",
-                    levels = levels(.preview_long$variable)),
-  yint = 50
-)
-
-.preview_notes <- tibble(
-  variable = factor(
-    c("PM2.5 Air Quality Index", "Maximum Temperature (F)"),
-    levels = levels(.preview_long$variable)
-  ),
-  date  = as.Date(c("2026-06-18", "2026-05-09")),
-  value = c(93, 53),
-  label = c("Wildfire smoke, Aug 3-8:\nthe worst air of the summer",
-            "May 5 storm: 1.03 in. of rain\nand a 44 F afternoon")
-)
-
-.preview_long %>%
-  ggplot(aes(x = date, y = value, color = variable)) +
-  annotate("rect",
-           xmin = as.Date("2026-08-03"), xmax = as.Date("2026-08-08"),
-           ymin = -Inf, ymax = Inf,
-           alpha = 0.15, fill = "firebrick") +
-  geom_vline(xintercept = as.Date("2026-05-05"),
-             linetype = "dotted", color = "grey40") +
-  geom_hline(data = .preview_threshold, aes(yintercept = yint),
-             linetype = "dashed", color = "grey50", inherit.aes = FALSE) +
-  geom_line(data = ~ filter(.x, variable != "Drought Severity (DSCI)"),
-            linewidth = 0.7) +
-  geom_step(data = ~ filter(.x, variable == "Drought Severity (DSCI)"),
-            linewidth = 0.8) +
-  geom_text(data = .preview_notes, aes(x = date, y = value, label = label),
-            size = 2.5, hjust = 0, color = "grey20", inherit.aes = FALSE) +
-  facet_wrap(~variable, ncol = 1, scales = "free_y") +
-  scale_x_date(date_breaks = "1 month", date_labels = "%b") +
-  scale_color_brewer(palette = "Dark2") +
-  labs(
-    title = "A Fort Collins summer: smoke, heat, and drought",
-    subtitle = "Daily air quality and temperature with weekly drought severity",
-    x = NULL, y = NULL
-  ) +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(face = "bold", size = 12),
-    plot.subtitle = element_text(size = 8, color = "grey30",
-                                 margin = margin(b = 8)),
-    plot.title.position = "plot",
-    strip.text = element_text(face = "bold", hjust = 0, size = 8),
-    panel.grid.minor = element_blank(),
-    legend.position = "none"
-  )
 ```
 
+...**to this!** Tada! 🎉
+
+Because the final figure compares the same summer months across two years, first create a dataset containing May through August of 2025 and 2026 and a `year` column for faceting:
+
+```{r}
+fc_summer <- read_csv("data/fort_collins_aq.csv") %>%
+  filter(month(date) %in% 5:8,
+         year(date) %in% c(2025, 2026)) %>%
+  mutate(year = year(date))
+```
+
+```{r}
+#| echo: false
+#| fig-height: 7
+
+# This annotation belongs only in the 2026 facet.
+smoke_2026 <- tibble(year = 2026)
+
+p_aqi_preview <- fc_summer %>%
+  ggplot(aes(x = date, y = pm25_aqi)) +
+  geom_rect(data = smoke_2026,
+            xmin = as.Date("2026-08-03"), 
+            xmax = as.Date("2026-08-08"), 
+            ymin = -Inf, 
+            ymax = Inf,
+            inherit.aes = FALSE, 
+            alpha = 0.15, 
+            fill = "firebrick") +
+  geom_hline(yintercept = 50, 
+             linetype = "dashed", 
+             color = "grey50") +
+  geom_line(color = "#1b9e77",
+            linewidth = 0.7) +
+  geom_point(color = "#1b9e77", 
+             size = 1) +
+  geom_text(data = smoke_2026,
+            x = as.Date("2026-07-05"), 
+            y = 99,
+            label = "Aug 3–8 smoke episode:\nworst AQI of the summer",
+            inherit.aes = FALSE, 
+            size = 2.8, 
+            hjust = 0, 
+            vjust = 1,
+            color = "grey20") +
+  scale_x_date(date_breaks = "1 month",
+               date_labels = "%b") +
+  facet_wrap(~year, nrow = 1, scales = "free_x") +
+  labs(x = NULL, y = "PM2.5 AQI") +
+  theme_minimal()
+
+p_temp_preview <- fc_summer %>%
+  ggplot(aes(x = date, y = temp_max_f)) +
+  geom_rect(data = smoke_2026,
+            xmin = as.Date("2026-08-03"), xmax = as.Date("2026-08-08"),
+            ymin = -Inf, ymax = Inf,
+            inherit.aes = FALSE, alpha = 0.15, fill = "firebrick") +
+  geom_line(color = "#d95f02", linewidth = 0.7) +
+  geom_point(color = "#d95f02", size = 1) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%b") +
+  facet_wrap(~year, nrow = 1, scales = "free_x") +
+  labs(x = NULL, y = "Max temperature (F)") +
+  theme_minimal()
+
+p_precip_preview <- fc_summer %>%
+  ggplot(aes(x = date, y = precip_in)) +
+  geom_rect(data = smoke_2026,
+            xmin = as.Date("2026-08-03"), xmax = as.Date("2026-08-08"),
+            ymin = -Inf, ymax = Inf,
+            inherit.aes = FALSE, alpha = 0.15, fill = "firebrick") +
+  geom_col(fill = "#7570b3", width = 0.8) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%b") +
+  facet_wrap(~year, nrow = 1, scales = "free_x") +
+  labs(x = NULL, y = "Precipitation (in.)") +
+  theme_minimal()
+
+(p_aqi_preview / p_temp_preview / p_precip_preview) +
+  plot_annotation(title = "Two Fort Collins summers: smoke, heat, and rain",
+                  subtitle = "Daily air quality, maximum temperature, and precipitation, May to August 2025 and 2026")
+```
+
+<hr>
 
 ## Building a Line Chart with `ggplot2`
 
 <hr>
-
 
 Every `ggplot2` chart is built from the same three pieces:
 
@@ -361,7 +335,7 @@ Every `ggplot2` chart is built from the same three pieces:
 
 3.  one or more **geoms**, the actual marks drawn on the page
 
-A line chart is `geom_line()` with time on the x axis. That is the whole idea:
+A line chart is `geom_line()` with time on the x axis:
 
 ```{r}
 fc_air %>%
@@ -369,9 +343,19 @@ fc_air %>%
   geom_line()
 ```
 
-Note the `+` between `ggplot2` layers, rather than the `%>%` pipe we use elsewhere in the tidyverse. Every chart in this lesson is built by adding layers with `+`.
+::: {.alert .alert-info}
+**Why are there gaps in the line?** Look closely and you will see gaps in early May and mid June. Those dates are still present as rows in `fc_air`, but `pm25_aqi` is explicitly recorded as `NA` because the monitor did not have enough valid hourly observations to calculate a trustworthy daily value.
 
-Look closely and you will see the line has **gaps** in early May and mid June. Those are not plotting errors. Those are the five days with no air quality reading, and `geom_line()` correctly refuses to draw a line through missing data. A gap is the honest thing to show. If you connected across it, you would be inventing measurements that were never taken.
+```{r}
+fc_air %>%
+  filter(is.na(pm25_aqi)) %>%
+  select(date, pm25_aqi)
+```
+
+That `NA` is what tells `geom_line()` to stop the line. If the missing dates were simply absent from the data frame, `geom_line()` would connect the observations on either side and there would be **no visible gap**. Keeping the missing dates with an explicit `NA` makes the pause in the record visible instead of implying that measurements exist continuously through it.
+:::
+
+Note the `+` between `ggplot2` layers, rather than the `%>%` pipe we use elsewhere in the tidyverse. Every chart in this lesson is built by adding layers with `+`.
 
 Adding points on top makes the individual observations visible, and makes those gaps easier to read. Layers draw in the order you add them, so the points land on top of the line:
 
@@ -382,7 +366,7 @@ fc_air %>%
   geom_point(size = 1)
 ```
 
-Setting `color` and `size` *outside* of `aes()` applies one fixed value to everything. Later we will put them *inside* `aes()` to map them to a variable, which is a different thing entirely.
+Setting `color` and `size` *outside* of `aes()` applies one fixed value to everything. Later we will put color *inside* `aes()` to map it to a variable, which is a different thing entirely.
 
 Daily data is noisy. When you want the *trend* rather than the day-to-day jitter, `geom_smooth()` fits a curve through the points. `se = FALSE` turns off the shaded confidence band, and `span` controls how wiggly the curve is (smaller is wigglier):
 
@@ -390,6 +374,7 @@ Daily data is noisy. When you want the *trend* rather than the day-to-day jitter
 fc_air %>%
   ggplot(aes(x = date, y = pm25_aqi)) +
   geom_line(color = "grey75") +
+  geom_point(color = "grey60", size = 1) +
   geom_smooth(se = FALSE, span = 0.3, color = "black", linewidth = 1)
 ```
 
@@ -415,6 +400,7 @@ Note: `linewidth` is the modern argument for line thickness in `ggplot2`. You ma
 fc_air %>%
   ggplot(aes(x = date, y = pm25_aqi)) +
   geom_line() +
+  geom_point(size = 1) +
   ggtitle("Fort Collins air quality, summer 2026") +
   xlab("Date") +
   ylab("PM2.5 Air Quality Index") +
@@ -429,13 +415,12 @@ You can also put multiple label arguments within `labs()` like this, which is us
 fc_air %>%
   ggplot(aes(x = date, y = pm25_aqi)) +
   geom_line() +
-  labs(
-    title = "Fort Collins air quality, summer 2026",
-    subtitle = "Daily PM2.5 Air Quality Index at the CSU Facilities monitor",
-    x = NULL,
-    y = "PM2.5 Air Quality Index",
-    caption = "Data from OpenAQ"
-  )
+  geom_point(size = 1) +
+  labs(title = "Fort Collins air quality, summer 2026",
+       subtitle = "Daily PM2.5 Air Quality Index at the CSU Facilities monitor",
+       x = NULL,
+       y = "PM2.5 Air Quality Index",
+       caption = "Data from OpenAQ")
 ```
 
 `labs()` also gives you `subtitle` and `caption`, which `ggtitle()` does not. Setting `x = NULL` removes the axis title entirely, which makes sense here because the labels already say what they are.
@@ -454,14 +439,12 @@ fc_air %>%
   geom_line(color = "grey60") +
   geom_point(size = 1) +
   scale_x_date(date_breaks = "1 month", date_labels = "%B") +
-  labs(
-    title = "Fort Collins air quality, summer 2026",
-    x = NULL,
-    y = "PM2.5 Air Quality Index"
-  )
+  labs(title = "Fort Collins air quality, summer 2026",
+       x = NULL,
+       y = "PM2.5 Air Quality Index")
 ```
 
-Try changing `date_breaks` to `"2 weeks"` and `date_labels` to `"%b %d"` to see how much denser the axis gets, and why picking the right break interval matters.
+Try changing `date_breaks` to `"1 week"` and `date_labels` to `"%b %d"` to see how much denser the axis gets, and why picking the right break interval matters.
 
 <hr>
 
@@ -473,6 +456,7 @@ All `ggplot2` components can be customized within the `theme()` function. The fu
 fc_air %>%
   ggplot(aes(x = date, y = pm25_aqi)) +
   geom_line() +
+  geom_point(size = 1) +
   labs(title = "Fort Collins air quality, summer 2026",
        x = NULL, y = "PM2.5 Air Quality Index") +
   scale_x_date(date_breaks = "1 month", date_labels = "%B") +
@@ -502,6 +486,7 @@ For example, see what `theme_minimal()` and `theme_classic()` look like:
 fc_air %>%
   ggplot(aes(x = date, y = pm25_aqi)) +
   geom_line() +
+  geom_point(size = 1) +
   labs(title = "Fort Collins air quality, summer 2026",
        x = NULL, y = "PM2.5 Air Quality Index") +
   theme_minimal()
@@ -511,6 +496,7 @@ fc_air %>%
 fc_air %>%
   ggplot(aes(x = date, y = pm25_aqi)) +
   geom_line() +
+  geom_point(size = 1) +
   labs(title = "Fort Collins air quality, summer 2026",
        x = NULL, y = "PM2.5 Air Quality Index") +
   theme_classic()
@@ -524,6 +510,7 @@ Now explore a few themes, such as `theme_wsj`, which uses the Wall Street Journa
 fc_air %>%
   ggplot(aes(x = date, y = pm25_aqi)) +
   geom_line() +
+  geom_point(size = 1) +
   ggtitle("Fort Collins air quality") +
   ggthemes::theme_wsj() +
   # make the text smaller
@@ -540,51 +527,13 @@ Some themes may look messy out of the box, but you can apply any elements from `
 fc_air %>%
   ggplot(aes(x = date, y = pm25_aqi)) +
   geom_line() +
+  geom_point(size = 1) +
   labs(title = "Fort Collins air quality, summer 2026",
        x = NULL, y = "PM2.5 Air Quality Index") +
   ggthemes::theme_economist() +
-  theme(
-    plot.title = element_text(size = 12),
-    axis.title.y = element_text(margin = margin(r = 10))
-  )
+  theme(plot.title = element_text(size = 12),
+        axis.title.y = element_text(margin = margin(r = 10)))
 ```
-
-<hr>
-
-## Three Variables, One Chart
-
-Here is the real question we came for: we have air quality, temperature, and drought severity. Do they move together?
-
-To plot several variables as separate lines, `ggplot2` needs them stacked into **long format**: one row per date per variable, rather than one row per date with three columns. We will learn a lot more about *pivot* functions later, but here is your first introduction! To turn a *wide* dataset *long*, we use: `pivot_longer()`:
-
-```{r}
-fc_long <- fc_air %>%
-  select(date, pm25_aqi, temp_max_f, drought_dsci) %>%
-  pivot_longer(
-    cols = -date,                # everything except date
-    names_to = "variable",       # column names become this column
-    values_to = "value"          # the numbers go here
-  )
-
-head(fc_long)
-```
-
-Notice the shape change: `fc_air` had 123 rows and our three columns, `fc_long` has 369 rows and just `date`, `variable`, and `value`. Now `variable` is something we can map to color.
-
-### The naive attempt
-
-```{r}
-fc_long %>%
-  ggplot(aes(x = date, y = value, color = variable)) +
-  geom_line() +
-  theme_minimal()
-```
-
-This is our first time putting a variable *inside* `aes()`: `color = variable` tells `ggplot2` to draw a separate line for each variable and give each one its own color, and to build a legend explaining the mapping.
-
-But the chart is nearly useless, and it is worth being precise about why. Drought severity runs from about 210 to 430. Air quality runs from 7 to 100. When they share a y axis, the axis has to stretch from 7 to 430, which flattens the air quality line into a nearly straight streak along the bottom. All of its structure, including the August spike we just spent a whole section looking at, disappears.
-
-This is one of the most common failures in real-world charts: variables measured on different scales crammed onto one axis. There are three reasonable ways out, and each one trades something away. Before we get to them, let's fix the colors.
 
 <hr>
 
@@ -592,374 +541,261 @@ This is one of the most common failures in real-world charts: variables measured
 
 To specify a single color, the most common way is to specify the name (e.g., `"red"`) or the Hex code (e.g., `"#69b3a2"`). That is what we have been doing with `color = "grey60"` outside of `aes()`.
 
-When color is mapped to a variable inside `aes()`, you control the whole set of colors with a **palette**. Some of the most common packages to work with color palettes in R are `RColorBrewer` and [`viridis`](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html). Viridis is designed to be color-blind friendly, and RColorBrewer has a [web application](https://colorbrewer2.org/#type=qualitative&scheme=Dark2&n=3) where you can explore your data requirements and preview various palettes.
+When color is mapped to a variable inside `aes()`, `ggplot2` builds a legend automatically. For example, we can keep the air-quality line for continuity while coloring individual observations by their AQI category:
 
-The function you use depends on whether your variable is **discrete** (categories, like our three variable names) or **continuous** (numbers):
+```{r}
+fc_air %>%
+  ggplot(aes(x = date, y = pm25_aqi)) +
+  geom_line(color = "grey65",
+            linewidth = 0.7) +
+  geom_point(aes(color = pm25_category),
+             size = 2) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%B") +
+  labs(x = NULL,
+       y = "PM2.5 Air Quality Index",
+       color = "AQI category") +
+  theme_minimal()
+```
+
+When color is mapped to a variable, you control the colors with a **palette**. Some of the most common packages to work with color palettes in R are `RColorBrewer` and [`viridis`](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html). Viridis is designed to be color-blind friendly, and RColorBrewer has a [web application](https://colorbrewer2.org/) where you can explore your data requirements and preview palettes.
+
+The function you use depends on whether your variable is **discrete** (categories, such as AQI category) or **continuous** (numbers):
 
 | | RColorBrewer | viridis |
 |---|---|---|
 | discrete | `scale_color_brewer()` | `scale_color_viridis_d()` |
 | continuous | `scale_color_distiller()` | `scale_color_viridis_c()` |
 
-Our `variable` column is discrete, so we want `scale_color_brewer()` with a qualitative palette. "Dark2" is a good color-blind friendly choice:
+Our `pm25_category` variable is discrete, so we can use a qualitative Brewer palette:
 
 ```{r}
-fc_long %>%
-  ggplot(aes(x = date, y = value, color = variable)) +
-  geom_line() +
-  scale_color_brewer(palette = "Dark2") +
-  theme_minimal()
-```
-
-If you were filling an area or a bar rather than coloring a line, you would use `scale_fill_brewer()` instead. Every `scale_color_*` function has a `scale_fill_*` twin.
-
-The legend labels are still the raw column names, and the legend title says "variable". You can fix both with `labs()` and `scale_color_brewer()`:
-
-```{r}
-fc_long %>%
-  ggplot(aes(x = date, y = value, color = variable)) +
-  geom_line() +
-  scale_color_brewer(
-    palette = "Dark2",
-    name = "Measurement",
-    labels = c("Drought Severity", "PM2.5 AQI", "Max Temperature")
-  ) +
+fc_air %>%
+  ggplot(aes(x = date, y = pm25_aqi)) +
+  geom_line(color = "grey65", linewidth = 0.7) +
+  geom_point(aes(color = pm25_category), size = 2) +
+  scale_color_brewer(palette = "Dark2", 
+                     name = "AQI category",
+                     # remove NA from the legend
+                     na.translate = FALSE) +
   scale_x_date(date_breaks = "1 month", date_labels = "%B") +
-  labs(x = NULL, y = "Value") +
+  labs(x = NULL, y = "PM2.5 Air Quality Index") +
   theme_minimal() +
   theme(legend.position = "bottom")
 ```
 
-`legend.position` accepts `"bottom"`, `"top"`, `"left"`, `"right"`, and `"none"` to remove the legend entirely. We will use `"none"` later, once the chart labels each series in a way that makes a legend redundant.
-
-::: {.alert .alert-info}
-Careful with `labels =`: it applies them in the order R sorts the categories, which is alphabetical here, not the order you listed the columns. This is a common way to accidentally mislabel a chart. We will fix it properly in a moment using factors, which is the more reliable approach.
-:::
+`legend.position` accepts `"bottom"`, `"top"`, `"left"`, `"right"`, and `"none"` to remove the legend entirely.
 
 <hr>
 
-## Fix 1: Put Them on a Common Footing
+## Three Variables, One Figure
 
-If the problem is that the variables have different ranges, one fix is to remove the ranges entirely. Rescaling each variable to run from 0 to 1 lets you compare the **shapes** of the three series even though the units are gone. 
+Here is the real question we came for: we have air quality, temperature, and precipitation. How can we look at all three across the same summer?
 
-```{r}
-fc_scaled <- fc_long %>%
-  group_by(variable) %>%
-  mutate(scaled = (value - min(value, na.rm = TRUE)) /
-                  (max(value, na.rm = TRUE) - min(value, na.rm = TRUE))) %>%
-  ungroup() # ggplot doesn't always like grouped data, so we end with ungrouping it
-
-fc_scaled %>%
-  ggplot(aes(x = date, y = scaled, color = variable)) +
-  geom_line(linewidth = 0.8) +
-  scale_x_date(date_breaks = "1 month", date_labels = "%B") +
-  scale_color_brewer(palette = "Dark2") +
-  labs(
-    title = "All three variables, rescaled from 0 to 1",
-    x = NULL,
-    y = "Rescaled value (0 = summer minimum, 1 = summer maximum)"
-  ) +
-  theme_minimal()
-```
-
-Now you can actually see the relationships. Temperature and air quality both climb into midsummer. Drought does something different and more interesting: it *falls* sharply through May, bottoms out in mid June, then climbs steadily back through July and August.
-
-The `group_by(variable)` before `mutate()` is what makes this work. It tells R to calculate the minimum and maximum **separately for each variable**, rather than across the whole stacked column.
-
-What you gave up is the y axis. It no longer means anything a reader can interpret. "0.7" is not a temperature or an AQI. Use this when the question is genuinely about shape and timing, and say clearly in the axis label what you did.
-
-<hr>
-
-## Fix 2: A Second Axis
-
-If you have exactly **two** variables, you can give each its own axis. In `ggplot2` a secondary axis has to be a transformation of the primary one, so you rescale the second variable onto the first axis, then define the second axis as the inverse of that transformation:
+One tempting approach is to put everything on one set of axes. Because the variables are already separate columns in `fc_air`, we can add each one as its own layer without transforming the data frame:
 
 ```{r}
-# how much to stretch PM2.5 so it shares the temperature scale
-coef <- max(fc_air$temp_max_f, na.rm = TRUE) / max(fc_air$pm25_aqi, na.rm = TRUE)
-
 fc_air %>%
   ggplot(aes(x = date)) +
-  geom_line(aes(y = temp_max_f), color = "#d95f02", linewidth = 0.7) +
-  geom_line(aes(y = pm25_aqi * coef), color = "#1b9e77", linewidth = 0.7) +
-  scale_y_continuous(
-    name = "Maximum Temperature (F)",
-    sec.axis = sec_axis(~ . / coef, name = "PM2.5 Air Quality Index")
-  ) +
-  scale_x_date(date_breaks = "1 month", date_labels = "%B") +
-  labs(title = "Temperature and air quality on two axes", x = NULL) +
-  theme_minimal() +
-  theme(
-    axis.title.y.left  = element_text(color = "#d95f02", face = "bold"),
-    axis.title.y.right = element_text(color = "#1b9e77", face = "bold")
-  )
-```
-
-Coloring each axis title to match its line is essential here. Without it the reader has no way to know which line belongs to which axis.
-
-::: {.alert .alert-info}
-A word of caution: dual axis charts are controversial, and for good reason. You choose `coef`, and by choosing it differently you can make two unrelated series appear to move together or apart. Try setting `coef <- coef * 2` and re-running the chunk to see how much the apparent relationship changes without a single data value changing. Use dual axes sparingly, and never to argue that two things are correlated.
-:::
-
-<hr>
-
-## Fix 3: Facets
-
-The third option is to stop forcing the variables to share space at all. **Facets** split one plot into a grid of panels sharing the same x axis, which for time series data is exactly what we want: the same summer, three times, stacked.
-
-`facet_wrap()` takes a variable to split on, written with a `~` in front of it:
-
-```{r fig.height=6}
-fc_long %>%
-  ggplot(aes(x = date, y = value, color = variable)) +
-  geom_line() +
-  facet_wrap(~variable, ncol = 1) +
-  theme_minimal()
-```
-
-Better, but the panels still share a y axis, so we have not solved anything yet. The `scales` argument fixes that. Setting `scales = "free_y"` lets each panel choose its own y range:
-
-```{r fig.height=6}
-fc_long %>%
-  ggplot(aes(x = date, y = value, color = variable)) +
-  geom_line() +
-  facet_wrap(~variable, ncol = 1, scales = "free_y") +
-  theme_minimal()
-```
-
-Now every series gets the full height of its panel, the x axis is shared so dates line up vertically, and no units have been thrown away. This is usually the right default.
-
-::: {.alert .alert-info}
-`facet_wrap()` has a sibling, `facet_grid()`, which lays panels out by two variables at once (`facet_grid(rows ~ cols)`). For one grouping variable, `facet_wrap()` with `ncol` or `nrow` is what you want.
-:::
-
-### Better panel labels
-
-The strip labels still say `pm25_aqi` and `drought_dsci`, which is not what you would put in front of a reader. The cleanest fix is to turn `variable` into a **factor** with proper labels. This does two jobs at once: it renames the panels, and because factors have an order, it controls which panel comes first. This is also the reliable way to fix the legend label problem we ran into earlier.
-
-```{r}
-fc_long <- fc_long %>%
-  mutate(variable = factor(
-    variable,
-    levels = c("pm25_aqi", "temp_max_f", "drought_dsci"),
-    labels = c("PM2.5 Air Quality Index",
-               "Maximum Temperature (F)",
-               "Drought Severity (DSCI)")
-  ))
-
-levels(fc_long$variable)
-```
-
-Panels now appear in the order we listed the levels, not alphabetically.
-
-```{r fig.height=6}
-fc_long %>%
-  ggplot(aes(x = date, y = value, color = variable)) +
-  geom_line(linewidth = 0.7) +
-  facet_wrap(~variable, ncol = 1, scales = "free_y") +
-  scale_x_date(date_breaks = "1 month", date_labels = "%B") +
-  scale_color_brewer(palette = "Dark2") +
-  labs(x = NULL, y = NULL) +
-  theme_minimal() +
-  theme(
-    strip.text = element_text(face = "bold", hjust = 0),
-    legend.position = "none"     # the panel labels already say which is which
-  )
-```
-
-Dropping the legend with `legend.position = "none"` is a deliberate choice. Once each panel is labeled, a legend repeating the same three names is redundant ink.
-
-<hr>
-
-## Using the Right Geom
-
-Before we annotate, look carefully at the drought panel. `geom_line()` draws a smooth diagonal between each weekly value, which implies drought severity drifted gradually from one number to the next. It did not. The U.S. Drought Monitor publishes one map per week, and the value holds flat until the next map comes out.
-
-`geom_step()` draws that honestly, as a flat line that jumps:
-
-```{r}
-fc_air %>%
-  ggplot(aes(x = date, y = drought_dsci)) +
-  geom_step(color = "#7570b3", linewidth = 0.8) +
-  scale_x_date(date_breaks = "1 month", date_labels = "%B") +
-  labs(
-    title = "Drought severity updates once a week, so it steps",
-    x = NULL, y = "Drought Severity (DSCI)"
-  ) +
-  theme_minimal()
-```
-
-To use a different geom in one panel, give that layer its **own data**. Any geom can take a `data =` argument that overrides the plot's default, which is one of the most useful things to know about `ggplot2`:
-
-```{r fig.height=6}
-fc_long %>%
-  ggplot(aes(x = date, y = value, color = variable)) +
-  # daily variables get a line
-  geom_line(data = ~ filter(.x, variable != "Drought Severity (DSCI)"),
+  geom_line(aes(y = pm25_aqi), 
+            color = "#1b9e77", 
             linewidth = 0.7) +
-  # the weekly variable gets a step
-  geom_step(data = ~ filter(.x, variable == "Drought Severity (DSCI)"),
-            linewidth = 0.8) +
-  facet_wrap(~variable, ncol = 1, scales = "free_y") +
+  geom_point(aes(y = pm25_aqi),
+             color = "#1b9e77", 
+             size = 1) +
+  geom_line(aes(y = temp_max_f), 
+            color = "#d95f02", 
+            linewidth = 0.7) +
+  geom_point(aes(y = temp_max_f),
+             color = "#d95f02", 
+             size = 1) +
+  geom_col(aes(y = precip_in), 
+           fill = "#7570b3",
+           width = 0.8,
+           alpha = 0.7) +
   scale_x_date(date_breaks = "1 month", date_labels = "%B") +
-  scale_color_brewer(palette = "Dark2") +
-  labs(x = NULL, y = NULL) +
-  theme_minimal() +
-  theme(strip.text = element_text(face = "bold", hjust = 0),
-        legend.position = "none")
+  labs(x = NULL, y = "Value") +
+  theme_minimal()
 ```
 
-The `~ filter(.x, ...)` syntax is shorthand for "take the plot's data and filter it", where `.x` stands in for the dataset.
+The chart is not very useful.They are all measured in completely different units, and precipitation's values are much smaller numerically. Putting them all on one y axis flattens the precipitation bars against the bottom and makes the axis itself hard to interpret. Rather than forcing them onto a common scale, we will give each variable its own plot while keeping the dates lined up.
+
+One simple way to do this is with the `patchwork` package. We keep `fc_air` exactly as it is and make three ordinary `ggplot` objects:
+
+```{r fig.height=7}
+p_aqi <- fc_air %>%
+  ggplot(aes(x = date, y = pm25_aqi)) +
+  geom_line(color = "#1b9e77", linewidth = 0.7) +
+  geom_point(color = "#1b9e77", size = 1) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%B") +
+  labs(x = NULL, y = "PM2.5 AQI") +
+  theme_minimal()
+
+p_temp <- fc_air %>%
+  ggplot(aes(x = date, y = temp_max_f)) +
+  geom_line(color = "#d95f02", linewidth = 0.7) +
+  geom_point(color = "#d95f02", size = 1) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%B") +
+  labs(x = NULL, y = "Maximum Temperature (F)") +
+  theme_minimal()
+
+p_precip <- fc_air %>%
+  ggplot(aes(x = date, y = precip_in)) +
+  geom_col(fill = "#7570b3", width = 0.8) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%B") +
+  labs(x = NULL, y = "Precipitation (in.)") +
+  theme_minimal()
+
+p_aqi / p_temp / p_precip
+```
+
+The `/` is `patchwork` syntax for "put the next plot underneath this one." A `+` puts plots beside each other. Because each object is a separate ggplot, each one automatically keeps its own y-axis scale and units.
+
+Notice that we also use a different geom for precipitation. Temperature and AQI are shown with lines and points, while daily precipitation is shown with bars because each bar represents the amount that fell during that particular day.
+
+::: {.alert .alert-info}
+`patchwork` is useful when we want to stack **different variables** that need different y-axis units. For our final figure, we will also use `facet_wrap()` inside each plot to compare the **same variable across 2025 and 2026**.
+:::
+
+### Faceting by year
+
+`facet_wrap()` splits one plot into panels using a categorical variable. Just before the preview figure, we created `fc_summer` with a `year` column, so comparing the two summers only takes one additional layer:
+
+```{r}
+fc_summer %>%
+  ggplot(aes(x = date, y = pm25_aqi)) +
+  geom_line(color = "#1b9e77", linewidth = 0.7) +
+  geom_point(color = "#1b9e77", size = 1) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%B") +
+  facet_wrap(~year, nrow = 1, scales = "free_x") +
+  labs(x = NULL, y = "PM2.5 AQI") +
+  theme_minimal()
+```
+
+Because 2025 comes before 2026, the 2025 panel appears on the left and 2026 on the right. `scales = "free_x"` lets each panel use its own summer dates, while the y scale stays the same so values are still directly comparable across years.
 
 <hr>
 
 ## Annotation
 
-Annotation is the process of adding text, or 'notes', to your charts. With time series data the thing you usually want to call out is not a single point but a **period**: a heat wave, a storm, a smoke event.
+Annotation is the process of adding text, lines, shading, or other notes to your charts. In our final figure we want to communicate two things about the air-quality series: where the Good/Moderate AQI boundary falls, and when the worst smoke episode of the summer occurred.
+
+### A horizontal reference line
+
+An AQI of 50 is the boundary between the EPA's "Good" and "Moderate" categories. `geom_hline()` adds a horizontal reference line, and `annotate("text", ...)` lets us explain what that line means:
+
+```{r}
+p_aqi +
+  geom_hline(yintercept = 50,
+             linetype = "dashed", color = "grey50") +
+  annotate("text",
+           x = as.Date("2026-05-01"), y = 55,
+           label = "Good/Moderate boundary",
+           size = 3, hjust = 0, color = "grey45")
+```
+
+A reference line is useful only when the value has a real interpretation. The same line would make no sense on the temperature or precipitation plots, so we add it only to the AQI plot.
 
 ### Shading a time window
 
-`annotate("rect", ...)` draws a rectangle. The trick that makes it work for time series is `ymin = -Inf` and `ymax = Inf`, which means "from the bottom of the panel to the top" whatever the panel's y range happens to be:
+`annotate("rect", ...)` draws a rectangle. The trick that makes it work for time series is `ymin = -Inf` and `ymax = Inf`, which means "from the bottom of the plot to the top" whatever the y range happens to be:
 
 ```{r}
-fc_air %>%
-  ggplot(aes(x = date, y = pm25_aqi)) +
-  # shade first so the line draws on top of it
+p_aqi +
   annotate("rect",
            xmin = as.Date("2026-08-03"), xmax = as.Date("2026-08-08"),
            ymin = -Inf, ymax = Inf,
            alpha = 0.15, fill = "firebrick") +
-  geom_line(color = "grey40") +
-  scale_x_date(date_breaks = "1 month", date_labels = "%B") +
-  labs(x = NULL, y = "PM2.5 Air Quality Index") +
-  theme_minimal()
+  annotate("text",
+           x = as.Date("2026-07-05"), y = 99,
+           label = "Aug 3-8 smoke:\nworst AQI this summer",
+           size = 3, hjust = 0, vjust = 1, color = "grey20")
 ```
 
-Order matters. The `annotate()` call comes first so the shading sits *behind* the line. Swap the two and the rectangle will wash out your data.
+Order matters. The shaded rectangle should be added before the data layers when you build a plot from scratch so that the line and points remain visible on top of it.
 
-**Here is the clever part.** `annotate()` is not tied to any facet, so a single rectangle is drawn in *every* panel. One line of code marks the same window across all three variables, and suddenly you can read down through the panels at a fixed moment in time:
-
-```{r fig.height=6}
-fc_long %>%
-  ggplot(aes(x = date, y = value, color = variable)) +
-  annotate("rect",
-           xmin = as.Date("2026-08-03"), xmax = as.Date("2026-08-08"),
-           ymin = -Inf, ymax = Inf,
-           alpha = 0.15, fill = "firebrick") +
-  geom_line(data = ~ filter(.x, variable != "Drought Severity (DSCI)"),
-            linewidth = 0.7) +
-  geom_step(data = ~ filter(.x, variable == "Drought Severity (DSCI)"),
-            linewidth = 0.8) +
-  facet_wrap(~variable, ncol = 1, scales = "free_y") +
-  scale_x_date(date_breaks = "1 month", date_labels = "%B") +
-  scale_color_brewer(palette = "Dark2") +
-  labs(x = NULL, y = NULL) +
-  theme_minimal() +
-  theme(strip.text = element_text(face = "bold", hjust = 0),
-        legend.position = "none")
-```
-
-Look at what that one rectangle reveals. Inside the shaded window, air quality spikes to the worst readings of the summer, drought is sitting at its highest level since May, and temperature does something strange: it **drops** by nearly 30 degrees for a day, right in the middle of a stretch of upper 90s. That is the smoke itself blocking sunlight. You would be unlikely to notice that dip in the temperature panel on its own. It only becomes a story because the shading points your eye at the same dates in all three panels at once.
-
-`geom_vline()` does the same job for a single moment rather than a window, and `geom_hline()` draws a horizontal reference line:
-
-```{r eval = FALSE}
-geom_vline(xintercept = as.Date("2026-05-05"), linetype = "dotted", color = "grey30")
-```
-
-### Annotating one specific panel
-
-Sometimes a note belongs in only one panel. An AQI of 50 is the boundary between "Good" and "Moderate", which is meaningful for air quality and meaningless for temperature, so drawing it in all three panels would be nonsense.
-
-`annotate()` cannot do this, because it has no idea what a facet is. The solution is to build a small **data frame that contains the faceting variable**, and hand it to a geom. `ggplot2` then places that layer only in the matching panel:
-
-```{r}
-threshold <- tibble(
-  variable = factor("PM2.5 Air Quality Index", levels = levels(fc_long$variable)),
-  yint  = 50,
-  date  = as.Date("2026-05-09"),
-  label = "AQI 50: Good / Moderate boundary"
-)
- 
-threshold
-```
-
-The critical detail is `levels = levels(fc_long$variable)`. The factor in your annotation data has to have the *same levels* as the factor in your plot data, or the panels will not match up.
-
-The same technique places text in a chosen panel:
-
-```{r}
-notes <- tibble(
-  variable = factor(
-    c("PM2.5 Air Quality Index", "Maximum Temperature (F)"),
-    levels = levels(fc_long$variable)
-  ),
-  date  = as.Date(c("2026-07-07", "2026-05-20")),
-  value = c(99, 50),
-  label = c("Wildfire smoke, Aug 3-8:\nthe worst air of the summer",
-            "May 5: 1.03 in. of rain, 44 F high")
-)
- 
-notes
-```
+Most annotations are repeated across facets automatically. For an annotation that belongs to only one year, such as the August 2026 smoke event, we give the annotation data a `year` value so `facet_wrap()` knows which panel should receive it. We will shade that August 2026 window in **all three plots**, while the explanatory text stays only on the AQI plot.
 
 ::: {.alert .alert-info}
-Note that with annotations you may need to mess around with the x and y positions to get it just right. Also, the preview you see in the 'plot' window may look jumbled and viewing it by clicking 'Zoom' can help.
+With annotations you may need to experiment with the x and y positions to get them just right. Also, the preview in the Plot window may look jumbled; clicking 'Zoom' can help.
 :::
 
 <hr>
 
 ## Finalize and Save
 
-We are almost done with this figure. Below I am putting all of it together and adding a few more elements. Feel free to add your own!
+We are almost done with this figure. Below I am putting everything together, faceting each variable by year, and keeping the smoke-window shading in the 2026 facet of all three plots.
+
+Because the smoke event only occurred in 2026, we use one tiny helper data frame to tell `ggplot2` which facet should receive that annotation:
+
+```{r}
+smoke_2026 <- tibble(year = 2026)
+```
 
 ```{r fig.height=7}
-fc_long %>%
-  ggplot(aes(x = date, y = value, color = variable)) +
-  # 1. shaded smoke window, drawn in every panel, behind everything
-  annotate("rect",
-           xmin = as.Date("2026-08-03"), xmax = as.Date("2026-08-08"),
-           ymin = -Inf, ymax = Inf,
-           alpha = 0.15, fill = "firebrick") +
-  # 2. the May 5 storm, a single moment
-  geom_vline(xintercept = as.Date("2026-05-05"),
-             linetype = "dotted", color = "grey40") +
-  # 3. the Good/Moderate boundary, PM2.5 panel only, with its own label
-  geom_hline(data = threshold, aes(yintercept = yint),
-             linetype = "dashed", color = "grey50", inherit.aes = FALSE) +
-  geom_text(data = threshold, aes(x = date, y = yint + 6, label = label),
-            size = 2.2, hjust = 0, vjust = 0, color = "grey50",
-            inherit.aes = FALSE) +
-  # 4. the data itself, with the right geom for each variable
-  geom_line(data = ~ filter(.x, variable != "Drought Severity (DSCI)"),
-            linewidth = 0.7) +
-  geom_step(data = ~ filter(.x, variable == "Drought Severity (DSCI)"),
-            linewidth = 0.8) +
-  # 5. notes in specific panels
-  geom_text(data = notes, aes(x = date, y = value, label = label),
-            size = 2.8, hjust = 0, vjust = 1, color = "grey20",
-            inherit.aes = FALSE) +
-  facet_wrap(~variable, ncol = 1, scales = "free_y") +
+p_aqi_final <- fc_summer %>%
+  ggplot(aes(x = date, y = pm25_aqi)) +
+  geom_rect(data = smoke_2026,
+            xmin = as.Date("2026-08-03"), xmax = as.Date("2026-08-08"),
+            ymin = -Inf, ymax = Inf,
+            inherit.aes = FALSE, alpha = 0.15, fill = "firebrick") +
+  geom_hline(yintercept = 50,
+             linetype = "dashed", color = "grey50") +
+  geom_line(color = "#1b9e77", linewidth = 0.7) +
+  geom_point(color = "#1b9e77", size = 1) +
+  geom_text(data = smoke_2026,
+            x = as.Date("2026-07-05"), y = 99,
+            label = "Aug 3–8 smoke episode:\nworst AQI of the summer",
+            inherit.aes = FALSE, size = 2.8, hjust = 0, vjust = 1, color = "grey20") +
   scale_x_date(date_breaks = "1 month", date_labels = "%B") +
-  scale_color_brewer(palette = "Dark2") +
-  labs(
-    title = "A Fort Collins summer: smoke, heat, and drought",
-    subtitle = "Daily air quality and temperature with weekly drought severity, May to August 2026",
-    x = NULL,
-    y = NULL,
-    caption = "PM2.5 from the Fort Collins regulatory monitor via OpenAQ, weather from the CSU CoAgMET Fort Collins station, and drought severity from the U.S. Drought Monitor"
-  ) +
+  facet_wrap(~year, nrow = 1, scales = "free_x") +
+  labs(x = NULL, y = "PM2.5 AQI") +
   theme_minimal() +
-  theme(
-    plot.title = element_text(face = "bold", size = 15),
-    plot.subtitle = element_text(size = 10, color = "grey30",
-                                 margin = margin(b = 12)),
-    plot.caption = element_text(face = "italic", size = 7,
-                                color = "grey40", hjust = 0),
-    plot.title.position = "plot",   # sets the title to the left
-    strip.text = element_text(face = "bold", hjust = 0, size = 10),
-    panel.grid.minor = element_blank(),
-    legend.position = "none"
+  theme(panel.grid.minor = element_blank())
+
+p_temp_final <- fc_summer %>%
+  ggplot(aes(x = date, y = temp_max_f)) +
+  geom_rect(
+    data = smoke_2026,
+    xmin = as.Date("2026-08-03"), xmax = as.Date("2026-08-08"),
+    ymin = -Inf, ymax = Inf,
+    inherit.aes = FALSE, alpha = 0.15, fill = "firebrick"
+  ) +
+  geom_line(color = "#d95f02", linewidth = 0.7) +
+  geom_point(color = "#d95f02", size = 1) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%B") +
+  facet_wrap(~year, nrow = 1, scales = "free_x") +
+  labs(x = NULL, y = "Maximum Temperature (F)") +
+  theme_minimal() +
+  theme(panel.grid.minor = element_blank())
+
+p_precip_final <- fc_summer %>%
+  ggplot(aes(x = date, y = precip_in)) +
+  geom_rect(
+    data = smoke_2026,
+    xmin = as.Date("2026-08-03"), xmax = as.Date("2026-08-08"),
+    ymin = -Inf, ymax = Inf,
+    inherit.aes = FALSE, alpha = 0.15, fill = "firebrick"
+  ) +
+  geom_col(fill = "#7570b3", width = 0.8) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%B") +
+  facet_wrap(~year, nrow = 1, scales = "free_x") +
+  labs(x = NULL, y = "Precipitation (in.)") +
+  theme_minimal() +
+  theme(panel.grid.minor = element_blank())
+
+(p_aqi_final / p_temp_final / p_precip_final) +
+  plot_annotation(
+    title = "Two Fort Collins summers: smoke, heat, and rain",
+    subtitle = "Daily air quality, maximum temperature, and precipitation, May to August 2025 and 2026",
+    caption = "PM2.5 from the Fort Collins regulatory monitor via OpenAQ; weather from the CSU CoAgMET Fort Collins station",
+    theme = theme(
+      plot.title = element_text(face = "bold", size = 15),
+      plot.subtitle = element_text(size = 10, color = "grey30",
+                                   margin = margin(b = 12)),
+      plot.caption = element_text(face = "italic", size = 7,
+                                  color = "grey40", hjust = 0),
+      plot.title.position = "plot"
+    )
   )
 ```
 
@@ -967,31 +803,48 @@ fc_long %>%
 
 You can save your plot in the "Plots" pane by clicking "Export", or you can also do it programmatically with `ggsave()`, which also lets you customize the output file a little more. Note that you can give the argument a variable name of a ggplot object, or **by default it will save the last plot in the "Plots" pane**.
 
-Faceted figures usually need more vertical room than the default, so set `height` deliberately:
+This final figure now has two columns of facets as well as three stacked plots, so give it a little more width when you save it:
 
 ```{r eval = FALSE}
 # specify the file path and name, and height/width (if necessary)
 ggsave(filename = "images/fort_collins_timeseries.png",
-       width = 8, height = 7, units = "in", dpi = 300)
+       width = 10, height = 7, units = "in", dpi = 300)
 ```
 
 #### Want to make it interactive?
 
-The `plotly` package and the `ggplotly()` function lets you make your charts interactive. It works on faceted charts too, and hovering to read exact values on a specific date is genuinely useful for time series.
+The `plotly` package and the `ggplotly()` function let you make ggplots interactive. Hovering to read exact values on a specific date is genuinely useful for time series.
 
-We can put our entire ggplot code inside `ggplotly()` to make it interactive. Note that we removed the annotations, as `plotly` doesn't yet support them:
+Because our three panels are separate ggplots, we can convert each one and then stack the interactive versions with `subplot()`:
 
 ```{r}
-ggplotly(
-  fc_long %>%
-    ggplot(aes(x = date, y = value, color = variable)) +
-    geom_line(linewidth = 0.7) +
-    facet_wrap(~variable, ncol = 1, scales = "free_y") +
-    scale_x_date(date_breaks = "1 month", date_labels = "%b") +
-    scale_color_brewer(palette = "Dark2") +
-    labs(x = NULL, y = NULL) +
-    theme_minimal() +
-    theme(legend.position = "none")
+p1_interactive <- fc_air %>%
+  ggplot(aes(x = date, y = pm25_aqi)) +
+  geom_line(color = "#1b9e77", linewidth = 0.7) +
+  geom_point(color = "#1b9e77", size = 1) +
+  labs(x = NULL, y = "PM2.5 AQI") +
+  theme_minimal()
+
+p2_interactive <- fc_air %>%
+  ggplot(aes(x = date, y = temp_max_f)) +
+  geom_line(color = "#d95f02", linewidth = 0.7) +
+  geom_point(color = "#d95f02", size = 1) +
+  labs(x = NULL, y = "Max Temperature (F)") +
+  theme_minimal()
+
+p3_interactive <- fc_air %>%
+  ggplot(aes(x = date, y = precip_in)) +
+  geom_col(fill = "#7570b3", width = 0.8) +
+  labs(x = NULL, y = "Precipitation (in.)") +
+  theme_minimal()
+
+subplot(
+  ggplotly(p1_interactive),
+  ggplotly(p2_interactive),
+  ggplotly(p3_interactive),
+  nrows = 3,
+  shareX = TRUE,
+  titleY = TRUE
 )
 ```
 
@@ -1001,7 +854,7 @@ ggplotly(
 
 This week’s assignment is to use anything you’ve learned today, in previous lessons and additional resources (if you want) to make two plots. One ‘good plot’ and one ‘bad plot’. Essentially you will first make a good plot, and then break all the rules of data viz and ruin it. For the bad plot you **must specify two things** that are wrong with it (e.g., it is not color-blind friendly, jumbled labels, wrong plot for the job, poor legend or axis descriptions, etc.) Be as ‘poorly’ creative as you want!
 
-You can create these plots with any data (e.g., the fort collins aq/weather data from today, the penguins data past lessons, or new ones!), the good (and bad) visualization just has to be something we have not made in class before.
+You can create these plots with any data (e.g., the Fort Collins air quality/weather data from today, the penguins data from past lessons, or new ones!), the good (and bad) visualization just has to be something we have not made in class before.
 
 To submit the assignment, create an R Markdown document that includes reading in of the data, and the code to make the good figure and the bad figure. You will render your assignment to Word or HTML (**and make sure both code and plots are shown in the output**), and don’t forget to add the two reasons (minimum) your bad figure is ‘bad’. You will then submit this rendered document on Canvas. (20 pts. total)
 
@@ -1011,4 +864,4 @@ To submit the assignment, create an R Markdown document that includes reading in
 
 ### Acknowledgements and Resources
 
-For more on the grammar behind `ggplot2` and on faceting, the [ggplot2 book](https://ggplot2-book.org/facet) by Hadley Wickham is the definitive reference. The [R Graph Gallery](https://r-graph-gallery.com/time-series.html) has a good time series section, and [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/time-series.html) by Claus Wilke has an excellent chapter on visualizing time series, including a fair discussion of when dual axes are and are not defensible. Air quality data comes from [OpenAQ](https://openaq.org/), weather data from CSU's [CoAgMET](https://coagmet.colostate.edu/) network, and drought data from the [U.S. Drought Monitor](https://droughtmonitor.unl.edu/).
+For more on the grammar behind `ggplot2`, the [ggplot2 book](https://ggplot2-book.org/) by Hadley Wickham, Danielle Navarro, and Thomas Lin Pedersen is an excellent reference. The [`patchwork` documentation](https://patchwork.data-imaginist.com/) has more examples of combining separate ggplots into one figure. The [R Graph Gallery](https://r-graph-gallery.com/time-series.html) has a good time series section, and [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/time-series.html) by Claus Wilke has an excellent chapter on visualizing time series. Air quality data comes from [OpenAQ](https://openaq.org/) and weather data from CSU's [CoAgMET](https://coagmet.colostate.edu/) network.
