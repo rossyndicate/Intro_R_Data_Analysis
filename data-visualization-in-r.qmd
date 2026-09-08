@@ -83,7 +83,7 @@ Note: This data for Fort Collins was retrieved entirely in R from two sources: [
 
 library(httr2) # if trying to run, probably need to install first!
 
-openaq_key <- "9d63f209b2b7fd5ee091e0c28d4ca42cad49c32bcb04999b29274dfe2156cb4b"
+openaq_key <- "YOU KEY HERE"
 
 start_date <- as.Date("2025-01-01")
 end_date <- as.Date("2026-08-31")
