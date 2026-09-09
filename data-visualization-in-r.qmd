@@ -85,8 +85,8 @@ library(httr2) # if trying to run, probably need to install first!
 
 openaq_key <- "YOU KEY HERE"
 
-start_date <- as.Date("2025-01-01")
-end_date <- as.Date("2026-08-31")
+start_date <- ymd("2025-01-01")
+end_date <- ymd("2026-08-31")
 
 # Fort Collins, near the CDPHE monitor at 708 S. Mason St.
 fc_lat <- 40.5853
@@ -201,7 +201,7 @@ pm25_to_aqi <- function(conc) {
 }
 
 air <- map_dfr(days, function(d) tibble(
-  date      = as.Date(substr(d$period$datetimeFrom$local, 1, 10)),
+  date      = ymd(substr(d$period$datetimeFrom$local, 1, 10)),
   pm25_conc = as.numeric(d$value),
   coverage  = as.numeric(d$coverage$percentComplete)
 )) %>%
@@ -262,8 +262,8 @@ smoke_2026 <- tibble(year = 2026)
 p_aqi_preview <- fc_summer %>%
   ggplot(aes(x = date, y = pm25_aqi)) +
   geom_rect(data = smoke_2026,
-            xmin = as.Date("2026-08-03"), 
-            xmax = as.Date("2026-08-08"), 
+            xmin = ymd("2026-08-03"), 
+            xmax = ymd("2026-08-08"), 
             ymin = -Inf, 
             ymax = Inf,
             inherit.aes = FALSE, 
@@ -277,7 +277,7 @@ p_aqi_preview <- fc_summer %>%
   geom_point(color = "#1b9e77", 
              size = 1) +
   geom_text(data = smoke_2026,
-            x = as.Date("2026-07-04"), 
+            x = ymd("2026-07-04"), 
             y = 99,
             label = "Aug 3-8 smoke:\nworst AQI this summer",
             inherit.aes = FALSE, 
@@ -294,7 +294,7 @@ p_aqi_preview <- fc_summer %>%
 p_temp_preview <- fc_summer %>%
   ggplot(aes(x = date, y = temp_max_f)) +
   geom_rect(data = smoke_2026,
-            xmin = as.Date("2026-08-03"), xmax = as.Date("2026-08-08"),
+            xmin = ymd("2026-08-03"), xmax = ymd("2026-08-08"),
             ymin = -Inf, ymax = Inf,
             inherit.aes = FALSE, alpha = 0.15, fill = "firebrick") +
   geom_line(color = "#d95f02", linewidth = 0.7) +
@@ -307,7 +307,7 @@ p_temp_preview <- fc_summer %>%
 p_precip_preview <- fc_summer %>%
   ggplot(aes(x = date, y = precip_in)) +
   geom_rect(data = smoke_2026,
-            xmin = as.Date("2026-08-03"), xmax = as.Date("2026-08-08"),
+            xmin = ymd("2026-08-03"), xmax = ymd("2026-08-08"),
             ymin = -Inf, ymax = Inf,
             inherit.aes = FALSE, alpha = 0.15, fill = "firebrick") +
   geom_col(fill = "#7570b3", width = 0.8) +
@@ -688,7 +688,7 @@ p_aqi +
   geom_hline(yintercept = 50,
              linetype = "dashed", color = "grey50") +
   annotate("text",
-           x = as.Date("2026-05-01"), y = 55,
+           x = ymd("2026-05-01"), y = 55,
            label = "Good/Moderate boundary",
            size = 3, hjust = 0, color = "grey45")
 ```
@@ -702,11 +702,11 @@ A reference line is useful only when the value has a real interpretation. The sa
 ```{r}
 p_aqi +
   annotate("rect",
-           xmin = as.Date("2026-08-03"), xmax = as.Date("2026-08-08"),
+           xmin = ymd("2026-08-03"), xmax = ymd("2026-08-08"),
            ymin = -Inf, ymax = Inf,
            alpha = 0.15, fill = "firebrick") +
   annotate("text",
-           x = as.Date("2026-07-04"), y = 99,
+           x = ymd("2026-07-04"), y = 99,
            label = "Aug 3-8 smoke:\nworst AQI this summer",
            size = 3, hjust = 0, vjust = 1, color = "grey20")
 ```
@@ -735,7 +735,7 @@ smoke_2026 <- tibble(year = 2026)
 p_aqi_final <- fc_summer %>%
   ggplot(aes(x = date, y = pm25_aqi)) +
   geom_rect(data = smoke_2026,
-            xmin = as.Date("2026-08-03"), xmax = as.Date("2026-08-08"),
+            xmin = ymd("2026-08-03"), xmax = ymd("2026-08-08"),
             ymin = -Inf, ymax = Inf,
             inherit.aes = FALSE, alpha = 0.15, fill = "firebrick") +
   geom_hline(yintercept = 50,
@@ -743,7 +743,7 @@ p_aqi_final <- fc_summer %>%
   geom_line(color = "#1b9e77", linewidth = 0.7) +
   geom_point(color = "#1b9e77", size = 1) +
   geom_text(data = smoke_2026,
-            x = as.Date("2026-07-04"), y = 99,
+            x = ymd("2026-07-04"), y = 99,
             label = "Aug 3-8 smoke:\nworst AQI this summer",
             inherit.aes = FALSE, size = 2.8, hjust = 0, vjust = 1, color = "grey20") +
   scale_x_date(date_breaks = "1 month", date_labels = "%B") +
@@ -756,7 +756,7 @@ p_temp_final <- fc_summer %>%
   ggplot(aes(x = date, y = temp_max_f)) +
   geom_rect(
     data = smoke_2026,
-    xmin = as.Date("2026-08-03"), xmax = as.Date("2026-08-08"),
+    xmin = ymd("2026-08-03"), xmax = ymd("2026-08-08"),
     ymin = -Inf, ymax = Inf,
     inherit.aes = FALSE, alpha = 0.15, fill = "firebrick"
   ) +
@@ -772,7 +772,7 @@ p_precip_final <- fc_summer %>%
   ggplot(aes(x = date, y = precip_in)) +
   geom_rect(
     data = smoke_2026,
-    xmin = as.Date("2026-08-03"), xmax = as.Date("2026-08-08"),
+    xmin = ymd("2026-08-03"), xmax = ymd("2026-08-08"),
     ymin = -Inf, ymax = Inf,
     inherit.aes = FALSE, alpha = 0.15, fill = "firebrick"
   ) +
