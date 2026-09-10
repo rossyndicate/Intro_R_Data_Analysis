@@ -14,8 +14,12 @@ To access the dataset(s) you will be using in this lesson, we will be using a ne
 
 We we also need the {[rstatix](https://rpkgs.datanovia.com/rstatix/)} package, which allows us to conduct various statistical tests that are 'tidyverse' friendly (aka, we can use them with the pipe `%>%`).
 
-*Note:* These are new packages that we will need to add to our setup script by tacking them on to the `packages <- c()` list.
- 
+*Note:* These are new packages that we will need to install and load. To follow our previous setup methods, add the following list of packages to the `packages <- c()` list in your `setup.R` script:
+
+- `lterdatasampler`
+
+- `rstatix`
+
 ```{r include = FALSE}
 library(tidyverse)
 library(lterdatasampler)
@@ -44,6 +48,12 @@ This data set contains length and weight observations for three aquatic species 
 
 Previous work has shown that forest harvesting can impact aquatic vertebrate biomass (Kaylor & Warren 2017). With this `and_vertebrates` dataset we can investigate this hypothesis, by comparing weight to forest type (clear cut or old growth). This therefore involves a test comparing the means (average weight) among two groups (clear cut and old growth forests), which then requires a t-test.
 
+::: callout-note
+## Clear cut vs. old growth
+
+The `section` variable in `and_vertebrates` splits Mack Creek into two contrasting forest histories. The old growth (`OG`) reach runs through a stand of roughly 500-year-old coniferous forest that has never been logged, where large trees continue to fall into the channel and supply the wood, shade, and complex pool habitat that stream vertebrates depend on. The clear cut (`CC`) reach was logged around 1963, removing the mature canopy and, with it, the long-term source of large woody debris. The result is a more open channel with warmer water, higher light levels, and different sediment and food dynamics. Because the two reaches sit in the same watershed and are sampled the same way, comparing trout and salamander abundance or size between `CC` and `OG` is effectively a long-term natural experiment on how forest harvest legacy shapes stream habitat decades after the trees come down.
+:::
+
 Let's focus on conducting this test for just Cutthroat trout to reduce species-level variances in weight. Before conducting analyses, we need to clean our dataset. The steps below will filter our data to just include the trout species, and remove any NA values of weight with the `drop_na()` function:
 
 ```{r}
@@ -64,7 +74,7 @@ trout_clean %>%
   geom_boxplot()
 ```
 
-We don't see too much of a difference based on this visual, but let's conduct the statistical test to verify if our hypothesis is supported.
+We don't see too much of a difference based on this visual, but need to conduct the statistical test to officially verify if our hypothesis is supported.
 
 ### Assumptions
 
@@ -172,9 +182,9 @@ trout_cc %>%
   levene_test(weight_g ~ unittype)
 ```
 
-Given this small p-value, we see that the variances of our groups are not equal.
+Given this small p-value, we see that the variances of our groups are *not* equal.
 
-Therefore, after checking out assumptions we need to perform a non-parametric ANOVA test, which is the Kruskal-Wallis test. We can do this with the `kruskal_test()` function specifying a formula like we have for previous tests to see if weight varies by channel (aka `unittype`).
+Therefore, after checking our assumptions we need to perform a non-parametric ANOVA test, which is the Kruskal-Wallis test. We can do this with the `kruskal_test()` function specifying a formula like we have for previous tests to see if weight varies by channel (aka `unittype`).
 
 ```{r}
 trout_cc %>% 
@@ -217,11 +227,11 @@ This result shows us an adjusted p-value (for multiple comparisons) for each com
 
 Each question requires you to carry out a statistical analysis to test some hypothesis related to the `and_vertebrates` dataset. To answer each question fully:
 
--   Include the code you used to clean the data and conduct the appropriate statistical test. (*Including the steps to assess and address your statistical test assumptions*).
+- Include the code you used to clean the data and conduct the appropriate statistical test. (*Including the steps to assess and address your statistical test assumptions*).
 
--   Report the findings of your test.
+- Report the findings of your test.
 
--   Include an appropriate figure showing the patterns in the data associated with the test.
+- Include an appropriate figure showing the patterns in the data associated with the test.
 
 <br>
 
