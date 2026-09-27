@@ -67,7 +67,7 @@ $y = -1.0587x1 -2.4041x2 + 0.7563x3 + 77.7460$
 
 In the model's summary, our p-value is indicated in the Pr(\>\|t\|) column for each variable: because our p-values are well below 0.01, we can deduce that each variable has a significant effect on crab size.
 
-Our multiple R-squared (R^2^) is the Pearson correlation between the observed and the fitted (i.e. predicted) values. We can interpret this as 42.06% of the variability in crab size is explained by the linear regression on water temperature, air temperature, and latitude. **NOTE: R^2^ always increases when an additional predictor is added to a linear model.**
+Our multiple R-squared (R^2^) is the Pearson correlation between the observed and the fitted (i.e. predicted) values. We can interpret this as 42.06% of the variability in crab size is explained by the linear regression on water temperature, air temperature, and latitude. **NOTE: R^2^ never decreases (and almost always increases) when an additional predictor is added to a linear model. Adjusted R^2^ ** accounts for this by penalizing each added predictor, so it only increases when a new variable improves the model more than would be expected by chance. Use adjusted R² instead of R² when comparing models with different numbers of predictors.
 
 ### Predicting crab size
 
@@ -99,7 +99,7 @@ plot(mlr_model, which = 1)
 
 ![](images/Screenshot%202023-09-21%20at%2014.26.25.png)
 
-This "Residuals vs Fitted" (fitted meaning the predicted values) plot gives an indication if there are non-linear patterns. This is a bit subjective, but a good way of verifying that this assumption is met is by ensuring that no clear trend seems so exist. The residuals should also occupy equal space above and below the line, and along the length of the line.
+This "Residuals vs Fitted" (fitted meaning the predicted values) plot gives an indication if there are non-linear patterns. This is a bit subjective, but a good way of verifying that this assumption is met is by ensuring that no clear trend seems to exist. The residuals should also occupy equal space above and below the line, and along the length of the line.
 
 **The residual error values are normally distributed.**
 
@@ -125,7 +125,7 @@ Normally, we should exclude variables that have a correlation coefficient greate
 
 We are interested in developing a multiple linear regression model to predict mean annual stream flow across the Eastern US. For every state, we have a handful of watershed and site characteristic data associated with USGS stream gauging stations.
 
-Download the 'usgs_gages' folder on Canvas and store it in a 'data' folder in this assignment's project directory. Here is a list of all of these files:
+Download the 'usgs_gages' folder on Canvas and store it in the 'data' folder in this assignment's project directory. Here is a line of code to give you a list of all of the files in this folder:
 
 ```{r}
 data_files <- list.files('data/usgs_gages', full.names = TRUE, pattern = "*.csv")

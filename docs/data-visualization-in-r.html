@@ -2,21 +2,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.10.18">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Introduction to Environmental Data Science - 5&nbsp; Data Visualization in R</title>
+<title>5&nbsp; Data Visualization in R – Introduction to Environmental Data Science</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -43,43 +51,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -91,21 +69,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <meta name="quarto:offset" content="./">
 <link href="./data-analysis-t-test-and-anova.html" rel="next">
 <link href="./exploratory-data-analysis.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-307a28551d61dbf02fc075ff148a3b64.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -114,140 +99,157 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script><link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
-<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="site_libs/plotly-binding-4.11.0/plotly.js"></script><script src="site_libs/typedarray-0.1/typedarray.min.js"></script><script src="site_libs/jquery-3.5.1/jquery.min.js"></script><link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
-<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="site_libs/plotly-binding-4.11.0/plotly.js"></script><script src="site_libs/typedarray-0.1/typedarray.min.js"></script><script src="site_libs/jquery-3.5.1/jquery.min.js"></script><link href="site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script><link rel="stylesheet" href="style.css">
 </head>
-<body class="nav-sidebar docked">
+<body class="nav-sidebar docked quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Visualization in R</span>
-</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-visualization-in-r.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Visualization in R</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introduction to Environmental Data Science</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/rossyndicate/ESS523a_Intro_R_Data_Analysis" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/rossyndicate/ESS523a_Intro_R_Data_Analysis" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Environmental Data Science</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Environmental Data Science</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./setup-instructions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Setup Instructions</span></a>
+  <a href="./setup-instructions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Setup Instructions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./introduction-to-r-rstudio-and-r-markdown.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to R, RStudio and R Markdown</span></a>
+  <a href="./introduction-to-r-rstudio-and-r-markdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to R, RStudio and R Markdown</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exploratory-data-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></a>
+  <a href="./exploratory-data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-visualization-in-r.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Visualization in R</span></a>
+  <a href="./data-visualization-in-r.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Visualization in R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-analysis-t-test-and-anova.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Analysis: T-test and ANOVA</span></a>
+  <a href="./data-analysis-t-test-and-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Analysis: T-test and ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./correlation-and-simple-linear-regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Correlation and Simple Linear Regression</span></a>
+  <a href="./correlation-and-simple-linear-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Correlation and Simple Linear Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./multiple-linear-regression-mlr.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multiple Linear Regression (MLR)</span></a>
+  <a href="./multiple-linear-regression-mlr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multiple Linear Regression (MLR)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./power.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Power</span></a>
+  <a href="./power.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Power</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r-skills-review.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">R Skills Review</span></a>
+  <a href="./r-skills-review.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">R Skills Review</span></span></a>
   </div>
 </li>
     </ul>
 </div>
-</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#data-preparation" id="toc-data-preparation" class="nav-link active" data-scroll-target="#data-preparation"><span class="toc-section-number">5.0.1</span>  Data Preparation</a></li>
-  <li><a href="#where-we-are-headed" id="toc-where-we-are-headed" class="nav-link" data-scroll-target="#where-we-are-headed"><span class="toc-section-number">5.1</span>  Where We Are Headed</a></li>
-  <li><a href="#building-a-line-chart-with-ggplot2" id="toc-building-a-line-chart-with-ggplot2" class="nav-link" data-scroll-target="#building-a-line-chart-with-ggplot2"><span class="toc-section-number">5.2</span>  Building a Line Chart with <code>ggplot2</code></a></li>
+<li><a href="#data-preparation" id="toc-data-preparation" class="nav-link active" data-scroll-target="#data-preparation"><span class="header-section-number">5.0.1</span> Data Preparation</a></li>
+  <li><a href="#where-we-are-headed" id="toc-where-we-are-headed" class="nav-link" data-scroll-target="#where-we-are-headed"><span class="header-section-number">5.1</span> Where We Are Headed</a></li>
+  <li><a href="#building-a-line-chart-with-ggplot2" id="toc-building-a-line-chart-with-ggplot2" class="nav-link" data-scroll-target="#building-a-line-chart-with-ggplot2"><span class="header-section-number">5.2</span> Building a Line Chart with <code>ggplot2</code></a></li>
   <li>
-<a href="#titles-labels-and-axes" id="toc-titles-labels-and-axes" class="nav-link" data-scroll-target="#titles-labels-and-axes"><span class="toc-section-number">5.3</span>  Titles, Labels and Axes</a>
+<a href="#titles-labels-and-axes" id="toc-titles-labels-and-axes" class="nav-link" data-scroll-target="#titles-labels-and-axes"><span class="header-section-number">5.3</span> Titles, Labels and Axes</a>
   <ul class="collapse">
-<li><a href="#titles-and-limits" id="toc-titles-and-limits" class="nav-link" data-scroll-target="#titles-and-limits"><span class="toc-section-number">5.3.1</span>  Titles and limits</a></li>
-  <li><a href="#making-the-date-axis-readable" id="toc-making-the-date-axis-readable" class="nav-link" data-scroll-target="#making-the-date-axis-readable"><span class="toc-section-number">5.3.2</span>  Making the date axis readable</a></li>
+<li><a href="#titles-and-limits" id="toc-titles-and-limits" class="nav-link" data-scroll-target="#titles-and-limits"><span class="header-section-number">5.3.1</span> Titles and limits</a></li>
+  <li><a href="#making-the-date-axis-readable" id="toc-making-the-date-axis-readable" class="nav-link" data-scroll-target="#making-the-date-axis-readable"><span class="header-section-number">5.3.2</span> Making the date axis readable</a></li>
   </ul>
 </li>
   <li>
-<a href="#chart-components-with-theme" id="toc-chart-components-with-theme" class="nav-link" data-scroll-target="#chart-components-with-theme"><span class="toc-section-number">5.4</span>  Chart Components with <code>theme()</code></a>
+<a href="#chart-components-with-theme" id="toc-chart-components-with-theme" class="nav-link" data-scroll-target="#chart-components-with-theme"><span class="header-section-number">5.4</span> Chart Components with <code>theme()</code></a>
   <ul class="collapse">
-<li><a href="#themes" id="toc-themes" class="nav-link" data-scroll-target="#themes"><span class="toc-section-number">5.4.1</span>  Themes</a></li>
+<li><a href="#themes" id="toc-themes" class="nav-link" data-scroll-target="#themes"><span class="header-section-number">5.4.1</span> Themes</a></li>
   </ul>
 </li>
-  <li><a href="#color-and-legends" id="toc-color-and-legends" class="nav-link" data-scroll-target="#color-and-legends"><span class="toc-section-number">5.5</span>  Color and Legends</a></li>
+  <li><a href="#color-and-legends" id="toc-color-and-legends" class="nav-link" data-scroll-target="#color-and-legends"><span class="header-section-number">5.5</span> Color and Legends</a></li>
   <li>
-<a href="#three-variables-one-figure" id="toc-three-variables-one-figure" class="nav-link" data-scroll-target="#three-variables-one-figure"><span class="toc-section-number">5.6</span>  Three Variables, One Figure</a>
+<a href="#three-variables-one-figure" id="toc-three-variables-one-figure" class="nav-link" data-scroll-target="#three-variables-one-figure"><span class="header-section-number">5.6</span> Three Variables, One Figure</a>
   <ul class="collapse">
-<li><a href="#faceting-by-year" id="toc-faceting-by-year" class="nav-link" data-scroll-target="#faceting-by-year"><span class="toc-section-number">5.6.1</span>  Faceting by year</a></li>
+<li><a href="#faceting-by-year" id="toc-faceting-by-year" class="nav-link" data-scroll-target="#faceting-by-year"><span class="header-section-number">5.6.1</span> Faceting by year</a></li>
   </ul>
 </li>
   <li>
-<a href="#annotation" id="toc-annotation" class="nav-link" data-scroll-target="#annotation"><span class="toc-section-number">5.7</span>  Annotation</a>
+<a href="#annotation" id="toc-annotation" class="nav-link" data-scroll-target="#annotation"><span class="header-section-number">5.7</span> Annotation</a>
   <ul class="collapse">
-<li><a href="#a-horizontal-reference-line" id="toc-a-horizontal-reference-line" class="nav-link" data-scroll-target="#a-horizontal-reference-line"><span class="toc-section-number">5.7.1</span>  A horizontal reference line</a></li>
-  <li><a href="#shading-a-time-window" id="toc-shading-a-time-window" class="nav-link" data-scroll-target="#shading-a-time-window"><span class="toc-section-number">5.7.2</span>  Shading a time window</a></li>
+<li><a href="#a-horizontal-reference-line" id="toc-a-horizontal-reference-line" class="nav-link" data-scroll-target="#a-horizontal-reference-line"><span class="header-section-number">5.7.1</span> A horizontal reference line</a></li>
+  <li><a href="#shading-a-time-window" id="toc-shading-a-time-window" class="nav-link" data-scroll-target="#shading-a-time-window"><span class="header-section-number">5.7.2</span> Shading a time window</a></li>
   </ul>
 </li>
-  <li><a href="#finalize-and-save" id="toc-finalize-and-save" class="nav-link" data-scroll-target="#finalize-and-save"><span class="toc-section-number">5.8</span>  Finalize and Save</a></li>
+  <li><a href="#finalize-and-save" id="toc-finalize-and-save" class="nav-link" data-scroll-target="#finalize-and-save"><span class="header-section-number">5.8</span> Finalize and Save</a></li>
   <li>
-<a href="#the-assignment" id="toc-the-assignment" class="nav-link" data-scroll-target="#the-assignment"><span class="toc-section-number">5.9</span>  The Assignment</a>
+<a href="#the-assignment" id="toc-the-assignment" class="nav-link" data-scroll-target="#the-assignment"><span class="header-section-number">5.9</span> The Assignment</a>
   <ul class="collapse">
-<li><a href="#acknowledgements-and-resources" id="toc-acknowledgements-and-resources" class="nav-link" data-scroll-target="#acknowledgements-and-resources"><span class="toc-section-number">5.9.1</span>  Acknowledgements and Resources</a></li>
+<li><a href="#acknowledgements-and-resources" id="toc-acknowledgements-and-resources" class="nav-link" data-scroll-target="#acknowledgements-and-resources"><span class="header-section-number">5.9.1</span> Acknowledgements and Resources</a></li>
   </ul>
 </li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rossyndicate/ESS523a_Intro_R_Data_Analysis/edit/main/data-visualization-in-r.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/rossyndicate/ESS523a_Intro_R_Data_Analysis/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/rossyndicate/ESS523a_Intro_R_Data_Analysis/edit/main/data-visualization-in-r.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/rossyndicate/ESS523a_Intro_R_Data_Analysis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title d-none d-lg-block">
+<h1 class="title">
 <span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Visualization in R</span>
 </h1>
 </div>
@@ -262,6 +264,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
+
 </header><p>This lesson covers data visualization with <code>ggplot2</code>: how to build a chart, how to customize it, and how to make it ‘publication ready’.</p>
 <p>Our focus is on a question that comes up constantly in environmental data: how do things change <strong>over time</strong>, and how do you show several variables changing together in one figure? We will build up from a basic line chart to a polished small-multiple figure that lets us compare air quality, temperature, and precipitation across two summers.</p>
 <p>First, set up your session by executing your set up script we created in <a href="./introduction-to-r-rstudio-and-r-markdown.html#write-a-set-up-script">Lesson 1</a>.</p>
@@ -274,20 +277,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>patchwork</code></p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"setup.R"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"setup.R"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="data-preparation" class="level3" data-number="5.0.1"><h3 data-number="5.0.1" class="anchored" data-anchor-id="data-preparation">
 <span class="header-section-number">5.0.1</span> Data Preparation</h3>
 <p>For today’s lesson we are going to be working with daily air quality and weather data for Fort Collins, CO. Most of the lesson will stay focused on May through August of 2026, and our final figure will compare that summer with May through August of 2025. This data can be found on Canvas in the Data Module in .csv format titled <code>fort_collins_aq.csv</code>. <strong>Download that file and put it in a <code>data/</code> folder in your R Project.</strong></p>
 <p>After that, read the .csv into your R session using <code>read_csv()</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/fort_collins_aq.csv"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/fort_collins_aq.csv"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">date</span> <span class="op">&gt;=</span> <span class="fu">as_date</span><span class="op">(</span><span class="st">"2026-05-01"</span><span class="op">)</span>,</span>
-<span>         <span class="va">date</span> <span class="op">&lt;=</span> <span class="fu">as_date</span><span class="op">(</span><span class="st">"2026-08-31"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>         <span class="va">date</span> <span class="op">&lt;=</span> <span class="fu">as_date</span><span class="op">(</span><span class="st">"2026-08-31"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Inspect <code>fc_air</code> and the structure of the data frame:</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">glimpse</span><span class="op">(</span><span class="va">fc_air</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">glimpse</span><span class="op">(</span><span class="va">fc_air</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 123
 Columns: 11
@@ -316,7 +319,7 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <p>Note: This data for Fort Collins was retrieved entirely in R from two sources: <a href="https://openaq.org/">OpenAQ</a> for air quality and CSU’s own <a href="https://coagmet.colostate.edu/">CoAgMET</a> weather network for temperature, precipitation, solar radiation, and wind. The air quality readings come from a regulatory monitor here in town. If you are interested in how I did this, expand the code below. You will need your own OpenAQ API key to run it (free and instant <a href="https://explore.openaq.org/register">here</a>); CoAgMET needs no key.</p>
 </div>
 <div class="cell">
-<details><summary>Show the code used to retrieve this data</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr2.r-lib.org">httr2</a></span><span class="op">)</span> <span class="co"># if trying to run, probably need to install first!</span></span>
+<details class="code-fold"><summary>Show the code used to retrieve this data</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr2.r-lib.org">httr2</a></span><span class="op">)</span> <span class="co"># if trying to run, probably need to install first!</span></span>
 <span></span>
 <span><span class="va">openaq_key</span> <span class="op">&lt;-</span> <span class="st">"YOU KEY HERE"</span></span>
 <span></span>
@@ -458,7 +461,7 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">air</span>, by <span class="op">=</span> <span class="st">"date"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">weather</span>, by <span class="op">=</span> <span class="st">"date"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">write_csv</span><span class="op">(</span><span class="va">fort_collins_aq</span>, <span class="st">"data/fort_collins_aq.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">write_csv</span><span class="op">(</span><span class="va">fort_collins_aq</span>, <span class="st">"data/fort_collins_aq.csv"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <hr></section><section id="where-we-are-headed" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="where-we-are-headed">
@@ -466,20 +469,26 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <p>In today’s lesson, you are going to learn how to go <strong>from this…</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>…<strong>to this!</strong> Tada! 🎉</p>
 <p>Because the final figure compares the same summer months across two years, first create a dataset containing May through August of 2025 and 2026 and a <code>year</code> column for faceting:</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_summer</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/fort_collins_aq.csv"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_summer</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/fort_collins_aq.csv"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu">month</span><span class="op">(</span><span class="va">date</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fl">5</span><span class="op">:</span><span class="fl">8</span>,</span>
 <span>         <span class="fu">year</span><span class="op">(</span><span class="va">date</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2025</span>, <span class="fl">2026</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>year <span class="op">=</span> <span class="fu">year</span><span class="op">(</span><span class="va">date</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">mutate</span><span class="op">(</span>year <span class="op">=</span> <span class="fu">year</span><span class="op">(</span><span class="va">date</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <hr></section><section id="building-a-line-chart-with-ggplot2" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="building-a-line-chart-with-ggplot2">
@@ -494,19 +503,22 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 </ol>
 <p>A line chart is <code>geom_line()</code> with time on the x axis:</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">pm25_aqi</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="alert alert-info">
 <p><strong>Why are there gaps in the line?</strong> Look closely and you will see gaps in early May and mid June. Those dates are still present as rows in <code>fc_air</code>, but <code>pm25_aqi</code> is explicitly recorded as <code>NA</code> because the monitor did not have enough valid hourly observations to calculate a trustworthy daily value.</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">pm25_aqi</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">date</span>, <span class="va">pm25_aqi</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">date</span>, <span class="va">pm25_aqi</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 2
   date       pm25_aqi
@@ -523,24 +535,30 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <p>Note the <code>+</code> between <code>ggplot2</code> layers, rather than the <code>%&gt;%</code> pipe we use elsewhere in the tidyverse. Every chart in this lesson is built by adding layers with <code>+</code>.</p>
 <p>Adding points on top makes the individual observations visible, and makes those gaps easier to read. Layers draw in the order you add them, so the points land on top of the line:</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">pm25_aqi</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"grey60"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_point</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">geom_point</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Setting <code>color</code> and <code>size</code> <em>outside</em> of <code>aes()</code> applies one fixed value to everything. Later we will put color <em>inside</em> <code>aes()</code> to map it to a variable, which is a different thing entirely.</p>
 <p>Daily data is noisy. When you want the <em>trend</em> rather than the day-to-day jitter, <code>geom_smooth()</code> fits a curve through the points. <code>se = FALSE</code> turns off the shaded confidence band, and <code>span</code> controls how wiggly the curve is (smaller is wigglier):</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">pm25_aqi</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"grey75"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_point</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"grey60"</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_smooth</span><span class="op">(</span>se <span class="op">=</span> <span class="cn">FALSE</span>, span <span class="op">=</span> <span class="fl">0.3</span>, color <span class="op">=</span> <span class="st">"black"</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>se <span class="op">=</span> <span class="cn">FALSE</span>, span <span class="op">=</span> <span class="fl">0.3</span>, color <span class="op">=</span> <span class="st">"black"</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Now the shape this summer is obvious in a way it was not before: air quality drifts steadily worse from May into August, with a sharp spike at the start of August.</p>
@@ -557,22 +575,25 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <li><p>change axis limits with <code>xlim()</code> and <code>ylim()</code></p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">pm25_aqi</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_point</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Fort Collins air quality, summer 2026"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Date"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"PM2.5 Air Quality Index"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ylim</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">75</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">ylim</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">75</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Be cautious of setting the axis limits however, as you notice it omits the full dataset which could lead to dangerous misinterpretations of the data. Here <code>ylim(c(0, 75))</code> has quietly deleted the entire August smoke episode, the single most important thing in this dataset.</p>
 <p>You can also put multiple label arguments within <code>labs()</code> like this, which is usually tidier:</p>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">pm25_aqi</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_point</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
@@ -580,9 +601,12 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <span>       subtitle <span class="op">=</span> <span class="st">"Daily PM2.5 Air Quality Index at the CSU Facilities monitor"</span>,</span>
 <span>       x <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>       y <span class="op">=</span> <span class="st">"PM2.5 Air Quality Index"</span>,</span>
-<span>       caption <span class="op">=</span> <span class="st">"Data from OpenAQ"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>       caption <span class="op">=</span> <span class="st">"Data from OpenAQ"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p><code>labs()</code> also gives you <code>subtitle</code> and <code>caption</code>, which <code>ggtitle()</code> does not. Setting <code>x = NULL</code> removes the axis title entirely, which makes sense here because the labels already say what they are.</p>
@@ -594,16 +618,19 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <li><p><code>date_labels</code> uses date format codes: <code>%B</code> is the full month name, <code>%b</code> abbreviated, <code>%d</code> day of month, <code>%Y</code> year</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">pm25_aqi</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"grey60"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_point</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_x_date</span><span class="op">(</span>date_breaks <span class="op">=</span> <span class="st">"1 month"</span>, date_labels <span class="op">=</span> <span class="st">"%B"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Fort Collins air quality, summer 2026"</span>,</span>
 <span>       x <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>       y <span class="op">=</span> <span class="st">"PM2.5 Air Quality Index"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>       y <span class="op">=</span> <span class="st">"PM2.5 Air Quality Index"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Try changing <code>date_breaks</code> to <code>"1 week"</code> and <code>date_labels</code> to <code>"%b %d"</code> to see how much denser the axis gets, and why picking the right break interval matters.</p>
@@ -612,7 +639,7 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 </h2>
 <p>All <code>ggplot2</code> components can be customized within the <code>theme()</code> function. The full list of editable components (there’s a lot!) can be found <a href="https://ggplot2.tidyverse.org/reference/theme.html">here</a>. Note that the functions used within <code>theme()</code> depend on the type of components, such as <code>element_text()</code> for text, <code>element_line()</code> for lines, and <code>element_blank()</code> to remove something entirely.</p>
 <div class="cell">
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">pm25_aqi</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_point</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
@@ -630,9 +657,12 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <span>    panel.grid.major <span class="op">=</span> <span class="fu">element_line</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span>,</span>
 <span>    <span class="co"># remove the minor grid lines completely</span></span>
 <span>    panel.grid.minor <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>While these edits aren’t necessarily <em>pretty</em>, we are just demonstrating how you would edit specific components of your charts. To edit the overall aesthetics of your plots you can change the theme.</p>
@@ -641,42 +671,51 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <p><code>ggplot2</code> comes with many built in theme options (see the complete list <a href="https://r-graph-gallery.com/192-ggplot-themes">here</a>).</p>
 <p>For example, see what <code>theme_minimal()</code> and <code>theme_classic()</code> look like:</p>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">pm25_aqi</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_point</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Fort Collins air quality, summer 2026"</span>,</span>
 <span>       x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"PM2.5 Air Quality Index"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">pm25_aqi</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_point</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Fort Collins air quality, summer 2026"</span>,</span>
 <span>       x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"PM2.5 Air Quality Index"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_classic</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">theme_classic</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>You can also import many different themes by installing certain packages. A popular one is <code>ggthemes</code>. A complete list of themes with this package can be seen <a href="https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/">here</a></p>
 <p>Now explore a few themes, such as <code>theme_wsj</code>, which uses the Wall Street Journal theme, and <code>theme_economist</code> and <code>theme_economist_white</code> to use themes used by the Economist.</p>
 <div class="cell">
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">pm25_aqi</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_point</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Fort Collins air quality"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggthemes</span><span class="fu">::</span><span class="fu"><a href="https://jrnold.github.io/ggthemes/reference/theme_wsj.html">theme_wsj</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="co"># make the text smaller</span></span>
-<span>  <span class="fu">theme</span><span class="op">(</span>text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">theme</span><span class="op">(</span>text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="alert alert-info">
@@ -684,7 +723,7 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 </div>
 <p>Some themes may look messy out of the box, but you can apply any elements from <code>theme()</code> afterwards to clean it up. <strong>Order matters here</strong>: the overall theme has to come first, or it will wipe out your individual <code>theme()</code> edits.</p>
 <div class="cell">
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">pm25_aqi</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_point</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
@@ -692,9 +731,12 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <span>       x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"PM2.5 Air Quality Index"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggthemes</span><span class="fu">::</span><span class="fu"><a href="https://jrnold.github.io/ggthemes/reference/theme_economist.html">theme_economist</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme</span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">12</span><span class="op">)</span>,</span>
-<span>        axis.title.y <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>margin <span class="op">=</span> <span class="fu">margin</span><span class="op">(</span>r <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>        axis.title.y <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>margin <span class="op">=</span> <span class="fu">margin</span><span class="op">(</span>r <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <hr></section></section><section id="color-and-legends" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="color-and-legends">
@@ -702,7 +744,7 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <p>To specify a single color, the most common way is to specify the name (e.g., <code>"red"</code>) or the Hex code (e.g., <code>"#69b3a2"</code>). That is what we have been doing with <code>color = "grey60"</code> outside of <code>aes()</code>.</p>
 <p>When color is mapped to a variable inside <code>aes()</code>, <code>ggplot2</code> builds a legend automatically. For example, we can keep the air-quality line for continuity while coloring individual observations by their AQI category:</p>
 <div class="cell">
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">pm25_aqi</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"grey65"</span>,</span>
 <span>            linewidth <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span></span>
@@ -712,14 +754,17 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>       y <span class="op">=</span> <span class="st">"PM2.5 Air Quality Index"</span>,</span>
 <span>       color <span class="op">=</span> <span class="st">"AQI category"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>When color is mapped to a variable, you control the colors with a <strong>palette</strong>. Some of the most common packages to work with color palettes in R are <code>RColorBrewer</code> and <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html"><code>viridis</code></a>. Viridis is designed to be color-blind friendly, and RColorBrewer has a <a href="https://colorbrewer2.org/">web application</a> where you can explore your data requirements and preview palettes.</p>
 <p>The function you use depends on whether your variable is <strong>discrete</strong> (categories, such as AQI category) or <strong>continuous</strong> (numbers):</p>
-<table class="table">
+<table class="caption-top table">
 <thead><tr class="header">
 <th></th>
 <th>RColorBrewer</th>
@@ -740,7 +785,7 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 </table>
 <p>Our <code>pm25_category</code> variable is discrete, so we can use a qualitative Brewer palette:</p>
 <div class="cell">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">pm25_aqi</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"grey65"</span>, linewidth <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">pm25_category</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
@@ -751,9 +796,12 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <span>  <span class="fu">scale_x_date</span><span class="op">(</span>date_breaks <span class="op">=</span> <span class="st">"1 month"</span>, date_labels <span class="op">=</span> <span class="st">"%B"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"PM2.5 Air Quality Index"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p><code>legend.position</code> accepts <code>"bottom"</code>, <code>"top"</code>, <code>"left"</code>, <code>"right"</code>, and <code>"none"</code> to remove the legend entirely.</p>
@@ -762,7 +810,7 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <p>Here is the real question we came for: we have air quality, temperature, and precipitation. How can we look at all three across the same summer?</p>
 <p>One tempting approach is to put everything on one set of axes. Because the variables are already separate columns in <code>fc_air</code>, we can add each one as its own layer without transforming the data frame:</p>
 <div class="cell">
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">pm25_aqi</span><span class="op">)</span>, </span>
 <span>            color <span class="op">=</span> <span class="st">"#1b9e77"</span>, </span>
@@ -782,15 +830,18 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <span>           alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_x_date</span><span class="op">(</span>date_breaks <span class="op">=</span> <span class="st">"1 month"</span>, date_labels <span class="op">=</span> <span class="st">"%B"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The chart is not very useful.They are all measured in completely different units, and precipitation’s values are much smaller numerically. Putting them all on one y axis flattens the precipitation bars against the bottom and makes the axis itself hard to interpret. Rather than forcing them onto a common scale, we will give each variable its own plot while keeping the dates lined up.</p>
 <p>One simple way to do this is with the <code>patchwork</code> package. We keep <code>fc_air</code> exactly as it is and make three ordinary <code>ggplot</code> objects:</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p_aqi</span> <span class="op">&lt;-</span> <span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p_aqi</span> <span class="op">&lt;-</span> <span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">pm25_aqi</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"#1b9e77"</span>, linewidth <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_point</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"#1b9e77"</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
@@ -813,9 +864,12 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"Precipitation (in.)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">p_aqi</span> <span class="op">/</span> <span class="va">p_temp</span> <span class="op">/</span> <span class="va">p_precip</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">p_aqi</span> <span class="op">/</span> <span class="va">p_temp</span> <span class="op">/</span> <span class="va">p_precip</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The <code>/</code> is <code>patchwork</code> syntax for “put the next plot underneath this one.” A <code>+</code> puts plots beside each other. Because each object is a separate ggplot, each one automatically keeps its own y-axis scale and units.</p>
@@ -827,16 +881,19 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <span class="header-section-number">5.6.1</span> Faceting by year</h3>
 <p><code>facet_wrap()</code> splits one plot into panels using a categorical variable. Just before the preview figure, we created <code>fc_summer</code> with a <code>year</code> column, so comparing the two summers only takes one additional layer:</p>
 <div class="cell">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_summer</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fc_summer</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">pm25_aqi</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"#1b9e77"</span>, linewidth <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_point</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"#1b9e77"</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_x_date</span><span class="op">(</span>date_breaks <span class="op">=</span> <span class="st">"1 month"</span>, date_labels <span class="op">=</span> <span class="st">"%B"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">facet_wrap</span><span class="op">(</span><span class="op">~</span><span class="va">year</span>, nrow <span class="op">=</span> <span class="fl">1</span>, scales <span class="op">=</span> <span class="st">"free_x"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"PM2.5 AQI"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Because 2025 comes before 2026, the 2025 panel appears on the left and 2026 on the right. <code>scales = "free_x"</code> lets each panel use its own summer dates, while the y scale stays the same so values are still directly comparable across years.</p>
@@ -847,15 +904,18 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <span class="header-section-number">5.7.1</span> A horizontal reference line</h3>
 <p>An AQI of 50 is the boundary between the EPA’s “Good” and “Moderate” categories. <code>geom_hline()</code> adds a horizontal reference line, and <code>annotate("text", ...)</code> lets us explain what that line means:</p>
 <div class="cell">
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p_aqi</span> <span class="op">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p_aqi</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">50</span>,</span>
 <span>             linetype <span class="op">=</span> <span class="st">"dashed"</span>, color <span class="op">=</span> <span class="st">"grey50"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">annotate</span><span class="op">(</span><span class="st">"text"</span>,</span>
 <span>           x <span class="op">=</span> <span class="fu">ymd</span><span class="op">(</span><span class="st">"2026-05-01"</span><span class="op">)</span>, y <span class="op">=</span> <span class="fl">55</span>,</span>
 <span>           label <span class="op">=</span> <span class="st">"Good/Moderate boundary"</span>,</span>
-<span>           size <span class="op">=</span> <span class="fl">3</span>, hjust <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="st">"grey45"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>           size <span class="op">=</span> <span class="fl">3</span>, hjust <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="st">"grey45"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>A reference line is useful only when the value has a real interpretation. The same line would make no sense on the temperature or precipitation plots, so we add it only to the AQI plot.</p>
@@ -863,7 +923,7 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <span class="header-section-number">5.7.2</span> Shading a time window</h3>
 <p><code>annotate("rect", ...)</code> draws a rectangle. The trick that makes it work for time series is <code>ymin = -Inf</code> and <code>ymax = Inf</code>, which means “from the bottom of the plot to the top” whatever the y range happens to be:</p>
 <div class="cell">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p_aqi</span> <span class="op">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p_aqi</span> <span class="op">+</span></span>
 <span>  <span class="fu">annotate</span><span class="op">(</span><span class="st">"rect"</span>,</span>
 <span>           xmin <span class="op">=</span> <span class="fu">ymd</span><span class="op">(</span><span class="st">"2026-08-03"</span><span class="op">)</span>, xmax <span class="op">=</span> <span class="fu">ymd</span><span class="op">(</span><span class="st">"2026-08-08"</span><span class="op">)</span>,</span>
 <span>           ymin <span class="op">=</span> <span class="op">-</span><span class="cn">Inf</span>, ymax <span class="op">=</span> <span class="cn">Inf</span>,</span>
@@ -871,9 +931,12 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <span>  <span class="fu">annotate</span><span class="op">(</span><span class="st">"text"</span>,</span>
 <span>           x <span class="op">=</span> <span class="fu">ymd</span><span class="op">(</span><span class="st">"2026-07-04"</span><span class="op">)</span>, y <span class="op">=</span> <span class="fl">99</span>,</span>
 <span>           label <span class="op">=</span> <span class="st">"Aug 3-8 smoke:\nworst AQI this summer"</span>,</span>
-<span>           size <span class="op">=</span> <span class="fl">3</span>, hjust <span class="op">=</span> <span class="fl">0</span>, vjust <span class="op">=</span> <span class="fl">1</span>, color <span class="op">=</span> <span class="st">"grey20"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>           size <span class="op">=</span> <span class="fl">3</span>, hjust <span class="op">=</span> <span class="fl">0</span>, vjust <span class="op">=</span> <span class="fl">1</span>, color <span class="op">=</span> <span class="st">"grey20"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Order matters. The shaded rectangle should be added before the data layers when you build a plot from scratch so that the line and points remain visible on top of it.</p>
@@ -886,10 +949,10 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <p>We are almost done with this figure. Below I am putting everything together, faceting each variable by year, and keeping the smoke-window shading in the 2026 facet of all three plots.</p>
 <p>Because the smoke event only occurred in 2026, we use one tiny helper data frame to tell <code>ggplot2</code> which facet should receive that annotation:</p>
 <div class="cell">
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">smoke_2026</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2026</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">smoke_2026</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2026</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p_aqi_final</span> <span class="op">&lt;-</span> <span class="va">fc_summer</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p_aqi_final</span> <span class="op">&lt;-</span> <span class="va">fc_summer</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">pm25_aqi</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_rect</span><span class="op">(</span>data <span class="op">=</span> <span class="va">smoke_2026</span>,</span>
 <span>            xmin <span class="op">=</span> <span class="fu">ymd</span><span class="op">(</span><span class="st">"2026-08-03"</span><span class="op">)</span>, xmax <span class="op">=</span> <span class="fu">ymd</span><span class="op">(</span><span class="st">"2026-08-08"</span><span class="op">)</span>,</span>
@@ -953,25 +1016,28 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <span>                                  color <span class="op">=</span> <span class="st">"grey40"</span>, hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span>
 <span>      plot.title.position <span class="op">=</span> <span class="st">"plot"</span></span>
 <span>    <span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="data-visualization-in-r_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p><strong>Saving with <code>ggsave</code></strong></p>
 <p>You can save your plot in the “Plots” pane by clicking “Export”, or you can also do it programmatically with <code>ggsave()</code>, which also lets you customize the output file a little more. Note that you can give the argument a variable name of a ggplot object, or <strong>by default it will save the last plot in the “Plots” pane</strong>.</p>
 <p>This final figure now has two columns of facets as well as three stacked plots, so give it a little more width when you save it:</p>
 <div class="cell">
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># specify the file path and name, and height/width (if necessary)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># specify the file path and name, and height/width (if necessary)</span></span>
 <span><span class="fu">ggsave</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"images/fort_collins_timeseries.png"</span>,</span>
-<span>       width <span class="op">=</span> <span class="fl">10</span>, height <span class="op">=</span> <span class="fl">7</span>, units <span class="op">=</span> <span class="st">"in"</span>, dpi <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>       width <span class="op">=</span> <span class="fl">10</span>, height <span class="op">=</span> <span class="fl">7</span>, units <span class="op">=</span> <span class="st">"in"</span>, dpi <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="want-to-make-it-interactive" class="level4" data-number="5.8.0.1"><h4 data-number="5.8.0.1" class="anchored" data-anchor-id="want-to-make-it-interactive">
 <span class="header-section-number">5.8.0.1</span> Want to make it interactive?</h4>
 <p>The <code>plotly</code> package and the <code>ggplotly()</code> function let you make ggplots interactive. Hovering to read exact values on a specific date is genuinely useful for time series.</p>
 <p>Because our three panels are separate ggplots, we can convert each one and then stack the interactive versions with <code>subplot()</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p1_interactive</span> <span class="op">&lt;-</span> <span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p1_interactive</span> <span class="op">&lt;-</span> <span class="va">fc_air</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">pm25_aqi</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"#1b9e77"</span>, linewidth <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_point</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"#1b9e77"</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
@@ -998,10 +1064,10 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 <span>  nrows <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>  shareX <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  titleY <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item" id="htmlwidget-ff7269a286bbf711d6c8" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-ff7269a286bbf711d6c8">{"x":{"data":[{"x":[20574,20575,20576,20577,20578,20579,20580,20581,20582,20583,20584,20585,20586,20587,20588,20589,20590,20591,20592,20593,20594,20595,20596,20597,20598,20599,20600,20601,20602,20603,20604,20605,20606,20607,20608,20609,20610,20611,20612,20613,20614,20615,20616,20617,20618,20619,20620,20621,20622,20623,20624,20625,20626,20627,20628,20629,20630,20631,20632,20633,20634,20635,20636,20637,20638,20639,20640,20641,20642,20643,20644,20645,20646,20647,20648,20649,20650,20651,20652,20653,20654,20655,20656,20657,20658,20659,20660,20661,20662,20663,20664,20665,20666,20667,20668,20669,20670,20671,20672,20673,20674,20675,20676,20677,20678,20679,20680,20681,20682,20683,20684,20685,20686,20687,20688,20689,20690,20691,20692,20693,20694,20695,20696],"y":[27,null,null,27,13,22,35,17,22,20,28,37,38,31,25,23,10,25,19,19,33,7,13,16,19,24,27,29,32,14,12,24,29,21,23,49,55,20,29,30,16,14,17,28,37,null,null,null,23,25,55,44,52,39,54,54,40,43,58,34,41,65,67,57,52,52,64,61,39,27,21,22,29,32,26,31,30,37,32,28,35,62,52,51,43,40,21,26,32,31,38,59,62,57,100,92,80,76,83,72,63,62,55,53,48,38,47,41,28,18,21,27,28,41,31,19,26,31,36,26,18,11,17],"text":["date: 2026-05-01<br />pm25_aqi:  27","date: 2026-05-02<br />pm25_aqi:  NA","date: 2026-05-03<br />pm25_aqi:  NA","date: 2026-05-04<br />pm25_aqi:  27","date: 2026-05-05<br />pm25_aqi:  13","date: 2026-05-06<br />pm25_aqi:  22","date: 2026-05-07<br />pm25_aqi:  35","date: 2026-05-08<br />pm25_aqi:  17","date: 2026-05-09<br />pm25_aqi:  22","date: 2026-05-10<br />pm25_aqi:  20","date: 2026-05-11<br />pm25_aqi:  28","date: 2026-05-12<br />pm25_aqi:  37","date: 2026-05-13<br />pm25_aqi:  38","date: 2026-05-14<br />pm25_aqi:  31","date: 2026-05-15<br />pm25_aqi:  25","date: 2026-05-16<br />pm25_aqi:  23","date: 2026-05-17<br />pm25_aqi:  10","date: 2026-05-18<br />pm25_aqi:  25","date: 2026-05-19<br />pm25_aqi:  19","date: 2026-05-20<br />pm25_aqi:  19","date: 2026-05-21<br />pm25_aqi:  33","date: 2026-05-22<br />pm25_aqi:   7","date: 2026-05-23<br />pm25_aqi:  13","date: 2026-05-24<br />pm25_aqi:  16","date: 2026-05-25<br />pm25_aqi:  19","date: 2026-05-26<br />pm25_aqi:  24","date: 2026-05-27<br />pm25_aqi:  27","date: 2026-05-28<br />pm25_aqi:  29","date: 2026-05-29<br />pm25_aqi:  32","date: 2026-05-30<br />pm25_aqi:  14","date: 2026-05-31<br />pm25_aqi:  12","date: 2026-06-01<br />pm25_aqi:  24","date: 2026-06-02<br />pm25_aqi:  29","date: 2026-06-03<br />pm25_aqi:  21","date: 2026-06-04<br />pm25_aqi:  23","date: 2026-06-05<br />pm25_aqi:  49","date: 2026-06-06<br />pm25_aqi:  55","date: 2026-06-07<br />pm25_aqi:  20","date: 2026-06-08<br />pm25_aqi:  29","date: 2026-06-09<br />pm25_aqi:  30","date: 2026-06-10<br />pm25_aqi:  16","date: 2026-06-11<br />pm25_aqi:  14","date: 2026-06-12<br />pm25_aqi:  17","date: 2026-06-13<br />pm25_aqi:  28","date: 2026-06-14<br />pm25_aqi:  37","date: 2026-06-15<br />pm25_aqi:  NA","date: 2026-06-16<br />pm25_aqi:  NA","date: 2026-06-17<br />pm25_aqi:  NA","date: 2026-06-18<br />pm25_aqi:  23","date: 2026-06-19<br />pm25_aqi:  25","date: 2026-06-20<br />pm25_aqi:  55","date: 2026-06-21<br />pm25_aqi:  44","date: 2026-06-22<br />pm25_aqi:  52","date: 2026-06-23<br />pm25_aqi:  39","date: 2026-06-24<br />pm25_aqi:  54","date: 2026-06-25<br />pm25_aqi:  54","date: 2026-06-26<br />pm25_aqi:  40","date: 2026-06-27<br />pm25_aqi:  43","date: 2026-06-28<br />pm25_aqi:  58","date: 2026-06-29<br />pm25_aqi:  34","date: 2026-06-30<br />pm25_aqi:  41","date: 2026-07-01<br />pm25_aqi:  65","date: 2026-07-02<br />pm25_aqi:  67","date: 2026-07-03<br />pm25_aqi:  57","date: 2026-07-04<br />pm25_aqi:  52","date: 2026-07-05<br />pm25_aqi:  52","date: 2026-07-06<br />pm25_aqi:  64","date: 2026-07-07<br />pm25_aqi:  61","date: 2026-07-08<br />pm25_aqi:  39","date: 2026-07-09<br />pm25_aqi:  27","date: 2026-07-10<br />pm25_aqi:  21","date: 2026-07-11<br />pm25_aqi:  22","date: 2026-07-12<br />pm25_aqi:  29","date: 2026-07-13<br />pm25_aqi:  32","date: 2026-07-14<br />pm25_aqi:  26","date: 2026-07-15<br />pm25_aqi:  31","date: 2026-07-16<br />pm25_aqi:  30","date: 2026-07-17<br />pm25_aqi:  37","date: 2026-07-18<br />pm25_aqi:  32","date: 2026-07-19<br />pm25_aqi:  28","date: 2026-07-20<br />pm25_aqi:  35","date: 2026-07-21<br />pm25_aqi:  62","date: 2026-07-22<br />pm25_aqi:  52","date: 2026-07-23<br />pm25_aqi:  51","date: 2026-07-24<br />pm25_aqi:  43","date: 2026-07-25<br />pm25_aqi:  40","date: 2026-07-26<br />pm25_aqi:  21","date: 2026-07-27<br />pm25_aqi:  26","date: 2026-07-28<br />pm25_aqi:  32","date: 2026-07-29<br />pm25_aqi:  31","date: 2026-07-30<br />pm25_aqi:  38","date: 2026-07-31<br />pm25_aqi:  59","date: 2026-08-01<br />pm25_aqi:  62","date: 2026-08-02<br />pm25_aqi:  57","date: 2026-08-03<br />pm25_aqi: 100","date: 2026-08-04<br />pm25_aqi:  92","date: 2026-08-05<br />pm25_aqi:  80","date: 2026-08-06<br />pm25_aqi:  76","date: 2026-08-07<br />pm25_aqi:  83","date: 2026-08-08<br />pm25_aqi:  72","date: 2026-08-09<br />pm25_aqi:  63","date: 2026-08-10<br />pm25_aqi:  62","date: 2026-08-11<br />pm25_aqi:  55","date: 2026-08-12<br />pm25_aqi:  53","date: 2026-08-13<br />pm25_aqi:  48","date: 2026-08-14<br />pm25_aqi:  38","date: 2026-08-15<br />pm25_aqi:  47","date: 2026-08-16<br />pm25_aqi:  41","date: 2026-08-17<br />pm25_aqi:  28","date: 2026-08-18<br />pm25_aqi:  18","date: 2026-08-19<br />pm25_aqi:  21","date: 2026-08-20<br />pm25_aqi:  27","date: 2026-08-21<br />pm25_aqi:  28","date: 2026-08-22<br />pm25_aqi:  41","date: 2026-08-23<br />pm25_aqi:  31","date: 2026-08-24<br />pm25_aqi:  19","date: 2026-08-25<br />pm25_aqi:  26","date: 2026-08-26<br />pm25_aqi:  31","date: 2026-08-27<br />pm25_aqi:  36","date: 2026-08-28<br />pm25_aqi:  26","date: 2026-08-29<br />pm25_aqi:  18","date: 2026-08-30<br />pm25_aqi:  11","date: 2026-08-31<br />pm25_aqi:  17"],"type":"scatter","mode":"lines+markers","line":{"width":2.6456692913385824,"color":"rgba(27,158,119,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(27,158,119,1)","opacity":1,"size":3.7795275590551185,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(27,158,119,1)"}},"frame":null},{"x":[20574,20575,20576,20577,20578,20579,20580,20581,20582,20583,20584,20585,20586,20587,20588,20589,20590,20591,20592,20593,20594,20595,20596,20597,20598,20599,20600,20601,20602,20603,20604,20605,20606,20607,20608,20609,20610,20611,20612,20613,20614,20615,20616,20617,20618,20619,20620,20621,20622,20623,20624,20625,20626,20627,20628,20629,20630,20631,20632,20633,20634,20635,20636,20637,20638,20639,20640,20641,20642,20643,20644,20645,20646,20647,20648,20649,20650,20651,20652,20653,20654,20655,20656,20657,20658,20659,20660,20661,20662,20663,20664,20665,20666,20667,20668,20669,20670,20671,20672,20673,20674,20675,20676,20677,20678,20679,20680,20681,20682,20683,20684,20685,20686,20687,20688,20689,20690,20691,20692,20693,20694,20695,20696],"y":[65.230000000000004,73.260000000000005,75.790000000000006,73.849999999999994,44.520000000000003,44.149999999999999,71.129999999999995,70.969999999999999,77.180000000000007,69.010000000000005,85.909999999999997,74.909999999999997,87.329999999999998,86.129999999999995,81.700000000000003,77.849999999999994,69.060000000000002,45.149999999999999,52.030000000000001,59.450000000000003,64.560000000000002,66.810000000000002,77.310000000000002,82.450000000000003,83.930000000000007,80.200000000000003,70.519999999999996,77.609999999999999,82.400000000000006,76.75,80.709999999999994,79.25,76.890000000000001,84.25,88.680000000000007,85.260000000000005,93.790000000000006,92.75,77.109999999999999,88.790000000000006,87.799999999999997,80.260000000000005,91.170000000000002,78.010000000000005,68.489999999999995,83.120000000000005,91.670000000000002,88.120000000000005,85.390000000000001,81.519999999999996,84.290000000000006,90.299999999999997,87.819999999999993,80.819999999999993,80.239999999999995,73.810000000000002,87.620000000000005,93.420000000000002,84.760000000000005,86.430000000000007,85.599999999999994,88.75,88.540000000000006,87.189999999999998,90.090000000000003,94.620000000000005,93.719999999999999,90.269999999999996,94.659999999999997,82.510000000000005,89.150000000000006,97.069999999999993,95.650000000000006,97.230000000000004,93.939999999999998,92.799999999999997,91.310000000000002,91.890000000000001,92.390000000000001,96.569999999999993,98.239999999999995,92.969999999999999,90.790000000000006,84.969999999999999,98.170000000000002,100.65000000000001,100.78,88.75,92.349999999999994,88,96.209999999999994,89.459999999999994,93.180000000000007,101.59,98.980000000000004,71.890000000000001,81.319999999999993,99.569999999999993,92.120000000000005,97.75,97.719999999999999,94.510000000000005,95.540000000000006,92.909999999999997,80.819999999999993,84.739999999999995,82.170000000000002,86.090000000000003,91.090000000000003,86.040000000000006,85.75,91.400000000000006,100.84999999999999,84.939999999999998,91.560000000000002,93.489999999999995,84.689999999999998,83.980000000000004,90.069999999999993,93.629999999999995,88.930000000000007,81.819999999999993,84.719999999999999],"text":["date: 2026-05-01<br />temp_max_f:  65.23","date: 2026-05-02<br />temp_max_f:  73.26","date: 2026-05-03<br />temp_max_f:  75.79","date: 2026-05-04<br />temp_max_f:  73.85","date: 2026-05-05<br />temp_max_f:  44.52","date: 2026-05-06<br />temp_max_f:  44.15","date: 2026-05-07<br />temp_max_f:  71.13","date: 2026-05-08<br />temp_max_f:  70.97","date: 2026-05-09<br />temp_max_f:  77.18","date: 2026-05-10<br />temp_max_f:  69.01","date: 2026-05-11<br />temp_max_f:  85.91","date: 2026-05-12<br />temp_max_f:  74.91","date: 2026-05-13<br />temp_max_f:  87.33","date: 2026-05-14<br />temp_max_f:  86.13","date: 2026-05-15<br />temp_max_f:  81.70","date: 2026-05-16<br />temp_max_f:  77.85","date: 2026-05-17<br />temp_max_f:  69.06","date: 2026-05-18<br />temp_max_f:  45.15","date: 2026-05-19<br />temp_max_f:  52.03","date: 2026-05-20<br />temp_max_f:  59.45","date: 2026-05-21<br />temp_max_f:  64.56","date: 2026-05-22<br />temp_max_f:  66.81","date: 2026-05-23<br />temp_max_f:  77.31","date: 2026-05-24<br />temp_max_f:  82.45","date: 2026-05-25<br />temp_max_f:  83.93","date: 2026-05-26<br />temp_max_f:  80.20","date: 2026-05-27<br />temp_max_f:  70.52","date: 2026-05-28<br />temp_max_f:  77.61","date: 2026-05-29<br />temp_max_f:  82.40","date: 2026-05-30<br />temp_max_f:  76.75","date: 2026-05-31<br />temp_max_f:  80.71","date: 2026-06-01<br />temp_max_f:  79.25","date: 2026-06-02<br />temp_max_f:  76.89","date: 2026-06-03<br />temp_max_f:  84.25","date: 2026-06-04<br />temp_max_f:  88.68","date: 2026-06-05<br />temp_max_f:  85.26","date: 2026-06-06<br />temp_max_f:  93.79","date: 2026-06-07<br />temp_max_f:  92.75","date: 2026-06-08<br />temp_max_f:  77.11","date: 2026-06-09<br />temp_max_f:  88.79","date: 2026-06-10<br />temp_max_f:  87.80","date: 2026-06-11<br />temp_max_f:  80.26","date: 2026-06-12<br />temp_max_f:  91.17","date: 2026-06-13<br />temp_max_f:  78.01","date: 2026-06-14<br />temp_max_f:  68.49","date: 2026-06-15<br />temp_max_f:  83.12","date: 2026-06-16<br />temp_max_f:  91.67","date: 2026-06-17<br />temp_max_f:  88.12","date: 2026-06-18<br />temp_max_f:  85.39","date: 2026-06-19<br />temp_max_f:  81.52","date: 2026-06-20<br />temp_max_f:  84.29","date: 2026-06-21<br />temp_max_f:  90.30","date: 2026-06-22<br />temp_max_f:  87.82","date: 2026-06-23<br />temp_max_f:  80.82","date: 2026-06-24<br />temp_max_f:  80.24","date: 2026-06-25<br />temp_max_f:  73.81","date: 2026-06-26<br />temp_max_f:  87.62","date: 2026-06-27<br />temp_max_f:  93.42","date: 2026-06-28<br />temp_max_f:  84.76","date: 2026-06-29<br />temp_max_f:  86.43","date: 2026-06-30<br />temp_max_f:  85.60","date: 2026-07-01<br />temp_max_f:  88.75","date: 2026-07-02<br />temp_max_f:  88.54","date: 2026-07-03<br />temp_max_f:  87.19","date: 2026-07-04<br />temp_max_f:  90.09","date: 2026-07-05<br />temp_max_f:  94.62","date: 2026-07-06<br />temp_max_f:  93.72","date: 2026-07-07<br />temp_max_f:  90.27","date: 2026-07-08<br />temp_max_f:  94.66","date: 2026-07-09<br />temp_max_f:  82.51","date: 2026-07-10<br />temp_max_f:  89.15","date: 2026-07-11<br />temp_max_f:  97.07","date: 2026-07-12<br />temp_max_f:  95.65","date: 2026-07-13<br />temp_max_f:  97.23","date: 2026-07-14<br />temp_max_f:  93.94","date: 2026-07-15<br />temp_max_f:  92.80","date: 2026-07-16<br />temp_max_f:  91.31","date: 2026-07-17<br />temp_max_f:  91.89","date: 2026-07-18<br />temp_max_f:  92.39","date: 2026-07-19<br />temp_max_f:  96.57","date: 2026-07-20<br />temp_max_f:  98.24","date: 2026-07-21<br />temp_max_f:  92.97","date: 2026-07-22<br />temp_max_f:  90.79","date: 2026-07-23<br />temp_max_f:  84.97","date: 2026-07-24<br />temp_max_f:  98.17","date: 2026-07-25<br />temp_max_f: 100.65","date: 2026-07-26<br />temp_max_f: 100.78","date: 2026-07-27<br />temp_max_f:  88.75","date: 2026-07-28<br />temp_max_f:  92.35","date: 2026-07-29<br />temp_max_f:  88.00","date: 2026-07-30<br />temp_max_f:  96.21","date: 2026-07-31<br />temp_max_f:  89.46","date: 2026-08-01<br />temp_max_f:  93.18","date: 2026-08-02<br />temp_max_f: 101.59","date: 2026-08-03<br />temp_max_f:  98.98","date: 2026-08-04<br />temp_max_f:  71.89","date: 2026-08-05<br />temp_max_f:  81.32","date: 2026-08-06<br />temp_max_f:  99.57","date: 2026-08-07<br />temp_max_f:  92.12","date: 2026-08-08<br />temp_max_f:  97.75","date: 2026-08-09<br />temp_max_f:  97.72","date: 2026-08-10<br />temp_max_f:  94.51","date: 2026-08-11<br />temp_max_f:  95.54","date: 2026-08-12<br />temp_max_f:  92.91","date: 2026-08-13<br />temp_max_f:  80.82","date: 2026-08-14<br />temp_max_f:  84.74","date: 2026-08-15<br />temp_max_f:  82.17","date: 2026-08-16<br />temp_max_f:  86.09","date: 2026-08-17<br />temp_max_f:  91.09","date: 2026-08-18<br />temp_max_f:  86.04","date: 2026-08-19<br />temp_max_f:  85.75","date: 2026-08-20<br />temp_max_f:  91.40","date: 2026-08-21<br />temp_max_f: 100.85","date: 2026-08-22<br />temp_max_f:  84.94","date: 2026-08-23<br />temp_max_f:  91.56","date: 2026-08-24<br />temp_max_f:  93.49","date: 2026-08-25<br />temp_max_f:  84.69","date: 2026-08-26<br />temp_max_f:  83.98","date: 2026-08-27<br />temp_max_f:  90.07","date: 2026-08-28<br />temp_max_f:  93.63","date: 2026-08-29<br />temp_max_f:  88.93","date: 2026-08-30<br />temp_max_f:  81.82","date: 2026-08-31<br />temp_max_f:  84.72"],"type":"scatter","mode":"lines+markers","line":{"width":2.6456692913385824,"color":"rgba(217,95,2,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y2","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(217,95,2,1)","opacity":1,"size":3.7795275590551185,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(217,95,2,1)"}},"frame":null},{"orientation":"v","width":[0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038],"base":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"x":[20574,20575,20576,20577,20578,20579,20580,20581,20582,20583,20584,20585,20586,20587,20588,20589,20590,20591,20592,20593,20594,20595,20596,20597,20598,20599,20600,20601,20602,20603,20604,20605,20606,20607,20608,20609,20610,20611,20612,20613,20614,20615,20616,20617,20618,20619,20620,20621,20622,20623,20624,20625,20626,20627,20628,20629,20630,20631,20632,20633,20634,20635,20636,20637,20638,20639,20640,20641,20642,20643,20644,20645,20646,20647,20648,20649,20650,20651,20652,20653,20654,20655,20656,20657,20658,20659,20660,20661,20662,20663,20664,20665,20666,20667,20668,20669,20670,20671,20672,20673,20674,20675,20676,20677,20678,20679,20680,20681,20682,20683,20684,20685,20686,20687,20688,20689,20690,20691,20692,20693,20694,20695,20696],"y":[0,0,0,0.040000000000000001,1.03,0.58999999999999997,0.01,0.029999999999999999,0.01,0.17000000000000001,0,0,0,0,0,0,0.29999999999999999,0.96999999999999997,0.050000000000000003,0.070000000000000007,0.029999999999999999,0.029999999999999999,0,0,0,0,0.029999999999999999,0,0,0,0.01,0,0,0,0,0,0,0,0,0,0,0,0,0,0.050000000000000003,0,0,0,0,0,0,0,0,0,0.01,0.22,0.01,0,0,0,0,0.050000000000000003,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.19,0.01,0.23000000000000001,0,0,0,0,0.12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.029999999999999999,0.89000000000000001,0.070000000000000007,0.12,0,0,0.080000000000000002,0,0,0,0,0.11,0,0,0.040000000000000001,0,0,0.01,0.029999999999999999,0],"text":["date: 2026-05-01<br />precip_in: 0.00","date: 2026-05-02<br />precip_in: 0.00","date: 2026-05-03<br />precip_in: 0.00","date: 2026-05-04<br />precip_in: 0.04","date: 2026-05-05<br />precip_in: 1.03","date: 2026-05-06<br />precip_in: 0.59","date: 2026-05-07<br />precip_in: 0.01","date: 2026-05-08<br />precip_in: 0.03","date: 2026-05-09<br />precip_in: 0.01","date: 2026-05-10<br />precip_in: 0.17","date: 2026-05-11<br />precip_in: 0.00","date: 2026-05-12<br />precip_in: 0.00","date: 2026-05-13<br />precip_in: 0.00","date: 2026-05-14<br />precip_in: 0.00","date: 2026-05-15<br />precip_in: 0.00","date: 2026-05-16<br />precip_in: 0.00","date: 2026-05-17<br />precip_in: 0.30","date: 2026-05-18<br />precip_in: 0.97","date: 2026-05-19<br />precip_in: 0.05","date: 2026-05-20<br />precip_in: 0.07","date: 2026-05-21<br />precip_in: 0.03","date: 2026-05-22<br />precip_in: 0.03","date: 2026-05-23<br />precip_in: 0.00","date: 2026-05-24<br />precip_in: 0.00","date: 2026-05-25<br />precip_in: 0.00","date: 2026-05-26<br />precip_in: 0.00","date: 2026-05-27<br />precip_in: 0.03","date: 2026-05-28<br />precip_in: 0.00","date: 2026-05-29<br />precip_in: 0.00","date: 2026-05-30<br />precip_in: 0.00","date: 2026-05-31<br />precip_in: 0.01","date: 2026-06-01<br />precip_in: 0.00","date: 2026-06-02<br />precip_in: 0.00","date: 2026-06-03<br />precip_in: 0.00","date: 2026-06-04<br />precip_in: 0.00","date: 2026-06-05<br />precip_in: 0.00","date: 2026-06-06<br />precip_in: 0.00","date: 2026-06-07<br />precip_in: 0.00","date: 2026-06-08<br />precip_in: 0.00","date: 2026-06-09<br />precip_in: 0.00","date: 2026-06-10<br />precip_in: 0.00","date: 2026-06-11<br />precip_in: 0.00","date: 2026-06-12<br />precip_in: 0.00","date: 2026-06-13<br />precip_in: 0.00","date: 2026-06-14<br />precip_in: 0.05","date: 2026-06-15<br />precip_in: 0.00","date: 2026-06-16<br />precip_in: 0.00","date: 2026-06-17<br />precip_in: 0.00","date: 2026-06-18<br />precip_in: 0.00","date: 2026-06-19<br />precip_in: 0.00","date: 2026-06-20<br />precip_in: 0.00","date: 2026-06-21<br />precip_in: 0.00","date: 2026-06-22<br />precip_in: 0.00","date: 2026-06-23<br />precip_in: 0.00","date: 2026-06-24<br />precip_in: 0.01","date: 2026-06-25<br />precip_in: 0.22","date: 2026-06-26<br />precip_in: 0.01","date: 2026-06-27<br />precip_in: 0.00","date: 2026-06-28<br />precip_in: 0.00","date: 2026-06-29<br />precip_in: 0.00","date: 2026-06-30<br />precip_in: 0.00","date: 2026-07-01<br />precip_in: 0.05","date: 2026-07-02<br />precip_in: 0.00","date: 2026-07-03<br />precip_in: 0.00","date: 2026-07-04<br />precip_in: 0.00","date: 2026-07-05<br />precip_in: 0.00","date: 2026-07-06<br />precip_in: 0.00","date: 2026-07-07<br />precip_in: 0.00","date: 2026-07-08<br />precip_in: 0.00","date: 2026-07-09<br />precip_in: 0.00","date: 2026-07-10<br />precip_in: 0.00","date: 2026-07-11<br />precip_in: 0.00","date: 2026-07-12<br />precip_in: 0.00","date: 2026-07-13<br />precip_in: 0.00","date: 2026-07-14<br />precip_in: 0.00","date: 2026-07-15<br />precip_in: 0.00","date: 2026-07-16<br />precip_in: 0.00","date: 2026-07-17<br />precip_in: 0.00","date: 2026-07-18<br />precip_in: 0.00","date: 2026-07-19<br />precip_in: 0.00","date: 2026-07-20<br />precip_in: 0.00","date: 2026-07-21<br />precip_in: 0.19","date: 2026-07-22<br />precip_in: 0.01","date: 2026-07-23<br />precip_in: 0.23","date: 2026-07-24<br />precip_in: 0.00","date: 2026-07-25<br />precip_in: 0.00","date: 2026-07-26<br />precip_in: 0.00","date: 2026-07-27<br />precip_in: 0.00","date: 2026-07-28<br />precip_in: 0.12","date: 2026-07-29<br />precip_in: 0.00","date: 2026-07-30<br />precip_in: 0.00","date: 2026-07-31<br />precip_in: 0.00","date: 2026-08-01<br />precip_in: 0.00","date: 2026-08-02<br />precip_in: 0.00","date: 2026-08-03<br />precip_in: 0.00","date: 2026-08-04<br />precip_in: 0.00","date: 2026-08-05<br />precip_in: 0.00","date: 2026-08-06<br />precip_in: 0.00","date: 2026-08-07<br />precip_in: 0.00","date: 2026-08-08<br />precip_in: 0.00","date: 2026-08-09<br />precip_in: 0.00","date: 2026-08-10<br />precip_in: 0.00","date: 2026-08-11<br />precip_in: 0.00","date: 2026-08-12<br />precip_in: 0.03","date: 2026-08-13<br />precip_in: 0.89","date: 2026-08-14<br />precip_in: 0.07","date: 2026-08-15<br />precip_in: 0.12","date: 2026-08-16<br />precip_in: 0.00","date: 2026-08-17<br />precip_in: 0.00","date: 2026-08-18<br />precip_in: 0.08","date: 2026-08-19<br />precip_in: 0.00","date: 2026-08-20<br />precip_in: 0.00","date: 2026-08-21<br />precip_in: 0.00","date: 2026-08-22<br />precip_in: 0.00","date: 2026-08-23<br />precip_in: 0.11","date: 2026-08-24<br />precip_in: 0.00","date: 2026-08-25<br />precip_in: 0.00","date: 2026-08-26<br />precip_in: 0.04","date: 2026-08-27<br />precip_in: 0.00","date: 2026-08-28<br />precip_in: 0.00","date: 2026-08-29<br />precip_in: 0.01","date: 2026-08-30<br />precip_in: 0.03","date: 2026-08-31<br />precip_in: 0.00"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(117,112,179,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"showlegend":false,"xaxis":"x","yaxis":"y3","hoverinfo":"text","frame":null}],"layout":{"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[20567.459999999999,20702.540000000001],"tickmode":"array","ticktext":["May","Jun","Jul","Aug","Sep"],"tickvals":[20574,20605,20635,20666,20697],"categoryorder":"array","categoryarray":["May","Jun","Jul","Aug","Sep"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"y3","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis3":{"domain":[0,0.31333333333333335],"automargin":true,"type":"linear","autorange":false,"range":[-0.051500000000000004,1.0815000000000001],"tickmode":"array","ticktext":["0.00","0.25","0.50","0.75","1.00"],"tickvals":[0,0.25,0.5,0.75,1],"categoryorder":"array","categoryarray":["0.00","0.25","0.50","0.75","1.00"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"Precipitation (in.)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis2":{"domain":[0.35333333333333339,0.64666666666666672],"automargin":true,"type":"linear","autorange":false,"range":[41.277999999999999,104.462],"tickmode":"array","ticktext":["60","80","100"],"tickvals":[60,80,100],"categoryorder":"array","categoryarray":["60","80","100"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"Max Temperature (F)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0.68666666666666676,1],"automargin":true,"type":"linear","autorange":false,"range":[2.3499999999999996,104.65000000000001],"tickmode":"array","ticktext":["25","50","75","100"],"tickvals":[25,50,75,100],"categoryorder":"array","categoryarray":["25","50","75","100"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"PM2.5 AQI","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"annotations":[],"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":1,"y0":0.68666666666666676,"y1":1},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":1,"y0":0.35333333333333339,"y1":0.64666666666666672},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":1,"y0":0,"y1":0.31333333333333335}],"images":[],"margin":{"t":23.305936073059364,"r":7.3059360730593621,"b":22.648401826484022,"l":48.949771689497723},"paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498}},"hovermode":"closest","barmode":"relative"},"attrs":{"364c12249c8":{"x":{},"y":{},"type":"scatter"},"364c2ad27301":{"x":{},"y":{}},"364c4e9a61e":{"x":{},"y":{},"type":"scatter"},"364c12d04dab":{"x":{},"y":{}},"364c3640a":{"x":{},"y":{},"type":"bar"}},"source":"A","config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"subplot":true,"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-4db72b773f606a1b9802" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-4db72b773f606a1b9802">{"x":{"data":[{"x":[20574,20575,20576,20577,20578,20579,20580,20581,20582,20583,20584,20585,20586,20587,20588,20589,20590,20591,20592,20593,20594,20595,20596,20597,20598,20599,20600,20601,20602,20603,20604,20605,20606,20607,20608,20609,20610,20611,20612,20613,20614,20615,20616,20617,20618,20619,20620,20621,20622,20623,20624,20625,20626,20627,20628,20629,20630,20631,20632,20633,20634,20635,20636,20637,20638,20639,20640,20641,20642,20643,20644,20645,20646,20647,20648,20649,20650,20651,20652,20653,20654,20655,20656,20657,20658,20659,20660,20661,20662,20663,20664,20665,20666,20667,20668,20669,20670,20671,20672,20673,20674,20675,20676,20677,20678,20679,20680,20681,20682,20683,20684,20685,20686,20687,20688,20689,20690,20691,20692,20693,20694,20695,20696],"y":[27,null,null,27,13,22,35,17,22,20,28,37,38,31,25,23,10,25,19,19,33,7,13,16,19,24,27,29,32,14,12,24,29,21,23,49,55,20,29,30,16,14,17,28,37,null,null,null,23,25,55,44,52,39,54,54,40,43,58,34,41,65,67,57,52,52,64,61,39,27,21,22,29,32,26,31,30,37,32,28,35,62,52,51,43,40,21,26,32,31,38,59,62,57,100,92,80,76,83,72,63,62,55,53,48,38,47,41,28,18,21,27,28,41,31,19,26,31,36,26,18,11,17],"text":["date: 2026-05-01<br />pm25_aqi:  27","date: 2026-05-02<br />pm25_aqi:  NA","date: 2026-05-03<br />pm25_aqi:  NA","date: 2026-05-04<br />pm25_aqi:  27","date: 2026-05-05<br />pm25_aqi:  13","date: 2026-05-06<br />pm25_aqi:  22","date: 2026-05-07<br />pm25_aqi:  35","date: 2026-05-08<br />pm25_aqi:  17","date: 2026-05-09<br />pm25_aqi:  22","date: 2026-05-10<br />pm25_aqi:  20","date: 2026-05-11<br />pm25_aqi:  28","date: 2026-05-12<br />pm25_aqi:  37","date: 2026-05-13<br />pm25_aqi:  38","date: 2026-05-14<br />pm25_aqi:  31","date: 2026-05-15<br />pm25_aqi:  25","date: 2026-05-16<br />pm25_aqi:  23","date: 2026-05-17<br />pm25_aqi:  10","date: 2026-05-18<br />pm25_aqi:  25","date: 2026-05-19<br />pm25_aqi:  19","date: 2026-05-20<br />pm25_aqi:  19","date: 2026-05-21<br />pm25_aqi:  33","date: 2026-05-22<br />pm25_aqi:   7","date: 2026-05-23<br />pm25_aqi:  13","date: 2026-05-24<br />pm25_aqi:  16","date: 2026-05-25<br />pm25_aqi:  19","date: 2026-05-26<br />pm25_aqi:  24","date: 2026-05-27<br />pm25_aqi:  27","date: 2026-05-28<br />pm25_aqi:  29","date: 2026-05-29<br />pm25_aqi:  32","date: 2026-05-30<br />pm25_aqi:  14","date: 2026-05-31<br />pm25_aqi:  12","date: 2026-06-01<br />pm25_aqi:  24","date: 2026-06-02<br />pm25_aqi:  29","date: 2026-06-03<br />pm25_aqi:  21","date: 2026-06-04<br />pm25_aqi:  23","date: 2026-06-05<br />pm25_aqi:  49","date: 2026-06-06<br />pm25_aqi:  55","date: 2026-06-07<br />pm25_aqi:  20","date: 2026-06-08<br />pm25_aqi:  29","date: 2026-06-09<br />pm25_aqi:  30","date: 2026-06-10<br />pm25_aqi:  16","date: 2026-06-11<br />pm25_aqi:  14","date: 2026-06-12<br />pm25_aqi:  17","date: 2026-06-13<br />pm25_aqi:  28","date: 2026-06-14<br />pm25_aqi:  37","date: 2026-06-15<br />pm25_aqi:  NA","date: 2026-06-16<br />pm25_aqi:  NA","date: 2026-06-17<br />pm25_aqi:  NA","date: 2026-06-18<br />pm25_aqi:  23","date: 2026-06-19<br />pm25_aqi:  25","date: 2026-06-20<br />pm25_aqi:  55","date: 2026-06-21<br />pm25_aqi:  44","date: 2026-06-22<br />pm25_aqi:  52","date: 2026-06-23<br />pm25_aqi:  39","date: 2026-06-24<br />pm25_aqi:  54","date: 2026-06-25<br />pm25_aqi:  54","date: 2026-06-26<br />pm25_aqi:  40","date: 2026-06-27<br />pm25_aqi:  43","date: 2026-06-28<br />pm25_aqi:  58","date: 2026-06-29<br />pm25_aqi:  34","date: 2026-06-30<br />pm25_aqi:  41","date: 2026-07-01<br />pm25_aqi:  65","date: 2026-07-02<br />pm25_aqi:  67","date: 2026-07-03<br />pm25_aqi:  57","date: 2026-07-04<br />pm25_aqi:  52","date: 2026-07-05<br />pm25_aqi:  52","date: 2026-07-06<br />pm25_aqi:  64","date: 2026-07-07<br />pm25_aqi:  61","date: 2026-07-08<br />pm25_aqi:  39","date: 2026-07-09<br />pm25_aqi:  27","date: 2026-07-10<br />pm25_aqi:  21","date: 2026-07-11<br />pm25_aqi:  22","date: 2026-07-12<br />pm25_aqi:  29","date: 2026-07-13<br />pm25_aqi:  32","date: 2026-07-14<br />pm25_aqi:  26","date: 2026-07-15<br />pm25_aqi:  31","date: 2026-07-16<br />pm25_aqi:  30","date: 2026-07-17<br />pm25_aqi:  37","date: 2026-07-18<br />pm25_aqi:  32","date: 2026-07-19<br />pm25_aqi:  28","date: 2026-07-20<br />pm25_aqi:  35","date: 2026-07-21<br />pm25_aqi:  62","date: 2026-07-22<br />pm25_aqi:  52","date: 2026-07-23<br />pm25_aqi:  51","date: 2026-07-24<br />pm25_aqi:  43","date: 2026-07-25<br />pm25_aqi:  40","date: 2026-07-26<br />pm25_aqi:  21","date: 2026-07-27<br />pm25_aqi:  26","date: 2026-07-28<br />pm25_aqi:  32","date: 2026-07-29<br />pm25_aqi:  31","date: 2026-07-30<br />pm25_aqi:  38","date: 2026-07-31<br />pm25_aqi:  59","date: 2026-08-01<br />pm25_aqi:  62","date: 2026-08-02<br />pm25_aqi:  57","date: 2026-08-03<br />pm25_aqi: 100","date: 2026-08-04<br />pm25_aqi:  92","date: 2026-08-05<br />pm25_aqi:  80","date: 2026-08-06<br />pm25_aqi:  76","date: 2026-08-07<br />pm25_aqi:  83","date: 2026-08-08<br />pm25_aqi:  72","date: 2026-08-09<br />pm25_aqi:  63","date: 2026-08-10<br />pm25_aqi:  62","date: 2026-08-11<br />pm25_aqi:  55","date: 2026-08-12<br />pm25_aqi:  53","date: 2026-08-13<br />pm25_aqi:  48","date: 2026-08-14<br />pm25_aqi:  38","date: 2026-08-15<br />pm25_aqi:  47","date: 2026-08-16<br />pm25_aqi:  41","date: 2026-08-17<br />pm25_aqi:  28","date: 2026-08-18<br />pm25_aqi:  18","date: 2026-08-19<br />pm25_aqi:  21","date: 2026-08-20<br />pm25_aqi:  27","date: 2026-08-21<br />pm25_aqi:  28","date: 2026-08-22<br />pm25_aqi:  41","date: 2026-08-23<br />pm25_aqi:  31","date: 2026-08-24<br />pm25_aqi:  19","date: 2026-08-25<br />pm25_aqi:  26","date: 2026-08-26<br />pm25_aqi:  31","date: 2026-08-27<br />pm25_aqi:  36","date: 2026-08-28<br />pm25_aqi:  26","date: 2026-08-29<br />pm25_aqi:  18","date: 2026-08-30<br />pm25_aqi:  11","date: 2026-08-31<br />pm25_aqi:  17"],"type":"scatter","mode":"lines+markers","line":{"width":2.6456692913385824,"color":"rgba(27,158,119,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(27,158,119,1)","opacity":1,"size":3.7795275590551185,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(27,158,119,1)"}},"frame":null},{"x":[20574,20575,20576,20577,20578,20579,20580,20581,20582,20583,20584,20585,20586,20587,20588,20589,20590,20591,20592,20593,20594,20595,20596,20597,20598,20599,20600,20601,20602,20603,20604,20605,20606,20607,20608,20609,20610,20611,20612,20613,20614,20615,20616,20617,20618,20619,20620,20621,20622,20623,20624,20625,20626,20627,20628,20629,20630,20631,20632,20633,20634,20635,20636,20637,20638,20639,20640,20641,20642,20643,20644,20645,20646,20647,20648,20649,20650,20651,20652,20653,20654,20655,20656,20657,20658,20659,20660,20661,20662,20663,20664,20665,20666,20667,20668,20669,20670,20671,20672,20673,20674,20675,20676,20677,20678,20679,20680,20681,20682,20683,20684,20685,20686,20687,20688,20689,20690,20691,20692,20693,20694,20695,20696],"y":[65.230000000000004,73.260000000000005,75.790000000000006,73.849999999999994,44.520000000000003,44.149999999999999,71.129999999999995,70.969999999999999,77.180000000000007,69.010000000000005,85.909999999999997,74.909999999999997,87.329999999999998,86.129999999999995,81.700000000000003,77.849999999999994,69.060000000000002,45.149999999999999,52.030000000000001,59.450000000000003,64.560000000000002,66.810000000000002,77.310000000000002,82.450000000000003,83.930000000000007,80.200000000000003,70.519999999999996,77.609999999999999,82.400000000000006,76.75,80.709999999999994,79.25,76.890000000000001,84.25,88.680000000000007,85.260000000000005,93.790000000000006,92.75,77.109999999999999,88.790000000000006,87.799999999999997,80.260000000000005,91.170000000000002,78.010000000000005,68.489999999999995,83.120000000000005,91.670000000000002,88.120000000000005,85.390000000000001,81.519999999999996,84.290000000000006,90.299999999999997,87.819999999999993,80.819999999999993,80.239999999999995,73.810000000000002,87.620000000000005,93.420000000000002,84.760000000000005,86.430000000000007,85.599999999999994,88.75,88.540000000000006,87.189999999999998,90.090000000000003,94.620000000000005,93.719999999999999,90.269999999999996,94.659999999999997,82.510000000000005,89.150000000000006,97.069999999999993,95.650000000000006,97.230000000000004,93.939999999999998,92.799999999999997,91.310000000000002,91.890000000000001,92.390000000000001,96.569999999999993,98.239999999999995,92.969999999999999,90.790000000000006,84.969999999999999,98.170000000000002,100.65000000000001,100.78,88.75,92.349999999999994,88,96.209999999999994,89.459999999999994,93.180000000000007,101.59,98.980000000000004,71.890000000000001,81.319999999999993,99.569999999999993,92.120000000000005,97.75,97.719999999999999,94.510000000000005,95.540000000000006,92.909999999999997,80.819999999999993,84.739999999999995,82.170000000000002,86.090000000000003,91.090000000000003,86.040000000000006,85.75,91.400000000000006,100.84999999999999,84.939999999999998,91.560000000000002,93.489999999999995,84.689999999999998,83.980000000000004,90.069999999999993,93.629999999999995,88.930000000000007,81.819999999999993,84.719999999999999],"text":["date: 2026-05-01<br />temp_max_f:  65.23","date: 2026-05-02<br />temp_max_f:  73.26","date: 2026-05-03<br />temp_max_f:  75.79","date: 2026-05-04<br />temp_max_f:  73.85","date: 2026-05-05<br />temp_max_f:  44.52","date: 2026-05-06<br />temp_max_f:  44.15","date: 2026-05-07<br />temp_max_f:  71.13","date: 2026-05-08<br />temp_max_f:  70.97","date: 2026-05-09<br />temp_max_f:  77.18","date: 2026-05-10<br />temp_max_f:  69.01","date: 2026-05-11<br />temp_max_f:  85.91","date: 2026-05-12<br />temp_max_f:  74.91","date: 2026-05-13<br />temp_max_f:  87.33","date: 2026-05-14<br />temp_max_f:  86.13","date: 2026-05-15<br />temp_max_f:  81.70","date: 2026-05-16<br />temp_max_f:  77.85","date: 2026-05-17<br />temp_max_f:  69.06","date: 2026-05-18<br />temp_max_f:  45.15","date: 2026-05-19<br />temp_max_f:  52.03","date: 2026-05-20<br />temp_max_f:  59.45","date: 2026-05-21<br />temp_max_f:  64.56","date: 2026-05-22<br />temp_max_f:  66.81","date: 2026-05-23<br />temp_max_f:  77.31","date: 2026-05-24<br />temp_max_f:  82.45","date: 2026-05-25<br />temp_max_f:  83.93","date: 2026-05-26<br />temp_max_f:  80.20","date: 2026-05-27<br />temp_max_f:  70.52","date: 2026-05-28<br />temp_max_f:  77.61","date: 2026-05-29<br />temp_max_f:  82.40","date: 2026-05-30<br />temp_max_f:  76.75","date: 2026-05-31<br />temp_max_f:  80.71","date: 2026-06-01<br />temp_max_f:  79.25","date: 2026-06-02<br />temp_max_f:  76.89","date: 2026-06-03<br />temp_max_f:  84.25","date: 2026-06-04<br />temp_max_f:  88.68","date: 2026-06-05<br />temp_max_f:  85.26","date: 2026-06-06<br />temp_max_f:  93.79","date: 2026-06-07<br />temp_max_f:  92.75","date: 2026-06-08<br />temp_max_f:  77.11","date: 2026-06-09<br />temp_max_f:  88.79","date: 2026-06-10<br />temp_max_f:  87.80","date: 2026-06-11<br />temp_max_f:  80.26","date: 2026-06-12<br />temp_max_f:  91.17","date: 2026-06-13<br />temp_max_f:  78.01","date: 2026-06-14<br />temp_max_f:  68.49","date: 2026-06-15<br />temp_max_f:  83.12","date: 2026-06-16<br />temp_max_f:  91.67","date: 2026-06-17<br />temp_max_f:  88.12","date: 2026-06-18<br />temp_max_f:  85.39","date: 2026-06-19<br />temp_max_f:  81.52","date: 2026-06-20<br />temp_max_f:  84.29","date: 2026-06-21<br />temp_max_f:  90.30","date: 2026-06-22<br />temp_max_f:  87.82","date: 2026-06-23<br />temp_max_f:  80.82","date: 2026-06-24<br />temp_max_f:  80.24","date: 2026-06-25<br />temp_max_f:  73.81","date: 2026-06-26<br />temp_max_f:  87.62","date: 2026-06-27<br />temp_max_f:  93.42","date: 2026-06-28<br />temp_max_f:  84.76","date: 2026-06-29<br />temp_max_f:  86.43","date: 2026-06-30<br />temp_max_f:  85.60","date: 2026-07-01<br />temp_max_f:  88.75","date: 2026-07-02<br />temp_max_f:  88.54","date: 2026-07-03<br />temp_max_f:  87.19","date: 2026-07-04<br />temp_max_f:  90.09","date: 2026-07-05<br />temp_max_f:  94.62","date: 2026-07-06<br />temp_max_f:  93.72","date: 2026-07-07<br />temp_max_f:  90.27","date: 2026-07-08<br />temp_max_f:  94.66","date: 2026-07-09<br />temp_max_f:  82.51","date: 2026-07-10<br />temp_max_f:  89.15","date: 2026-07-11<br />temp_max_f:  97.07","date: 2026-07-12<br />temp_max_f:  95.65","date: 2026-07-13<br />temp_max_f:  97.23","date: 2026-07-14<br />temp_max_f:  93.94","date: 2026-07-15<br />temp_max_f:  92.80","date: 2026-07-16<br />temp_max_f:  91.31","date: 2026-07-17<br />temp_max_f:  91.89","date: 2026-07-18<br />temp_max_f:  92.39","date: 2026-07-19<br />temp_max_f:  96.57","date: 2026-07-20<br />temp_max_f:  98.24","date: 2026-07-21<br />temp_max_f:  92.97","date: 2026-07-22<br />temp_max_f:  90.79","date: 2026-07-23<br />temp_max_f:  84.97","date: 2026-07-24<br />temp_max_f:  98.17","date: 2026-07-25<br />temp_max_f: 100.65","date: 2026-07-26<br />temp_max_f: 100.78","date: 2026-07-27<br />temp_max_f:  88.75","date: 2026-07-28<br />temp_max_f:  92.35","date: 2026-07-29<br />temp_max_f:  88.00","date: 2026-07-30<br />temp_max_f:  96.21","date: 2026-07-31<br />temp_max_f:  89.46","date: 2026-08-01<br />temp_max_f:  93.18","date: 2026-08-02<br />temp_max_f: 101.59","date: 2026-08-03<br />temp_max_f:  98.98","date: 2026-08-04<br />temp_max_f:  71.89","date: 2026-08-05<br />temp_max_f:  81.32","date: 2026-08-06<br />temp_max_f:  99.57","date: 2026-08-07<br />temp_max_f:  92.12","date: 2026-08-08<br />temp_max_f:  97.75","date: 2026-08-09<br />temp_max_f:  97.72","date: 2026-08-10<br />temp_max_f:  94.51","date: 2026-08-11<br />temp_max_f:  95.54","date: 2026-08-12<br />temp_max_f:  92.91","date: 2026-08-13<br />temp_max_f:  80.82","date: 2026-08-14<br />temp_max_f:  84.74","date: 2026-08-15<br />temp_max_f:  82.17","date: 2026-08-16<br />temp_max_f:  86.09","date: 2026-08-17<br />temp_max_f:  91.09","date: 2026-08-18<br />temp_max_f:  86.04","date: 2026-08-19<br />temp_max_f:  85.75","date: 2026-08-20<br />temp_max_f:  91.40","date: 2026-08-21<br />temp_max_f: 100.85","date: 2026-08-22<br />temp_max_f:  84.94","date: 2026-08-23<br />temp_max_f:  91.56","date: 2026-08-24<br />temp_max_f:  93.49","date: 2026-08-25<br />temp_max_f:  84.69","date: 2026-08-26<br />temp_max_f:  83.98","date: 2026-08-27<br />temp_max_f:  90.07","date: 2026-08-28<br />temp_max_f:  93.63","date: 2026-08-29<br />temp_max_f:  88.93","date: 2026-08-30<br />temp_max_f:  81.82","date: 2026-08-31<br />temp_max_f:  84.72"],"type":"scatter","mode":"lines+markers","line":{"width":2.6456692913385824,"color":"rgba(217,95,2,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y2","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(217,95,2,1)","opacity":1,"size":3.7795275590551185,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(217,95,2,1)"}},"frame":null},{"orientation":"v","width":[0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038,0.80000000000291038],"base":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"x":[20574,20575,20576,20577,20578,20579,20580,20581,20582,20583,20584,20585,20586,20587,20588,20589,20590,20591,20592,20593,20594,20595,20596,20597,20598,20599,20600,20601,20602,20603,20604,20605,20606,20607,20608,20609,20610,20611,20612,20613,20614,20615,20616,20617,20618,20619,20620,20621,20622,20623,20624,20625,20626,20627,20628,20629,20630,20631,20632,20633,20634,20635,20636,20637,20638,20639,20640,20641,20642,20643,20644,20645,20646,20647,20648,20649,20650,20651,20652,20653,20654,20655,20656,20657,20658,20659,20660,20661,20662,20663,20664,20665,20666,20667,20668,20669,20670,20671,20672,20673,20674,20675,20676,20677,20678,20679,20680,20681,20682,20683,20684,20685,20686,20687,20688,20689,20690,20691,20692,20693,20694,20695,20696],"y":[0,0,0,0.040000000000000001,1.03,0.58999999999999997,0.01,0.029999999999999999,0.01,0.17000000000000001,0,0,0,0,0,0,0.29999999999999999,0.96999999999999997,0.050000000000000003,0.070000000000000007,0.029999999999999999,0.029999999999999999,0,0,0,0,0.029999999999999999,0,0,0,0.01,0,0,0,0,0,0,0,0,0,0,0,0,0,0.050000000000000003,0,0,0,0,0,0,0,0,0,0.01,0.22,0.01,0,0,0,0,0.050000000000000003,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.19,0.01,0.23000000000000001,0,0,0,0,0.12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.029999999999999999,0.89000000000000001,0.070000000000000007,0.12,0,0,0.080000000000000002,0,0,0,0,0.11,0,0,0.040000000000000001,0,0,0.01,0.029999999999999999,0],"text":["date: 2026-05-01<br />precip_in: 0.00","date: 2026-05-02<br />precip_in: 0.00","date: 2026-05-03<br />precip_in: 0.00","date: 2026-05-04<br />precip_in: 0.04","date: 2026-05-05<br />precip_in: 1.03","date: 2026-05-06<br />precip_in: 0.59","date: 2026-05-07<br />precip_in: 0.01","date: 2026-05-08<br />precip_in: 0.03","date: 2026-05-09<br />precip_in: 0.01","date: 2026-05-10<br />precip_in: 0.17","date: 2026-05-11<br />precip_in: 0.00","date: 2026-05-12<br />precip_in: 0.00","date: 2026-05-13<br />precip_in: 0.00","date: 2026-05-14<br />precip_in: 0.00","date: 2026-05-15<br />precip_in: 0.00","date: 2026-05-16<br />precip_in: 0.00","date: 2026-05-17<br />precip_in: 0.30","date: 2026-05-18<br />precip_in: 0.97","date: 2026-05-19<br />precip_in: 0.05","date: 2026-05-20<br />precip_in: 0.07","date: 2026-05-21<br />precip_in: 0.03","date: 2026-05-22<br />precip_in: 0.03","date: 2026-05-23<br />precip_in: 0.00","date: 2026-05-24<br />precip_in: 0.00","date: 2026-05-25<br />precip_in: 0.00","date: 2026-05-26<br />precip_in: 0.00","date: 2026-05-27<br />precip_in: 0.03","date: 2026-05-28<br />precip_in: 0.00","date: 2026-05-29<br />precip_in: 0.00","date: 2026-05-30<br />precip_in: 0.00","date: 2026-05-31<br />precip_in: 0.01","date: 2026-06-01<br />precip_in: 0.00","date: 2026-06-02<br />precip_in: 0.00","date: 2026-06-03<br />precip_in: 0.00","date: 2026-06-04<br />precip_in: 0.00","date: 2026-06-05<br />precip_in: 0.00","date: 2026-06-06<br />precip_in: 0.00","date: 2026-06-07<br />precip_in: 0.00","date: 2026-06-08<br />precip_in: 0.00","date: 2026-06-09<br />precip_in: 0.00","date: 2026-06-10<br />precip_in: 0.00","date: 2026-06-11<br />precip_in: 0.00","date: 2026-06-12<br />precip_in: 0.00","date: 2026-06-13<br />precip_in: 0.00","date: 2026-06-14<br />precip_in: 0.05","date: 2026-06-15<br />precip_in: 0.00","date: 2026-06-16<br />precip_in: 0.00","date: 2026-06-17<br />precip_in: 0.00","date: 2026-06-18<br />precip_in: 0.00","date: 2026-06-19<br />precip_in: 0.00","date: 2026-06-20<br />precip_in: 0.00","date: 2026-06-21<br />precip_in: 0.00","date: 2026-06-22<br />precip_in: 0.00","date: 2026-06-23<br />precip_in: 0.00","date: 2026-06-24<br />precip_in: 0.01","date: 2026-06-25<br />precip_in: 0.22","date: 2026-06-26<br />precip_in: 0.01","date: 2026-06-27<br />precip_in: 0.00","date: 2026-06-28<br />precip_in: 0.00","date: 2026-06-29<br />precip_in: 0.00","date: 2026-06-30<br />precip_in: 0.00","date: 2026-07-01<br />precip_in: 0.05","date: 2026-07-02<br />precip_in: 0.00","date: 2026-07-03<br />precip_in: 0.00","date: 2026-07-04<br />precip_in: 0.00","date: 2026-07-05<br />precip_in: 0.00","date: 2026-07-06<br />precip_in: 0.00","date: 2026-07-07<br />precip_in: 0.00","date: 2026-07-08<br />precip_in: 0.00","date: 2026-07-09<br />precip_in: 0.00","date: 2026-07-10<br />precip_in: 0.00","date: 2026-07-11<br />precip_in: 0.00","date: 2026-07-12<br />precip_in: 0.00","date: 2026-07-13<br />precip_in: 0.00","date: 2026-07-14<br />precip_in: 0.00","date: 2026-07-15<br />precip_in: 0.00","date: 2026-07-16<br />precip_in: 0.00","date: 2026-07-17<br />precip_in: 0.00","date: 2026-07-18<br />precip_in: 0.00","date: 2026-07-19<br />precip_in: 0.00","date: 2026-07-20<br />precip_in: 0.00","date: 2026-07-21<br />precip_in: 0.19","date: 2026-07-22<br />precip_in: 0.01","date: 2026-07-23<br />precip_in: 0.23","date: 2026-07-24<br />precip_in: 0.00","date: 2026-07-25<br />precip_in: 0.00","date: 2026-07-26<br />precip_in: 0.00","date: 2026-07-27<br />precip_in: 0.00","date: 2026-07-28<br />precip_in: 0.12","date: 2026-07-29<br />precip_in: 0.00","date: 2026-07-30<br />precip_in: 0.00","date: 2026-07-31<br />precip_in: 0.00","date: 2026-08-01<br />precip_in: 0.00","date: 2026-08-02<br />precip_in: 0.00","date: 2026-08-03<br />precip_in: 0.00","date: 2026-08-04<br />precip_in: 0.00","date: 2026-08-05<br />precip_in: 0.00","date: 2026-08-06<br />precip_in: 0.00","date: 2026-08-07<br />precip_in: 0.00","date: 2026-08-08<br />precip_in: 0.00","date: 2026-08-09<br />precip_in: 0.00","date: 2026-08-10<br />precip_in: 0.00","date: 2026-08-11<br />precip_in: 0.00","date: 2026-08-12<br />precip_in: 0.03","date: 2026-08-13<br />precip_in: 0.89","date: 2026-08-14<br />precip_in: 0.07","date: 2026-08-15<br />precip_in: 0.12","date: 2026-08-16<br />precip_in: 0.00","date: 2026-08-17<br />precip_in: 0.00","date: 2026-08-18<br />precip_in: 0.08","date: 2026-08-19<br />precip_in: 0.00","date: 2026-08-20<br />precip_in: 0.00","date: 2026-08-21<br />precip_in: 0.00","date: 2026-08-22<br />precip_in: 0.00","date: 2026-08-23<br />precip_in: 0.11","date: 2026-08-24<br />precip_in: 0.00","date: 2026-08-25<br />precip_in: 0.00","date: 2026-08-26<br />precip_in: 0.04","date: 2026-08-27<br />precip_in: 0.00","date: 2026-08-28<br />precip_in: 0.00","date: 2026-08-29<br />precip_in: 0.01","date: 2026-08-30<br />precip_in: 0.03","date: 2026-08-31<br />precip_in: 0.00"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(117,112,179,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"showlegend":false,"xaxis":"x","yaxis":"y3","hoverinfo":"text","frame":null}],"layout":{"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[20567.459999999999,20702.540000000001],"tickmode":"array","ticktext":["May","Jun","Jul","Aug","Sep"],"tickvals":[20574,20605,20635,20666,20697],"categoryorder":"array","categoryarray":["May","Jun","Jul","Aug","Sep"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y3","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis3":{"domain":[0,0.31333333333333335],"automargin":true,"type":"linear","autorange":false,"range":[-0.051500000000000004,1.0815000000000001],"tickmode":"array","ticktext":["0.00","0.25","0.50","0.75","1.00"],"tickvals":[0,0.25,0.5,0.75,1],"categoryorder":"array","categoryarray":["0.00","0.25","0.50","0.75","1.00"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Precipitation (in.)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis2":{"domain":[0.35333333333333339,0.64666666666666672],"automargin":true,"type":"linear","autorange":false,"range":[41.277999999999999,104.462],"tickmode":"array","ticktext":["60","80","100"],"tickvals":[60,80,100],"categoryorder":"array","categoryarray":["60","80","100"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Max Temperature (F)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0.68666666666666676,1],"automargin":true,"type":"linear","autorange":false,"range":[2.3499999999999996,104.65000000000001],"tickmode":"array","ticktext":["25","50","75","100"],"tickvals":[25,50,75,100],"categoryorder":"array","categoryarray":["25","50","75","100"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"PM2.5 AQI","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"annotations":[],"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":1,"y0":0.68666666666666676,"y1":1},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":1,"y0":0.35333333333333339,"y1":0.64666666666666672},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":1,"y0":0,"y1":0.31333333333333335}],"images":[],"margin":{"t":26.228310502283108,"r":7.3059360730593621,"b":25.57077625570777,"l":48.949771689497723},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498}},"hovermode":"closest","barmode":"relative"},"attrs":{"f18d23f56ecb":{"x":{},"y":{},"type":"scatter"},"f18d463ce3de":{"x":{},"y":{}},"f18d68d8ba73":{"x":{},"y":{},"type":"scatter"},"f18d6cb909cb":{"x":{},"y":{}},"f18d6db17bc8":{"x":{},"y":{},"type":"bar"}},"source":"A","config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"subplot":true,"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <hr></section></section><section id="the-assignment" class="level2" data-number="5.9"><h2 data-number="5.9" class="anchored" data-anchor-id="the-assignment">
@@ -1017,144 +1083,411 @@ $ gust_mph      &lt;dbl&gt; 15.13, 15.04, 17.32, 18.63, 12.93, 12.63, 21.00, 15.
 
 
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
-    }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  function tippyHover(el, contentFn) {
-    const config = {
-      allowHTML: true,
-      content: contentFn,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start'
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      return note.innerHTML;
-    });
-  }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
-    } else {
-      return undefined;
+      return false;
     }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
       });
     }
-  }
-});
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./exploratory-data-analysis.html" class="pagination-link">
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./exploratory-data-analysis.html" class="pagination-link" aria-label="Exploratory Data Analysis">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./data-analysis-t-test-and-anova.html" class="pagination-link">
+      <a href="./data-analysis-t-test-and-anova.html" class="pagination-link" aria-label="Data Analysis: T-test and ANOVA">
         <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Analysis: T-test and ANOVA</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -1163,4 +1496,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/rossyndicate/ESS523a_Intro_R_Data_Analysis/edit/main/data-visualization-in-r.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/rossyndicate/ESS523a_Intro_R_Data_Analysis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
