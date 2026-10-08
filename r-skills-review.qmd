@@ -9,20 +9,22 @@ In this lesson you will take all of the skills you have learned up to this point
 #### Setup
 
 ::: {.alert .alert-info}
-New packages for this lesson: `dataRetrieval`, `httr`, `jsonlite`, `sf`, and `mapview`
+New packages for this lesson: `dataRetrieval`, `cdssr`, `sf`, and `mapview`
 
 Add these to your 'setup.R' script if you want to follow along with the data retrieval part of this lesson (*optional*).
 :::
 
 ```{r eval = FALSE}
+# Run once to install/update the data retrieval packages:
+# remotes::install_github("anguswg-ucsb/cdssr")
+
 source("setup.R")
 ```
 
 ```{r include=FALSE}
 library(tidyverse)
 library(rstatix)
-library(httr)
-library(jsonlite)
+library(cdssr)
 library(dataRetrieval)
 library(sf) # for the map
 library(mapview) # for making the interactive plot
@@ -44,7 +46,7 @@ poudre_sites <- tibble(site = c("Canyon Mouth", "Lincoln Bridge", "Boxelder", "T
   sf::st_as_sf(coords = c("long", "lat"), crs = 4269)
 
 # Mapview is another package that creates interactive plots, not necessary for you to know yet!
-mapview::mapview(poudre_sites, zcol = "site", layer.name = "Poudre River Monitoring")
+mapview::mapview(poudre_sites, zcol = "site", layer.name = "Poudre River Monitoring", map.types = "OpenTopoMap")
 ```
 
 <br>
@@ -57,80 +59,76 @@ Using the `dataRetrieval` package we can pull all sorts of USGS water data. You 
 
 ```{r eval = FALSE}
 
-# pulls USGS daily ('dv') stream flow data for those two sites:
-usgs <- dataRetrieval::readNWISdv(siteNumbers = c("06752260", "06752280"), # USGS site code for the Poudre River at the Lincoln Bridge and the ELC
-                                  parameterCd = "00060", # USGS code for stream flow
-                                  startDate = "2020-10-01", # YYYY-MM-DD formatting
-                                  endDate = "2024-09-30") %>% # YYYY-MM-DD formatting
-  rename(q_cfs = X_00060_00003) %>% # USGS code for stream flow units in cubic feet per second (CFS)
-  mutate(Date = lubridate::ymd(Date), # convert the Date column to "Date" formatting using the `lubridate` package
+# pulls USGS daily mean stream flow data for those two sites:
+usgs <- dataRetrieval::read_waterdata_daily(
+  monitoring_location_id = c("USGS-06752260", "USGS-06752280"), # USGS site IDs now include the agency prefix
+  parameter_code = "00060", # USGS code for stream flow in cubic feet per second (CFS)
+  statistic_id = "00003", # daily mean
+  time = c("2020-10-01", "2026-09-30"), # start and end dates in YYYY-MM-DD format
+  skipGeometry = TRUE) %>% # return a regular data frame
+  rename(q_cfs = value, Date = time) %>%
+  mutate(site_no = str_remove(monitoring_location_id, "^USGS-"),
+         agency_cd = "USGS",
+         Date = lubridate::ymd(Date), # convert the Date column to "Date" formatting using the `lubridate` package
          Site = case_when(site_no == "06752260" ~ "Lincoln", 
                           site_no == "06752280" ~ "Boxelder")) 
 
 # if you want to save the data:
-#write_csv(usgs, 'data/review-usgs.csv')
+write_csv(usgs, 'data/review-usgs.csv')
 
 ```
 
 ### Get CDWR stream flow data
 
-Alas, CDWR doesn't have an R packge to easily pull data from their API like USGS does, but they do have user-friendly instructions about how to develop **API calls.**
+CDWR data can also be retrieved with a package, hosted on GitHub: [`cdssr` package](https://github.com/anguswg-ucsb/cdssr).
 
-**Don't stress if you have no clue what an API is**! We will learn a lot more about them in later lessons, but this is good practice for our function writing and mapping skills.
-
-Using the ["URL Generator" steps outlined](https://dwr.state.co.us/Rest/GET/Help/SurfaceWaterTSDayGenerator), if we wanted data from 2020-2024 for the Canyon mouth site (site abbreviation = CLAFTCCO), it generates this URL to retrieve that data:
-
-<https://dwr.state.co.us/Rest/GET/api/v2/surfacewater/surfacewatertsday/?dateFormat=dateOnly&fields=abbrev%2CmeasDate%2Cvalue%2CmeasUnit&abbrev=CLAFTCCO&min-measDate=10%2F01%2F2020&max-measDate=09%2F30%2F2024>
-
-However, we want to pull this data for two different sites, and may want to change the year range of data. Therefore, writing a custom function to pull data for our various sites and time frames would be useful:
+However, we want to pull this data for two different sites and their current function does not handle pulling in multiple sites at the same time like the `dataRetrieval` package does. Therefore, writing a custom function to pull data for our various sites would be useful. Plus, being able to easily change the dates of the pull:
 
 ```{r eval=FALSE}
 
 # Function to retrieve data
 pull_cdwr <- function(site, start_year, end_year){
   
-  raw_data <- httr::GET(url = paste0("https://dwr.state.co.us/Rest/GET/api/v2/surfacewater/surfacewatertsday/?dateFormat=dateOnly&fields=abbrev%2CmeasDate%2Cvalue%2CmeasUnit&abbrev=",site,
-                                     "&min-measDate=10%2F01%2F", start_year,
-                                     "&max-measDate=09%2F30%2F", end_year))
-  
-  # extract the text data, returns a JSON object
-  extracted_data <- httr::content(raw_data, as = "text", encoding = "UTF-8") 
-  
-  # parse text from JSON to data frame
-  final_data <- jsonlite::fromJSON(extracted_data)[["ResultList"]]
+  final_data <- cdssr::get_sw_ts(
+    abbrev = site,
+    start_date = paste0(start_year, "-10-01"),
+    end_date = paste0(end_year, "-09-30"),
+    timescale = "day") %>%
+    # Keep the column names and date format used in the rest of this lesson
+    transmute(abbrev,
+              measDate = as.Date(datetime),
+              value,
+              measUnit = meas_unit)
   
   return(final_data)
   
 }
-
-
 ```
 
 Now, lets use that function to pull data for our two CDWR sites of interest, which we can iterate over with `map()`. Since this function returns data frames with the same structure an variable names, we can use `map_dfr()` to bind the two data frames into a single one:
 
 ```{r eval=FALSE}
 # run function for our two sites
-sites <- c("CLAFTCCO","CLARIVCO")
+sites <- c("CLAFTCCO", "CLARIVCO")
 
 cdwr <- sites %>% 
-  map_dfr(~ pull_cdwr(site = .x, start_year = 2020, end_year = 2024))
+  map_dfr(~ pull_cdwr(site = .x, start_year = 2020, end_year = 2026))
  
-# If you want to save this file
-#write_csv(cdwr, 'data/review-cdwr.csv') 
+# If you want to save the data
+write_csv(cdwr, 'data/review-cdwr.csv') 
 ```
 
 ### OR, read in the .csv's we already generated and saved for you:
 
-Read in our two data sets. You will find that they provide the same information (daily streamflow from 2020-2024) but their variable names and structures are different:
+Read in our two data sets.
 
 ```{r}
 usgs <- read_csv('data/review-usgs.csv')
 
 cdwr <- read_csv('data/review-cdwr.csv') 
-
 ```
 
-When we look at these two datasets, we see they provide the same information (daily streamflow from 2020-2024) but their variable names and structures are different:
+When we look at these two datasets, we see they provide the same information (daily streamflow from 2020-2026) but their variable names and structures are different:
 
 ```{r}
 glimpse(usgs)
@@ -156,7 +154,9 @@ cdwr_clean <- cdwr %>%
 Now, we can join our USGS and CDWR data frames together with `bind_rows()`.
 
 ```{r}
-data <- bind_rows(usgs,cdwr_clean)
+data <- bind_rows(usgs,cdwr_clean) %>%
+  mutate(Site = factor(Site, levels = c("Canyon", "Lincoln", "Boxelder", "Timnath"))) 
+
 ```
 
 ## Exploratory Data Analysis
@@ -186,7 +186,7 @@ data_annual <- data %>%
 # visualize annual differences across the course of each year
 data_annual %>% 
   ggplot(aes(x = Month, y = monthly_q, group = Year)) +
-  geom_line(aes(colour = Year))+
+  geom_line(aes(colour = Year)) +
   facet_wrap(~Site) +
   theme_bw()
   

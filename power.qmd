@@ -254,6 +254,7 @@ final_data <- rep(c(5, 10, 1000, 5000), 100)  %>%
 ```{r, eval = FALSE, echo = FALSE}
 ggplot(final_data) +
   geom_histogram(aes(x = p)) +
+  ylab("p-value") +
   facet_wrap(~n1, scales = "free_y")
 ```
 
